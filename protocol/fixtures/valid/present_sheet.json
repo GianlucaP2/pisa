@@ -1,0 +1,56 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009301",
+  "ts": "2026-11-01T18:40:00+01:00",
+  "type": "present",
+  "present_id": "5d2b8c1e-7a43-4f0e-9a1b-2c3d4e5f6a70",
+  "reply_to": null,
+  "object": {
+    "object_id": "sheet:3f1c2b9a-6e5d-4c7b-8a91-0b2c3d4e5f60",
+    "kind": "sheet",
+    "revision": 0,
+    "data": {
+      "title": "Pizza al taglio: le migliori",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Il Cerchio di Sala e Antico Forno Marzelli, i più citati dalle guide."
+        },
+        {
+          "type": "image",
+          "url": "https://www.gamberorosso.it/img/cerchio.jpg",
+          "alt": "Pizza al taglio dal Cerchio",
+          "credit": "Gambero Rosso"
+        },
+        {
+          "type": "fact",
+          "label": "Distanza",
+          "value": "3 km, 12 minuti in metro"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Il Cerchio, via Inventata",
+            "Antico Forno Marzelli, via dei Finti"
+          ]
+        },
+        {
+          "type": "link",
+          "url": "https://www.gamberorosso.it/pizza-al-taglio-roma",
+          "title": "Le migliori pizze al taglio di Roma",
+          "host": "gamberorosso.it"
+        }
+      ],
+      "sources": [
+        {
+          "title": "Le migliori pizze al taglio di Roma",
+          "url": "https://www.gamberorosso.it/pizza-al-taglio-roma",
+          "host": "gamberorosso.it"
+        }
+      ]
+    }
+  },
+  "purpose": "Le migliori pizze al taglio, con le guide",
+  "focus": "take",
+  "lang": "it-IT"
+}

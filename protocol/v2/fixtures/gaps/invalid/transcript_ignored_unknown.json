@@ -1,0 +1,19 @@
+{
+  "gap": "transcript",
+  "check": "server_frame",
+  "why": "ignored is noise, echo, language or fragment.",
+  "frame": {
+    "seq": 12,
+    "threadId": "thread-conversation",
+    "runId": "run-talk-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.voice.transcript",
+      "value": {
+        "text": "",
+        "final": true,
+        "ignored": "boring"
+      }
+    }
+  }
+}

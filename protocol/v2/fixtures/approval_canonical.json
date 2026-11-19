@@ -1,0 +1,61 @@
+{
+  "interrupt": {
+    "id": "int-33333333-3333-4333-8333-333333333333",
+    "reason": "pisa.approval",
+    "message": "Send an email · notifies 1",
+    "expiresAt": "2026-11-18T10:10:00Z",
+    "responseSchema": {
+      "type": "object",
+      "required": [
+        "decision",
+        "auth",
+        "digest"
+      ],
+      "properties": {
+        "decision": {
+          "enum": [
+            "approve",
+            "reject"
+          ]
+        },
+        "auth": {
+          "enum": [
+            "tap",
+            "voice",
+            "biometric"
+          ]
+        },
+        "digest": {
+          "const": "305b4add67d0bbc45673988e8944f6f88fabedcc24ac9aa912a2b3457c994bb7"
+        },
+        "nonce": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string"
+        },
+        "keyId": {
+          "type": "string"
+        }
+      }
+    },
+    "metadata": {
+      "pisa": {
+        "approvalId": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "risk": "R2",
+        "requiresBiometric": true,
+        "digest": "305b4add67d0bbc45673988e8944f6f88fabedcc24ac9aa912a2b3457c994bb7",
+        "recipientsCount": 1,
+        "undoMinutes": null,
+        "detailsRef": "approval:33333333-3333-4333-8333-333333333333",
+        "server": "srv_synthetic0001_Qm7Zr2Xc"
+      }
+    },
+    "toolCallId": "call-c1067ca4-bb89-5dd9-a9b3-611bde498590"
+  },
+  "device": "00000000-0000-4000-8000-0000000000d1",
+  "nonce": "bm9uY2UtMQ==",
+  "expiresAt": "2026-11-18T10:05:00Z",
+  "canonical": "pisa-approval/2\nserver=srv_synthetic0001_Qm7Zr2Xc\ndevice=00000000-0000-4000-8000-0000000000d1\napproval_id=33333333-3333-4333-8333-333333333333\ninterrupt_id=int-33333333-3333-4333-8333-333333333333\ndecision=approve\nkind=email_send\ndigest=305b4add67d0bbc45673988e8944f6f88fabedcc24ac9aa912a2b3457c994bb7\nrecipients_count=1\nnonce=bm9uY2UtMQ==\nexpires_at=2026-11-18T10:05:00Z"
+}

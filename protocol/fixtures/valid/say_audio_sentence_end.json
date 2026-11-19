@@ -1,0 +1,13 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009042",
+  "ts": "2026-10-30T10:13:47+02:00",
+  "type": "say_audio",
+  "stream_id": "00000000-0000-4000-8000-000000000600",
+  "seq": 1,
+  "format": "mp3",
+  "sample_rate": 24000,
+  "data": "SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjYxLjcuMTAwAAAAAAAAAAAAAAD/+0DAAAAAAAAAAAAAAAAAAAAAAAA=",
+  "final": false,
+  "sentence_end": true
+}

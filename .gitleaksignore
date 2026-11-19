@@ -1,0 +1,5 @@
+# Reviewed false positives (gitleaks fingerprints). Both are synthetic test JWTs: kid "test", an example.org
+# address, and the signature is the literal bytes "signature".
+core/tests/data/google/token_exchange.json:jwt:7
+core/tests/data/google/token_exchange_partial_scopes.json:jwt:7
+

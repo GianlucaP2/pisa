@@ -1,0 +1,21 @@
+{
+  "reviews": [
+    {
+      "name": "places/ChIJmarioTrattoria0001/reviews/r1",
+      "relativePublishTimeDescription": "2 settimane fa",
+      "rating": 5,
+      "text": {"text": "Cotoletta perfetta, servizio veloce a pranzo.", "languageCode": "it"},
+      "originalText": {"text": "Cotoletta perfetta, servizio veloce a pranzo.", "languageCode": "it"},
+      "authorAttribution": {"displayName": "Reviewer One", "uri": "https://www.google.com/maps/contrib/1", "photoUri": "https://example.com/p.jpg"},
+      "publishTime": "2026-10-05T12:30:00Z"
+    },
+    {
+      "name": "places/ChIJmarioTrattoria0001/reviews/r2",
+      "rating": 3,
+      "text": {"text": "Buono ma rumoroso la sera.", "languageCode": "it"},
+      "authorAttribution": {"displayName": "Reviewer Two"},
+      "publishTime": "2026-09-28T20:10:00Z"
+    }
+  ],
+  "editorialSummary": {"text": "Trattoria milanese con cucina tradizionale.", "languageCode": "it"}
+}

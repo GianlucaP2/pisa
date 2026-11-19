@@ -1,0 +1,22 @@
+{
+  "id": "ChIJposteItaliane0002",
+  "displayName": {"text": "Poste Italiane", "languageCode": "it"},
+  "formattedAddress": "Via del Recapito, 4, 20123 Milano MI, Italia",
+  "location": {"latitude": 45.467, "longitude": 9.09},
+  "primaryType": "post_office",
+  "nationalPhoneNumber": "02 0000 2126",
+  "websiteUri": "https://www.poste.it/",
+  "rating": 3.1,
+  "userRatingCount": 512,
+  "regularOpeningHours": {
+    "openNow": false,
+    "periods": [
+      {"open": {"day": 1, "hour": 8, "minute": 20}, "close": {"day": 1, "hour": 13, "minute": 35}},
+      {"open": {"day": 2, "hour": 8, "minute": 20}, "close": {"day": 2, "hour": 13, "minute": 35}},
+      {"open": {"day": 3, "hour": 8, "minute": 20}, "close": {"day": 3, "hour": 13, "minute": 35}},
+      {"open": {"day": 4, "hour": 8, "minute": 20}, "close": {"day": 4, "hour": 13, "minute": 35}},
+      {"open": {"day": 5, "hour": 8, "minute": 20}, "close": {"day": 5, "hour": 13, "minute": 35}},
+      {"open": {"day": 6, "hour": 8, "minute": 20}, "close": {"day": 6, "hour": 12, "minute": 35}}
+    ]
+  }
+}

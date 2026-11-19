@@ -1,0 +1,6 @@
+{
+  "members": [
+    {"person_id": "8e2f3a4b-5c6d-4e7f-9a8b-0c1d2e3f4a5b", "name": "Mamma", "shares": "calendar_busy", "since": "2026-11-03T21:00:00+01:00"},
+    {"person_id": "7d1e2f3a-4b5c-4d6e-8f7a-9b0c1d2e3f4a", "name": "Laura Bianchi", "shares": "nothing", "since": "2026-11-03T21:00:00+01:00"}
+  ]
+}

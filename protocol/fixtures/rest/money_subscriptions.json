@@ -1,0 +1,28 @@
+{
+  "subscriptions": [
+    {
+      "id": "3fa85f6457174562",
+      "name": "Netflix",
+      "service": "netflix",
+      "amount": "13.99",
+      "currency": "EUR",
+      "period": "monthly",
+      "first_on": "2026-06-05",
+      "last_on": "2026-10-05",
+      "count": 5,
+      "flags": [
+        "duplicate",
+        "unused"
+      ],
+      "duplicate_of": "9c8b7a6f5e4d3c2b",
+      "last_use_on": null,
+      "cancel": {
+        "url": "https://www.netflix.com/cancelplan",
+        "host": "www.netflix.com",
+        "steps": "Annulla l'abbonamento dalla pagina che si apre"
+      },
+      "text": "Netflix: lo paghi due volte (13,99 € al mese). Ti mostro la pagina per disdirne uno?",
+      "cancelled_on": "2026-11-02"
+    }
+  ]
+}

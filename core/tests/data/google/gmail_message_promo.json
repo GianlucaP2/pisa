@@ -1,0 +1,32 @@
+{
+  "id": "m-promo",
+  "threadId": "t-2",
+  "labelIds": [
+    "INBOX",
+    "CATEGORY_PROMOTIONS"
+  ],
+  "snippet": "Sconti del 50% solo oggi!",
+  "historyId": "900091",
+  "internalDate": "1760954400000",
+  "payload": {
+    "mimeType": "text/plain",
+    "headers": [
+      {
+        "name": "From",
+        "value": "Shop <promo@shop.example>"
+      },
+      {
+        "name": "To",
+        "value": "owner@example.org"
+      },
+      {
+        "name": "Subject",
+        "value": "Sconti del 50%"
+      }
+    ],
+    "body": {
+      "size": 30,
+      "data": "U2NvbnRpIGRlbCA1MCUgc29sbyBvZ2dpISBDb21wcmEgb3JhLg"
+    }
+  }
+}

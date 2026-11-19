@@ -1,0 +1,137 @@
+# The checks on every pull request and every push to main: the server (core/), the push relay (relay/), and the
+# DCO sign-off of a pull request's commits. GitHub-hosted runners only; actions pinned by commit SHA.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    services:
+      postgres:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_PASSWORD: test  # pragma: allowlist secret (a throwaway CI container)
+        ports: ["55432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 20
+    defaults:
+      run:
+        working-directory: core
+    env:
+      PISA_TEST_ADMIN_URL: postgresql://postgres:test@127.0.0.1:55432/postgres  # pragma: allowlist secret
+      NODE_OPTIONS: --max-old-space-size=4096
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2  # v10.3.3
+        with:
+          python-version: "3.13"  # ortools has no wheels for the runner's default 3.14
+          working-directory: core
+      - name: the client guide's code blocks are its example files, byte for byte (docs-site/build-a-client)
+        run: python3 ../scripts/ci/check_client_guide.py
+      - run: uv sync --frozen
+      - name: lint
+        run: uv run ruff check . && uv run ruff format --check .
+      - name: types
+        run: uv run pyright
+      - name: layers
+        run: uv run lint-imports
+      - name: the OpenAPI contract is current
+        run: uv run python ../scripts/ci/gen_openapi.py --check
+      - name: tests
+        run: uv run pytest -n auto -q
+      - name: contract 2's conformance kit, live against this server (selftest, discovery, /v2/live)
+        env:
+          PISA_DATABASE_URL: postgresql://postgres:test@127.0.0.1:55432/pisa_conformance  # pragma: allowlist secret
+        run: |
+          uv run python -c "import os, psycopg; psycopg.connect(os.environ['PISA_TEST_ADMIN_URL'], autocommit=True).execute('CREATE DATABASE pisa_conformance')"
+          uv run python ../scripts/ci/conformance_live.py
+      # The two live suites below start the same server as the conformance step (scripts/ci/live_server.py:
+      # migrated, offline, paired by QR like the CLI), each on a database of its own so the fuzzer's data never
+      # reaches the end-to-end run.
+      - name: the headless end-to-end suite, live (pairing, consent, /v2/runs, /v2/live, push, revocation)
+        timeout-minutes: 5
+        env:
+          PISA_DATABASE_URL: postgresql://postgres:test@127.0.0.1:55432/pisa_e2e  # pragma: allowlist secret
+        run: |
+          uv run python -c "import os, psycopg; psycopg.connect(os.environ['PISA_TEST_ADMIN_URL'], autocommit=True).execute('CREATE DATABASE pisa_e2e')"
+          uv run python ../scripts/ci/e2e_live.py
+      - name: the client guide's examples, live (pairing, sessions, chat, voice, screens, approvals, push, errors, devices)
+        timeout-minutes: 5
+        env:
+          PISA_DATABASE_URL: postgresql://postgres:test@127.0.0.1:55432/pisa_client_guide  # pragma: allowlist secret
+        run: |
+          uv run python -c "import os, psycopg; psycopg.connect(os.environ['PISA_TEST_ADMIN_URL'], autocommit=True).execute('CREATE DATABASE pisa_client_guide')"
+          uv run python ../scripts/ci/client_guide_live.py
+      - name: Schemathesis against the live server (no 5xx, documented statuses and shapes)
+        timeout-minutes: 8
+        env:
+          PISA_DATABASE_URL: postgresql://postgres:test@127.0.0.1:55432/pisa_fuzz  # pragma: allowlist secret
+          PISA_FUZZ_EXAMPLES: "50"
+        run: |
+          uv run python -c "import os, psycopg; psycopg.connect(os.environ['PISA_TEST_ADMIN_URL'], autocommit=True).execute('CREATE DATABASE pisa_fuzz')"
+          uv run python ../scripts/ci/api_fuzz.py
+
+  relay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: relay
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2  # v10.3.3
+        with:
+          python-version: "3.13"
+          working-directory: relay
+      - run: uv sync --frozen
+      - name: lint
+        run: uv run ruff check . && uv run ruff format --check .
+      - name: types
+        run: uv run pyright
+      - name: tests (with the interop test against core's sender)
+        run: uv run pytest -q
+      - name: known vulnerabilities in what the image ships (pip-audit, PyPI and OSV advisories)
+        run: |
+          uv export --frozen --no-dev --no-emit-project --format requirements-txt -o "$RUNNER_TEMP/relay-requirements.txt"
+          uvx --from pip-audit==2.9.0 pip-audit --strict --disable-pip -r "$RUNNER_TEMP/relay-requirements.txt"
+
+  dco:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: every commit is signed off (CONTRIBUTING.md)
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          missing=0
+          for c in $(git rev-list --no-merges "$BASE..$HEAD"); do
+            author="$(git log -1 --format='%an <%ae>' "$c")"
+            if ! git log -1 --format='%(trailers:key=Signed-off-by,valueonly)' "$c" | grep -qF "$author"; then
+              echo "::error::$(git log -1 --format='%h %s' "$c"): no Signed-off-by matching its author"
+              missing=1
+            fi
+          done
+          [ "$missing" -eq 0 ] || { echo "Sign off with: git rebase --signoff $BASE && git push --force-with-lease"; exit 1; }
