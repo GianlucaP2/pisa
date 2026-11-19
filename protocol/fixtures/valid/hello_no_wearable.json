@@ -1,0 +1,20 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009001",
+  "ts": "2026-10-20T13:00:00+02:00",
+  "type": "hello",
+  "device_id": "00000000-0000-4000-8000-000000000101",
+  "app_version": "0.1.0",
+  "platform": "ios",
+  "capabilities": {
+    "mic": true,
+    "speaker": true,
+    "display": true,
+    "camera": false,
+    "local_stt": true,
+    "local_tts": true,
+    "location": true,
+    "push": false
+  },
+  "wearable": null
+}

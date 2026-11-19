@@ -1,0 +1,32 @@
+{
+  "id": "m-new",
+  "threadId": "t-4",
+  "labelIds": [
+    "INBOX",
+    "UNREAD"
+  ],
+  "snippet": "Please pay invoice 42 by 31 October.",
+  "historyId": "900150",
+  "internalDate": "1760961600000",
+  "payload": {
+    "mimeType": "text/plain",
+    "headers": [
+      {
+        "name": "From",
+        "value": "Acme Billing <billing@acme.example>"
+      },
+      {
+        "name": "To",
+        "value": "owner@example.org"
+      },
+      {
+        "name": "Subject",
+        "value": "Invoice 42"
+      }
+    ],
+    "body": {
+      "size": 40,
+      "data": "UGxlYXNlIHBheSBpbnZvaWNlIDQyIChFVVIgMTIwKSBieSAzMSBPY3RvYmVyIDIwMjYu"
+    }
+  }
+}

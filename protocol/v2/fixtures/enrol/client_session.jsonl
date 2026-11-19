@@ -1,0 +1,13 @@
+{"name": "pisa.voice.enrol.block", "op": "custom", "value": {"block": "A", "state": "start"}}
+{"name": "pisa.voice.enrol.block", "op": "custom", "value": {"block": "A", "state": "end"}}
+{"name": "pisa.voice.enrol.block", "op": "custom", "value": {"block": "B", "state": "start"}}
+{"name": "pisa.voice.enrol.block", "op": "custom", "value": {"block": "B", "state": "end"}}
+{"name": "pisa.voice.enrol.block", "op": "custom", "value": {"block": "C", "state": "start"}}
+{"name": "pisa.voice.enrol.block", "op": "custom", "value": {"block": "C", "state": "end"}}
+{"name": "pisa.voice.enrol.block", "op": "custom", "value": {"block": "D", "state": "start"}}
+{"name": "pisa.voice.enrol.block", "op": "custom", "value": {"block": "D", "state": "end"}}
+{"name": "pisa.voice.enrol.block", "op": "custom", "value": {"block": "E", "state": "start"}}
+{"name": "pisa.voice.enrol.block", "op": "custom", "value": {"block": "E", "state": "end"}}
+{"name": "pisa.voice.enrol.test", "op": "custom", "value": {"state": "start"}}
+{"name": "pisa.voice.enrol.test", "op": "custom", "value": {"state": "end"}}
+{"name": "pisa.voice.enrol.finish", "op": "custom", "value": {}}

@@ -1,0 +1,1374 @@
+{
+  "$schema": "https://a2ui.org/specification/v1_0/catalog_definition.json",
+  "$id": "urn:pisa:a2ui:catalog:core:1",
+  "protocolVersion": "1.0",
+  "catalogId": "urn:pisa:a2ui:catalog:core:1",
+  "title": "PISA core catalog, version 1",
+  "description": "Small primitives the PISA app draws natively (Ring 1). Additive only: a new component means a new catalog version with a new catalogId. Every component has a text fallback (x-pisa-fallback says where it comes from); a renderer that cannot draw a component shows that text.",
+  "instructions": "Compose with Column, Row, Card and Section. Outside text (emails, pages, people's words) goes only in Text with quoted=true. Never build an approval from components: approvals are interrupts. Actions: pisa.choose {optionId}, pisa.ask {elementId,label}, pisa.sheet_action {actionId}, pisa.handoff_opened {handoffId}, pisa.undo {undoId}, pisa.act {action: go|call|plan_it|open|details, ref}.",
+  "components": {
+    "Column": {
+      "type": "object",
+      "description": "Children stacked vertically.",
+      "x-pisa-fallback": "children's fallbacks, one per line",
+      "properties": {
+        "component": {
+          "const": "Column"
+        },
+        "children": {
+          "$ref": "https://a2ui.org/specification/v1_0/common_types.json#/$defs/ChildList"
+        },
+        "spacing": {
+          "type": "string",
+          "enum": [
+            "none",
+            "tight",
+            "normal",
+            "loose"
+          ],
+          "default": "normal"
+        }
+      },
+      "required": [
+        "component",
+        "children"
+      ]
+    },
+    "Row": {
+      "type": "object",
+      "description": "Children side by side; wraps to a Column below the compact width.",
+      "x-pisa-fallback": "children's fallbacks joined by ' · '",
+      "properties": {
+        "component": {
+          "const": "Row"
+        },
+        "children": {
+          "$ref": "https://a2ui.org/specification/v1_0/common_types.json#/$defs/ChildList"
+        }
+      },
+      "required": [
+        "component",
+        "children"
+      ]
+    },
+    "Card": {
+      "type": "object",
+      "description": "A grouped surface with the app's card style.",
+      "x-pisa-fallback": "child's fallback",
+      "properties": {
+        "component": {
+          "const": "Card"
+        },
+        "child": {
+          "$ref": "https://a2ui.org/specification/v1_0/common_types.json#/$defs/Child"
+        },
+        "tone": {
+          "type": "string",
+          "enum": [
+            "plain",
+            "info",
+            "warning",
+            "done"
+          ],
+          "default": "plain"
+        }
+      },
+      "required": [
+        "component",
+        "child"
+      ]
+    },
+    "Section": {
+      "type": "object",
+      "description": "A titled group.",
+      "x-pisa-fallback": "title, then child's fallback",
+      "properties": {
+        "component": {
+          "const": "Section"
+        },
+        "title": {
+          "$ref": "https://a2ui.org/specification/v1_0/common_types.json#/$defs/DynamicString"
+        },
+        "child": {
+          "$ref": "https://a2ui.org/specification/v1_0/common_types.json#/$defs/Child"
+        }
+      },
+      "required": [
+        "component",
+        "title",
+        "child"
+      ]
+    },
+    "Divider": {
+      "type": "object",
+      "description": "A thin rule.",
+      "x-pisa-fallback": "nothing",
+      "properties": {
+        "component": {
+          "const": "Divider"
+        }
+      },
+      "required": [
+        "component"
+      ]
+    },
+    "Text": {
+      "type": "object",
+      "description": "Text. quoted=true marks outside text (an email, a page, a person's words): drawn as a quotation, never in the app's own voice (D-013).",
+      "x-pisa-fallback": "text (quoted text prefixed by its source)",
+      "properties": {
+        "component": {
+          "const": "Text"
+        },
+        "text": {
+          "$ref": "https://a2ui.org/specification/v1_0/common_types.json#/$defs/DynamicString"
+        },
+        "variant": {
+          "type": "string",
+          "enum": [
+            "title",
+            "headline",
+            "body",
+            "caption",
+            "footnote"
+          ],
+          "default": "body"
+        },
+        "quoted": {
+          "type": "boolean",
+          "default": false
+        },
+        "source": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Where quoted text came from (host or kind)."
+        }
+      },
+      "required": [
+        "component",
+        "text"
+      ]
+    },
+    "Fact": {
+      "type": "object",
+      "description": "A label and a value on one line.",
+      "x-pisa-fallback": "'label: value'",
+      "properties": {
+        "component": {
+          "const": "Fact"
+        },
+        "label": {
+          "$ref": "https://a2ui.org/specification/v1_0/common_types.json#/$defs/DynamicString"
+        },
+        "value": {
+          "$ref": "https://a2ui.org/specification/v1_0/common_types.json#/$defs/DynamicString"
+        }
+      },
+      "required": [
+        "component",
+        "label",
+        "value"
+      ]
+    },
+    "Stat": {
+      "type": "object",
+      "description": "A big number with a label.",
+      "x-pisa-fallback": "'label value unit'",
+      "properties": {
+        "component": {
+          "const": "Stat"
+        },
+        "label": {
+          "$ref": "https://a2ui.org/specification/v1_0/common_types.json#/$defs/DynamicString"
+        },
+        "value": {
+          "$ref": "https://a2ui.org/specification/v1_0/common_types.json#/$defs/DynamicString"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20
+        },
+        "trend": {
+          "type": "string",
+          "enum": [
+            "up",
+            "down",
+            "flat"
+          ]
+        }
+      },
+      "required": [
+        "component",
+        "label",
+        "value"
+      ]
+    },
+    "BulletList": {
+      "type": "object",
+      "description": "Up to 8 short lines.",
+      "x-pisa-fallback": "items, one per line",
+      "properties": {
+        "component": {
+          "const": "BulletList"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        }
+      },
+      "required": [
+        "component",
+        "items"
+      ]
+    },
+    "Chips": {
+      "type": "object",
+      "description": "Small labels.",
+      "x-pisa-fallback": "items joined by ', '",
+      "properties": {
+        "component": {
+          "const": "Chips"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          }
+        }
+      },
+      "required": [
+        "component",
+        "items"
+      ]
+    },
+    "Link": {
+      "type": "object",
+      "description": "An https link; opening it asks Ring 0 (an in-app Safari view).",
+      "x-pisa-fallback": "'title (host)'",
+      "properties": {
+        "component": {
+          "const": "Link"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://\\S+$",
+          "maxLength": 2000
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "host": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      },
+      "required": [
+        "component",
+        "url",
+        "title",
+        "host"
+      ]
+    },
+    "Image": {
+      "type": "object",
+      "description": "An https image from a page the server read this turn, or a place photo. Fetched by the app without cookies.",
+      "x-pisa-fallback": "alt",
+      "properties": {
+        "component": {
+          "const": "Image"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://\\S+$",
+          "maxLength": 2000
+        },
+        "alt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "credit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      },
+      "required": [
+        "component",
+        "url",
+        "alt"
+      ]
+    },
+    "Check": {
+      "type": "object",
+      "description": "One requirement as checked: verified, likely, unknown or no, with its source.",
+      "x-pisa-fallback": "'requirement: status (source)'",
+      "properties": {
+        "component": {
+          "const": "Check"
+        },
+        "requirement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "verified",
+            "likely",
+            "unknown",
+            "no"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "maxLength": 120
+        }
+      },
+      "required": [
+        "component",
+        "requirement",
+        "status"
+      ]
+    },
+    "Sources": {
+      "type": "object",
+      "description": "The links behind an answer.",
+      "x-pisa-fallback": "'Sources: ' + hosts",
+      "properties": {
+        "component": {
+          "const": "Sources"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "title",
+              "url",
+              "host"
+            ],
+            "properties": {
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              },
+              "url": {
+                "type": "string",
+                "pattern": "^https?://\\S+$",
+                "maxLength": 2000
+              },
+              "host": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "component",
+        "items"
+      ]
+    },
+    "Table": {
+      "type": "object",
+      "description": "A small table; cells are text, numbers, or {text, status} (a checked value).",
+      "x-pisa-fallback": "fallback",
+      "properties": {
+        "component": {
+          "const": "Table"
+        },
+        "columns": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 7,
+          "items": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 40
+          }
+        },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 7,
+            "items": {
+              "oneOf": [
+                {
+                  "type": [
+                    "string",
+                    "number",
+                    "null"
+                  ],
+                  "maxLength": 120
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "text",
+                    "status"
+                  ],
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "minLength": 0,
+                      "maxLength": 120
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "verified",
+                        "likely",
+                        "unknown",
+                        "no"
+                      ]
+                    },
+                    "source": {
+                      "type": "string",
+                      "maxLength": 120
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "fallback": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400,
+          "description": "Plain text said or shown where this component cannot be drawn (unknown component, glasses, watch, VoiceOver summary). Required."
+        }
+      },
+      "required": [
+        "component",
+        "columns",
+        "rows",
+        "fallback"
+      ]
+    },
+    "Chart": {
+      "type": "object",
+      "description": "A chart drawn natively (Swift Charts). The wire format is a strict subset of Vega-Lite v6: one inline data table, one mark, x/y/color/theta encodings, no transforms, no URLs, no expressions. Anything beyond the subset is a Ring 2 view.",
+      "x-pisa-fallback": "fallback",
+      "properties": {
+        "component": {
+          "const": "Chart"
+        },
+        "spec": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mark",
+            "data",
+            "encoding"
+          ],
+          "properties": {
+            "$schema": {
+              "const": "https://vega.github.io/schema/vega-lite/v6.json"
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "mark": {
+              "type": "string",
+              "enum": [
+                "bar",
+                "line",
+                "area",
+                "point",
+                "arc",
+                "rule"
+              ]
+            },
+            "data": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "values"
+              ],
+              "properties": {
+                "values": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 500,
+                  "items": {
+                    "type": "object",
+                    "maxProperties": 8,
+                    "additionalProperties": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "encoding": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "x": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "field",
+                    "type"
+                  ],
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 40
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "quantitative",
+                        "temporal",
+                        "nominal",
+                        "ordinal"
+                      ]
+                    },
+                    "title": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 60
+                    },
+                    "aggregate": {
+                      "type": "string",
+                      "enum": [
+                        "sum",
+                        "mean",
+                        "count",
+                        "min",
+                        "max"
+                      ]
+                    }
+                  }
+                },
+                "y": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "field",
+                    "type"
+                  ],
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 40
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "quantitative",
+                        "temporal",
+                        "nominal",
+                        "ordinal"
+                      ]
+                    },
+                    "title": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 60
+                    },
+                    "aggregate": {
+                      "type": "string",
+                      "enum": [
+                        "sum",
+                        "mean",
+                        "count",
+                        "min",
+                        "max"
+                      ]
+                    }
+                  }
+                },
+                "color": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "field",
+                    "type"
+                  ],
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 40
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "quantitative",
+                        "temporal",
+                        "nominal",
+                        "ordinal"
+                      ]
+                    },
+                    "title": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 60
+                    },
+                    "aggregate": {
+                      "type": "string",
+                      "enum": [
+                        "sum",
+                        "mean",
+                        "count",
+                        "min",
+                        "max"
+                      ]
+                    }
+                  }
+                },
+                "theta": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "field",
+                    "type"
+                  ],
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 40
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "quantitative",
+                        "temporal",
+                        "nominal",
+                        "ordinal"
+                      ]
+                    },
+                    "title": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 60
+                    },
+                    "aggregate": {
+                      "type": "string",
+                      "enum": [
+                        "sum",
+                        "mean",
+                        "count",
+                        "min",
+                        "max"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20
+        },
+        "fallback": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400,
+          "description": "Plain text said or shown where this component cannot be drawn (unknown component, glasses, watch, VoiceOver summary). Required."
+        }
+      },
+      "required": [
+        "component",
+        "spec",
+        "fallback"
+      ]
+    },
+    "Diagram": {
+      "type": "object",
+      "description": "A flow or structure diagram laid out natively (build 60's K33 diagram). Mermaid sources are Ring 2.",
+      "x-pisa-fallback": "fallback",
+      "properties": {
+        "component": {
+          "const": "Diagram"
+        },
+        "style": {
+          "type": "string",
+          "enum": [
+            "flow",
+            "structure"
+          ]
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "down",
+            "right"
+          ],
+          "default": "down"
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "label"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9_]{1,24}$"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 60
+              },
+              "shape": {
+                "type": "string",
+                "enum": [
+                  "box",
+                  "store",
+                  "actor",
+                  "note"
+                ],
+                "default": "box"
+              },
+              "group": {
+                "type": "string",
+                "pattern": "^[a-z0-9_]{1,24}$"
+              }
+            }
+          }
+        },
+        "edges": {
+          "type": "array",
+          "maxItems": 80,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "from",
+              "to"
+            ],
+            "properties": {
+              "from": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 24
+              },
+              "to": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 24
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40
+              },
+              "style": {
+                "type": "string",
+                "enum": [
+                  "solid",
+                  "dashed"
+                ]
+              },
+              "arrow": {
+                "type": "string",
+                "enum": [
+                  "end",
+                  "both",
+                  "none"
+                ]
+              }
+            }
+          }
+        },
+        "groups": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "label"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 24
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 60
+              }
+            }
+          }
+        },
+        "fallback": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400,
+          "description": "Plain text said or shown where this component cannot be drawn (unknown component, glasses, watch, VoiceOver summary). Required."
+        }
+      },
+      "required": [
+        "component",
+        "style",
+        "nodes",
+        "edges",
+        "fallback"
+      ]
+    },
+    "Timeline": {
+      "type": "object",
+      "description": "Dated items in order.",
+      "x-pisa-fallback": "fallback",
+      "properties": {
+        "component": {
+          "const": "Timeline"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "at",
+              "title"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40
+              },
+              "at": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              },
+              "detail": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              }
+            }
+          }
+        },
+        "fallback": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400,
+          "description": "Plain text said or shown where this component cannot be drawn (unknown component, glasses, watch, VoiceOver summary). Required."
+        }
+      },
+      "required": [
+        "component",
+        "items",
+        "fallback"
+      ]
+    },
+    "Map": {
+      "type": "object",
+      "description": "Pins on a native map.",
+      "x-pisa-fallback": "fallback",
+      "properties": {
+        "component": {
+          "const": "Map"
+        },
+        "pins": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name",
+              "lat",
+              "lon"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              },
+              "lat": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "lon": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180
+              },
+              "badge": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 60
+              },
+              "pick": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "fallback": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400,
+          "description": "Plain text said or shown where this component cannot be drawn (unknown component, glasses, watch, VoiceOver summary). Required."
+        }
+      },
+      "required": [
+        "component",
+        "pins",
+        "fallback"
+      ]
+    },
+    "PlaceSummary": {
+      "type": "object",
+      "description": "One place the turn found: the decision facts first; photos and details come from REST by placeId.",
+      "x-pisa-fallback": "fallback",
+      "properties": {
+        "component": {
+          "const": "PlaceSummary"
+        },
+        "placeId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "distanceM": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "travelMin": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "openNow": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "closesAt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "opensAt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "rating": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ratingCount": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "priceLevel": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "lat": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "lon": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "photoCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fits": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          }
+        },
+        "different": {
+          "type": "boolean"
+        },
+        "checks": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/components/Check"
+          },
+          "description": "Inline Check objects (their component key included)."
+        },
+        "fallback": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400,
+          "description": "Plain text said or shown where this component cannot be drawn (unknown component, glasses, watch, VoiceOver summary). Required."
+        }
+      },
+      "required": [
+        "component",
+        "placeId",
+        "name",
+        "why",
+        "fallback"
+      ]
+    },
+    "Ref": {
+      "type": "object",
+      "description": "Something the server holds (plan, place, task, event, email, draft, approval, claim, thing, changes, setting): Ring 0 draws it from REST, so the object is the truth, not a copy.",
+      "x-pisa-fallback": "fallback",
+      "properties": {
+        "component": {
+          "const": "Ref"
+        },
+        "ref": {
+          "type": "string",
+          "pattern": "^(plan:\\d{4}-\\d{2}-\\d{2}|place:[0-9a-f-]{36}|(task|event|email|draft|approval|claim|thing):\\S{1,1100}|changes:(all|\\S{1,40})|setting:[a-z_]{1,40})$"
+        },
+        "detail": {
+          "type": "string",
+          "enum": [
+            "card",
+            "full"
+          ],
+          "default": "card"
+        },
+        "fallback": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400,
+          "description": "Plain text said or shown where this component cannot be drawn (unknown component, glasses, watch, VoiceOver summary). Required."
+        }
+      },
+      "required": [
+        "component",
+        "ref",
+        "fallback"
+      ]
+    },
+    "Button": {
+      "type": "object",
+      "description": "A tap. Never an approval: approvals are Ring 0 (interrupts). Action names are the closed list pisa.*.",
+      "x-pisa-fallback": "label",
+      "properties": {
+        "component": {
+          "const": "Button"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "style": {
+          "type": "string",
+          "enum": [
+            "primary",
+            "plain",
+            "undo"
+          ],
+          "default": "plain"
+        },
+        "action": {
+          "$ref": "https://a2ui.org/specification/v1_0/common_types.json#/$defs/Action"
+        }
+      },
+      "required": [
+        "component",
+        "label",
+        "action"
+      ]
+    },
+    "Choice": {
+      "type": "object",
+      "description": "A question answerable by tap or voice; a tap sends action pisa.choose with optionId.",
+      "x-pisa-fallback": "question, then '1. label' lines",
+      "properties": {
+        "component": {
+          "const": "Choice"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "options": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "label"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^o[1-5]$"
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40
+              },
+              "detail": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "component",
+        "question",
+        "options"
+      ]
+    },
+    "Handoff": {
+      "type": "object",
+      "description": "The app hands a prepared act to the system (open a page, call, message, map) after the user's tap.",
+      "x-pisa-fallback": "fallback",
+      "properties": {
+        "component": {
+          "const": "Handoff"
+        },
+        "handoffId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "open_url",
+            "call",
+            "message",
+            "map"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "subtitle": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "url": {
+          "type": "string",
+          "maxLength": 2000,
+          "pattern": "^(https://\\S+|tel:\\+[1-9][0-9]{5,14}|sms:(\\+[1-9][0-9]{5,14})?&body=[A-Za-z0-9%._~-]*)$"
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+[1-9][0-9]{5,14}$"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 3000
+        },
+        "notes": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "fallback": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400,
+          "description": "Plain text said or shown where this component cannot be drawn (unknown component, glasses, watch, VoiceOver summary). Required."
+        }
+      },
+      "required": [
+        "component",
+        "handoffId",
+        "kind",
+        "title",
+        "fallback"
+      ]
+    }
+  },
+  "functions": {},
+  "$defs": {
+    "anyComponent": {
+      "oneOf": [
+        {
+          "$ref": "#/components/Column"
+        },
+        {
+          "$ref": "#/components/Row"
+        },
+        {
+          "$ref": "#/components/Card"
+        },
+        {
+          "$ref": "#/components/Section"
+        },
+        {
+          "$ref": "#/components/Divider"
+        },
+        {
+          "$ref": "#/components/Text"
+        },
+        {
+          "$ref": "#/components/Fact"
+        },
+        {
+          "$ref": "#/components/Stat"
+        },
+        {
+          "$ref": "#/components/BulletList"
+        },
+        {
+          "$ref": "#/components/Chips"
+        },
+        {
+          "$ref": "#/components/Link"
+        },
+        {
+          "$ref": "#/components/Image"
+        },
+        {
+          "$ref": "#/components/Check"
+        },
+        {
+          "$ref": "#/components/Sources"
+        },
+        {
+          "$ref": "#/components/Table"
+        },
+        {
+          "$ref": "#/components/Chart"
+        },
+        {
+          "$ref": "#/components/Diagram"
+        },
+        {
+          "$ref": "#/components/Timeline"
+        },
+        {
+          "$ref": "#/components/Map"
+        },
+        {
+          "$ref": "#/components/PlaceSummary"
+        },
+        {
+          "$ref": "#/components/Ref"
+        },
+        {
+          "$ref": "#/components/Button"
+        },
+        {
+          "$ref": "#/components/Choice"
+        },
+        {
+          "$ref": "#/components/Handoff"
+        }
+      ],
+      "discriminator": {
+        "propertyName": "component"
+      }
+    },
+    "anyFunction": {
+      "not": {}
+    }
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "options_id": "5334e242-4d55-4e90-b28a-33432ec1c5b9",
+  "expires_at": "2026-10-24T11:45:00+02:00",
+  "target_title": "BRAM'S Broodjes",
+  "options": [
+    {
+      "id": "o1",
+      "summary": "Salta Stadsweide · LICHTJESMARKT",
+      "why": "26 min a piedi in meno; salta: Stadsweide · LICHTJESMARKT.",
+      "changes": [
+        {
+          "action": "skip",
+          "event_id": "97997bfc052f45d99febb17b43d3b07c"
+        },
+        {
+          "action": "move",
+          "task_id": "8df701b7-0b8d-4221-b4da-c46e3ac0a2c7",
+          "start": "2026-10-24T11:39:00+02:00",
+          "end": "2026-10-24T12:24:00+02:00"
+        }
+      ],
+      "effects": {
+        "late_min": 0,
+        "extra_travel_min": -26,
+        "dropped": [
+          "Stadsweide · LICHTJESMARKT"
+        ]
+      },
+      "plan": {
+        "date": "2026-10-24",
+        "generated_at": "2026-10-24T11:30:00+02:00",
+        "from": {
+          "lat": 52.359,
+          "lon": 4.889,
+          "label": "here"
+        },
+        "items": [
+          {
+            "kind": "travel",
+            "start": "2026-10-24T11:30:00+02:00",
+            "end": "2026-10-24T11:39:00+02:00",
+            "title": "4 min on foot",
+            "mode": "walk",
+            "minutes": 4,
+            "provider": "apple",
+            "to_place_id": "5f8fd6c8-7107-4001-aad7-797190c1a9e1",
+            "leave_at": "2026-10-24T11:30:00+02:00"
+          },
+          {
+            "kind": "task",
+            "start": "2026-10-24T11:39:00+02:00",
+            "end": "2026-10-24T12:24:00+02:00",
+            "title": "BRAM'S Broodjes",
+            "task_id": "8df701b7-0b8d-4221-b4da-c46e3ac0a2c7",
+            "place_id": "5f8fd6c8-7107-4001-aad7-797190c1a9e1",
+            "why": "Moved here at your request.",
+            "status": "planned",
+            "adjusted": true
+          },
+          {
+            "kind": "event",
+            "start": "2026-10-24T12:00:00+02:00",
+            "end": "2026-10-24T23:00:00+02:00",
+            "title": "Stadsweide · LICHTJESMARKT",
+            "event_id": "97997bfc052f45d99febb17b43d3b07c",
+            "event_ids": [
+              "97997bfc052f45d99febb17b43d3b07c"
+            ],
+            "place_id": "0de99273-1cbd-4bab-bf6c-78131e1c5f50",
+            "status": "skipped",
+            "event_kind": "fixed",
+            "kind_source": "owner"
+          },
+          {
+            "kind": "task",
+            "start": "2026-10-24T12:29:00+02:00",
+            "end": "2026-10-24T13:14:00+02:00",
+            "title": "BRAM'S Broodjes",
+            "task_id": "e257b67d-8e61-47ed-b2de-af0c2c35067d",
+            "place_id": "5f8fd6c8-7107-4001-aad7-797190c1a9e1",
+            "why": "0 min from BRAM'S Broodjes.",
+            "status": "planned"
+          },
+          {
+            "kind": "free",
+            "start": "2026-10-24T13:14:00+02:00",
+            "end": "2026-10-24T21:00:00+02:00"
+          }
+        ],
+        "unplanned": [],
+        "sources": {
+          "routes": "apple",
+          "skipped": []
+        }
+      }
+    },
+    {
+      "id": "o2",
+      "summary": "Adesso da BRAM'S Broodjes",
+      "why": "Arrivi a Stadsweide · LICHTJESMARKT alle 13:07, 67 min in ritardo; 17 min a piedi in più; salta: BRAM'S Broodjes.",
+      "changes": [
+        {
+          "action": "move",
+          "task_id": "8df701b7-0b8d-4221-b4da-c46e3ac0a2c7",
+          "start": "2026-10-24T11:39:00+02:00",
+          "end": "2026-10-24T12:24:00+02:00"
+        }
+      ],
+      "effects": {
+        "late_min": 67,
+        "extra_travel_min": 17,
+        "dropped": [
+          "BRAM'S Broodjes"
+        ]
+      },
+      "plan": {
+        "date": "2026-10-24",
+        "generated_at": "2026-10-24T11:30:00+02:00",
+        "from": {
+          "lat": 52.359,
+          "lon": 4.889,
+          "label": "here"
+        },
+        "items": [
+          {
+            "kind": "travel",
+            "start": "2026-10-24T11:30:00+02:00",
+            "end": "2026-10-24T11:39:00+02:00",
+            "title": "4 min on foot",
+            "mode": "walk",
+            "minutes": 4,
+            "provider": "apple",
+            "to_place_id": "5f8fd6c8-7107-4001-aad7-797190c1a9e1",
+            "leave_at": "2026-10-24T11:30:00+02:00"
+          },
+          {
+            "kind": "task",
+            "start": "2026-10-24T11:39:00+02:00",
+            "end": "2026-10-24T12:24:00+02:00",
+            "title": "BRAM'S Broodjes",
+            "task_id": "8df701b7-0b8d-4221-b4da-c46e3ac0a2c7",
+            "place_id": "5f8fd6c8-7107-4001-aad7-797190c1a9e1",
+            "why": "Moved here at your request.",
+            "status": "planned",
+            "adjusted": true
+          },
+          {
+            "kind": "event",
+            "start": "2026-10-24T12:00:00+02:00",
+            "end": "2026-10-24T23:00:00+02:00",
+            "title": "Stadsweide · LICHTJESMARKT",
+            "event_id": "97997bfc052f45d99febb17b43d3b07c",
+            "event_ids": [
+              "97997bfc052f45d99febb17b43d3b07c"
+            ],
+            "place_id": "0de99273-1cbd-4bab-bf6c-78131e1c5f50",
+            "why": "You can get there by 13:07, 67 min late.",
+            "status": "planned",
+            "event_kind": "fixed",
+            "kind_source": "owner"
+          },
+          {
+            "kind": "travel",
+            "start": "2026-10-24T12:24:00+02:00",
+            "end": "2026-10-24T13:07:00+02:00",
+            "title": "43 min by public transport",
+            "mode": "transit",
+            "minutes": 43,
+            "provider": "estimate",
+            "to_place_id": "0de99273-1cbd-4bab-bf6c-78131e1c5f50",
+            "leave_at": "2026-10-24T12:24:00+02:00"
+          }
+        ],
+        "unplanned": [
+          {
+            "task_id": "e257b67d-8e61-47ed-b2de-af0c2c35067d",
+            "title": "BRAM'S Broodjes",
+            "reason": "Needs 45 min; the longest free time left today is 0 min."
+          }
+        ],
+        "sources": {
+          "routes": "apple",
+          "skipped": []
+        }
+      }
+    }
+  ]
+}

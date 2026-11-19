@@ -1,0 +1,282 @@
+{
+  "identity": {
+    "agent_url": "https://pisa.example.org",
+    "signing": true,
+    "kid": "kPrK_qmxVWaYVA9wwBF6Iuo3vVzz7TxHCTwXBygrS4k",
+    "created_at": "2026-11-03T18:00:00+01:00",
+    "published": [
+      "kPrK_qmxVWaYVA9wwBF6Iuo3vVzz7TxHCTwXBygrS4k"
+    ],
+    "card_url": "https://pisa.example.org/.well-known/agent-card.json",
+    "directory_url": "https://pisa.example.org/.well-known/http-message-signatures-directory"
+  },
+  "ladder": {
+    "categories": [
+      {
+        "category": "restaurants",
+        "countries": {
+          "US": [
+            {
+              "rung": "protocol",
+              "state": "watch",
+              "via": "UCP food",
+              "note": "coming soon (DoorDash, Toast, Square, Uber Eats)",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "business_agent",
+              "state": "none",
+              "via": "OpenTable/Resy",
+              "note": "no public agent API; AI Mode only inside Google",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "call",
+              "state": "live",
+              "via": "the restaurant's phone",
+              "note": "he calls; Pisa writes what to say",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "deep_link",
+              "state": "live",
+              "via": "OpenTable, Resy",
+              "note": "",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            }
+          ],
+          "IT": [
+            {
+              "rung": "protocol",
+              "state": "none",
+              "via": "—",
+              "note": "no protocol in Italy",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "business_agent",
+              "state": "none",
+              "via": "TheFork",
+              "note": "no public agent API",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "call",
+              "state": "live",
+              "via": "the restaurant's phone",
+              "note": "he calls; Pisa writes what to say",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "deep_link",
+              "state": "live",
+              "via": "TheFork",
+              "note": "",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            }
+          ]
+        }
+      },
+      {
+        "category": "travel",
+        "countries": {
+          "US": [
+            {
+              "rung": "protocol",
+              "state": "watch",
+              "via": "UCP lodging",
+              "note": "draft (Booking, Expedia, Hilton, Marriott)",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "business_agent",
+              "state": "watch",
+              "via": "Etraveli Flight MCP",
+              "note": "OAuth; open to individuals unknown (owner decision)",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "signed_browser",
+              "state": "watch",
+              "via": "signed browser",
+              "note": "",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "call",
+              "state": "live",
+              "via": "the hotel's phone",
+              "note": "",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "deep_link",
+              "state": "live",
+              "via": "the airline's or the hotel's page",
+              "note": "Pisa searches, he books",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            }
+          ],
+          "IT": [
+            {
+              "rung": "protocol",
+              "state": "none",
+              "via": "—",
+              "note": "lastminute.com on Visa's rail: approved agents only",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "business_agent",
+              "state": "none",
+              "via": "Trenitalia, Italo, ITA",
+              "note": "none found",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "call",
+              "state": "live",
+              "via": "the hotel's phone",
+              "note": "",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "deep_link",
+              "state": "live",
+              "via": "the carrier's or the hotel's page",
+              "note": "Pisa searches, he books",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            }
+          ]
+        }
+      },
+      {
+        "category": "retail",
+        "countries": {
+          "US": [
+            {
+              "rung": "protocol",
+              "state": "live",
+              "via": "UCP",
+              "note": "search, cart, the checkout link to him (allowlisted merchants)",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "business_agent",
+              "state": "watch",
+              "via": "Shopify Shop MCP",
+              "note": "",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "signed_browser",
+              "state": "watch",
+              "via": "WebMCP stores",
+              "note": "",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "deep_link",
+              "state": "live",
+              "via": "the store's search page",
+              "note": "",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            }
+          ],
+          "IT": [
+            {
+              "rung": "protocol",
+              "state": "watch",
+              "via": "UCP",
+              "note": "few merchants; Nexi pilots",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "business_agent",
+              "state": "watch",
+              "via": "Shopify Shop MCP",
+              "note": "",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "deep_link",
+              "state": "live",
+              "via": "the store's own page",
+              "note": "",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            }
+          ]
+        }
+      },
+      {
+        "category": "utilities",
+        "countries": {
+          "US": [
+            {
+              "rung": "deep_link",
+              "state": "live",
+              "via": "the provider's portal",
+              "note": "he logs in",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "call",
+              "state": "live",
+              "via": "the provider's service line",
+              "note": "service issues",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            }
+          ],
+          "IT": [
+            {
+              "rung": "deep_link",
+              "state": "live",
+              "via": "the provider's portal",
+              "note": "he logs in; Pisa drafts, he sends (PEC/email)",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "call",
+              "state": "live",
+              "via": "the provider's service line",
+              "note": "service issues",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            }
+          ]
+        }
+      },
+      {
+        "category": "public_it",
+        "countries": {
+          "IT": [
+            {
+              "rung": "protocol",
+              "state": "none",
+              "via": "pagoPA, app IO, SPID, CIE",
+              "note": "accredited parties only; SPID/CIE are personal",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "deep_link",
+              "state": "live",
+              "via": "app IO, the agency's portal, the pagoPA notice",
+              "note": "he authenticates; Pisa prepares the data",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            },
+            {
+              "rung": "call",
+              "state": "live",
+              "via": "the office (CUP, anagrafe)",
+              "note": "appointments",
+              "source": "a survey of public ordering protocols (Nov 2026)"
+            }
+          ]
+        }
+      }
+    ],
+    "carried": [
+      "call",
+      "deep_link",
+      "protocol"
+    ]
+  }
+}

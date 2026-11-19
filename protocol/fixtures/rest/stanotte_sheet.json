@@ -1,0 +1,137 @@
+{
+  "object_id": "sheet:81c8d3e4-5a6b-4c7d-8e9f-0a1b2c3d4e81",
+  "kind": "sheet",
+  "revision": 1762844700000,
+  "data": {
+    "title": "Stanotte",
+    "blocks": [
+      {
+        "type": "section",
+        "title": "L'idea di stanotte, fatta"
+      },
+      {
+        "type": "text",
+        "text": "Un bot che legge le ricevute e prepara la fattura"
+      },
+      {
+        "type": "fact",
+        "label": "Come",
+        "value": "foto della ricevuta, estrazione dei campi, bozza"
+      },
+      {
+        "type": "stat",
+        "label": "Ricavi l'anno",
+        "value": "€54.720",
+        "unit": "conti in codice"
+      },
+      {
+        "type": "table",
+        "columns": [
+          "Scenario",
+          "Ricavi l'anno (€)"
+        ],
+        "rows": [
+          [
+            "metà adozione",
+            27360.0
+          ],
+          [
+            "prezzo -20%",
+            43776.0
+          ],
+          [
+            "base",
+            54720.0
+          ],
+          [
+            "prezzo +20%",
+            65664.0
+          ],
+          [
+            "adozione doppia",
+            109440.0
+          ]
+        ]
+      },
+      {
+        "type": "text",
+        "text": "Prove: 1 simili trovati, linkati; mercato: 38.000 letto sulla pagina citata; conti fatti in codice: circa €54.720 l'anno; chi ci perde: scritto; la parte tecnica non è provata: il laboratorio non è ancora attivo."
+      },
+      {
+        "type": "link",
+        "url": "https://istat.example/freelance",
+        "title": "Mercato: freelance con partita IVA",
+        "host": "istat.example"
+      },
+      {
+        "type": "link",
+        "url": "https://fatturino.example/",
+        "title": "Simile: Fatturino",
+        "host": "fatturino.example"
+      },
+      {
+        "type": "fact",
+        "label": "Chi ci perde",
+        "value": "chi vive di data entry"
+      },
+      {
+        "type": "section",
+        "title": "Le scartate, e perché"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Calendario fiscale vocale sul telefono — simili già sul mercato > 2"
+        ]
+      },
+      {
+        "type": "section",
+        "title": "La finestra più vicina"
+      },
+      {
+        "type": "text",
+        "text": "Tra 19 giorni chiude: il bando regionale per il digitale (IT, 30/11/2026)."
+      },
+      {
+        "type": "link",
+        "url": "https://www.regione.example/bando-digitale",
+        "title": "il bando regionale per il digitale",
+        "host": "www.regione.example"
+      },
+      {
+        "type": "section",
+        "title": "Italia / USA"
+      },
+      {
+        "type": "text",
+        "text": "Negli USA la fattura elettronica non è obbligatoria: in Italia sì, dal 2019."
+      },
+      {
+        "type": "link",
+        "url": "https://www.sba.example/rules",
+        "title": "Negli USA la fattura elettronica non è obbligatoria: in Italia sì, dal 2019.",
+        "host": "www.sba.example"
+      },
+      {
+        "type": "section",
+        "title": "Una cosa a cui forse non hai pensato"
+      },
+      {
+        "type": "text",
+        "text": "Il volo di giovedì atterra alle 23: chi apre lo studio venerdì?"
+      },
+      {
+        "type": "link",
+        "url": "https://server.example.com/b/stanotte-1a2b3c/1765000000.0123456789abcdef0123456789abcdef/",
+        "title": "Il deck e il grafico",
+        "host": "server.example.com"
+      },
+      {
+        "type": "link",
+        "url": "https://server.example.com/b/stanotte-1a2b3c/1765000000.0123456789abcdef0123456789abcdef/tutto.html",
+        "title": "Dammi tutto",
+        "host": "server.example.com"
+      }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "week": "2026-W46",
+  "from": "2026-11-09",
+  "to": "2026-11-15",
+  "days": [
+    {
+      "date": "2026-11-14",
+      "lines": [
+        {
+          "id": "decision:00000000-0000-4000-8000-000000000601",
+          "at": "2026-11-14T10:02:00+01:00",
+          "kind": "calendar",
+          "title": "Palestra spostata alle 19",
+          "why": "così arrivi in tempo dal dentista",
+          "source": "owner_said",
+          "type": "calendar_move",
+          "undo": {"available": true, "until": "2026-11-15T10:02:00+01:00"}
+        },
+        {
+          "id": "decision:00000000-0000-4000-8000-000000000602",
+          "at": "2026-11-14T09:00:00+01:00",
+          "kind": "bill",
+          "title": "Pagare la bolletta Enel entro venerdì 20",
+          "why": "Una bolletta nella tua email: 84,20 €.",
+          "source": "rule",
+          "undo": {"available": false, "until": null}
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "lines": [
+        {
+          "id": "done:00000000-0000-4000-8000-000000000603",
+          "at": "2026-11-12T13:10:00+01:00",
+          "kind": "task_done",
+          "title": "Ritirare il pacco",
+          "why": "Chiuso: eri lì.",
+          "source": "rule",
+          "type": "task_done",
+          "undo": {"available": false, "until": "2026-11-13T13:10:00+01:00"}
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "lines": 3,
+    "undone": 0,
+    "by_kind": {"calendar": 1, "bill": 1, "task_done": 1},
+    "by_source": {"owner_said": 1, "rule": 2}
+  }
+}

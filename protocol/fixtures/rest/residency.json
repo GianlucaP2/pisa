@@ -1,0 +1,55 @@
+{
+  "year": 2026,
+  "days": {
+    "IT": 201,
+    "US": 96,
+    "other": 4,
+    "unknown": 5
+  },
+  "by_rule": [
+    {
+      "rule": "it_presence_183",
+      "country": "IT",
+      "count": 201,
+      "threshold": 183,
+      "note": "Italia: 201 giorni su 183 di presenza nell'anno. È un conteggio, non una consulenza."
+    },
+    {
+      "rule": "us_substantial_presence",
+      "country": "US",
+      "count": 131.5,
+      "threshold": 183,
+      "note": "USA: 131.5 su 183 (96 quest'anno + 1/3 e 1/6 degli anni prima). È un conteggio, non una consulenza."
+    },
+    {
+      "rule": "us_closer_connection",
+      "country": "US",
+      "count": 96,
+      "threshold": 183,
+      "note": "USA, giorni dell'anno (eccezione closer connection): 96 su 183. È un conteggio, non una consulenza."
+    }
+  ],
+  "evidence": [
+    {
+      "day": "2026-11-01",
+      "country": "IT",
+      "source": "phone_region"
+    },
+    {
+      "day": "2026-11-02",
+      "country": "IT",
+      "source": "trip"
+    },
+    {
+      "day": "2026-11-02",
+      "country": "US",
+      "source": "trip"
+    },
+    {
+      "day": "2026-11-03",
+      "country": "IT",
+      "source": "his_words"
+    }
+  ],
+  "note": "È un conteggio, non una consulenza."
+}

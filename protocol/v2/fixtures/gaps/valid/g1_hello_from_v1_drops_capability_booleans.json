@@ -1,0 +1,96 @@
+{
+  "gap": "G1",
+  "check": "client_frame",
+  "why": "v1 hello.capabilities booleans have no contract 2 field: no backend reads them. display became rings and surfaces.",
+  "v1": {
+    "v": 1,
+    "id": "00000000-0000-4000-8000-000000009000",
+    "ts": "2026-10-20T13:00:00+02:00",
+    "type": "hello",
+    "device_id": "00000000-0000-4000-8000-000000000100",
+    "app_version": "0.1.0",
+    "platform": "ios",
+    "capabilities": {
+      "mic": true,
+      "speaker": true,
+      "display": true,
+      "camera": true,
+      "local_stt": true,
+      "local_tts": true,
+      "location": true,
+      "push": true
+    },
+    "wearable": {
+      "kind": "meta_glasses",
+      "model": "Ray-Ban Meta Gen 2",
+      "connected": true
+    }
+  },
+  "frame": {
+    "op": "hello",
+    "contract": {
+      "versions": [
+        "2.0"
+      ]
+    },
+    "agui": {
+      "protocolVersions": [
+        "1.0"
+      ]
+    },
+    "a2ui": {
+      "1.0": {
+        "supportedCatalogIds": [
+          "urn:pisa:a2ui:catalog:core:1"
+        ]
+      }
+    },
+    "mcpApps": {
+      "protocolVersions": [
+        "2026-01-26"
+      ],
+      "mimeTypes": [
+        "text/html;profile=mcp-app"
+      ],
+      "bundledLibraries": [
+        "d3@7.9.0",
+        "mermaid@12.2.0",
+        "vega@6.4.0",
+        "vega-lite@6.5.0",
+        "vega-embed@7.3.0",
+        "vega-interpreter@2.3.2"
+      ]
+    },
+    "rings": [
+      0,
+      1,
+      2
+    ],
+    "extensions": {
+      "pisa.voice": 1,
+      "pisa.presence": 1,
+      "pisa.location": 1,
+      "pisa.notice": 1,
+      "pisa.directions": 1,
+      "pisa.call": 1,
+      "pisa.compose": 1,
+      "pisa.approval": 1,
+      "pisa.surface": 1
+    },
+    "device": {
+      "deviceId": "00000000-0000-4000-8000-000000000100",
+      "appVersion": "0.1.0",
+      "platform": "ios",
+      "surfaces": [
+        "phone",
+        "glasses_display"
+      ],
+      "audioFormats": [],
+      "wearable": {
+        "kind": "meta_glasses",
+        "model": "Ray-Ban Meta Gen 2",
+        "connected": true
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009112",
+  "ts": "2026-10-31T14:02:11+01:00",
+  "type": "presented",
+  "present_id": "00000000-0000-4000-8000-000000009204",
+  "object_id": "places:00000000-0000-4000-8000-000000000801",
+  "status": "unavailable",
+  "surface": "none",
+  "reason": "glasses only: no screen in use"
+}

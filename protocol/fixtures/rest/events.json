@@ -1,0 +1,32 @@
+{
+  "timezone": "Europe/Rome",
+  "events": [
+    {
+      "id": "97997bfc052f45d99febb17b43d3b07c",
+      "calendar": "primary",
+      "title": "Stadsweide · LICHTJESMARKT",
+      "start": "2026-10-24T12:00:00+02:00",
+      "end": "2026-10-24T23:00:00+02:00",
+      "all_day": false,
+      "location": "Utrecht",
+      "place_id": "0de99273-1cbd-4bab-bf6c-78131e1c5f50",
+      "kind": "window",
+      "kind_source": "inferred",
+      "min_stay_min": 120,
+      "attended_at": "2026-10-24T13:10:00+02:00"
+    },
+    {
+      "id": "c3f1a0b7e2d94c5a8b6f1e2d3c4b5a69",
+      "calendar": "primary",
+      "title": "Cena con amici",
+      "start": "2026-10-24T20:00:00+02:00",
+      "end": "2026-10-24T23:00:00+02:00",
+      "all_day": false,
+      "location": null,
+      "place_id": null,
+      "kind": "fixed",
+      "kind_source": "owner",
+      "min_stay_min": null
+    }
+  ]
+}

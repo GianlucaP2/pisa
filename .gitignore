@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Secrets: never commit
+.env
+*.env
+!.env.example
+*.pem
+!/relay/pisa_relay/AppleRootCA-G3.pem
+*.p8
+*.p12
+*.mobileprovision
+
+# Xcode
+xcuserdata/
+DerivedData/
+._*
+*.xcuserstate
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
