@@ -3,7 +3,7 @@
 # Multi-arch: linux/amd64 and linux/arm64 (a Raspberry Pi 4/5 on a 64-bit OS); both bases are multi-arch
 # indexes, so `docker buildx build --platform linux/amd64,linux/arm64 relay` needs nothing else.
 # Base images pinned by the index digest (the tag says which; bump both together).
-FROM python:3.13-slim@sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90
+FROM python:3.15-slim@sha256:65a65fc7b30b06cb6df4930fd4650697cb23f4c2698ab81fc87e4b031bc36928
 COPY --from=ghcr.io/astral-sh/uv:0.11.32@sha256:df4cae8f3a96d175e2e5f992e597550000edbe78fdc2594d5cd8de1a217f504c /uv /bin/
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy PYTHONUNBUFFERED=1 RELAY_DATABASE=/data/relay.sqlite3
 WORKDIR /app
