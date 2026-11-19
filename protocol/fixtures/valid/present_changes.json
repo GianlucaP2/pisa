@@ -1,0 +1,19 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009107",
+  "ts": "2026-10-31T14:02:11+01:00",
+  "type": "present",
+  "present_id": "00000000-0000-4000-8000-000000009207",
+  "reply_to": "00000000-0000-4000-8000-000000009007",
+  "object": {
+    "object_id": "changes:today",
+    "kind": "changes",
+    "revision": 5,
+    "ref": {
+      "since": null
+    }
+  },
+  "purpose": "Quello che ho cambiato oggi, con il perché",
+  "focus": "quiet",
+  "lang": "it-IT"
+}

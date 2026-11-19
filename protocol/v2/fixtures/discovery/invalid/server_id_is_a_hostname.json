@@ -1,0 +1,47 @@
+{
+  "why": "serverId is opaque base64url, never a hostname.",
+  "document": {
+    "product": "pisa",
+    "serverId": "pisa.home.example.net",
+    "serverVersion": "0.1.0",
+    "contract": {
+      "versions": [
+        "2.0"
+      ]
+    },
+    "agui": [
+      "1.0"
+    ],
+    "a2ui": {
+      "versions": [
+        "1.0"
+      ],
+      "catalogIds": [
+        "urn:pisa:a2ui:catalog:core:1"
+      ]
+    },
+    "mcpApps": [],
+    "features": [
+      {
+        "id": "stop",
+        "version": 1
+      },
+      {
+        "id": "approvals.signed",
+        "version": 2
+      }
+    ],
+    "readiness": {
+      "ready": true
+    },
+    "reach": {
+      "scheme": "https",
+      "network": "lan"
+    },
+    "push": {
+      "modes": [
+        "none"
+      ]
+    }
+  }
+}

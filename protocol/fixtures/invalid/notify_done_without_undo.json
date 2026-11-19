@@ -1,0 +1,13 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009042",
+  "ts": "2026-10-24T12:42:00+02:00",
+  "type": "notify",
+  "notification_id": "00000000-0000-4000-8000-000000000543",
+  "text": "Fatto: BRAM'S Broodjes ✓",
+  "lang": "it-IT",
+  "kind": "done",
+  "priority": "normal",
+  "task_id": "00000000-0000-4000-8000-000000000541",
+  "title": "BRAM'S Broodjes"
+}

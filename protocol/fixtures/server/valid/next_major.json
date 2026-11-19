@@ -1,0 +1,11 @@
+{
+  "server_id": "7c1f0e2a9b4d",
+  "product": "pisa",
+  "server_version": "0.9.0",
+  "contract": "2.0",
+  "features": [
+    "talk",
+    "stop",
+    "approvals"
+  ]
+}

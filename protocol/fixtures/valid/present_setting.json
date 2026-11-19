@@ -1,0 +1,20 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009108",
+  "ts": "2026-10-31T14:02:11+01:00",
+  "type": "present",
+  "present_id": "00000000-0000-4000-8000-000000009208",
+  "reply_to": "00000000-0000-4000-8000-000000009008",
+  "object": {
+    "object_id": "setting:places_modes",
+    "kind": "setting",
+    "revision": 0,
+    "ref": {
+      "section": "places_modes"
+    }
+  },
+  "purpose": "Qui scegli quanto vuoi camminare al massimo",
+  "focus": "take",
+  "lang": "it-IT",
+  "highlight": "walk_max_min"
+}

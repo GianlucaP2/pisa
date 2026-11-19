@@ -1,0 +1,8 @@
+# Every path is reviewed by the maintainers. Replace <org>/<maintainers-team> when the repository is created
+# (REPO-SETTINGS-CHECKLIST.md); the team needs write access, or this file has no effect.
+*               @<org>/<maintainers-team>
+
+# The protocol is a contract other people implement; the workflows run with the repository's permissions.
+/protocol/      @<org>/<maintainers-team>
+/relay/         @<org>/<maintainers-team>
+/.github/       @<org>/<maintainers-team>

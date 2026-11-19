@@ -1,0 +1,297 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Pisa on one machine: Postgres, Pisa (the API, the background worker, a one-shot migration) and one way in.
+#
+# THE CONTRACT (what `pisa init` and the install scripts write, and what this file reads):
+#   - one env file: deploy/.env (start from deploy/.env.example). Compose reads it for the ${...} below, and the
+#     Pisa services read it as their settings.
+#   - the way in is a compose profile, chosen by COMPOSE_PROFILES in that same file. Exactly one of:
+#       tailscale  (the default) a Tailscale sidecar runs `tailscale serve`: HTTPS on your tailnet only, with a
+#                  certificate Tailscale issues, proxied to api:8000. No host port is published. Needs TS_AUTHKEY.
+#       caddy      a domain on a VPS: Caddy gets a public WebPKI certificate for PISA_DOMAIN automatically and
+#                  proxies to api:8000. Publishes 80 and 443 (both needed for the certificate). Needs
+#                  PISA_DOMAIN, PISA_ACME_EMAIL and PISA_ADDRESSES=https://<PISA_DOMAIN>. The pairing QR
+#                  pins the leaf Caddy presents, read at pair time (PISA_TLS_PIN_FROM=caddy:443).
+#       local      the API itself on the home network (service `api-lan`), serving HTTPS with Pisa's own
+#                  self-signed key and certificate, which `pisa init` makes in deploy/tls/ (paired clients pin
+#                  that key). Publishes PISA_LAN_PORT on PISA_LAN_BIND (127.0.0.1 unless set to 0.0.0.0).
+#   - changing the profile: `docker compose down` first (volumes stay), then `up -d` with the new one. A plain
+#     `up -d` leaves the old profile's API running, and Pisa refuses a second API on the same database.
+#   - PISA_TRUSTED_PROXIES is set here for tailscale and caddy: the one fixed proxy address, PISA_PROXY_IP, which
+#     the profile's own proxy holds (the tailscale container or caddy, never both: only one profile runs). With
+#     local it comes from the env file (empty, or 172.29.0.1/32, the gateway, for a proxy on the host).
+#   - files this compose file needs beside it: deploy/postgres/init/01-roles.sh, deploy/caddy/Caddyfile,
+#     deploy/tailscale/serve.json, deploy/tailscale/cert-export.sh, and the directory deploy/tls/.
+#   - service names: postgres, migrate, worker, api (tailscale/caddy) or api-lan (local), tailscale (with
+#     voice-relay), caddy.
+#     The worker runs under every profile, so the CLI does too: `docker compose exec worker pisa ...`.
+#
+#   cd deploy && docker compose up -d          # pulls PISA_IMAGE, or builds ../core as pisa:local
+#
+# Hardening, every service: no Docker socket anywhere, no-new-privileges, every capability dropped (Caddy keeps
+# only NET_BIND_SERVICE), a read-only root filesystem with tmpfs scratch, restart unless-stopped and a
+# healthcheck. Pisa and Postgres run as non-root users; the Tailscale and Caddy images run as root (their images
+# have no other user and their state directories are root's), holding no capabilities. Postgres is never
+# published to the host.
+#
+# Voice talks use WebRTC: their audio is UDP between the phone and Pisa, on PISA_VOICE_UDP_PORTS (default
+# 40000-40019, one port per talk), offered to the phone at PISA_ICE_HOST:
+#   tailscale  voice-relay (in the sidecar's network namespace) takes that range on the tailnet address and
+#              relays it to the API; PISA_ICE_HOST is the node's tailnet IP (`tailscale ip -4`). Nothing is
+#              published on the host (the API's range is published on 127.0.0.1 only: PISA_VOICE_UDP_BIND).
+#   caddy      the range is published on PISA_VOICE_UDP_BIND (0.0.0.0): open it in the VPS firewall too;
+#              PISA_ICE_HOST is the domain (or the public IP).
+#   local      the range is published on PISA_LAN_BIND, beside the API's port; PISA_ICE_HOST is this
+#              machine's LAN address.
+# A talk whose media can't connect ends in PISA_VOICE_CONNECT_TIMEOUT_S (15 s) and the app talks over its live
+# socket: text always works. A TURN server is optional (PISA_TALK_ICE_SERVERS; no coturn profile yet).
+name: pisa
+
+x-hardening: &hardening
+  restart: unless-stopped
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  logging:
+    driver: json-file
+    options: {max-size: "20m", max-file: "5"}
+
+x-pisa: &pisa
+  <<: *hardening
+  image: ${PISA_IMAGE:-pisa:local}
+  build: ../core
+  env_file: .env
+  tmpfs:
+    - /tmp
+    - /home/pisa  # `pisa client`'s scratch config (~/.config/pisa); the server's state lives in Postgres
+  volumes:
+    - ./tls:/etc/pisa/tls:ro  # local: the TLS certificate the clients pin (PISA_TLS_CERT=/etc/pisa/tls/cert.pem)
+    # tailscale: the certificate `tailscale serve` presents, exported by the sidecar (never its key), whose pin
+    # the pairing QR carries (PISA_TLS_CERT=/etc/pisa/ts-cert/cert.pem). Empty under the other profiles.
+    - ts-cert:/etc/pisa/ts-cert:ro
+
+# Pisa's processes get the app role's URLs, and none of the other secrets in .env.
+x-pisa-env: &pisa-env
+  PISA_DATABASE_URL: postgresql://pisa_app:${PISA_APP_PASSWORD}@postgres:5432/pisa
+  PISA_DBOS_DATABASE_URL: postgresql://pisa_app:${PISA_APP_PASSWORD}@postgres:5432/pisa_dbos
+  POSTGRES_PASSWORD: ""
+  PISA_MIGRATE_PASSWORD: ""
+  PISA_READONLY_PASSWORD: ""
+  TS_AUTHKEY: ""
+
+x-api: &api
+  <<: *pisa
+  command: ["pisa", "serve-api"]
+  environment:
+    <<: *pisa-env
+    PISA_API_HOST: 0.0.0.0  # inside its container
+    PISA_API_PORT: "8000"
+    PISA_VOICE_UDP_PORTS: ${PISA_VOICE_UDP_PORTS:-40000-40019}  # the same range the ports below publish
+  healthcheck:
+    test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).status==200 else 1)"]
+    interval: 30s
+    timeout: 5s
+    start_period: 30s
+    retries: 3
+  depends_on:
+    migrate: {condition: service_completed_successfully}
+
+services:
+  postgres:
+    <<: *hardening
+    image: pgvector/pgvector:pg17
+    user: postgres  # the image's own non-root user; the data volume is its
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in deploy/.env}
+      PISA_MIGRATE_PASSWORD: ${PISA_MIGRATE_PASSWORD:?set PISA_MIGRATE_PASSWORD in deploy/.env}
+      PISA_APP_PASSWORD: ${PISA_APP_PASSWORD:?set PISA_APP_PASSWORD in deploy/.env}
+      PISA_READONLY_PASSWORD: ${PISA_READONLY_PASSWORD:-}
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql:uid=999,gid=999,mode=0775
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d pisa"]
+      interval: 5s
+      retries: 20
+    # no `ports`: only the services on this compose network reach it
+
+  migrate:
+    <<: *pisa
+    command: ["pisa", "migrate"]
+    restart: "no"
+    environment:
+      <<: *pisa-env
+      PISA_MIGRATE_DATABASE_URL: postgresql://pisa_migrate:${PISA_MIGRATE_PASSWORD}@postgres:5432/pisa
+    healthcheck: {disable: true}  # one-shot
+    depends_on:
+      postgres: {condition: service_healthy}
+
+  worker:
+    <<: *pisa
+    command: ["pisa", "worker"]
+    environment:
+      <<: *pisa-env
+    healthcheck:  # the worker serves no HTTP: healthy while it can reach its database
+      test: ["CMD", "python", "-c", "import os,psycopg; psycopg.connect(os.environ['PISA_DATABASE_URL'], connect_timeout=3).close()"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+
+  # tailscale and caddy: the API stays on the compose network; the proxy in front reaches it as api:8000.
+  # `pisa init` runs as `docker compose run --rm --no-deps -v <deploy>:/setup api pisa init`: naming the service
+  # starts it whatever the profile, so keep this name.
+  api:
+    <<: *api
+    profiles: [tailscale, caddy]
+    environment:
+      <<: *pisa-env
+      PISA_API_HOST: 0.0.0.0
+      PISA_API_PORT: "8000"
+      PISA_VOICE_UDP_PORTS: ${PISA_VOICE_UDP_PORTS:-40000-40019}
+      # the profile's own proxy alone: it holds this fixed address (outside the range dynamic addresses come from)
+      PISA_TRUSTED_PROXIES: ${PISA_PROXY_IP:-172.29.0.10}/32
+    ports:  # the talk's media (caddy: PISA_VOICE_UDP_BIND=0.0.0.0; tailscale: voice-relay reaches it inside)
+      - "${PISA_VOICE_UDP_BIND:-127.0.0.1}:${PISA_VOICE_UDP_PORTS:-40000-40019}:${PISA_VOICE_UDP_PORTS:-40000-40019}/udp"
+
+  # local: the API answers on the home network itself, over HTTPS with Pisa's own self-signed key and
+  # certificate in deploy/tls/ (mounted read-only at /etc/pisa/tls; `pisa init --mode local` makes them).
+  # PISA_LAN_BIND defaults to 127.0.0.1, this machine only; set it to 0.0.0.0 (or this machine's LAN address)
+  # for your phone. It runs as the key's owner (PISA_LAN_UID/GID, written by `pisa init`; default the image's
+  # user), so the key stays 0600. PISA_LAN_TLS_CERT= and PISA_LAN_TLS_KEY= (both set, empty) serve plain http
+  # instead: a developer's loopback setup, or your own TLS proxy on the host.
+  api-lan:
+    <<: *api
+    profiles: [local]
+    user: "${PISA_LAN_UID:-10001}:${PISA_LAN_GID:-10001}"
+    environment:
+      <<: *pisa-env
+      PISA_API_HOST: 0.0.0.0
+      PISA_API_PORT: "8000"
+      PISA_VOICE_UDP_PORTS: ${PISA_VOICE_UDP_PORTS:-40000-40019}  # the same range the ports below publish
+      PISA_API_TLS_CERT: ${PISA_LAN_TLS_CERT-/etc/pisa/tls/cert.pem}
+      PISA_API_TLS_KEY: ${PISA_LAN_TLS_KEY-/etc/pisa/tls/key.pem}
+    healthcheck:  # https checked against the certificate itself (as a paired client does), or plain http
+      test: ["CMD", "python", "-c", "import os,ssl,sys,urllib.request as u; c=os.environ.get('PISA_API_TLS_CERT'); x=ssl.create_default_context(cafile=c) if c else None; x and setattr(x,'check_hostname',False); x and setattr(x,'verify_flags',x.verify_flags|ssl.VERIFY_X509_PARTIAL_CHAIN); sys.exit(0 if u.urlopen(('https' if c else 'http')+'://127.0.0.1:8000/health',timeout=3,context=x).status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
+    ports:
+      - "${PISA_LAN_BIND:-127.0.0.1}:${PISA_LAN_PORT:-8443}:8000"
+      - "${PISA_LAN_BIND:-127.0.0.1}:${PISA_VOICE_UDP_PORTS:-40000-40019}:${PISA_VOICE_UDP_PORTS:-40000-40019}/udp"  # voice
+
+  tailscale:
+    <<: *hardening
+    image: ghcr.io/tailscale/tailscale:v1.104.7@sha256:72c1e19e0aedca96b8533bbb0b4368564410ff20b17e53b804eb6c1f04a31be4
+    profiles: [tailscale]
+    hostname: ${TS_HOSTNAME:-pisa}
+    # containerboot as the image runs it, plus an export of the serve certificate to the ts-cert volume every
+    # 12 hours (deploy/tailscale/cert-export.sh: the key never leaves this container)
+    entrypoint: ["/bin/sh", "/config/cert-export.sh"]
+    environment:
+      TS_AUTHKEY: ${TS_AUTHKEY:-}
+      TS_AUTH_ONCE: "true"          # the key is used for the first login only; the node then lives in the state volume
+      TS_HOSTNAME: ${TS_HOSTNAME:-pisa}
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_SOCKET: /var/run/tailscale/tailscaled.sock  # where `docker compose exec tailscale tailscale status` looks
+      TS_USERSPACE: "true"          # userspace networking: no /dev/net/tun, no NET_ADMIN
+      TS_SERVE_CONFIG: /config/serve.json  # HTTPS :443 on the tailnet -> http://api:8000
+      TS_ENABLE_HEALTH_CHECK: "true"
+      TS_LOCAL_ADDR_PORT: 127.0.0.1:9002
+    tmpfs:
+      - /tmp
+      - /var/run/tailscale
+    volumes:
+      - tailscale-state:/var/lib/tailscale
+      - ./tailscale:/config:ro
+      - ts-cert:/ts-cert
+    networks:
+      default:
+        ipv4_address: ${PISA_PROXY_IP:-172.29.0.10}  # the tailscale profile's proxy: api trusts this address
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:9002/healthz"]
+      interval: 30s
+      timeout: 5s
+      start_period: 60s
+      retries: 3
+    depends_on:
+      api: {condition: service_healthy}
+    # no `ports`: reachable only over the tailnet
+
+  # tailscale: the talk's UDP media. In userspace networking, tailscaled hands UDP for the node's tailnet IP to
+  # 127.0.0.1 in its own network namespace only; this relay lives there and forwards PISA_VOICE_UDP_PORTS to
+  # api at the same ports (pisa/voice_relay.py). The API is not moved into that namespace: its HTTP port would
+  # then answer any tailnet peer directly, as if from 127.0.0.1.
+  voice-relay:
+    <<: *hardening
+    image: ${PISA_IMAGE:-pisa:local}
+    build: ../core
+    profiles: [tailscale]
+    command: ["pisa", "voice-relay"]
+    network_mode: "service:tailscale"
+    environment:  # no env_file: the relay needs no secret
+      PISA_VOICE_UDP_PORTS: ${PISA_VOICE_UDP_PORTS:-40000-40019}
+      PISA_VOICE_RELAY_TO: api
+    tmpfs:
+      - /tmp
+    healthcheck:
+      test: ["CMD", "pisa", "voice-relay", "--check"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      tailscale: {condition: service_started}
+      api: {condition: service_healthy}
+
+  caddy:
+    <<: *hardening
+    image: caddy:2.11.9@sha256:4851e54a46b206517c574821bb5cc67f170d2156041e9fbc4c9193b45e84a75b
+    profiles: [caddy]
+    cap_add: [NET_BIND_SERVICE]  # ports 80 and 443 inside the container
+    environment:
+      PISA_DOMAIN: ${PISA_DOMAIN:-}
+      PISA_ACME_EMAIL: ${PISA_ACME_EMAIL:-}  # required in this profile: the ACME account's contact
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"  # HTTP/3
+    tmpfs:
+      - /tmp
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data      # the certificates and the ACME account: keep it
+      - caddy-config:/config
+    networks:
+      default:
+        ipv4_address: ${PISA_PROXY_IP:-172.29.0.10}  # the caddy profile's proxy: api trusts this address
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:2019/config/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      api: {condition: service_healthy}
+
+volumes:
+  pgdata:
+  tailscale-state:
+  ts-cert:
+  caddy-data:
+  caddy-config:
+
+networks:
+  default:
+    ipam:
+      # A fixed subnet, so the proxy in front of Pisa has a fixed address it can be trusted by
+      # (PISA_TRUSTED_PROXIES: deploy/.env.example). Every other container (`docker compose run` ones included)
+      # gets its address from ip_range, the upper half, so none can take the proxy's. The gateway is set: with an
+      # ip_range Docker would otherwise put it at the range's first address, not .1 (a proxy on the host).
+      config:
+        - subnet: ${PISA_SUBNET:-172.29.0.0/24}
+          ip_range: ${PISA_IP_RANGE:-172.29.0.128/25}
+          gateway: ${PISA_GATEWAY:-172.29.0.1}

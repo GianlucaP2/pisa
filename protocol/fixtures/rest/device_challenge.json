@@ -1,0 +1,6 @@
+{
+  "nonce": "ZGV2aWNlLW5vbmNlLW9uY2UtMTIzNDU2Nzg5",
+  "action": "device",
+  "expires_at": "2026-11-19T18:12:00+01:00",
+  "canonical": "pisa-device\nop=revoke_device\ntarget=6a1d0c3e-9b2f-4e8a-8c7d-5f4e3b2a1c0d\nnonce=ZGV2aWNlLW5vbmNlLW9uY2UtMTIzNDU2Nzg5\nexpires_at=2026-11-19T18:12:00+01:00"
+}

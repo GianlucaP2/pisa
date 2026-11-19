@@ -1,0 +1,9 @@
+# <org>/<repo> are filled in when the repository is created (REPO-SETTINGS-CHECKLIST.md).
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability (private)
+    url: https://github.com/<org>/<repo>/security/advisories/new
+    about: Never in a public issue. See SECURITY.md.
+  - name: Questions and ideas
+    url: https://github.com/<org>/<repo>/discussions
+    about: Ask and discuss in GitHub Discussions.

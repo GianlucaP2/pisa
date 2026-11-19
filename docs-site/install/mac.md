@@ -1,0 +1,500 @@
+# Install Pisa on a Mac
+
+This page takes you from a Mac with nothing installed to the PISA app on your iPhone talking to your own Pisa
+server. You need no programming knowledge. Follow the steps in order, do one thing at a time, and after each
+step check that you see what the step says you should see. If you don't, the step says what to do.
+
+The Mac becomes the server: it must stay on (and awake) for Pisa to answer your phone. Your phone reaches it
+through **Tailscale**, a private network between your own devices: no domain name, no router settings, nothing
+opened to the internet.
+
+Other ways to install: [Windows](windows.md), [Linux](linux.md), [Raspberry Pi](raspberry-pi.md),
+[a rented server (VPS)](vps.md). What the self-hosted setup does not do yet: [Limits](../limits.md).
+
+## What you need
+
+- A Mac with a recent version of macOS. Docker Desktop supports the current macOS and the two versions before
+  it; Tailscale needs macOS Ventura 13.0 or later.
+- At least 8 GB of memory and 20 GB of free disk space (Pisa uses about 0.6 GB of memory idle and up to about
+  2 GB when busy; its image is about 650 MB to download and 2.5 GB on disk: [Limits](../limits.md#size-and-memory)).
+- An iPhone with iOS 16 or later, for the Tailscale app and the PISA app.
+- An API key from an AI provider (for example OpenAI, Anthropic or Mistral), from that provider's website.
+- Two values from the Pisa release you are installing: the repository, written `<owner>/<repo>`, and the
+  version, written `vX.Y.Z`. They are on the release page. Wherever this page shows `<owner>/<repo>` or
+  `vX.Y.Z`, type the real values instead.
+- About an hour.
+
+A word on typing commands: a command is shown in a grey box. Copy it exactly (select it, then press
+Command-C), paste it in Terminal (Command-V), and press Return. Change only the parts written between `<` and
+`>`, and `vX.Y.Z`.
+
+## Part 1: Find out which chip your Mac has
+
+**Step 1.** Click the Apple menu (the apple in the top-left corner of the screen), then choose
+**About This Mac**.
+
+You should see a small window. Look at the line under the Mac's name:
+
+- If it says **Chip** (for example "Chip Apple M2"), your Mac has **Apple silicon**.
+- If it says **Processor** followed by an Intel name, your Mac has an **Intel** chip.
+
+Write down which one it is: you need it in step 2. Close the window.
+
+## Part 2: Install Docker Desktop
+
+Docker runs Pisa and its database in sealed boxes ("containers"), so they don't mix with the rest of your Mac.
+
+**Step 2.** Open <https://docs.docker.com/desktop/setup/install/mac-install/> in Safari. Click the download
+button that matches your chip from step 1: **Docker Desktop for Mac with Apple silicon**, or **Docker Desktop
+for Mac with Intel chip**.
+
+You should see `Docker.dmg` in your Downloads folder (the downloads arrow in Safari's toolbar shows it). If the
+page looks different, look for the same two choices: the important part is to pick the one for your chip.
+
+**Step 3.** Double-click `Docker.dmg` in your Downloads folder.
+
+You should see a window with the Docker whale icon and an Applications folder icon.
+
+**Step 4.** Drag the Docker icon onto the Applications folder icon. Wait until the copy finishes, then close the
+window.
+
+**Step 5.** Open your Applications folder (in Finder, choose Go > Applications) and double-click **Docker**.
+If macOS asks whether you are sure you want to open an app downloaded from the internet, click **Open**.
+
+You should see the Docker Subscription Service Agreement.
+
+**Step 6.** Read the agreement and click **Accept**. Docker Desktop does not run until you accept it.
+
+- If Docker shows a choice between **Use recommended settings** and **Use advanced settings** (older versions
+  do), choose **Use recommended settings**, click **Finish**, and type your Mac password when asked.
+- If it asks you to sign in or create a Docker account, you can skip it: Pisa does not need one.
+
+You should see the Docker whale icon in the menu bar at the top of the screen, and the Docker Desktop window.
+
+**Step 7.** Wait until Docker Desktop says its engine is running (the exact words depend on the version; while
+it starts, the whale in the menu bar is animated). The first start can take a few minutes.
+
+If it is still starting after 10 minutes, click the whale in the menu bar, choose **Quit Docker Desktop**, and
+open Docker again from Applications.
+
+**Step 8.** Make Docker start by itself when you sign in to the Mac. In Docker Desktop, open **Settings** (the
+gear icon at the top right), then **General**, and turn on **Start Docker Desktop when you sign in to your
+computer**. Click **Apply** if the button is there.
+
+**Step 9.** Check how much memory Docker may use. Still in **Settings**, open **Resources**, then **Advanced**
+(in some versions the section is called **VM resources**). Look at **Memory limit**: by default Docker may use
+half of the Mac's memory, so 4 GB on an 8 GB Mac, which is enough for Pisa (about 2 GB at most). Leave it as
+it is if it shows 4 GB or more; if it shows less, raise it to 4 GB and click **Apply & restart** (or
+**Apply**). Close the Settings window.
+
+## Part 3: Install Tailscale on the Mac and create your private network
+
+Tailscale makes the private network (Tailscale calls it a **tailnet**) that your phone uses to reach Pisa. The
+Pisa server joins it on its own, with a key you make in part 4; installing Tailscale on the Mac too gives you
+the account and lets you check the network from the Mac.
+
+**Step 10.** Open <https://tailscale.com/download/mac> in Safari and click **Download Tailscale for macOS**.
+This is the version Tailscale recommends (the one in the Mac App Store also works, but may need an Apple
+Account with a payment card on file).
+
+You should see a file ending in `.pkg` in your Downloads folder.
+
+**Step 11.** Double-click the `.pkg` file and follow the installer: click **Continue** and **Install**, and type
+your Mac password when asked.
+
+**Step 12.** Open Tailscale (from Applications, or from the icon that appears in the menu bar) and follow its
+welcome screens. When macOS asks to allow a **VPN configuration** (or a system extension), allow it: this is
+how Tailscale works. If macOS sends you to **System Settings** to allow it, do so there, then come back.
+
+**Step 13.** When Tailscale asks you to sign in, choose an account you already have (for example Apple,
+Google or Microsoft) and sign in in the browser window that opens. If this is your first time, this creates
+your tailnet.
+
+You should see Tailscale's icon in the menu bar; clicking it shows your account and this Mac as connected. If
+it says it is disconnected, click it and choose to connect.
+
+## Part 4: Prepare the tailnet for Pisa
+
+**Step 14.** Open the Tailscale admin console's DNS page: <https://console.tailscale.com/admin/dns>. Sign in
+with the same account as in step 13 if asked.
+
+- If you see a button **Enable MagicDNS**, click it. (Tailnets created since October 2022 have MagicDNS on
+  already, and then there is no such button.)
+- Under **HTTPS Certificates**, click **Enable HTTPS** and confirm. If it already says HTTPS is enabled, there
+  is nothing to do.
+
+Why: your phone talks to Pisa over HTTPS at an address like `https://pisa.<your-tailnet>.ts.net`. Pisa's
+Tailscale part uses Tailscale's `serve` feature for that, which works only with HTTPS certificates enabled,
+and HTTPS certificates need MagicDNS. Good to know before you click: with
+HTTPS on, the names of the machines that get a certificate (here, `pisa`) and your tailnet's name appear in
+the public log every certificate is recorded in. Nothing else about you or your data does.
+
+**Step 15.** Open the admin console's Keys page: <https://console.tailscale.com/admin/settings/keys>. Click
+**Generate auth key**. In the form:
+
+- Description: type `pisa`.
+- **Reusable**: turn it **on** (Pisa may need to join again, for example after an update).
+- Expiration: leave it as it is, or choose up to 90 days. The key is used only when Pisa joins; once it has
+  joined, the key expiring does not disconnect it.
+- **Ephemeral**: leave it **off** (an ephemeral device is removed when it goes offline, for example when the
+  Mac restarts).
+- Leave the other options as they are.
+
+Click **Generate key**.
+
+You should see a long key starting with `tskey-`. Click the copy button next to it and keep this browser tab
+open: you paste the key in step 19. Treat it like a password: anyone with it can add a machine to your
+tailnet. Tailscale shows it only once; if you lose it, generate a new one.
+
+## Part 5: Install Pisa
+
+**Step 16.** Open **Terminal**: press Command-Space, type `Terminal`, and press Return.
+
+You should see a window with a line ending in `%` (or `$`). This is where you type commands.
+
+**Step 17.** Check that Terminal finds Docker. Type this and press Return:
+
+```bash
+docker compose version
+```
+
+You should see a line like `Docker Compose version v2...`.
+
+- If you see `command not found: docker`: quit Terminal (Command-Q), open it again, and try once more. If it
+  still says so, make sure Docker Desktop is running (step 7), then type
+  `export PATH="$HOME/.docker/bin:$PATH"` and press Return, and try again.
+- If you see that it cannot connect to the Docker daemon: Docker Desktop is not running. Open it (step 7) and
+  wait for the engine to run.
+
+**Step 18.** Download the install script. Type this (with your release's values for `<owner>/<repo>` and
+`vX.Y.Z`) and press Return:
+
+```bash
+curl -fsSLo install.sh https://raw.githubusercontent.com/<owner>/<repo>/vX.Y.Z/deploy/install.sh
+```
+
+You should see no message at all: that means it worked. If you see `404` or `could not resolve`, check the two
+values and your internet connection. (Curious what it does? Type `open -e install.sh` to read it in TextEdit.
+It installs nothing but Pisa's folder.)
+
+**Step 19.** Run the install script. Type this (again with your values) and press Return:
+
+```bash
+PISA_REPO=<owner>/<repo> PISA_VERSION=vX.Y.Z bash install.sh
+```
+
+You should see `Installed the compose bundle in /Users/<you>/pisa` and then, the first time, Docker
+downloading Pisa (lines with `Pulling` and progress), which can take a few minutes. Then `pisa init` asks its
+questions, one at a time. For each, type the answer and press Return; to keep the answer shown in
+`[brackets]`, just press Return.
+
+1. `How will your phone reach Pisa? tailscale (no domain, no open port), caddy (your own domain), or local (this network only) [tailscale]:`
+   Press Return (this keeps `tailscale`).
+2. `Your home time zone (an IANA name, e.g. Europe/London):`
+   Type your time zone as a region and city, for example `Europe/Rome` or `America/New_York`, and press Return.
+   (If you don't know its name, in a second Terminal window `readlink /etc/localtime` shows it at the end, after
+   `zoneinfo/`.)
+3. `The language Pisa speaks (en or it) [en]:`
+   Press Return for English, or type `it` for Italian.
+4. A paragraph about the Tailscale auth key appears, then
+   `Tailscale auth key (hidden; empty: add TS_AUTHKEY to the .env later):`
+   Paste the key from step 15 (Command-V) and press Return. **Nothing appears while you paste: that is on
+   purpose**, the key stays hidden.
+5. `This server's name on the tailnet [pisa]:`
+   Press Return (this keeps `pisa`).
+
+You should see `Wrote /setup/.env (readable by you only).`, a list of what was generated, the sentence
+`Back up PISA_SECRETS_KEY somewhere safe: without it the stored provider keys can't be read.`, and the
+**Next:** steps with three `docker compose` commands. Those are the next three parts of this page.
+
+What went wrong, and what to do:
+
+- `error: Docker is not installed` or `Docker is installed but not running`: go back to part 2 (step 7).
+- `error: set PISA_REPO ...` or `PISA_VERSION ... is not pinned`: one of the two values is missing or
+  mistyped. Run step 19 again with the right values.
+- `error: ... is not a time zone name`: run step 19 again and type a name like `Europe/London`.
+- `error: ... is already configured; nothing was changed`: Pisa was already set up in this folder. Nothing was
+  lost; go on to step 21.
+
+**Step 20.** Keep a copy of the key that protects your provider keys. Type:
+
+```bash
+grep PISA_SECRETS_KEY ~/pisa/deploy/.env
+```
+
+Copy the line it shows into your password manager (or print it and keep it somewhere safe). Never share it.
+Without it, a restored backup cannot read the AI provider keys you store in part 7.
+
+## Part 6: Start Pisa
+
+**Step 21.** Type:
+
+```bash
+docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env up -d
+```
+
+You should see lines for each part of Pisa ending in `Started`, `Healthy` or `Running`. The first start takes
+a minute or two.
+
+**Step 22.** Check that everything runs. Type:
+
+```bash
+docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env ps
+```
+
+You should see `postgres`, `api`, `worker` and `tailscale` listed as running (`Up`, and after a minute
+`healthy`). `migrate` may not be in the list, or show that it exited: that is normal, it runs once at each
+start.
+
+If something is missing or keeps restarting, show its messages with:
+
+```bash
+docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env logs --tail 50
+```
+
+and see [Troubleshooting](../troubleshooting.md). To see Tailscale's own view, type:
+
+```bash
+docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env exec tailscale tailscale status
+```
+
+A wrong or expired Tailscale key shows up in the messages as Tailscale failing to log in: make a new key
+(step 15), open the settings file with `open -e ~/pisa/deploy/.env`, replace the text after `TS_AUTHKEY=` with
+the new key, save, close, and run step 21 again.
+
+**Step 23.** Check that Pisa joined your tailnet. Open <https://console.tailscale.com/admin/machines>.
+
+You should see a machine called `pisa` (as well as your Mac). Tailscale makes a machine sign in again after a
+while (by default after 180 days), which Pisa can't do by itself: open the `...` menu at the right of the
+`pisa` row and choose **Disable Key Expiry**, so that Pisa doesn't drop off the tailnet in six months.
+
+## Part 7: Set up Pisa
+
+**Step 24.** Type:
+
+```bash
+docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env exec worker pisa setup
+```
+
+Pisa's setup guide starts. Each step explains what it asks and why. Press Return to keep what is shown in
+`[brackets]`.
+
+1. **Your place in the world.** `Language (en, it)` and `Time zone` show what you chose in step 19: press
+   Return for each. `Country (two letters, e.g. IT; '-' for none)`: type your country's two-letter code
+   (for example `GB`, `IT`, `US`) and press Return.
+2. **The AI.** `Choose: cloud, own (your model server), or skip`: type `cloud` and press Return.
+   `Provider id (e.g. openai, anthropic, mistral)`: type your provider's id and press Return.
+   `API key (not shown)`: paste your provider's API key and press Return; again, nothing appears while you
+   paste. You should see `Key stored (encrypted).` and a test result. The key is kept encrypted in Pisa's
+   database, never in a file. `Model for the conversation (<provider>:<model>)`: type the provider id, a colon,
+   and a model name from your provider's list of models (for example `openai:` followed by the model's name),
+   then press Return. Pisa tests the model, which can take a minute.
+3. **Push** (notifications on the phone). `Which will your phone use: relay, direct, or none`: press Return to
+   keep what is shown. Pisa works without push; see [Notifications](../notifications.md) to change it later.
+4. **Pairing.** `Pair a device now? Give its name, or press Enter to skip`: press Return. You pair the phone in
+   part 9, once Tailscale is on it.
+
+You should see ``Setup done. Run `pisa setup` again at any time.`` You can run step 24 again whenever you like.
+
+If you see `error: the database is unreachable`: Pisa is not running. Go back to step 21.
+
+## Part 8: Put Tailscale on the iPhone
+
+**Step 25.** On the iPhone, open the App Store, search for **Tailscale**, and install it.
+
+**Step 26.** Open Tailscale and tap **Get Started**. When iOS asks to add a VPN configuration, tap **Allow**
+(and enter your passcode or use Face ID if asked). Allow notifications too: Tailscale uses them to tell you when
+you need to sign in again.
+
+**Step 27.** Tap **Log in** and sign in with **the same account as on the Mac** (step 13).
+
+You should see your Mac and `pisa` in Tailscale's list of devices on the phone. If they are not there, you
+signed in with a different account: log out in the Tailscale app and sign in with the right one.
+
+## Part 9: Pair the PISA app
+
+**Step 28.** Install the PISA app on the iPhone and open it, up to the point where it offers to scan a pairing
+code.
+
+**Step 29.** On the Mac, in Terminal, type:
+
+```bash
+docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env exec worker pisa pair
+```
+
+You should see `Scan this code with the Pisa app (valid until ...)`, a large QR code made of blocks, and a line
+`No camera? Type this code in the app: ...`, then `Waiting for the phone...`. If the QR code looks broken,
+make the Terminal window bigger (or press Command-minus a couple of times) and run step 29 again.
+
+**Step 30.** Scan the QR code with the PISA app (not with the Camera app).
+
+You should see, on the Mac, `Pairing request from ...` and `Does it show ...? Confirm only if the 6 digits are
+the same [y/N]`, and six digits on the phone.
+
+**Step 31.** Compare the six digits on the phone with the six digits in Terminal. If they are the same, type `y`
+and press Return. If they are different, press Return: someone else may have tried to pair, and nothing is
+paired; run step 29 again.
+
+You should see `Paired: ...`. The PISA app is now connected to your own Pisa.
+
+If the code expired (`The code expired without a request`), run step 29 again: a code is valid for 10 minutes.
+If the app can't reach the server, check that Tailscale is on (connected) on the phone, and that `pisa` is in
+its device list (step 27).
+
+## Part 10: Check that it works
+
+**Step 32.** In the PISA app, send a short message such as "Hello". You should get an answer within a few
+seconds.
+
+If you don't:
+
+- On the phone, open Tailscale and check that it is connected.
+- On the Mac, run step 22 and check that everything is `Up`.
+- Run Pisa's own check:
+
+  ```bash
+  docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env exec worker pisa doctor
+  ```
+
+  It prints what it found, each with what to do. See also [Troubleshooting](../troubleshooting.md).
+- An answer about the AI provider (a refused key, no credit) means the key from step 24 needs fixing: run step
+  24 again.
+
+Voice talks need more than text: see [Limits](../limits.md). When voice isn't available, text still works.
+
+**Voice, once.** After the first `up`, give Pisa its tailnet address so voice talks can connect: run
+`docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env exec tailscale tailscale ip -4`,
+put the address it prints (it starts with `100.`) after `PISA_ICE_HOST=` in `~/pisa/deploy/.env`, and run the
+`up -d` command again. Without it, text works and voice talks don't connect.
+
+## Part 11: Verify text and voice end to end
+
+Do these three checks once, in this order, the first time you install Pisa or after an update. They take about
+five minutes.
+
+**Step 33. Pairing.** You did this in Part 9. Success: Terminal said `Paired: ...` and the app shows it is
+connected to your Pisa.
+
+**Step 34. Text.** In the app, type: "Add a task: buy stamps", then "What's on my list?". Success: Pisa
+confirms the task, and the list it reads back includes "buy stamps".
+
+**Step 35. Voice.** First make sure the tailnet address is set ("Voice, once" in Part 10). To check, run:
+
+```bash
+grep PISA_ICE_HOST ~/pisa/deploy/.env
+```
+
+Success: one line `PISA_ICE_HOST=100.` followed by numbers. If the part after `=` is empty, do "Voice, once"
+now: to edit the file, run `open -e ~/pisa/deploy/.env`, which opens it in TextEdit. Then start a voice talk in
+the app and say "What's on my list?".
+
+Success: you hear Pisa answer within a few seconds, and it mentions "buy stamps". If the app says voice isn't
+available and offers text instead, voice did not connect: text still works, and the next paragraph says what
+to send.
+
+**If a check fails, send us these four things.** Read them first: none of them should hold anything private,
+but remove anything that looks personal before sending.
+
+1. Which step failed, and what you saw (a screenshot of the app is fine).
+2. The output of:
+
+   ```bash
+   docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env ps
+   ```
+
+3. The output of Pisa's own check:
+
+   ```bash
+   docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env exec worker pisa doctor
+   ```
+
+4. The last lines of the logs:
+
+   ```bash
+   docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env logs --tail 200 api worker tailscale voice-relay > ~/Desktop/pisa-logs.txt
+   ```
+
+   This saves the logs to `pisa-logs.txt` on your Desktop. At the default log level they hold no messages,
+   tasks or keys.
+
+Never send the `.env` file: it holds your passwords and keys.
+
+## Every day
+
+### Keep the Mac awake
+
+Pisa answers only while the Mac is awake. Choose Apple menu > **System Settings**, then:
+
+- On a desktop Mac (iMac, Mac mini, Mac Studio, Mac Pro): click **Energy** in the sidebar (scroll down if you
+  don't see it) and turn on **Prevent automatic sleeping when the display is off**.
+- On a MacBook: click **Battery** in the sidebar, click **Options**, and turn on **Prevent automatic sleeping on
+  power adapter when the display is off**. Keep the MacBook plugged in, and its lid open.
+
+The screen can still turn off; only the Mac must not sleep. Names can differ slightly between macOS versions:
+Apple's guide is "Set sleep and wake settings for your Mac" in the Mac User Guide.
+
+After a restart, sign in to the Mac: Docker starts (step 8), and Pisa starts with it on its own.
+
+### Stop and start Pisa
+
+To stop Pisa (your data stays):
+
+```bash
+docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env stop
+```
+
+To start it again:
+
+```bash
+docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env up -d
+```
+
+### Update Pisa
+
+Updating means running the install for the new version, then starting again:
+
+1. Back up first (below).
+2. Run step 18 again with the new `vX.Y.Z`, then this (with the new `vX.Y.Z`). `--force --yes` keeps every
+   answer, password and key you already have, asks nothing, and only switches Pisa to the new version:
+
+   ```bash
+   PISA_REPO=<owner>/<repo> PISA_VERSION=vX.Y.Z bash install.sh --force --yes
+   ```
+
+3. Run:
+
+   ```bash
+   docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env pull
+   docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env up -d
+   ```
+
+The database is upgraded on its own as Pisa starts. Updates go only forward: going back to an older version
+means restoring the backup taken before the update. See [Backups](../limits.md#backups).
+
+### Back up
+
+Backups are your job: see [Backups](../limits.md#backups) for the command that saves Pisa's database to a file,
+and keep that file somewhere other than this Mac.
+
+## Uninstall
+
+This deletes Pisa and **everything it knows**. Back up first if you may want it again.
+
+1. Stop Pisa and delete its containers and its database:
+
+   ```bash
+   docker compose -f ~/pisa/deploy/docker-compose.yml --env-file ~/pisa/deploy/.env down --volumes
+   ```
+
+2. Delete Pisa's folder:
+
+   ```bash
+   rm -rf ~/pisa
+   ```
+
+3. Remove the `pisa` machine from your tailnet: open <https://console.tailscale.com/admin/machines>, open the
+   `...` menu of the `pisa` row and remove the machine. On the Keys page
+   (<https://console.tailscale.com/admin/settings/keys>), revoke the key from step 15.
+4. In the PISA app, remove the server.
+5. Optionally, remove Docker Desktop and Tailscale as their makers describe in their own documentation
+   (Docker: "Uninstall Docker Desktop"; Tailscale: "Uninstall Tailscale").

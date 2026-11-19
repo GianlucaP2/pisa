@@ -1,0 +1,6 @@
+{
+  "from_name": "GitHub",
+  "from_address": "notifications@ci.example.com",
+  "subject": "[example/pisa] Run failed: ci - lane/core (4c7a2e1)",
+  "body": "Run failed: ci - lane/core (4c7a2e1)\n\nci: All jobs have failed\n\ncore\nFailed in 2 minutes and 48 seconds\n\nView workflow run\n\nYou are receiving this because you are subscribed to this thread.\nManage your GitHub Actions notifications"
+}

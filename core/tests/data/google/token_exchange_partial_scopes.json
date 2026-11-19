@@ -1,0 +1,8 @@
+{
+  "access_token": "ya29.test-access-1",
+  "expires_in": 3599,
+  "refresh_token": "1//test-refresh-token",
+  "scope": "https://www.googleapis.com/auth/calendar.readonly",
+  "token_type": "Bearer",
+  "id_token": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogInRlc3QiLCAidHlwIjogIkpXVCJ9.eyJpc3MiOiAiaHR0cHM6Ly9hY2NvdW50cy5nb29nbGUuY29tIiwgImF1ZCI6ICIxMjMtd2ViLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwgImF6cCI6ICI0NTYtaW9zLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwgInN1YiI6ICIxMjM0NTY3ODkwIiwgImVtYWlsIjogIm93bmVyQGV4YW1wbGUub3JnIiwgImVtYWlsX3ZlcmlmaWVkIjogdHJ1ZSwgImlhdCI6IDE3NjA5NTAwMDAsICJleHAiOiAxNzYwOTUzNjAwfQ.c2lnbmF0dXJl"
+}

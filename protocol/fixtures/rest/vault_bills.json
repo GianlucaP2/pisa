@@ -1,0 +1,31 @@
+{
+  "bills": [
+    {
+      "id": "00000000-0000-4000-8000-000000000621",
+      "from": "Enel Energia",
+      "subject": "La tua bolletta",
+      "amount": "84.20",
+      "currency": "EUR",
+      "due_on": "2026-11-12",
+      "paid": false,
+      "source_email_id": "18c0a1b2c3d4e5f6",
+      "task_id": "00000000-0000-4000-8000-000000000622",
+      "payee": "Enel Energia S.p.A.",
+      "iban_last4": "3456",
+      "source": "pdf"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000623",
+      "from": "Con Edison",
+      "subject": "Your bill is ready",
+      "amount": "61.07",
+      "currency": "USD",
+      "due_on": null,
+      "paid": true,
+      "source_email_id": "18c0a1b2c3d4e5f7",
+      "payee": null,
+      "iban_last4": null,
+      "source": "email"
+    }
+  ]
+}

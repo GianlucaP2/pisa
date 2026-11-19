@@ -1,0 +1,25 @@
+{
+  "gap": "transcript",
+  "check": "server_frame",
+  "why": "v1 VOICE-ID-1: a turn the server drops gets an empty final transcript with ignored language or fragment, and no reply.",
+  "v1": {
+    "type": "talk.transcript",
+    "text": "",
+    "final": true,
+    "ignored": "fragment"
+  },
+  "frame": {
+    "seq": 12,
+    "threadId": "thread-conversation",
+    "runId": "run-talk-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.voice.transcript",
+      "value": {
+        "text": "",
+        "final": true,
+        "ignored": "fragment"
+      }
+    }
+  }
+}

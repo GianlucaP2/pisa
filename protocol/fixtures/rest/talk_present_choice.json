@@ -1,0 +1,18 @@
+{
+  "type": "talk.present",
+  "id": "00000000-0000-4000-8000-000000009302",
+  "object": {
+    "object_id": "choice:00000000-0000-4000-8000-000000000805",
+    "kind": "choice",
+    "revision": 0,
+    "data": {
+      "question": "Dove prendiamo il caffè?",
+      "options": [
+        {"id": "o1", "label": "Bar Centrale", "detail": "4 minuti a piedi"},
+        {"id": "o2", "label": "Caffè del Porto", "detail": "9 minuti a piedi"}
+      ]
+    }
+  },
+  "purpose": "Così scegli con un tocco",
+  "focus": "take"
+}

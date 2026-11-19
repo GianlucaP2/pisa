@@ -1,0 +1,48 @@
+{
+  "id": "ChIJmarioTrattoria0001",
+  "displayName": {"text": "Trattoria da Mario", "languageCode": "it"},
+  "formattedAddress": "Via Immaginaria, 1, 20121 Milano MI, Italia",
+  "location": {"latitude": 45.465, "longitude": 9.094},
+  "primaryType": "italian_restaurant",
+  "nationalPhoneNumber": "02 123 4567",
+  "internationalPhoneNumber": "+39 02 0000 4567",
+  "websiteUri": "https://trattoriadamario.example.it/",
+  "rating": 4.5,
+  "userRatingCount": 1240,
+  "priceLevel": "PRICE_LEVEL_MODERATE",
+  "regularOpeningHours": {
+    "openNow": true,
+    "periods": [
+      {"open": {"day": 1, "hour": 12, "minute": 0}, "close": {"day": 1, "hour": 15, "minute": 0}},
+      {"open": {"day": 1, "hour": 19, "minute": 0}, "close": {"day": 1, "hour": 23, "minute": 30}},
+      {"open": {"day": 2, "hour": 12, "minute": 0}, "close": {"day": 2, "hour": 15, "minute": 0}},
+      {"open": {"day": 2, "hour": 19, "minute": 0}, "close": {"day": 2, "hour": 23, "minute": 30}},
+      {"open": {"day": 3, "hour": 12, "minute": 0}, "close": {"day": 3, "hour": 15, "minute": 0}},
+      {"open": {"day": 3, "hour": 19, "minute": 0}, "close": {"day": 3, "hour": 23, "minute": 30}},
+      {"open": {"day": 4, "hour": 12, "minute": 0}, "close": {"day": 4, "hour": 15, "minute": 0}},
+      {"open": {"day": 4, "hour": 19, "minute": 0}, "close": {"day": 4, "hour": 23, "minute": 30}},
+      {"open": {"day": 5, "hour": 12, "minute": 0}, "close": {"day": 5, "hour": 15, "minute": 0}},
+      {"open": {"day": 5, "hour": 19, "minute": 0}, "close": {"day": 6, "hour": 1, "minute": 0}},
+      {"open": {"day": 6, "hour": 19, "minute": 0}, "close": {"day": 0, "hour": 1, "minute": 0}}
+    ],
+    "weekdayDescriptions": [
+      "lunedì: 12:00–15:00, 19:00–23:30", "martedì: 12:00–15:00, 19:00–23:30", "mercoledì: 12:00–15:00, 19:00–23:30",
+      "giovedì: 12:00–15:00, 19:00–23:30", "venerdì: 12:00–15:00, 19:00–01:00", "sabato: 19:00–01:00", "domenica: Chiuso"
+    ]
+  },
+  "currentOpeningHours": {
+    "openNow": true,
+    "periods": [
+      {"open": {"day": 3, "hour": 12, "minute": 0, "date": {"year": 2026, "month": 10, "day": 21}}, "close": {"day": 3, "hour": 15, "minute": 0, "date": {"year": 2026, "month": 10, "day": 21}}},
+      {"open": {"day": 3, "hour": 19, "minute": 0, "date": {"year": 2026, "month": 10, "day": 21}}, "close": {"day": 3, "hour": 23, "minute": 30, "date": {"year": 2026, "month": 10, "day": 21}}},
+      {"open": {"day": 4, "hour": 12, "minute": 0, "date": {"year": 2026, "month": 10, "day": 22}}, "close": {"day": 4, "hour": 15, "minute": 0, "date": {"year": 2026, "month": 10, "day": 22}}},
+      {"open": {"day": 4, "hour": 19, "minute": 0, "date": {"year": 2026, "month": 10, "day": 22}}, "close": {"day": 4, "hour": 23, "minute": 30, "date": {"year": 2026, "month": 10, "day": 22}}},
+      {"open": {"day": 5, "hour": 12, "minute": 0, "date": {"year": 2026, "month": 10, "day": 23}}, "close": {"day": 5, "hour": 15, "minute": 0, "date": {"year": 2026, "month": 10, "day": 23}}},
+      {"open": {"day": 5, "hour": 19, "minute": 0, "date": {"year": 2026, "month": 10, "day": 23}}, "close": {"day": 6, "hour": 1, "minute": 0, "date": {"year": 2026, "month": 10, "day": 24}}},
+      {"open": {"day": 6, "hour": 19, "minute": 0, "date": {"year": 2026, "month": 10, "day": 24}}, "close": {"day": 0, "hour": 1, "minute": 0, "date": {"year": 2026, "month": 10, "day": 25}}},
+      {"open": {"day": 2, "hour": 12, "minute": 0, "date": {"year": 2026, "month": 10, "day": 27}}, "close": {"day": 2, "hour": 15, "minute": 0, "date": {"year": 2026, "month": 10, "day": 27}}}
+    ],
+    "specialDays": [{"date": {"year": 2026, "month": 10, "day": 26}}],
+    "nextCloseTime": "2026-10-21T13:00:00Z"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "results": [
+    {
+      "name": "Piazza della Finzione",
+      "coordinate": {"latitude": 45.465, "longitude": 9.092},
+      "formattedAddressLines": ["Piazza della Finzione", "20122 Milano MI", "Italia"],
+      "country": "Italia",
+      "countryCode": "IT"
+    }
+  ]
+}

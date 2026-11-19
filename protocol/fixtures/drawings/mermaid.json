@@ -1,0 +1,10 @@
+{
+  "drawing_id": "fixture-mermaid",
+  "title": "Come il modello parla al database",
+  "summary": "La domanda diventa una query, il database risponde, il modello riassume.",
+  "kind": "flow",
+  "html": "<!doctype html><html><head><meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'sha256-ALkIqljcbn+OOADeJpurjKevTHcOoZk9ZHBvsUL6v/w=' pisa-bundle:; style-src 'unsafe-inline'; img-src data: pisa-bundle:; form-action 'none'; base-uri 'none'\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"></head><body><div id=\"d\"></div><script src=\"pisa-bundle://lib/mermaid.min.js\"></script><script>const el = document.getElementById('d'); el.textContent = window.PISA_DATA.diagram;mermaid.initialize({ startOnLoad: false, securityLevel: 'strict' });mermaid.run({ nodes: [el] }).then(() => { if (el.querySelector('svg')) { document.documentElement.dataset.rendered = 'yes'; } }, (e) => { document.documentElement.dataset.rendered = 'error: ' + (e && e.message); });</script></body></html>",
+  "data": {
+    "diagram": "flowchart LR\n  A[Domanda] --> B[Query]\n  B --> C[Risposta]"
+  }
+}

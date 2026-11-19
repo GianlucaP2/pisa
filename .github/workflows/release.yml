@@ -1,0 +1,204 @@
+# A release, and the only workflow that publishes Pisa's images. On a semver tag (v1.2.3, made by release-please)
+# or by hand (workflow_dispatch, naming an existing tag), build the server (core/) and the push relay (relay/) for
+# linux/amd64 and linux/arm64 (a Raspberry Pi 4/5 on a 64-bit OS), push them to the GitHub Container Registry as
+#   ghcr.io/<org>/pisa        and   ghcr.io/<org>/pisa-relay
+# tagged x.y.z, x.y and latest (a pre-release such as v1.2.3-rc.1 gets only its own tag), with BuildKit's SBOM and
+# build-provenance attestations attached, and:
+#   - sign each pushed digest with cosign, keyless (the workflow's OIDC identity, in Sigstore's public log);
+#   - publish for each an SBOM (SPDX, attached to the GitHub release) and signed GitHub attestations of its build
+#     provenance and of its SBOM.
+#
+# Verify a pulled image: the identity names this file, the release's tag and the push trigger, so an image signed
+# by a manual run, or by a run from any branch, does not verify. Releases come from a tag push (release-please
+# with RELEASE_PLEASE_TOKEN, or a maintainer pushing the tag).
+#   cosign verify ghcr.io/<org>/pisa:1.2.3 \
+#     --certificate-identity 'https://github.com/<org>/<repo>/.github/workflows/release.yml@refs/tags/v1.2.3' \
+#     --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+#     --certificate-github-workflow-trigger push
+#   gh attestation verify oci://ghcr.io/<org>/pisa:1.2.3 --repo <org>/<repo>
+#   docker buildx imagetools inspect ghcr.io/<org>/pisa:1.2.3 --format '{{ json .Provenance }}'
+#
+# Then the job `assets` attaches two files to the tag's GitHub release (made if there is none yet), which
+# deploy/install.sh and install.ps1 fetch and check:
+#   IMAGES      one line per image, `<name> ghcr.io/<org>/<name>@sha256:<digest>`: the digests this run pushed and
+#               signed. The install scripts write the server's into .env, so an install never follows a tag.
+#   SHA256SUMS  `sha256sum` of the install bundle (the files install.sh's BUNDLE lists, read from install.sh
+#               itself) and of the two install scripts. The scripts refuse to install a file that doesn't match.
+# Keep the `tags` ruleset on v* in place (REPO-SETTINGS-CHECKLIST.md): the bundle is fetched by tag, and
+# SHA256SUMS is only as fixed as the release it is attached to.
+name: release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: An existing release tag to build again (v1.2.3)
+        required: true
+
+permissions: {}
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  image:
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 90  # arm64 builds under QEMU emulation
+    permissions:
+      contents: read   # check out the tag
+      packages: write  # push to ghcr.io
+      id-token: write  # cosign keyless signing and the attestations (the workflow's OIDC token)
+      attestations: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: pisa
+            context: core
+          - name: pisa-relay
+            context: relay
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
+    steps:
+      - name: the tag is a release version (vX.Y.Z or vX.Y.Z-pre)
+        run: |
+          if ! [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "not a release tag: $TAG" >&2
+            exit 1
+          fi
+          if [[ "$TAG" == *-* ]]; then echo "PRERELEASE=true" >> "$GITHUB_ENV"; else echo "PRERELEASE=false" >> "$GITHUB_ENV"; fi
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          ref: refs/tags/${{ env.TAG }}
+          persist-credentials: false
+      - name: the image's name (lower case, as the registry requires)
+        id: name
+        run: echo "image=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/${{ matrix.name }}" >> "$GITHUB_OUTPUT"
+      - uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1  # v4.4.0
+        with:
+          platforms: arm64
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069  # v4.4.1
+      - uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550  # v4.8.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: meta
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302  # v6.2.0
+        with:
+          images: ${{ steps.name.outputs.image }}
+          flavor: |
+            latest=false
+          tags: |
+            type=semver,pattern={{version}},value=${{ env.TAG }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ env.TAG }}
+            type=raw,value=latest,enable=${{ env.PRERELEASE == 'false' }}
+          labels: |
+            org.opencontainers.image.licenses=AGPL-3.0-only
+      - id: build
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc  # v7.4.0
+        with:
+          context: ${{ matrix.context }}
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          provenance: mode=max
+          sbom: true
+      - uses: sigstore/cosign-installer@756fe2d284c7292c4e9b62c8a28f1e5629c59532  # v4.1.3
+      - name: sign the pushed digest (keyless)
+        env:
+          IMAGE: ${{ steps.name.outputs.image }}
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: cosign sign --yes "${IMAGE}@${DIGEST}"
+      - name: SBOM (SPDX JSON) of the pushed image
+        uses: anchore/sbom-action@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c  # v0.24.3
+        with:
+          image: ${{ steps.name.outputs.image }}@${{ steps.build.outputs.digest }}
+          format: spdx-json
+          output-file: ${{ matrix.name }}-${{ env.TAG }}.spdx.json
+          upload-artifact: false
+          upload-release-assets: false
+      - name: attest the build provenance
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8  # v4.2.2
+        with:
+          subject-name: ${{ steps.name.outputs.image }}
+          subject-digest: ${{ steps.build.outputs.digest }}
+          push-to-registry: true
+      - name: attest the SBOM
+        uses: actions/attest-sbom@c604332985a26aa8cf1bdc465b92731239ec6b9e  # v4.1.0
+        with:
+          subject-name: ${{ steps.name.outputs.image }}
+          subject-digest: ${{ steps.build.outputs.digest }}
+          sbom-path: ${{ matrix.name }}-${{ env.TAG }}.spdx.json
+          push-to-registry: true
+      - name: the digest, for the release's IMAGES
+        env:
+          NAME: ${{ matrix.name }}
+          IMAGE: ${{ steps.name.outputs.image }}
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: |
+          [[ "$DIGEST" =~ ^sha256:[0-9a-f]{64}$ ]] || { echo "no digest: $DIGEST" >&2; exit 1; }
+          mkdir -p digest
+          printf '%s %s@%s\n' "$NAME" "$IMAGE" "$DIGEST" > "digest/$NAME"
+          cp "$NAME-$TAG.spdx.json" digest/
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: digest-${{ matrix.name }}
+          path: digest/
+          retention-days: 1
+          if-no-files-found: error
+
+  assets:
+    needs: image
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write  # make the release and attach IMAGES, SHA256SUMS and the SBOMs
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
+    steps:
+      - name: the tag is a release version (vX.Y.Z or vX.Y.Z-pre)
+        run: |
+          if ! [[ "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "not a release tag: $TAG" >&2
+            exit 1
+          fi
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          ref: refs/tags/${{ env.TAG }}
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
+        with:
+          pattern: digest-*
+          path: digest
+          merge-multiple: true
+      - name: IMAGES and SHA256SUMS
+        run: |
+          cat digest/pisa digest/pisa-relay > "$RUNNER_TEMP/IMAGES"
+          mapfile -t bundle < <(bash -c 'source deploy/install.sh && printf "%s\n" "${BUNDLE[@]}"')
+          [ "${#bundle[@]}" -gt 0 ] || { echo "install.sh lists no bundle" >&2; exit 1; }
+          sha256sum -- "${bundle[@]}" deploy/install.sh deploy/install.ps1 > "$RUNNER_TEMP/SHA256SUMS"
+          {
+            echo "### $TAG"
+            echo '```'
+            cat "$RUNNER_TEMP/IMAGES" "$RUNNER_TEMP/SHA256SUMS"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: attach them to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view "$TAG" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            pre=()
+            if [[ "$TAG" == *-* ]]; then pre=(--prerelease); fi
+            gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --verify-tag --title "$TAG" \
+              --notes "Pisa $TAG. The assets IMAGES and SHA256SUMS are what the install scripts check." \
+              "${pre[@]}"
+          fi
+          gh release upload "$TAG" "$RUNNER_TEMP/IMAGES" "$RUNNER_TEMP/SHA256SUMS" digest/*.spdx.json \
+            --clobber --repo "$GITHUB_REPOSITORY"

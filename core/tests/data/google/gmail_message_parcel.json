@@ -1,0 +1,75 @@
+{
+  "id": "m-parcel",
+  "threadId": "t-1",
+  "labelIds": [
+    "INBOX",
+    "CATEGORY_UPDATES",
+    "UNREAD"
+  ],
+  "snippet": "Il tuo pacco è disponibile al punto di ritiro fino al 24 ottobre.",
+  "historyId": "900090",
+  "internalDate": "1760950800000",
+  "payload": {
+    "mimeType": "multipart/alternative",
+    "headers": [
+      {
+        "name": "From",
+        "value": "Poste Italiane <noreply@posteitaliane.example>"
+      },
+      {
+        "name": "To",
+        "value": "Owner <owner@example.org>"
+      },
+      {
+        "name": "Subject",
+        "value": "Il tuo pacco è in giacenza"
+      },
+      {
+        "name": "Date",
+        "value": "Mon, 20 Oct 2026 11:00:00 +0200"
+      }
+    ],
+    "parts": [
+      {
+        "partId": "0",
+        "mimeType": "text/plain",
+        "filename": "",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "text/plain; charset=\"UTF-8\""
+          }
+        ],
+        "body": {
+          "size": 120,
+          "data": "R2VudGlsZSBjbGllbnRlLAppbCB0dW8gcGFjY28gw6ggZGlzcG9uaWJpbGUgYWwgcHVudG8gZGkgcml0aXJvIGRpIFZpYSBSb21hIDEsIE1pbGFubywgZmlubyBhbCAyNCBvdHRvYnJlIDIwMjYuClBvcnRhIHVuIGRvY3VtZW50by4"
+        }
+      },
+      {
+        "partId": "1",
+        "mimeType": "text/html",
+        "filename": "",
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "text/html; charset=\"UTF-8\""
+          }
+        ],
+        "body": {
+          "size": 200,
+          "data": "PHA-R2VudGlsZSBjbGllbnRlPC9wPg"
+        }
+      },
+      {
+        "partId": "2",
+        "mimeType": "application/pdf",
+        "filename": "ricevuta.pdf",
+        "headers": [],
+        "body": {
+          "attachmentId": "att-1",
+          "size": 5000
+        }
+      }
+    ]
+  }
+}

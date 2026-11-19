@@ -1,0 +1,257 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009701",
+  "ts": "2026-11-10T10:00:00+01:00",
+  "type": "present",
+  "present_id": "6e3c9d2f-8b54-4a1f-9b2c-3d4e5f6a7c01",
+  "reply_to": null,
+  "object": {
+    "object_id": "sheet:4a2d3c0b-7f6e-4d8c-9ba2-1c3d4e5f6b01",
+    "kind": "sheet",
+    "revision": 1762765200000,
+    "data": {
+      "title": "Modello e database",
+      "blocks": [
+        {
+          "type": "diagram",
+          "style": "flow",
+          "direction": "down",
+          "nodes": [
+            {
+              "id": "n1",
+              "label": "App",
+              "shape": "box"
+            },
+            {
+              "id": "n2",
+              "label": "Modello",
+              "shape": "box",
+              "group": "g1"
+            },
+            {
+              "id": "n3",
+              "label": "Chiamata di tool",
+              "shape": "box",
+              "group": "g1"
+            },
+            {
+              "id": "n4",
+              "label": "Connection pool",
+              "shape": "box",
+              "group": "g2"
+            },
+            {
+              "id": "n5",
+              "label": "Postgres",
+              "shape": "store",
+              "group": "g2"
+            },
+            {
+              "id": "n6",
+              "label": "Utente",
+              "shape": "actor"
+            }
+          ],
+          "edges": [
+            {
+              "from": "n6",
+              "to": "n1",
+              "style": "solid",
+              "arrow": "end"
+            },
+            {
+              "from": "n1",
+              "to": "n2",
+              "style": "solid",
+              "arrow": "end",
+              "label": "domanda"
+            },
+            {
+              "from": "n2",
+              "to": "n3",
+              "style": "solid",
+              "arrow": "end"
+            },
+            {
+              "from": "n3",
+              "to": "n4",
+              "style": "solid",
+              "arrow": "end",
+              "label": "SQL"
+            },
+            {
+              "from": "n4",
+              "to": "n5",
+              "style": "solid",
+              "arrow": "end"
+            },
+            {
+              "from": "n5",
+              "to": "n2",
+              "style": "dashed",
+              "arrow": "end",
+              "label": "righe"
+            }
+          ],
+          "groups": [
+            {
+              "id": "g1",
+              "label": "Modello"
+            },
+            {
+              "id": "g2",
+              "label": "Database"
+            }
+          ],
+          "layout": {
+            "width": 219.0,
+            "height": 596.2,
+            "nodes": {
+              "n1": {
+                "x": 13.0,
+                "y": 151.2,
+                "w": 88.0,
+                "h": 39.0
+              },
+              "n2": {
+                "x": 18.0,
+                "y": 246.2,
+                "w": 88.0,
+                "h": 39.0
+              },
+              "n3": {
+                "x": 18.0,
+                "y": 341.2,
+                "w": 159.0,
+                "h": 39.0
+              },
+              "n4": {
+                "x": 18.0,
+                "y": 436.2,
+                "w": 150.0,
+                "h": 39.0
+              },
+              "n5": {
+                "x": 18.0,
+                "y": 531.2,
+                "w": 92.0,
+                "h": 47.0
+              },
+              "n6": {
+                "x": 8.0,
+                "y": 38.2,
+                "w": 88.0,
+                "h": 57.0
+              }
+            },
+            "edges": [
+              {
+                "points": [
+                  [
+                    53.4,
+                    95.2
+                  ],
+                  [
+                    56.1,
+                    151.2
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    58.0,
+                    190.2
+                  ],
+                  [
+                    61.0,
+                    246.2
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    69.3,
+                    285.2
+                  ],
+                  [
+                    90.2,
+                    341.2
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    96.6,
+                    380.2
+                  ],
+                  [
+                    93.9,
+                    436.2
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    87.3,
+                    475.2
+                  ],
+                  [
+                    70.9,
+                    531.2
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    96.8,
+                    531.2
+                  ],
+                  [
+                    202.0,
+                    455.8
+                  ],
+                  [
+                    211.0,
+                    360.8
+                  ],
+                  [
+                    92.6,
+                    285.2
+                  ]
+                ]
+              }
+            ],
+            "groups": {
+              "g1": {
+                "x": 8.0,
+                "y": 216.0,
+                "w": 179.0,
+                "h": 174.2
+              },
+              "g2": {
+                "x": 8.0,
+                "y": 406.0,
+                "w": 170.0,
+                "h": 182.2
+              }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "text": "Il modello non tocca il database: chiama un tool."
+        }
+      ],
+      "lang": "it-IT",
+      "basis": "knowledge"
+    }
+  },
+  "purpose": "Come parla un modello con un database",
+  "focus": "take",
+  "lang": "it-IT"
+}
