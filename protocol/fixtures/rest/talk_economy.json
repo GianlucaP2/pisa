@@ -1,0 +1,36 @@
+{
+  "refusals": [
+    {
+      "error": {
+        "code": "talk_economy",
+        "message": "Conversation mode is economy (Settings → Conversation).",
+        "action": "Talk in economy",
+        "economy_reason": "setting"
+      }
+    },
+    {
+      "error": {
+        "code": "talk_economy",
+        "message": "Today's AI spend passed 50% of a cap: Pisa talks in economy for the rest of the day.",
+        "action": "Talk in economy, or raise the cap in Settings → AI spend",
+        "economy_reason": "day_guard"
+      }
+    },
+    {
+      "error": {
+        "code": "talk_economy",
+        "message": "This month's AI spend passed 50% of a cap: Pisa talks in economy until the month's spend is under it.",
+        "action": "Talk in economy, or raise the cap in Settings → AI spend",
+        "economy_reason": "month_guard"
+      }
+    },
+    {
+      "error": {
+        "code": "provider_key_missing",
+        "message": "Gemini Live needs the google key, and none is set.",
+        "action": "Add it in Settings → AI providers, or pick the other talker",
+        "provider": "google"
+      }
+    }
+  ]
+}

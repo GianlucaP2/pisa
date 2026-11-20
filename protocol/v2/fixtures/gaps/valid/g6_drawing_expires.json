@@ -1,0 +1,38 @@
+{
+  "gap": "G6",
+  "check": "server_frame",
+  "why": "A Ring 2 view can expire too.",
+  "frame": {
+    "seq": 3,
+    "threadId": "thread-conversation",
+    "runId": "run-9d6ba167-e9ec-5aa3-a93c-7951b40c836a",
+    "event": {
+      "type": "ACTIVITY_SNAPSHOT",
+      "timestamp": 1763460000120,
+      "messageId": "ui://pisa/drawing/77777777-7777-4777-8777-777777777777",
+      "activityType": "mcp-apps",
+      "content": {
+        "resourceUri": "ui://pisa/drawing/77777777-7777-4777-8777-777777777777",
+        "mimeType": "text/html;profile=mcp-app",
+        "html": "<!doctype html><html><head><meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src pisa-bundle:; style-src 'unsafe-inline'\"></head><body><div id=\"m\"></div><script src=\"pisa-bundle://lib/mermaid.min.js\"></script></body></html>",
+        "toolInput": {
+          "source": "graph LR; A-->B; B-->C"
+        },
+        "csp": {},
+        "permissions": {},
+        "pisa": {
+          "title": "How the pieces talk",
+          "summary": "Three steps: ask, query, answer.",
+          "fallbackText": "Three steps: ask, query, answer.",
+          "bundle": [
+            "mermaid@12.2.0"
+          ],
+          "kind": "flow",
+          "basis": "data",
+          "focus": "take",
+          "expiresAt": "2026-11-18T18:00:00Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+PISA protocol
+Copyright 2026 The PISA contributors
+
+Everything in protocol/ is licensed under the Apache License, Version 2.0 (LICENSE), except the third-party files
+listed below, which keep their own licences.
+
+--------------------------------------------------------------------------------------------------------------------
+Third-party schemas vendored UNMODIFIED in protocol/v2/vendor/, pinned by sha256 (protocol/v2/vendor/SHA256SUMS,
+checked by the conformance tests). Refresh only by copying the upstream files again and updating the pins.
+
+AG-UI protocol 1.0 (protocol/v2/vendor/ag-ui-1.0/schema.json)
+  Source: https://github.com/ag-ui-protocol/ag-ui, spec/1.0/schema.json, commit 3416b86da4b3288e87f827c7f2759a7fa18b5231
+  sha256: 4b5c93226838a0e72d88e6c5df20633c686c49fcb75d9be2815c6cbf9e48e71a
+  Licence: MIT. The licence text is in protocol/v2/vendor/ag-ui-1.0/LICENSE.
+
+A2UI 1.0 (protocol/v2/vendor/a2ui-1.0/*.json)
+  Source: https://github.com/a2ui-project/a2ui, specification/v1_0/json/, commit 0d3ebdcd303e5d7123ee61648f6fcb1b79812129
+  agent_to_renderer.json      2f575f783fdda0e4d175fe5d331661655e4a4901613262322792dae7e823761d
+  renderer_to_agent.json      58ecde02101f0f37566b5e238dc6ef6af628c3ff312fce0e17ab7670b7215465
+  common_types.json           c4e78305be1de73eecb37f8179ba169730250611703683af291b18135a6430dc
+  catalog_definition.json     836a48b2deb7ae76c3b68cb4e79c2faa24cba36d4d5396474894796797364d44
+  renderer_capabilities.json  3ebd2889764d892df16d034643ecd9e3a3fc02f298fa05577b95d9e287e703de
+  Licence: Apache License 2.0. The licence text is in protocol/v2/vendor/a2ui-1.0/LICENSE.
+
+MCP Apps 2026-01-26 (extension io.modelcontextprotocol/ui of the Model Context Protocol)
+  Source: https://github.com/modelcontextprotocol/ext-apps, specification/2026-01-26, commit ea3e9d0e
+  Licence: Apache License 2.0 (with older contributions under MIT).
+  No file of MCP Apps is vendored: its methods are TypeScript, with no JSON Schema to pin. Contract 2 uses its resource
+  format (ui:// URIs, the text/html;profile=mcp-app MIME type, _meta.ui) and its view-host JSON-RPC method names, as
+  described in protocol/v2/README.md.
+
+Product and project names above belong to their owners and are used only to identify the specifications.

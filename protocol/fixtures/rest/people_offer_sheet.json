@@ -1,0 +1,32 @@
+{
+  "object_id": "sheet:6c8d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f",
+  "kind": "sheet",
+  "revision": 1793800800000,
+  "data": {
+    "title": "Auguri a Marco",
+    "blocks": [
+      {
+        "type": "text",
+        "text": "A New York sono le 9: vuoi fare gli auguri a Marco?"
+      },
+      {
+        "type": "handoff",
+        "handoff_id": "7d9e4f5a-6b7c-4d8e-9f0a-1b2c3d4e5f6a",
+        "kind": "message",
+        "title": "WhatsApp a Marco",
+        "subtitle": "Scegli Marco nell'app",
+        "url": "https://wa.me/?text=Ciao%20Marco%21%20Tanti%20auguri%20di%20buon%20compleanno%21%0AUn%20abbraccio%2C%20A.",
+        "text": "Ciao Marco! Tanti auguri di buon compleanno!\nUn abbraccio, A."
+      },
+      {
+        "type": "handoff",
+        "handoff_id": "8e0f5a6b-7c8d-4e9f-8a1b-2c3d4e5f6a7b",
+        "kind": "message",
+        "title": "iMessage a Marco",
+        "subtitle": "Scegli Marco nell'app",
+        "url": "sms:&body=Ciao%20Marco%21%20Tanti%20auguri%20di%20buon%20compleanno%21%0AUn%20abbraccio%2C%20A.",
+        "text": "Ciao Marco! Tanti auguri di buon compleanno!\nUn abbraccio, A."
+      }
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009004",
+  "ts": "2026-10-20T13:00:00+02:00",
+  "type": "utterance",
+  "text": "Pisa, what's next?",
+  "lang": "en-US",
+  "final": true,
+  "source": "typed"
+}

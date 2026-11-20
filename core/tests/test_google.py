@@ -1,0 +1,455 @@
+"""Google connector (contract A): credentials, the server auth code exchange, refresh and the 7-day
+reconnect, disconnect; Gmail and Calendar sync against recorded-shape API responses."""
+
+import json
+import time
+from contextlib import asynccontextmanager
+from datetime import UTC, date, datetime, timedelta
+from typing import Any, LiteralString
+
+import httpx
+import psycopg
+import pytest
+from pydantic import SecretStr
+from structlog.testing import capture_logs
+
+from pisa.db.pool import open_pool
+from pisa.infra.keys import KeyStore
+from pisa.services.google import GoogleService
+from pisa.services.google_sync import calendar_window, sync_calendar, sync_gmail
+from tests.conftest import Clock, dsn, pair
+from tests.gateway_env import run
+from tests.google_fake import (
+    CLIENT_SECRET,
+    IOS_CLIENT_ID,
+    SERVER_AUTH_CODE,
+    USED_CODE,
+    WEB_CLIENT_ID,
+    FakeGoogle,
+)
+from tests.owner import owner_at
+
+T0 = datetime(2026, 10, 20, 10, 0, tzinfo=UTC)  # 12:00 in Rome
+
+
+@pytest.fixture
+def auth(db: psycopg.Connection) -> dict[str, str]:
+    _, token = pair(db)
+    return {"Authorization": f"Bearer {token}"}
+
+
+@pytest.fixture
+def fake(http_handler: dict[str, object]) -> FakeGoogle:
+    google = FakeGoogle()
+    http_handler["handler"] = google
+    return google
+
+
+def wait_for(db: psycopg.Connection, query: LiteralString, expected: object, timeout: float = 5.0) -> None:
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        if db.execute(query).fetchone() == expected:
+            return
+        time.sleep(0.05)
+    assert db.execute(query).fetchone() == expected
+
+
+CREDENTIALS = {
+    "web_client_id": WEB_CLIENT_ID,
+    "web_client_secret": CLIENT_SECRET,
+    "ios_client_id": IOS_CLIENT_ID,
+}
+
+
+def configure(client, auth) -> None:  # type: ignore[no-untyped-def]
+    put = client.put("/v1/connectors/google/credentials", headers=auth, json=CREDENTIALS)
+    assert put.status_code == 204, put.json()
+
+
+def test_credentials_are_validated_and_write_only(client, auth, fake, db) -> None:  # type: ignore[no-untyped-def]
+    bad = client.put(
+        "/v1/connectors/google/credentials", headers=auth, json=CREDENTIALS | {"ios_client_id": "x"}
+    )
+    assert bad.status_code == 400
+    assert bad.json()["error"]["message"] == (
+        "That is not a Google iOS client ID: it should end with .apps.googleusercontent.com."
+    )
+    same = client.put(
+        "/v1/connectors/google/credentials", headers=auth, json=CREDENTIALS | {"ios_client_id": WEB_CLIENT_ID}
+    )
+    assert same.status_code == 400
+    configure(client, auth)
+    listed = client.get("/v1/connectors", headers=auth)
+    assert listed.json()["connectors"][0]["google"] == {  # The registry's Google entry
+        "id": "google",
+        "name": "Google (Gmail + Calendar)",
+        "configured": True,
+        "status": "not_connected",
+        "account": None,
+        "scopes": [],
+        "last_sync": {"gmail": None, "calendar": None},
+        "message": None,
+        "client": {"web_client_id": WEB_CLIENT_ID, "ios_client_id": IOS_CLIENT_ID},
+        "requested_scopes": [
+            "https://www.googleapis.com/auth/gmail.readonly",
+            "https://www.googleapis.com/auth/calendar.readonly",
+            "https://www.googleapis.com/auth/calendar.app.created",
+            "https://www.googleapis.com/auth/calendar.events",
+            "https://www.googleapis.com/auth/gmail.compose",
+        ],
+        "missing_scopes": [  # not connected: everything
+            "https://www.googleapis.com/auth/gmail.readonly",
+            "https://www.googleapis.com/auth/calendar.readonly",
+            "https://www.googleapis.com/auth/calendar.app.created",
+            "https://www.googleapis.com/auth/calendar.events",
+            "https://www.googleapis.com/auth/gmail.compose",
+        ],
+    }
+    assert CLIENT_SECRET not in listed.text
+    stored = db.execute("SELECT web_client_secret_enc FROM connector_credentials").fetchone()
+    assert stored is not None and CLIENT_SECRET.encode() not in bytes(stored[0])
+
+
+def test_code_before_configuration_is_409(client, auth, fake) -> None:  # type: ignore[no-untyped-def]
+    response = client.post(
+        "/v1/connectors/google/code", headers=auth, json={"server_auth_code": SERVER_AUTH_CODE}
+    )
+    assert response.status_code == 409 and response.json()["error"]["code"] == "connector_not_configured"
+
+
+def test_server_auth_code_connects_and_first_sync_runs(client, auth, fake, db, capsys) -> None:  # type: ignore[no-untyped-def]
+    with capture_logs() as logs:
+        configure(client, auth)
+        response = client.post(
+            "/v1/connectors/google/code", headers=auth, json={"server_auth_code": SERVER_AUTH_CODE}
+        )
+        assert response.status_code == 200, response.json()
+        wait_for(db, "SELECT count(*) FROM email_messages", (3,))
+        wait_for(db, "SELECT calendar_synced_at IS NOT NULL FROM connector_accounts", (True,))
+        listed = client.get("/v1/connectors", headers=auth)
+
+    connector = response.json()
+    assert (
+        connector["status"] == "connected" and connector["account"] == "owner@example.org"
+    )  # from the ID token
+    # The read scopes are granted; the action ones (calendar.events, gmail.compose) are missing.
+    actions = {
+        "https://www.googleapis.com/auth/calendar.events",
+        "https://www.googleapis.com/auth/gmail.compose",
+    }
+    assert set(connector["requested_scopes"]) - set(connector["scopes"]) == actions
+    assert set(connector["missing_scopes"]) == actions and connector["message"] is None
+    google = listed.json()["connectors"][0]["google"]
+    assert google["last_sync"]["gmail"] and google["last_sync"]["calendar"]
+    exchange = fake.forms[0]
+    assert exchange == {
+        "grant_type": ["authorization_code"],
+        "code": [SERVER_AUTH_CODE],
+        "client_id": [WEB_CLIENT_ID],
+        "client_secret": [CLIENT_SECRET],
+        "redirect_uri": [""],
+    }
+    assert "/gmail/v1/users/me/profile" in fake.paths(
+        "gmail.googleapis.com"
+    )  # the history point, not the email
+    row = db.execute("SELECT refresh_token_enc, access_token_enc FROM connector_accounts").fetchone()
+    assert row is not None and b"1//test-refresh-token" not in bytes(row[0]) and b"ya29" not in bytes(row[1])
+    everything = json.dumps(logs, default=str) + capsys.readouterr().out + response.text + listed.text
+    for secret in (CLIENT_SECRET, "1//test-refresh-token", "ya29.test-access-1", SERVER_AUTH_CODE):
+        assert secret not in everything
+
+
+@pytest.mark.parametrize(
+    ("case", "message"),
+    [
+        ("used", "Google rejected the code: invalid_grant (codes are single-use and expire in minutes)."),
+        (
+            "partial",
+            "Google granted only part of the access Pisa needs: read Gmail, manage Pisa's own "
+            "calendar is missing.",
+        ),
+    ],
+)
+def test_rejected_codes_are_502_with_the_cause(client, auth, fake, db, case, message) -> None:  # type: ignore[no-untyped-def]
+    configure(client, auth)
+    code = USED_CODE if case == "used" else SERVER_AUTH_CODE
+    if case == "partial":
+        fake.token_file = "token_exchange_partial_scopes.json"
+    response = client.post("/v1/connectors/google/code", headers=auth, json={"server_auth_code": code})
+    assert response.status_code == 502
+    assert response.json()["error"]["code"] == "connector_auth_failed"
+    assert response.json()["error"]["message"] == message
+    assert db.execute("SELECT count(*) FROM connector_accounts").fetchone() == (0,)
+
+
+def test_disconnect_revokes_and_deletes_caches_but_keeps_tasks(client, auth, fake, db) -> None:  # type: ignore[no-untyped-def]
+    configure(client, auth)
+    client.post("/v1/connectors/google/code", headers=auth, json={"server_auth_code": SERVER_AUTH_CODE})
+    wait_for(db, "SELECT count(*) > 0 FROM calendar_events", (True,))
+    created = client.post("/v1/tasks", headers=auth, json={"title": "Ritirare il pacco"})
+    assert created.status_code == 201
+    assert client.delete("/v1/connectors/google", headers=auth).status_code == 204
+    assert fake.revoked == ["1//test-refresh-token"]
+    for table in ("connector_accounts", "email_messages", "calendars", "calendar_events"):
+        assert db.execute(f"SELECT count(*) FROM {table}").fetchone() == (0,), table
+    assert db.execute("SELECT count(*) FROM tasks").fetchone() == (1,)
+    assert (
+        client.get("/v1/connectors", headers=auth).json()["connectors"][0]["google"]["status"]
+        == "not_connected"
+    )
+
+
+# --- sync, driven directly --------------------------------------------------------------------------------
+
+
+@asynccontextmanager
+async def google_env(db: psycopg.Connection, secrets_key: str, fake: FakeGoogle, clock: Clock):  # type: ignore[no-untyped-def]
+    keys = KeyStore(SecretStr(secrets_key))
+    pool = await open_pool(dsn(db), max_size=4)
+    await pool.wait()
+    transport = httpx.MockTransport(fake)
+    http = httpx.AsyncClient(transport=transport)
+    sync_http = httpx.Client(transport=transport)
+    try:
+        async with pool.connection() as conn:
+            await conn.execute(
+                "INSERT INTO connector_credentials (connector, web_client_id, web_client_secret_enc, "
+                "ios_client_id) VALUES ('google', %s, %s, %s) ON CONFLICT DO NOTHING",
+                (WEB_CLIENT_ID, keys.seal(CLIENT_SECRET), IOS_CLIENT_ID),
+            )
+            await conn.execute(
+                "INSERT INTO connector_accounts (connector, account, scopes, refresh_token_enc, status) "
+                "VALUES ('google', 'owner@example.org', '{}', %s, 'connected') ON CONFLICT DO NOTHING",
+                (keys.seal("1//test-refresh-token"),),
+            )
+        yield GoogleService(pool, keys, http, sync_http, owner=owner_at(), clock=clock), pool
+    finally:
+        await http.aclose()
+        sync_http.close()  # noqa: ASYNC212 (closing an idle mock client does no I/O)
+        await pool.close()
+
+
+def messages(db: psycopg.Connection) -> dict[str, tuple[Any, ...]]:
+    rows = db.execute(
+        "SELECT id, from_name, from_address, subject, labels, body, intake_status FROM email_messages"
+    ).fetchall()
+    return {r[0]: r[1:] for r in rows}
+
+
+def test_gmail_first_then_incremental_then_expired_history(db, secrets_key, clock) -> None:  # type: ignore[no-untyped-def]
+    fake = FakeGoogle()
+
+    async def go(expired: bool, times: int) -> list[Any]:
+        fake.history_expired = expired
+        async with google_env(db, secrets_key, fake, clock) as (google, pool):
+            return [await sync_gmail(pool, google, now=T0) for _ in range(times)]
+
+    first, second = run(lambda: go(False, 2))
+    assert first.ran and first.changed == 3 and first.error is None
+    list_call = next(p for h, path, p in fake.calls if path.endswith("/messages"))
+    assert list_call["q"] == ["newer_than:7d -in:trash -in:drafts -in:chats"] and list_call["maxResults"] == [
+        "300"
+    ]
+    assert second.changed == 3  # one added, one relabelled, one deleted
+    found = messages(db)
+    assert set(found) == {"m-parcel", "m-html", "m-new"}  # the promo was deleted at Google
+    parcel = found["m-parcel"]
+    assert parcel[:3] == ("Poste Italiane", "noreply@posteitaliane.example", "Il tuo pacco è in giacenza")
+    assert parcel[3] == ["INBOX", "CATEGORY_UPDATES"]  # UNREAD removed by the history
+    assert (
+        parcel[4].startswith("Gentile cliente,\nil tuo pacco è disponibile") and "ricevuta" not in parcel[4]
+    )
+    html_body = found["m-html"][4]
+    assert html_body == (
+        "Your dentist appointment is confirmed for Tuesday 21 October at 10:00.\n\nAddress: Via "
+        "Verdi 5, Milano"
+    )
+    assert "alert" not in html_body and "color" not in html_body
+    (third,) = run(lambda: go(True, 1))  # the stored history point is gone: 404 → a 7-day resync
+    assert third.changed == 1 and third.error is None  # only what isn't stored yet is fetched again
+    assert fake.paths("gmail.googleapis.com").count("/gmail/v1/users/me/history") == 2  # 2nd sync + the 404
+    assert fake.paths("gmail.googleapis.com").count("/gmail/v1/users/me/profile") == 2
+
+
+def test_the_first_gmail_sync_goes_on_over_rounds(db, secrets_key, clock, monkeypatch) -> None:  # type: ignore[no-untyped-def]
+    """A low Gmail quota: each round fetches a small batch, keeps it, and the next one goes on from there."""
+    from pisa.services import google_sync
+
+    monkeypatch.setattr(google_sync, "FIRST_SYNC_BATCH", 2)
+    fake = FakeGoogle()
+
+    async def go() -> Any:
+        async with google_env(db, secrets_key, fake, clock) as (google, pool):
+            return await sync_gmail(pool, google, now=T0)
+
+    def fetched() -> int:
+        return sum(1 for _, path, _ in fake.calls if "/messages/" in path)
+
+    assert run(go).changed == 2 and fetched() == 2
+    assert db.execute("SELECT gmail_history_id FROM connector_accounts").fetchone() == (None,)
+    fake.fail_next_message = True  # the quota runs out in the second round: nothing is lost
+    assert run(go).error is not None and len(messages(db)) == 2
+    assert run(go).changed == 1 and len(messages(db)) == 3  # the last one: the first sync is done
+    assert db.execute("SELECT gmail_history_id FROM connector_accounts").fetchone() != (None,)
+    assert fake.paths("gmail.googleapis.com").count("/gmail/v1/users/me/profile") == 1  # one starting point
+    assert run(go).changed == 3  # then incremental, from that point
+    assert db.execute("SELECT count(*) FROM app_settings WHERE key = 'gmail_first_sync'").fetchone() == (0,)
+
+
+def test_calendar_full_incremental_gone_and_new_day(db, secrets_key, clock) -> None:  # type: ignore[no-untyped-def]
+    fake = FakeGoogle()
+
+    def events() -> dict[str, tuple[Any, ...]]:
+        rows = db.execute(
+            "SELECT id, title, all_day, start_date, end_date, location FROM calendar_events"
+        ).fetchall()
+        return {r[0]: r[1:] for r in rows}
+
+    async def sync(now: datetime) -> Any:
+        async with google_env(db, secrets_key, fake, clock) as (google, pool):
+            return await sync_calendar(pool, google, timezone="Europe/Rome", now=now)
+
+    first = run(lambda: sync(T0))
+    assert first.ran and first.error is None
+    assert db.execute("SELECT id, name, access_role FROM calendars ORDER BY name").fetchall() == [
+        ("it.italian#holiday@group.v.calendar.google.com", "Festività in Italia", "reader"),
+        ("owner@example.org", "Personale", "owner"),
+    ]  # the hidden (not selected) calendar is left out; the role decides where Pisa may write
+    full = next(p for h, path, p in fake.calls if path.endswith("/events") and "timeMin" in p)
+    assert full["timeMin"] == ["2026-10-19T00:00:00+02:00"] and full["timeMax"] == [
+        "2026-11-20T00:00:00+01:00"
+    ]
+    assert full["singleEvents"] == ["true"]
+    assert events()["ev-trip"] == ("Weekend a Torino", True, date(2026, 10, 24), date(2026, 10, 26), None)
+    assert set(events()) == {"ev-dentist", "ev-trip", "ev-lunch", "hol-1"}
+
+    run(lambda: sync(T0 + timedelta(minutes=5)))  # same day: incremental with the sync token
+    assert set(events()) == {
+        "ev-dentist",
+        "ev-trip",
+        "ev-call",
+        "hol-1",
+    }  # lunch cancelled, far future dropped
+    assert db.execute("SELECT sync_token FROM calendars WHERE id = 'owner@example.org'").fetchone() == (
+        "sync-token-2",
+    )
+
+    fake.calendar_gone = True
+    run(lambda: sync(T0 + timedelta(minutes=10)))  # 410 → full resync
+    assert set(events()) == {"ev-dentist", "ev-trip", "ev-lunch", "hol-1"}
+
+    fake.calendar_gone = False
+    fake.calls.clear()
+    run(lambda: sync(datetime(2026, 10, 20, 22, 30, tzinfo=UTC)))  # 00:30 on the 21st in Rome: a new window
+    assert all("syncToken" not in p for h, path, p in fake.calls if path.endswith("/events"))
+
+
+def test_calendar_window_is_rome_days_across_dst() -> None:
+    start, end = calendar_window(
+        datetime(2026, 10, 24, 22, 30, tzinfo=UTC), "Europe/Rome"
+    )  # 00:30 on the 25th
+    assert start.isoformat() == "2026-10-24T00:00:00+02:00"
+    assert end.isoformat() == "2026-11-25T00:00:00+01:00"
+
+
+def test_refresh_invalid_grant_asks_for_reconnect_and_pauses_sync(db, secrets_key, clock) -> None:  # type: ignore[no-untyped-def]
+    fake = FakeGoogle()
+    fake.refresh_status = 400  # Testing mode: the refresh token expired after 7 days
+
+    async def go() -> Any:
+        async with google_env(db, secrets_key, fake, clock) as (google, pool):
+            first = await sync_gmail(pool, google, now=T0)
+            calls_after_first = len(fake.calls)
+            later = [
+                await sync_gmail(pool, google, now=T0),
+                await sync_calendar(pool, google, timezone="Europe/Rome"),
+            ]
+            return first, calls_after_first, later, len(fake.calls), await google.connectors()
+
+    first, calls_after_first, later, calls_after_later, connectors = run(go)
+    refresh = next(f for f in fake.forms if f.get("grant_type") == ["refresh_token"])
+    assert refresh["client_id"] == [WEB_CLIENT_ID] and refresh["refresh_token"] == ["1//test-refresh-token"]
+    assert first.ran and first.error == (
+        "Google access expired (the app is in Testing mode): reconnect Google in Settings → Connectors."
+    )
+    assert connectors[0]["status"] == "error" and connectors[0]["message"] == first.error
+    assert [r.ran for r in later] == [
+        False,
+        False,
+    ] and calls_after_later == calls_after_first  # paused, no loop
+    assert db.execute("SELECT needs_reconnect FROM connector_accounts").fetchone() == (True,)
+
+
+def test_reconnect_clears_the_pause(client, auth, fake, db) -> None:  # type: ignore[no-untyped-def]
+    configure(client, auth)
+    client.post("/v1/connectors/google/code", headers=auth, json={"server_auth_code": SERVER_AUTH_CODE})
+    wait_for(db, "SELECT calendar_synced_at IS NOT NULL FROM connector_accounts", (True,))
+    db.execute("UPDATE connector_accounts SET status = 'error', message = 'expired', needs_reconnect = true")
+    again = client.post(
+        "/v1/connectors/google/code", headers=auth, json={"server_auth_code": SERVER_AUTH_CODE}
+    )
+    assert again.json()["status"] == "connected" and again.json()["message"] is None
+    assert db.execute("SELECT needs_reconnect FROM connector_accounts").fetchone() == (False,)
+
+
+def test_rate_limits_wait_and_retry() -> None:
+    """2026-10-21 live run: a first Gmail sync hit Google's per-user per-minute quota (HTTP 403 "Quota
+    exceeded … per minute per user") and showed as an error. Pisa now waits and retries rate-limit answers."""
+    import asyncio as aio
+
+    import httpx
+
+    from pisa.connectors.google.api import GoogleApi
+    from pisa.connectors.google.errors import ConnectorError
+
+    answers = [
+        httpx.Response(
+            403,
+            json={
+                "error": {
+                    "message": "Quota exceeded for quota metric 'Total Query Cost' "
+                    "and limit 'Units per minute per user'"
+                }
+            },
+        ),
+        httpx.Response(429, json={"error": {"message": "Rate Limit Exceeded"}}, headers={"Retry-After": "7"}),
+        httpx.Response(200, json={"ok": True}),
+    ]
+    slept: list[float] = []
+
+    async def sleep(seconds: float) -> None:
+        slept.append(seconds)
+
+    async def token(force: bool) -> str:
+        return "access-token"
+
+    async def go(responses: list[httpx.Response]) -> dict[str, object]:
+        transport = httpx.MockTransport(lambda request: responses.pop(0))
+        async with httpx.AsyncClient(transport=transport) as http:
+            return await GoogleApi(http, token, service="Gmail", sleep=sleep).json("https://gmail.test/x")
+
+    assert aio.run(go(answers)) == {"ok": True} and slept == [2.0, 7.0]
+    forbidden = [httpx.Response(403, json={"error": {"message": "Request had insufficient scopes."}})]
+    with pytest.raises(ConnectorError):  # a real 403 is not retried
+        aio.run(go(forbidden))
+    always = [httpx.Response(429, json={"error": {"message": "Rate Limit Exceeded"}}) for _ in range(4)]
+    slept.clear()
+    with pytest.raises(ConnectorError) as raised:
+        aio.run(go(always))
+    assert raised.value.status == 429 and slept == [2.0, 5.0, 15.0]
+
+
+def test_the_owners_event_kind_survives_the_daily_full_resync(db, secrets_key, clock) -> None:  # type: ignore[no-untyped-def]
+    """The 12 review, H1: the first sync of every day is a full one (DELETE + re-insert); the user's kind and
+    minimum stay are Pisa's own data and stay."""
+    fake = FakeGoogle()
+
+    async def sync(now: datetime) -> Any:
+        async with google_env(db, secrets_key, fake, clock) as (google, pool):
+            return await sync_calendar(pool, google, timezone="Europe/Rome", now=now)
+
+    run(lambda: sync(T0))
+    db.execute("UPDATE calendar_events SET kind_owner = 'fixed', min_stay_owner = 30 WHERE id = 'ev-trip'")
+    run(lambda: sync(datetime(2026, 10, 20, 22, 30, tzinfo=UTC)))  # a new day: a full resync
+    row = db.execute("SELECT kind_owner, min_stay_owner FROM calendar_events WHERE id = 'ev-trip'").fetchone()
+    assert row == ("fixed", 30)

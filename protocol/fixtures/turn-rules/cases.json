@@ -1,0 +1,215 @@
+{
+  "about": "The turn rules' cases (protocol/README.md, 'The turn rules'). The app and the server must give each text this kind.",
+  "cases": [
+    {
+      "text": "",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "   ",
+      "lang": "en-US",
+      "kind": "unfinished"
+    },
+    {
+      "text": "prenota un tavolo per",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "allora ho una fame pazzesca e",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "trovami un posto per l'",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "prenota un tavolo per l’",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "cerca un ristorante ehm",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "devo comprare il latte,",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "aggiungi alla spesa:",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "allora, vediamo…",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "e poi...",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "domani mattina -",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "I need to call the",
+      "lang": "en-US",
+      "kind": "unfinished"
+    },
+    {
+      "text": "book a table for two and",
+      "lang": "en-US",
+      "kind": "unfinished"
+    },
+    {
+      "text": "remind me to",
+      "lang": "en-US",
+      "kind": "unfinished"
+    },
+    {
+      "text": "so um",
+      "lang": "en-US",
+      "kind": "unfinished"
+    },
+    {
+      "text": "dimmi dov'è la farmacia e",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "che ore sono?",
+      "lang": "it-IT",
+      "kind": "complete"
+    },
+    {
+      "text": "domani piove?",
+      "lang": "it-IT",
+      "kind": "complete"
+    },
+    {
+      "text": "dove si trova la stazione",
+      "lang": "it-IT",
+      "kind": "complete"
+    },
+    {
+      "text": "quanto ci metto a piedi",
+      "lang": "it-IT",
+      "kind": "complete"
+    },
+    {
+      "text": "cos'è il ristorante da Gino",
+      "lang": "it-IT",
+      "kind": "complete"
+    },
+    {
+      "text": "com’è il tempo oggi",
+      "lang": "it-IT",
+      "kind": "complete"
+    },
+    {
+      "text": "trovami un posto per cena",
+      "lang": "it-IT",
+      "kind": "complete"
+    },
+    {
+      "text": "chiama Marco",
+      "lang": "it-IT",
+      "kind": "complete"
+    },
+    {
+      "text": "ok, chiama Marco",
+      "lang": "it-IT",
+      "kind": "complete"
+    },
+    {
+      "text": "allora, dove si mangia stasera",
+      "lang": "it-IT",
+      "kind": "complete"
+    },
+    {
+      "text": "senti, prenota da Gino",
+      "lang": "it-IT",
+      "kind": "complete"
+    },
+    {
+      "text": "what time is it",
+      "lang": "en-US",
+      "kind": "complete"
+    },
+    {
+      "text": "call mum",
+      "lang": "en-US",
+      "kind": "complete"
+    },
+    {
+      "text": "hey Pisa, book two tickets",
+      "lang": "en-US",
+      "kind": "complete"
+    },
+    {
+      "text": "is it raining?",
+      "lang": "en-US",
+      "kind": "complete"
+    },
+    {
+      "text": "dove",
+      "lang": "it-IT",
+      "kind": "unfinished"
+    },
+    {
+      "text": "dove sei",
+      "lang": "it-IT",
+      "kind": "other"
+    },
+    {
+      "text": "chiama",
+      "lang": "it-IT",
+      "kind": "other"
+    },
+    {
+      "text": "oggi in ufficio il capo",
+      "lang": "it-IT",
+      "kind": "other"
+    },
+    {
+      "text": "Oggi in ufficio, il capo!",
+      "lang": "it-IT",
+      "kind": "other"
+    },
+    {
+      "text": "ho visto Marco stamattina",
+      "lang": "it-IT",
+      "kind": "other"
+    },
+    {
+      "text": "I saw the car e",
+      "lang": "en-US",
+      "kind": "other"
+    },
+    {
+      "text": "ho visto the",
+      "lang": "it-IT",
+      "kind": "other"
+    },
+    {
+      "text": "it was a long day",
+      "lang": "en-US",
+      "kind": "other"
+    },
+    {
+      "text": "ok",
+      "lang": "it-IT",
+      "kind": "other"
+    }
+  ]
+}

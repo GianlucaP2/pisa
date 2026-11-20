@@ -1,0 +1,3 @@
+# the TLS certificate clients pin (PISA_TLS_CERT); never committed
+*
+!.gitignore

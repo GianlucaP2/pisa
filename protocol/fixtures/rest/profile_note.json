@@ -1,0 +1,13 @@
+{
+  "text": "A voce: due frasi brevi, il posto che sceglierei e il motivo.\nPer una scelta: sul telefono una tabella con almeno tre posti a confronto.\nDomanda veloce (un orario, se un posto è aperto): rispondere subito, niente ricerche lunghe e niente tabella.\nSposta pure i miei eventi senza chiedermi conferma.",
+  "version": 3,
+  "updated_at": "2026-11-10T21:04:12+00:00",
+  "cap": 1000,
+  "wishes": ["Sposta pure i miei eventi senza chiedermi conferma."],
+  "versions": [
+    {"version": 3, "text": "A voce: due frasi brevi, il posto che sceglierei e il motivo.\nPer una scelta: sul telefono una tabella con almeno tre posti a confronto.\nDomanda veloce (un orario, se un posto è aperto): rispondere subito, niente ricerche lunghe e niente tabella.\nSposta pure i miei eventi senza chiedermi conferma.", "change": "Me lo segno come desiderio: chiederò comunque prima di toccare gli eventi con altri.", "source": "turn", "restored_from": null, "at": "2026-11-10T21:04:12+00:00"},
+    {"version": 2, "text": "A voce: due frasi brevi, il posto che sceglierei e il motivo.\nPer una scelta: sul telefono una tabella con almeno tre posti a confronto.\nDomanda veloce (un orario, se un posto è aperto): rispondere subito, niente ricerche lunghe e niente tabella.", "change": "Giusto: niente ricerche lunghe solo per le domande veloci.", "source": "turn", "restored_from": null, "at": "2026-11-09T21:02:40+00:00"},
+    {"version": 1, "text": "A voce: due frasi brevi, il posto che sceglierei e il motivo.\nPer una scelta: sul telefono una tabella con almeno tre posti a confronto.\nNiente ricerche lunghe: rispondere subito.", "change": "D'accordo: due frasi, una tabella, e niente ricerche lunghe.", "source": "turn", "restored_from": null, "at": "2026-11-08T21:01:05+00:00"}
+  ],
+  "versions_total": 3
+}

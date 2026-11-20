@@ -1,0 +1,46 @@
+{
+  "kind": "calendar#events",
+  "summary": "Personale",
+  "items": [
+    {
+      "id": "ev-dentist",
+      "status": "confirmed",
+      "summary": "Dentista",
+      "location": "Via dei Sogni 5, Milano",
+      "start": {
+        "dateTime": "2026-10-21T10:00:00+02:00",
+        "timeZone": "Europe/Rome"
+      },
+      "end": {
+        "dateTime": "2026-10-21T11:00:00+02:00",
+        "timeZone": "Europe/Rome"
+      },
+      "updated": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "ev-trip",
+      "status": "confirmed",
+      "summary": "Weekend a Torino",
+      "start": {
+        "date": "2026-10-24"
+      },
+      "end": {
+        "date": "2026-10-26"
+      },
+      "updated": "2026-10-10T08:00:00.000Z"
+    },
+    {
+      "id": "ev-lunch",
+      "status": "confirmed",
+      "summary": "Pranzo con Anna",
+      "start": {
+        "dateTime": "2026-10-20T13:00:00+02:00"
+      },
+      "end": {
+        "dateTime": "2026-10-20T14:00:00+02:00"
+      },
+      "updated": "2026-10-18T08:00:00.000Z"
+    }
+  ],
+  "nextSyncToken": "sync-token-1"
+}

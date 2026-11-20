@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Caddy for the `caddy` profile (deploy/docker-compose.yml): HTTPS for PISA_DOMAIN with a certificate Caddy gets
+# and renews by itself (ACME), in front of the API. The domain's A/AAAA records must point at this machine and
+# ports 80 and 443 must reach it. PISA_ACME_EMAIL (required) is the ACME account's contact. The compose file
+# tells Pisa to trust this container's X-Forwarded-For (PISA_TRUSTED_PROXIES).
+{
+	# the healthcheck's only; never published
+	admin 127.0.0.1:2019
+	email {$PISA_ACME_EMAIL}
+}
+
+{$PISA_DOMAIN} {
+	tls {
+		# keep the key across renewals: paired clients pin it (docs-site/self-hosting.md, "The pin")
+		reuse_private_keys
+	}
+	reverse_proxy api:8000
+}

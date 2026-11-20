@@ -1,0 +1,38 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009404",
+  "ts": "2026-11-18T22:00:05+01:00",
+  "type": "present",
+  "present_id": "ae5b4c6d-7f8a-4c9d-8e0f-2a3b4c5d6e7f",
+  "reply_to": null,
+  "purpose": "Domani, in 20 secondi",
+  "focus": "offer",
+  "lang": "it-IT",
+  "object": {
+    "object_id": "sheet:9d4a3f5b-6e7f-4b8c-9d0e-1f2a3b4c5d6e",
+    "kind": "sheet",
+    "revision": 1795035600000,
+    "data": {
+      "title": "Domani",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": ["Quando", "Cosa", "Dove", "Esci"],
+          "rows": [
+            ["09:00-10:00", "Dentista", "Studio Rossi", ""],
+            ["18:00-19:00", "Palestra", "", ""],
+            ["18:30-19:30", "Call con Marco", "", ""]
+          ]
+        },
+        {"type": "fact", "label": "Meteo", "value": "Domani: nuvoloso, 8–14 °C."},
+        {"type": "section", "title": "Da sistemare"},
+        {"type": "text", "text": "Call con Marco alle 18:30 si sovrappone a palestra."},
+        {"type": "text", "text": "Sposto la palestra alle 19:30?"}
+      ],
+      "actions": [
+        {"id": "a1", "label": "Sì", "style": "primary"},
+        {"id": "a2", "label": "No", "style": "plain"}
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009033",
+  "ts": "2026-10-21T14:10:30+02:00",
+  "type": "utterance",
+  "text": "Sono in ritardo, posso ancora pranzare prima della prossima tappa?",
+  "lang": "it-IT",
+  "final": true,
+  "source": "earbuds_mic",
+  "wake": "hey_pisa"
+}

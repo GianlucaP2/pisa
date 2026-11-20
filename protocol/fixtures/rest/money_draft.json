@@ -1,0 +1,27 @@
+{
+  "lang": "it-IT",
+  "subject": "Richiesta di compensazione pecuniaria ai sensi del Regolamento (CE) n. 261/2004 - prenotazione [codice …QX2], volo AZ5287 del 15/10/2026",
+  "text": "Spett.le ITA Airways,\n\nil sottoscritto [NOME COGNOME] era passeggero del volo AZ5287 da FCO a JFK, …",
+  "buttons": [
+    {
+      "type": "handoff",
+      "handoff_id": "5d0b6a3e-91c2-5f0d-9e44-2b7f3c8a1d10",
+      "kind": "open_url",
+      "title": "Apri ITA Airways",
+      "subtitle": "www.ita-airways.com",
+      "url": "https://www.ita-airways.com/",
+      "text": "Richiesta di compensazione pecuniaria … (la lettera, da copiare)",
+      "notes": [
+        "Assistenza → Reclami e rimborsi"
+      ]
+    },
+    {
+      "type": "handoff",
+      "handoff_id": "c2e7f4a1-0b3d-5a6e-8f19-4d2c1b0a9e87",
+      "kind": "open_url",
+      "title": "Modulo UE reclami",
+      "subtitle": "europa.eu",
+      "url": "https://europa.eu/youreurope/citizens/travel/passenger-rights/air/index_en.htm"
+    }
+  ]
+}

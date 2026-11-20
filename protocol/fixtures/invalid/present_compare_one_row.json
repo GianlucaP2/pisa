@@ -1,0 +1,47 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009153",
+  "ts": "2026-10-31T14:02:11+01:00",
+  "type": "present",
+  "present_id": "00000000-0000-4000-8000-000000009205",
+  "reply_to": "00000000-0000-4000-8000-000000009005",
+  "object": {
+    "object_id": "compare:00000000-0000-4000-8000-000000000802",
+    "kind": "compare",
+    "revision": 0,
+    "data": {
+      "title": "Bar sul Naviglio",
+      "criteria": [
+        "distanza",
+        "aperto fino",
+        "tranquillo"
+      ],
+      "rows": [
+        {
+          "place_id": "00000000-0000-4000-8000-000000000501",
+          "name": "Bar Ripa",
+          "cells": [
+            {
+              "status": "verified",
+              "value": "600 m",
+              "source": "Google"
+            },
+            {
+              "status": "verified",
+              "value": "02:00",
+              "source": "Google (orari)"
+            },
+            {
+              "status": "unknown",
+              "value": "",
+              "source": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "purpose": "Tre cose che contano stasera, una accanto all'altra",
+  "focus": "take",
+  "lang": "it-IT"
+}

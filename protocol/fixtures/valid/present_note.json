@@ -1,0 +1,31 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009109",
+  "ts": "2026-10-31T14:02:11+01:00",
+  "type": "present",
+  "present_id": "00000000-0000-4000-8000-000000009209",
+  "reply_to": "00000000-0000-4000-8000-000000009009",
+  "object": {
+    "object_id": "note:00000000-0000-4000-8000-000000000803",
+    "kind": "note",
+    "revision": 0,
+    "data": {
+      "title": "Biglietti per Haverbrug",
+      "lines": [
+        "Waterbus 21 da Rotterdam Centraal, ogni 10 minuti",
+        "Gratis per pedoni e bici"
+      ],
+      "kind": "info",
+      "sources": [
+        {
+          "title": "Waterbus naar Haverbrug",
+          "url": "https://waterbus.example.com/en/haverbrug",
+          "host": "waterbus.example.com"
+        }
+      ]
+    }
+  },
+  "purpose": "Le due cose da ricordare sul traghetto",
+  "focus": "offer",
+  "lang": "it-IT"
+}

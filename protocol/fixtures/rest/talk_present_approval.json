@@ -1,0 +1,12 @@
+{
+  "type": "talk.present",
+  "id": "00000000-0000-4000-8000-000000009303",
+  "object": {
+    "object_id": "approval:00000000-0000-4000-8000-000000000901",
+    "kind": "item",
+    "revision": 0,
+    "ref": {"ref": "approval:00000000-0000-4000-8000-000000000901"}
+  },
+  "purpose": "Il testo esatto prima di mandarlo",
+  "focus": "take"
+}

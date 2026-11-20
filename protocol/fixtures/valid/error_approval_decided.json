@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009054",
+  "ts": "2026-10-20T13:00:00+02:00",
+  "type": "error",
+  "reply_to": "00000000-0000-4000-8000-000000009011",
+  "code": "approval_decided",
+  "message": "This approval was already answered: it is done.",
+  "action": "Nothing to do; ask Pisa again for a new one",
+  "retryable": false
+}

@@ -1,0 +1,11 @@
+{
+  "server_id": "f00d",
+  "product": "someone-elses-server",
+  "server_version": "2026.11",
+  "contract": "1.0",
+  "features": [
+    "talk",
+    "stop",
+    "approvals"
+  ]
+}

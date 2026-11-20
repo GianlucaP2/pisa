@@ -1,0 +1,6 @@
+{
+  "from_name": "Account Esempio",
+  "from_address": "no-reply@accounts.example.com",
+  "subject": "Avviso di sicurezza",
+  "body": "Nuovo accesso da un telefono\n\nAbbiamo notato un nuovo accesso al tuo account da un telefono. Se sei stato tu, non devi fare nulla. Se non lo riconosci, ti aiutiamo a mettere al sicuro l'account.\n\nControlla l'attività\n\nTrovi anche l'attività di sicurezza su https://account.example.com/sicurezza\n\nTi scriviamo per informarti di modifiche importanti al tuo account."
+}

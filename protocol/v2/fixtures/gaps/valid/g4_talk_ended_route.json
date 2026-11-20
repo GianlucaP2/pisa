@@ -1,0 +1,25 @@
+{
+  "gap": "G4",
+  "check": "server_frame",
+  "why": "talk.ended becomes the talk's last RUN_FINISHED.result.",
+  "v1": {
+    "type": "talk.ended",
+    "reason": "route"
+  },
+  "frame": {
+    "seq": 12,
+    "threadId": "thread-conversation",
+    "runId": "run-talk-1",
+    "event": {
+      "type": "RUN_FINISHED",
+      "threadId": "thread-conversation",
+      "runId": "run-talk-1",
+      "outcome": {
+        "type": "success"
+      },
+      "result": {
+        "talkEnded": "route"
+      }
+    }
+  }
+}

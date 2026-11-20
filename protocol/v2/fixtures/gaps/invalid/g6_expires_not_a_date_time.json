@@ -1,0 +1,57 @@
+{
+  "gap": "G6",
+  "check": "server_frame",
+  "why": "expiresAt is an RFC 3339 date-time.",
+  "frame": {
+    "seq": 2,
+    "threadId": "thread-conversation",
+    "runId": "run-9d6ba167-e9ec-5aa3-a93c-7951b40c836a",
+    "event": {
+      "type": "ACTIVITY_SNAPSHOT",
+      "timestamp": 1763460000080,
+      "messageId": "choice:00000000-0000-4000-8000-000000000804",
+      "activityType": "a2ui-surface",
+      "content": {
+        "a2ui_operations": [
+          {
+            "version": "1.0",
+            "createSurface": {
+              "surfaceId": "choice:00000000-0000-4000-8000-000000000804",
+              "catalogId": "urn:pisa:a2ui:catalog:core:1",
+              "components": [
+                {
+                  "id": "root",
+                  "component": "Choice",
+                  "question": "Dove ceniamo?",
+                  "options": [
+                    {
+                      "id": "o1",
+                      "label": "Osteria sul Ponte",
+                      "detail": "11 minuti a piedi"
+                    },
+                    {
+                      "id": "o2",
+                      "label": "Il bar sul fiume"
+                    },
+                    {
+                      "id": "o3",
+                      "label": "A casa"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "pisa": {
+          "purpose": "Così scegli con un tocco",
+          "focus": "take",
+          "fallbackText": "Dove ceniamo?\n1. Osteria sul Ponte\n2. Il bar sul fiume\n3. A casa",
+          "lang": "it-IT",
+          "replyTo": "00000000-0000-4000-8000-000000009010",
+          "expiresAt": "tomorrow"
+        }
+      }
+    }
+  }
+}

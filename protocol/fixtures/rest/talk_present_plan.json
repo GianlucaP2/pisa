@@ -1,0 +1,12 @@
+{
+  "type": "talk.present",
+  "id": "00000000-0000-4000-8000-000000009301",
+  "object": {
+    "object_id": "plan:2026-11-12",
+    "kind": "plan",
+    "revision": 0,
+    "ref": {"date": "2026-11-12", "options_id": null}
+  },
+  "purpose": "La tua giornata di domani",
+  "focus": "take"
+}

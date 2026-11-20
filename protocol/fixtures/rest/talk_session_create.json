@@ -1,0 +1,6 @@
+{
+  "sdp_offer": "v=0\r\no=- 0 0 IN IP4 100.64.0.2\r\ns=-\r\nt=0 0\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111\r\na=mid:0\r\na=sendrecv\r\na=rtpmap:111 opus/48000/2\r\nm=application 9 UDP/DTLS/SCTP webrtc-datachannel\r\na=mid:1\r\n",
+  "trigger": "wake",
+  "lang": "it-IT",
+  "first_text": "che tempo fa domani?"
+}

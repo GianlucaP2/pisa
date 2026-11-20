@@ -1,0 +1,88 @@
+PISA (Pretty Intelligent Silicon Assistant)
+Copyright 2026 The PISA contributors
+
+PISA is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public
+License, version 3 only (LICENSE), with these exceptions:
+
+- protocol/ (the device protocol, its schemas, fixtures and the OpenAPI document) is licensed under the Apache
+  License, Version 2.0 (protocol/LICENSE). Its third-party schemas are listed in protocol/NOTICE.
+- The third-party works below keep their own licences.
+
+"PISA" and "Pisa" as the name of this project are covered by TRADEMARKS.md, not by the licences above.
+
+====================================================================================================================
+1. Dependencies distributed in the container images
+====================================================================================================================
+
+The images built from core/Dockerfile and relay/Dockerfile contain the Python packages pinned in core/uv.lock and
+relay/uv.lock (without the development group). Each keeps its own licence, whose text is in the package's
+*.dist-info directory inside the image. Every one of them is checked to be compatible with AGPL-3.0 before each
+export (MIT, BSD-2-Clause, BSD-3-Clause, Apache-2.0, ISC, MPL-2.0, PSF-2.0, LGPL-3.0, and the ones below).
+
+Packages whose licence needs a note:
+
+wordfreq (https://github.com/rspeer/wordfreq)
+  Code: Copyright 2022 Robyn Speer. Licensed under the Apache License, Version 2.0.
+  Data: "wordfreq is freely redistributable under the Apache license (see LICENSE.txt), and it includes data
+  files that may be redistributed under a Creative Commons Attribution-ShareAlike 4.0 license
+  (https://creativecommons.org/licenses/by-sa/4.0/)."
+  As its README states, wordfreq contains data extracted from Google Books Ngrams
+  (http://books.google.com/ngrams) and Google Books Syntactic Ngrams; data derived from the Leeds Internet Corpus
+  (University of Leeds Centre for Translation Studies), Wikipedia (http://www.wikipedia.org) and ParaCrawl
+  (https://paracrawl.eu); data from OPUS OpenSubtitles 2018 (http://opus.nlpl.eu/OpenSubtitles.php), originating
+  from the OpenSubtitles project (http://www.opensubtitles.org/); and the SUBTLEX word lists SUBTLEX-US,
+  SUBTLEX-UK, SUBTLEX-CH, SUBTLEX-DE and SUBTLEX-NL, created by Marc Brysbaert et al.
+  (http://crr.ugent.be/programs-data/subtitle-frequencies). SUBTLEX is freely available data; the SUBTLEX authors
+  are credited here as wordfreq's terms require. Citation: Robyn Speer (2022). rspeer/wordfreq: v3.0 (v3.0.2).
+  Zenodo. https://doi.org/10.5281/zenodo.7199437
+
+regex (https://github.com/mrabarnett/mrab-regex)
+  "This work was derived from the 're' module of CPython 2.6 and CPython 3.1, copyright (c) 1998-2001 by Secret
+  Labs AB and licensed under CNRI's Python 1.6 license. All additions and alterations are licensed under the
+  Apache 2.0 License."
+
+locate
+  Licensed under the MIT License (its LICENSE file), although its package classifier says otherwise.
+
+mistralai
+  Licensed under the Apache License, Version 2.0 (its LICENSE file; its metadata names none).
+
+psycopg, psycopg-binary, psycopg-pool
+  Licensed under the GNU Lesser General Public License, version 3.
+
+certifi, tqdm (in part)
+  Licensed under the Mozilla Public License, Version 2.0. Their source is available from their projects
+  (https://github.com/certifi/python-certifi, https://github.com/tqdm/tqdm).
+
+====================================================================================================================
+2. Voice models fetched into the core image at build time
+====================================================================================================================
+
+core/Dockerfile downloads these files once, each checked against a pinned SHA-256 (core/pisa/connectors/
+voice_models.py). They are not in this repository.
+
+3D-Speaker CAM++ speaker embedding (3dspeaker_speech_campplus_sv_en_voxceleb_16k.onnx)
+  Apache-2.0 (3D-Speaker); trained on VoxCeleb, licensed CC BY 4.0.
+WeSpeaker ResNet34 speaker embedding (wespeaker_en_voxceleb_resnet34_LM.onnx)
+  Apache-2.0 (WeSpeaker code); the weights follow VoxCeleb, licensed CC BY 4.0.
+  VoxCeleb: the University of Oxford Visual Geometry Group (https://www.robots.ox.ac.uk/~vgg/data/voxceleb/).
+Silero VAD v4 (silero_vad.onnx)
+  MIT, by the Silero team (https://github.com/snakers4/silero-vad).
+Smart Turn v3.2 (smart-turn-v3.2-cpu.onnx)
+  BSD-2-Clause, by Daily (https://github.com/pipecat-ai/smart-turn).
+The files are served from the sherpa-onnx project's releases (Apache-2.0, https://github.com/k2-fsa/sherpa-onnx)
+and from Hugging Face (pipecat-ai/smart-turn-v3).
+
+====================================================================================================================
+3. Public data
+====================================================================================================================
+
+The files in core/tests/data/public/ are synthetic: invented content in each public source's file format (their
+README). No data from the sources is in this repository.
+
+At run time PISA reads public feeds and shows each one's credit line with what it used (core/pisa/domain/
+public_sources.py), as their licences ask: Roma Servizi per la Mobilità (CC BY-SA 4.0), the MTA (its developer
+terms), the Dipartimento della Protezione Civile (CC BY 4.0), Regione Lazio (IODL 2.0), NOAA / National Weather
+Service (US public domain), Open-Meteo (CC BY 4.0).
+
+Product and organisation names above belong to their owners and are used only to identify their works.

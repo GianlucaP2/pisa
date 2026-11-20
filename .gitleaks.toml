@@ -1,0 +1,20 @@
+# gitleaks: the default rules, plus the contract's published synthetic test values (and nothing else).
+#
+# A finding is ignored only when its matched value contains one of the stopwords below: exact, distinctive
+# fragments of synthetic values that the contract publishes as test vectors. No paths, commits or patterns are
+# allowed. core/tests/test_gitleaks_allowlist.py checks that every stopword is a documented test value in
+# protocol/v2/fixtures/pairing/vectors.json or in the kit's RFC 9180 A.2.1 test, and that nothing else is allowed.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "The contract's synthetic pairing and push test vectors (protocol/v2/fixtures/pairing/vectors.json)"
+stopwords = [
+    "8f1e2d3c4b5a69788796a5b4c3d2e1f0",                                   # pairing.tokenHex
+    "zNxNTlUQrua6L96DvuFUh3s",                                            # pairing.deviceKey (test P-256 key, after its header)
+    "R4PC2PCLLJUXRB4WUW2MHUXB6A",                                         # pairing.token (base32 of tokenHex)
+    "29e754e7182136842bef82858805a2998f8f69df8a8e4fbad416adec78649c26",   # relay.keyHex (sha256 of the test secret)
+    "0bbe78490412b4bbea4812666f7916932b828bba79942424abb65244930d69a7",   # RFC 9180 A.2.1 shared_secret
+    "ad2744de8e17f4ebba575b3f5f5a8fa1f69c2a07f6e7500bc60ca6e3e3ec1c91",   # RFC 9180 A.2.1 key
+    "55ba834e-40eb-8f96-88a3-4ac1fd42cf59",                               # relay.appApi.appAccountToken (key 00..1f)
+]
