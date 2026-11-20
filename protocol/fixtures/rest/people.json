@@ -1,0 +1,96 @@
+{
+  "people": [
+    {
+      "id": "7d1e2f3a-4b5c-4d6e-8f7a-9b0c1d2e3f4a",
+      "name": "Laura Bianchi",
+      "relation": "sorella",
+      "birthday": "04-21",
+      "tz": "America/New_York",
+      "city": "New York",
+      "emails": [
+        "laura@example.invalid"
+      ],
+      "last_contact_at": "2026-10-28T19:02:00+01:00",
+      "notes_count": 2,
+      "gift_ideas": [
+        {
+          "id": 11,
+          "text": "Le piacerebbe una macchina per la pasta",
+          "from": "owner",
+          "at": "2026-11-02T20:15:00+01:00"
+        },
+        {
+          "id": 12,
+          "text": "Mi piacerebbe tanto rivedere il Monte Rosa quest'estate.",
+          "from": "email",
+          "at": "2026-10-28T19:02:00+01:00"
+        }
+      ],
+      "dates": [
+        {
+          "id": 5,
+          "kind": "birthday",
+          "on": "04-21",
+          "remind_days_before": [
+            7,
+            1
+          ],
+          "source": "owner"
+        }
+      ],
+      "orbit": true,
+      "source": "email",
+      "clock": {
+        "at": "2026-11-04T17:40:00-05:00",
+        "call": "good",
+        "call_from": null,
+        "line": "Da Laura sono le 17:40: puoi chiamare."
+      }
+    },
+    {
+      "id": "8e2f3a4b-5c6d-4e7f-9a8b-0c1d2e3f4a5b",
+      "name": "Mamma",
+      "relation": "madre",
+      "birthday": "03-12",
+      "tz": null,
+      "city": null,
+      "emails": [],
+      "last_contact_at": null,
+      "notes_count": 0,
+      "gift_ideas": [],
+      "dates": [
+        {
+          "id": 6,
+          "kind": "birthday",
+          "on": "03-12",
+          "remind_days_before": [
+            7,
+            1
+          ],
+          "source": "owner"
+        }
+      ],
+      "orbit": true,
+      "source": "owner",
+      "clock": null
+    },
+    {
+      "id": "9f3a4b5c-6d7e-4f8a-8b9c-1d2e3f4a5b6c",
+      "name": "Paolo",
+      "relation": null,
+      "birthday": null,
+      "tz": null,
+      "city": null,
+      "emails": [
+        "paolo@example.invalid"
+      ],
+      "last_contact_at": "2026-08-01T10:00:00+02:00",
+      "notes_count": 0,
+      "gift_ideas": [],
+      "dates": [],
+      "orbit": false,
+      "source": "email"
+    }
+  ],
+  "orbits": true
+}

@@ -1,0 +1,76 @@
+{
+  "gap": "G1",
+  "check": "client_frame",
+  "why": "There is no open capabilities set in contract 2.",
+  "frame": {
+    "op": "hello",
+    "contract": {
+      "versions": [
+        "2.0"
+      ]
+    },
+    "agui": {
+      "protocolVersions": [
+        "1.0"
+      ]
+    },
+    "a2ui": {
+      "1.0": {
+        "supportedCatalogIds": [
+          "urn:pisa:a2ui:catalog:core:1"
+        ]
+      }
+    },
+    "mcpApps": {
+      "protocolVersions": [
+        "2026-01-26"
+      ],
+      "mimeTypes": [
+        "text/html;profile=mcp-app"
+      ],
+      "bundledLibraries": [
+        "d3@7.9.0",
+        "mermaid@12.2.0",
+        "vega@6.4.0",
+        "vega-lite@6.5.0",
+        "vega-embed@7.3.0",
+        "vega-interpreter@2.3.2"
+      ]
+    },
+    "rings": [
+      0,
+      1,
+      2
+    ],
+    "extensions": {
+      "pisa.voice": 1,
+      "pisa.presence": 1,
+      "pisa.location": 1,
+      "pisa.notice": 1,
+      "pisa.directions": 1,
+      "pisa.call": 1,
+      "pisa.compose": 1,
+      "pisa.approval": 1,
+      "pisa.surface": 1
+    },
+    "device": {
+      "deviceId": "00000000-0000-4000-8000-000000000100",
+      "appVersion": "0.1.0",
+      "platform": "ios",
+      "surfaces": [
+        "phone",
+        "glasses_display"
+      ],
+      "audioFormats": [],
+      "wearable": {
+        "kind": "meta_glasses",
+        "model": "Ray-Ban Meta Gen 2",
+        "connected": true
+      },
+      "capabilities": {
+        "mic": true,
+        "camera": false
+      }
+    }
+  }
+}

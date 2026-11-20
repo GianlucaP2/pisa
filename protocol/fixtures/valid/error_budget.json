@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009015",
+  "ts": "2026-10-20T13:00:00+02:00",
+  "type": "error",
+  "reply_to": "00000000-0000-4000-8000-000000000001",
+  "code": "budget_exceeded",
+  "message": "Daily AI spend cap reached: €1.00 of €1.00 used (slot chat.conversation).",
+  "action": "Raise the cap in Settings → AI spend",
+  "retryable": false
+}

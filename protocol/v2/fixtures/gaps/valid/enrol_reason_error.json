@@ -1,0 +1,23 @@
+{
+  "gap": "enrol-reason",
+  "check": "enrol_server_frame",
+  "why": "enrol.done ok false, reason error.",
+  "v1": {
+    "type": "enrol.done",
+    "route": "headphones",
+    "ok": false,
+    "reason": "error"
+  },
+  "frame": {
+    "seq": 1,
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.voice.enrol.done",
+      "value": {
+        "route": "headphones",
+        "ok": false,
+        "reason": "error"
+      }
+    }
+  }
+}

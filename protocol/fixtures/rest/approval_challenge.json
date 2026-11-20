@@ -1,0 +1,6 @@
+{
+  "nonce": "a2FwcHJvdmFsLW5vbmNlLW9uY2UtMTIzNDU2",
+  "action": "approval",
+  "expires_at": "2026-11-19T18:12:00+01:00",
+  "canonical": "pisa-approval\napproval_id=0b6f3a52-6c1e-4d7a-9f0e-2a4c1b8d5e70\ndecision=approve\nkind=email_send\nsummary=Mando a Claudio, Marco:  Re: Cena di venerdì\ndigest=10a33b49933a0dc1f6c6cbe3a6c0972dbe47d7c0294527999c6be64b9fc31fa7\nnonce=a2FwcHJvdmFsLW5vbmNlLW9uY2UtMTIzNDU2\nexpires_at=2026-11-19T18:12:00+01:00"
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "metrics",
+  "app_version": "0.1.0 (29)",
+  "os_version": "26.3",
+  "payload": {
+    "day": "2026-10-28",
+    "foreground_s": 5400,
+    "background_audio_s": 3600,
+    "background_location_s": 1200,
+    "location_s": {
+      "best": 300,
+      "ten_m": 900,
+      "hundred_m": 2400,
+      "km": 0,
+      "three_km": 0
+    },
+    "cpu_s": 420.5,
+    "gpu_s": 38.2,
+    "cell_up_kb": 5120,
+    "cell_down_kb": 20480,
+    "wifi_up_kb": 1024,
+    "wifi_down_kb": 8192,
+    "companion": [
+      {
+        "start": "2026-10-28T08:10:00+01:00",
+        "minutes": 42,
+        "battery_pct_per_h": 6.5
+      },
+      {
+        "start": "2026-10-28T18:30:00+01:00",
+        "minutes": 95,
+        "battery_pct_per_h": 5.1
+      }
+    ]
+  }
+}

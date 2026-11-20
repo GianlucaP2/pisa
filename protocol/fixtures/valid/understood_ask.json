@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009052",
+  "ts": "2026-10-24T11:31:00+02:00",
+  "type": "understood",
+  "reply_to": "00000000-0000-4000-8000-000000000052",
+  "meant": "chiama elena",
+  "raw": "chiama elena",
+  "corrections": [],
+  "ask": "Intendi Elena Neri o Elena Conti?"
+}

@@ -1,0 +1,108 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "id": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.example2.001.1",
+   "type": "Feature",
+   "geometry": null,
+   "properties": {
+    "@id": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.example2.001.1",
+    "@type": "wx:Alert",
+    "id": "urn:oid:2.49.0.1.840.0.example2.001.1",
+    "areaDesc": "Example Valley",
+    "geocode": {
+     "SAME": [
+      "099001"
+     ],
+     "UGC": [
+      "EXZ002"
+     ]
+    },
+    "affectedZones": [
+     "https://api.weather.gov/zones/forecast/EXZ002"
+    ],
+    "references": [],
+    "sent": "2026-11-03T05:10:00-05:00",
+    "effective": "2026-11-03T05:10:00-05:00",
+    "onset": "2026-11-03T05:10:00-05:00",
+    "expires": "2026-11-03T09:00:00-05:00",
+    "ends": "2026-11-03T09:00:00-05:00",
+    "status": "Actual",
+    "messageType": "Alert",
+    "category": "Met",
+    "severity": "Minor",
+    "certainty": "Likely",
+    "urgency": "Expected",
+    "event": "Special Weather Statement",
+    "sender": "alerts@weather.example.com",
+    "senderName": "NWS Example Office",
+    "headline": "Special Weather Statement issued November 3 for Example Valley",
+    "description": "* WHAT...Special Weather Statement for Example Valley.\n\n* WHEN...Until 2026-11-03T09:00:00-05:00.",
+    "instruction": "Take the usual care.",
+    "response": "Execute",
+    "note": null,
+    "parameters": {
+     "NWSheadline": [
+      "SPECIAL WEATHER STATEMENT ISSUED NOVEMBER 3 FOR EXAMPLE VALLEY"
+     ]
+    },
+    "scope": "Public",
+    "code": "IPAWSv1.0",
+    "language": "en-US",
+    "web": "http://www.weather.gov/"
+   }
+  },
+  {
+   "id": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.example1.001.1",
+   "type": "Feature",
+   "geometry": null,
+   "properties": {
+    "@id": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.example1.001.1",
+    "@type": "wx:Alert",
+    "id": "urn:oid:2.49.0.1.840.0.example1.001.1",
+    "areaDesc": "Example Coast",
+    "geocode": {
+     "SAME": [
+      "099001"
+     ],
+     "UGC": [
+      "EXZ001"
+     ]
+    },
+    "affectedZones": [
+     "https://api.weather.gov/zones/forecast/EXZ001"
+    ],
+    "references": [],
+    "sent": "2026-11-03T04:50:00-05:00",
+    "effective": "2026-11-03T04:50:00-05:00",
+    "onset": "2026-11-03T04:50:00-05:00",
+    "expires": "2026-11-04T06:00:00-05:00",
+    "ends": "2026-11-04T06:00:00-05:00",
+    "status": "Actual",
+    "messageType": "Alert",
+    "category": "Met",
+    "severity": "Moderate",
+    "certainty": "Likely",
+    "urgency": "Expected",
+    "event": "Wind Advisory",
+    "sender": "alerts@weather.example.com",
+    "senderName": "NWS Example Office",
+    "headline": "Wind Advisory issued November 3 until November 4 for Example Coast",
+    "description": "* WHAT...Wind Advisory for Example Coast.\n\n* WHEN...Until 2026-11-04T06:00:00-05:00.",
+    "instruction": "Take the usual care.",
+    "response": "Execute",
+    "note": null,
+    "parameters": {
+     "NWSheadline": [
+      "WIND ADVISORY ISSUED NOVEMBER 3 UNTIL NOVEMBER 4 FOR EXAMPLE COAST"
+     ]
+    },
+    "scope": "Public",
+    "code": "IPAWSv1.0",
+    "language": "en-US",
+    "web": "http://www.weather.gov/"
+   }
+  }
+ ],
+ "title": "Current watches, warnings, and advisories"
+}

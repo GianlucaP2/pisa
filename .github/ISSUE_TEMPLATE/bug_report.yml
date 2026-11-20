@@ -1,0 +1,64 @@
+name: Bug report
+description: Something in PISA does not work as documented.
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. **A security problem never goes here**: see SECURITY.md (private reporting).
+        Remove passwords, keys, tokens, addresses and anything personal from what you paste.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - server (core/)
+        - push relay (relay/)
+        - protocol (protocol/)
+        - deployment (deploy/, docker compose)
+        - documentation
+        - not sure
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The release tag or the commit you run.
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: The smallest steps that show it, with invented data.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: The relevant lines, with secrets and personal data removed.
+      render: text
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: How PISA is deployed (docker compose, local), the OS, the proxy in front of it.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the existing issues.
+          required: true
+        - label: This report holds no secret and no real personal data.
+          required: true

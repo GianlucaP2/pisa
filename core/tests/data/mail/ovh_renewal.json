@@ -1,0 +1,6 @@
+{
+  "from_name": "Hosting Esempio",
+  "from_address": "noreply@hosting.example.com",
+  "subject": "Il tuo dominio example.org scade il 05/11/2026",
+  "body": "Gentile cliente,\n\nil dominio example.org scade il 05/11/2026. Rinnova il servizio prima di questa data: dopo la scadenza il dominio viene sospeso e il sito e la posta smettono di funzionare.\n\nRinnova ora dalla tua Area Clienti.\n\nIl team di Hosting Esempio\n\nQuesto messaggio è stato inviato automaticamente, non rispondere."
+}

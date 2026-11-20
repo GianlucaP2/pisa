@@ -1,0 +1,40 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000031004",
+  "ts": "2026-10-20T13:00:00+02:00",
+  "type": "hello",
+  "device_id": "00000000-0000-4000-8000-000000000100",
+  "app_version": "0.1.0",
+  "platform": "ios",
+  "capabilities": {
+    "mic": true,
+    "speaker": true,
+    "display": true,
+    "camera": true,
+    "local_stt": true,
+    "local_tts": true,
+    "location": true,
+    "push": true,
+    "present": {
+      "kinds": [
+        "plan",
+        "places",
+        "place",
+        "compare",
+        "item",
+        "changes",
+        "setting",
+        "note",
+        "choice",
+        "sheet",
+        "drawing"
+      ],
+      "focus": true
+    }
+  },
+  "wearable": {
+    "kind": "meta_glasses",
+    "model": "Ray-Ban Meta Gen 2",
+    "connected": true
+  }
+}

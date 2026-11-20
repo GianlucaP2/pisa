@@ -1,0 +1,13 @@
+{
+  "gap": "G5",
+  "check": "enrol_client_frame",
+  "why": "Blocks are A to E.",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.voice.enrol.block",
+    "value": {
+      "block": "F",
+      "state": "start"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "drawing_id": "fixture-vega-lite",
+  "title": "Spese della settimana",
+  "summary": "Le spese di tre giorni in euro, con una colonna calcolata.",
+  "kind": "chart",
+  "html": "<!doctype html><html><head><meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'sha256-A2ZlphEpZZbCvKpda1n3rLKetUBjgVlPOeDxE+zmhOk=' pisa-bundle:; style-src 'unsafe-inline'; img-src data: pisa-bundle:; form-action 'none'; base-uri 'none'\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"></head><body><div id=\"v\"></div><script src=\"pisa-bundle://lib/vega.min.js\"></script><script src=\"pisa-bundle://lib/vega-lite.min.js\"></script><script src=\"pisa-bundle://lib/vega-interpreter.min.js\"></script><script src=\"pisa-bundle://lib/vega-embed.min.js\"></script><script>const spec = JSON.parse(JSON.stringify(window.PISA_DATA.spec));vegaEmbed('#v', spec, { ast: true, expr: vega.expressionInterpreter, actions: false, renderer: 'svg' }).then(() => { if (document.querySelector('#v svg')) { document.documentElement.dataset.rendered = 'yes'; } }, (e) => { document.documentElement.dataset.rendered = 'error: ' + (e && e.message); });</script></body></html>",
+  "data": {
+    "spec": {
+      "data": {
+        "values": [
+          {
+            "giorno": "Lun",
+            "euro": 12.5
+          },
+          {
+            "giorno": "Mar",
+            "euro": 30
+          },
+          {
+            "giorno": "Mer",
+            "euro": 7.2
+          }
+        ]
+      },
+      "transform": [
+        {
+          "calculate": "datum.euro * 100",
+          "as": "centesimi"
+        }
+      ],
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "giorno",
+          "type": "nominal"
+        },
+        "y": {
+          "field": "centesimi",
+          "type": "quantitative"
+        }
+      }
+    }
+  }
+}

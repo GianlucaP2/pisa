@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-24",
+  "generated_at": "2026-10-24T11:30:00+02:00",
+  "from": {
+    "lat": 52.359,
+    "lon": 4.889,
+    "label": "here"
+  },
+  "items": [
+    {
+      "kind": "travel",
+      "start": "2026-10-24T11:30:00+02:00",
+      "end": "2026-10-24T11:39:00+02:00",
+      "title": "4 min on foot",
+      "mode": "walk",
+      "minutes": 4,
+      "provider": "apple",
+      "to_place_id": "5f8fd6c8-7107-4001-aad7-797190c1a9e1",
+      "leave_at": "2026-10-24T11:30:00+02:00"
+    },
+    {
+      "kind": "task",
+      "start": "2026-10-24T11:39:00+02:00",
+      "end": "2026-10-24T12:24:00+02:00",
+      "title": "BRAM'S Broodjes",
+      "task_id": "e257b67d-8e61-47ed-b2de-af0c2c35067d",
+      "place_id": "5f8fd6c8-7107-4001-aad7-797190c1a9e1",
+      "why": "Moved here at your request.",
+      "status": "planned",
+      "adjusted": true
+    },
+    {
+      "kind": "travel",
+      "start": "2026-10-24T12:24:00+02:00",
+      "end": "2026-10-24T12:58:00+02:00",
+      "title": "29 min by public transport",
+      "mode": "transit",
+      "minutes": 29,
+      "provider": "apple",
+      "to_place_id": "0de99273-1cbd-4bab-bf6c-78131e1c5f50",
+      "leave_at": "2026-10-24T12:24:00+02:00"
+    },
+    {
+      "kind": "event",
+      "start": "2026-10-24T12:58:00+02:00",
+      "end": "2026-10-24T23:00:00+02:00",
+      "title": "Stadsweide · LICHTJESMARKT",
+      "event_id": "97997bfc052f45d99febb17b43d3b07c",
+      "event_ids": [
+        "97997bfc052f45d99febb17b43d3b07c"
+      ],
+      "place_id": "0de99273-1cbd-4bab-bf6c-78131e1c5f50",
+      "status": "planned",
+      "event_kind": "window",
+      "kind_source": "inferred",
+      "min_stay_min": 120,
+      "arrive_at": "2026-10-24T12:58:00+02:00"
+    }
+  ],
+  "unplanned": [],
+  "sources": {
+    "routes": "apple",
+    "skipped": []
+  }
+}

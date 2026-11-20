@@ -1,0 +1,41 @@
+{
+  "week": "2026-10-25",
+  "items": [
+    {
+      "id": "00000000-0000-4000-8000-000000000701",
+      "kind": "changed",
+      "statement": "Gli piace «Bar Bislacco»",
+      "why": "Ultimamente sembra cambiato: Visto 7 volte nelle ultime 4 settimane",
+      "evidence": [
+        {
+          "summary": "Chiesto un altro posto invece di «Bar Bislacco»",
+          "at": "2026-10-21T19:31:00+02:00"
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000702",
+      "kind": "buffer",
+      "statement": "Per gli incontri con altri arrivi di solito circa 10 minuti dopo l'inizio (5 delle ultime 5). Vuoi che ti dica di uscire 10 minuti prima per questi?",
+      "why": "Visto 5 volte nelle ultime 4 settimane",
+      "evidence": [
+        {
+          "summary": "Arrivato 11 min dopo l'inizio (gli incontri con altri), ven 20:00",
+          "at": "2026-10-23T20:00:00+02:00"
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000703",
+      "kind": "new",
+      "statement": "Di solito va a «Caffè Lento» il martedì verso le 18",
+      "why": "Visto 3 volte nelle ultime 4 settimane",
+      "evidence": [
+        {
+          "summary": "Da «Caffè Lento», mar 18",
+          "at": "2026-10-20T17:57:00+02:00"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "emails": [
+    {
+      "id": "18a2f0c4d9e1b7a3",
+      "subject": "Avviso di sicurezza critico",
+      "sender": "Google",
+      "sender_address": "no-reply@accounts.google.example",
+      "sent_at": "2026-10-24T09:12:00+02:00",
+      "kind": "security",
+      "why": "Notifica automatica: niente da fare (avvisi di sicurezza)",
+      "detail": "A new sign-in alert: nothing for the user to do unless it wasn't them."
+    },
+    {
+      "id": "18a2e9b1c7d0f4a2",
+      "subject": "Promemoria: rinnovo example.net",
+      "sender": "OVHcloud",
+      "sender_address": "support@ovh.example",
+      "sent_at": "2026-10-23T18:40:00+02:00",
+      "kind": "bill_or_deadline",
+      "why": "Lo stesso di un tuo task aperto",
+      "detail": "A reminder of the renewal already on the user's list."
+    },
+    {
+      "id": "18a2d1a0b6c5e3f1",
+      "subject": "Il tuo ordine è stato rinnovato",
+      "sender": "billing",
+      "sender_address": "billing@ovh.example",
+      "sent_at": "2026-10-23T08:05:00+02:00",
+      "kind": null,
+      "why": "Mai da questo mittente: la tua regola",
+      "detail": null
+    }
+  ]
+}
