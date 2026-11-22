@@ -1,0 +1,195 @@
+{
+  "description": "The model_server signed device op (contract 2). body is the exact request body; the target hashes its UTF-8 bytes as sent. A server that does not offer model servers answers 501 unsupported (challenge and routes).",
+  "canonicalFormat": "pisa-device\\nop=<op>\\ntarget=<target>\\nnonce=<nonce>\\nexpires_at=<iso>",
+  "signedRoutes": [
+    {
+      "method": "POST",
+      "path": "/v1/ai/providers",
+      "idFrom": "body"
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/ai/providers/{id}",
+      "idFrom": "path"
+    }
+  ],
+  "unsignedRoutes": [
+    {
+      "method": "DELETE",
+      "path": "/v1/ai/providers/{id}"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/ai/providers/{id}/probe"
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/ai/providers/{id}/capabilities/overrides"
+    }
+  ],
+  "cases": [
+    {
+      "name": "add a LAN server",
+      "method": "POST",
+      "path": "/v1/ai/providers",
+      "body": "{\"type\":\"openai_compatible\",\"id\":\"lab-gpu\",\"base_url\":\"http://192.0.2.20:8000/v1\"}",
+      "bodySha256": "80457d52c80b6926bbe965cf4b5a59fa2309725d8f1d9aa7410953073e94f7fb",
+      "challenge": {
+        "action": "device",
+        "op": "model_server",
+        "target": "lab-gpu:80457d52c80b6926bbe965cf4b5a59fa2309725d8f1d9aa7410953073e94f7fb"
+      },
+      "nonce": "bm9uY2UtbW9kZWwtc2VydmVy",
+      "expires_at": "2026-11-18T10:05:00Z",
+      "canonical": "pisa-device\nop=model_server\ntarget=lab-gpu:80457d52c80b6926bbe965cf4b5a59fa2309725d8f1d9aa7410953073e94f7fb\nnonce=bm9uY2UtbW9kZWwtc2VydmVy\nexpires_at=2026-11-18T10:05:00Z"
+    },
+    {
+      "name": "the same body with another key order hashes differently: the bytes as sent are signed",
+      "method": "POST",
+      "path": "/v1/ai/providers",
+      "body": "{\"id\":\"lab-gpu\",\"type\":\"openai_compatible\",\"base_url\":\"http://192.0.2.20:8000/v1\"}",
+      "bodySha256": "f771fcb14613317302094a0de9ea702221c686726da981c920e8cdff41887ddf",
+      "challenge": {
+        "action": "device",
+        "op": "model_server",
+        "target": "lab-gpu:f771fcb14613317302094a0de9ea702221c686726da981c920e8cdff41887ddf"
+      },
+      "nonce": "bm9uY2UtbW9kZWwtc2VydmVy",
+      "expires_at": "2026-11-18T10:05:00Z",
+      "canonical": "pisa-device\nop=model_server\ntarget=lab-gpu:f771fcb14613317302094a0de9ea702221c686726da981c920e8cdff41887ddf\nnonce=bm9uY2UtbW9kZWwtc2VydmVy\nexpires_at=2026-11-18T10:05:00Z"
+    },
+    {
+      "name": "add with a name (UTF-8 bytes) and a private CA",
+      "method": "POST",
+      "path": "/v1/ai/providers",
+      "body": "{\"type\": \"openai_compatible\", \"id\": \"studio\", \"base_url\": \"https://198.51.100.7/v1\", \"name\": \"Studio · Büro\", \"ca_bundle\": \"/etc/pisa/ca/studio.pem\"}",
+      "bodySha256": "220c8dd62a917206c02f8f4ca60952458300bb5389deb7eee8f9843acb8ea768",
+      "challenge": {
+        "action": "device",
+        "op": "model_server",
+        "target": "studio:220c8dd62a917206c02f8f4ca60952458300bb5389deb7eee8f9843acb8ea768"
+      },
+      "nonce": "bm9uY2UtbW9kZWwtc2VydmVy",
+      "expires_at": "2026-11-18T10:05:00Z",
+      "canonical": "pisa-device\nop=model_server\ntarget=studio:220c8dd62a917206c02f8f4ca60952458300bb5389deb7eee8f9843acb8ea768\nnonce=bm9uY2UtbW9kZWwtc2VydmVy\nexpires_at=2026-11-18T10:05:00Z"
+    },
+    {
+      "name": "move a server to a new address (forgets its probes)",
+      "method": "PATCH",
+      "path": "/v1/ai/providers/lab-gpu",
+      "body": "{\"base_url\":\"http://203.0.113.9:8000/v1\"}",
+      "bodySha256": "bbd7c594e56482cc56fef9f094abf80ea9381882538875c68f2aa1379966fbdd",
+      "challenge": {
+        "action": "device",
+        "op": "model_server",
+        "target": "lab-gpu:bbd7c594e56482cc56fef9f094abf80ea9381882538875c68f2aa1379966fbdd"
+      },
+      "nonce": "bm9uY2UtbW9kZWwtc2VydmVy",
+      "expires_at": "2026-11-18T10:05:00Z",
+      "canonical": "pisa-device\nop=model_server\ntarget=lab-gpu:bbd7c594e56482cc56fef9f094abf80ea9381882538875c68f2aa1379966fbdd\nnonce=bm9uY2UtbW9kZWwtc2VydmVy\nexpires_at=2026-11-18T10:05:00Z"
+    },
+    {
+      "name": "remove a private CA",
+      "method": "PATCH",
+      "path": "/v1/ai/providers/studio",
+      "body": "{\"ca_bundle\":null}",
+      "bodySha256": "0101bd1c219dcc0579410d284671fd6488a18f0172249997294f96847402611c",
+      "challenge": {
+        "action": "device",
+        "op": "model_server",
+        "target": "studio:0101bd1c219dcc0579410d284671fd6488a18f0172249997294f96847402611c"
+      },
+      "nonce": "bm9uY2UtbW9kZWwtc2VydmVy",
+      "expires_at": "2026-11-18T10:05:00Z",
+      "canonical": "pisa-device\nop=model_server\ntarget=studio:0101bd1c219dcc0579410d284671fd6488a18f0172249997294f96847402611c\nnonce=bm9uY2UtbW9kZWwtc2VydmVy\nexpires_at=2026-11-18T10:05:00Z"
+    }
+  ],
+  "targetLine": [
+    {
+      "target": "lab-gpu:abc\ndecision=approve",
+      "line": "lab-gpu:abc decision=approve"
+    }
+  ],
+  "bodies": {
+    "ServerCreate": {
+      "valid": [
+        {
+          "type": "openai_compatible",
+          "id": "lab-gpu",
+          "base_url": "http://192.0.2.20:8000/v1"
+        },
+        {
+          "id": "lab-gpu",
+          "type": "openai_compatible",
+          "base_url": "http://192.0.2.20:8000/v1"
+        },
+        {
+          "type": "openai_compatible",
+          "id": "studio",
+          "base_url": "https://198.51.100.7/v1",
+          "name": "Studio · Büro",
+          "ca_bundle": "/etc/pisa/ca/studio.pem"
+        }
+      ],
+      "invalid": [
+        {
+          "why": "no base_url",
+          "body": {
+            "type": "openai_compatible",
+            "id": "lab-gpu"
+          }
+        },
+        {
+          "why": "an id with capitals",
+          "body": {
+            "type": "openai_compatible",
+            "id": "Lab",
+            "base_url": "http://192.0.2.20:8000/v1"
+          }
+        },
+        {
+          "why": "a built-in type",
+          "body": {
+            "type": "builtin",
+            "id": "lab-gpu",
+            "base_url": "http://192.0.2.20:8000/v1"
+          }
+        },
+        {
+          "why": "an unknown field",
+          "body": {
+            "type": "openai_compatible",
+            "id": "lab-gpu",
+            "base_url": "http://192.0.2.20:8000/v1",
+            "key": "x"
+          }
+        }
+      ]
+    },
+    "ServerUpdate": {
+      "valid": [
+        {
+          "base_url": "http://203.0.113.9:8000/v1"
+        },
+        {
+          "ca_bundle": null
+        },
+        {}
+      ],
+      "invalid": [
+        {
+          "why": "the id cannot change",
+          "body": {
+            "id": "other"
+          }
+        },
+        {
+          "why": "an empty address",
+          "body": {
+            "base_url": ""
+          }
+        }
+      ]
+    }
+  }
+}

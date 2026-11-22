@@ -1,0 +1,261 @@
+{
+  "week": "2026-W46",
+  "counts": {
+    "calendar": 6,
+    "task_done": 5,
+    "bill": 1
+  },
+  "total": 12,
+  "undone": 0,
+  "mattered": [
+    {
+      "id": "decision:00000000-0000-4000-8000-000000000601",
+      "at": "2026-11-14T10:02:00+01:00",
+      "kind": "calendar",
+      "title": "Palestra spostata alle 19",
+      "why": "così arrivi in tempo dal dentista",
+      "source": "owner_said",
+      "type": "calendar_move",
+      "undo": {
+        "available": true,
+        "until": "2026-11-15T19:00:00+01:00"
+      }
+    }
+  ],
+  "undoable": [
+    {
+      "id": "decision:00000000-0000-4000-8000-000000000601",
+      "at": "2026-11-14T10:02:00+01:00",
+      "kind": "calendar",
+      "title": "Palestra spostata alle 19",
+      "why": "così arrivi in tempo dal dentista",
+      "source": "owner_said",
+      "type": "calendar_move",
+      "undo": {
+        "available": true,
+        "until": "2026-11-15T19:00:00+01:00"
+      }
+    }
+  ],
+  "proposals": [
+    {
+      "type": "calendar_move",
+      "level": "tell",
+      "kept": 23,
+      "undone": 0,
+      "days": 27,
+      "since_on": "2026-10-12",
+      "bound_pct": 13,
+      "last_error": {
+        "on": "2026-10-09",
+        "what": "Palestra sopra la cena con Marta"
+      },
+      "text": "Ho spostato 23 eventi in 30 giorni e non ne hai annullato nessuno: li sposto e te lo dico, senza chiedere?"
+    }
+  ],
+  "subscriptions": [
+    {
+      "name": "Netflix",
+      "amount": "12.99",
+      "currency": "EUR",
+      "period": "monthly",
+      "last_on": "2026-11-03",
+      "count": 4,
+      "text": "Netflix, 12,99 € al mese: vuoi che ti prepari la disdetta?"
+    }
+  ],
+  "sheet": {
+    "title": "La tua settimana con Pisa",
+    "blocks": [
+      {
+        "type": "stat",
+        "label": "Cose fatte",
+        "value": "12"
+      },
+      {
+        "type": "stat",
+        "label": "Annullate",
+        "value": "0"
+      },
+      {
+        "type": "text",
+        "text": "Questo mese Pisa ti è costato 4,12 € (AI 3,80 €, servizi 0,32 €) e ti ha fatto ritrovare 62,89 € (1 rimborso, 1 abbonamento disdetto)."
+      },
+      {
+        "type": "section",
+        "title": "Una cosa nuova che faccio per te"
+      },
+      {
+        "type": "text",
+        "text": "Da oggi sposto i tuoi eventi senza chiedere, e te lo dico subito dopo. Per tornare indietro, dimmi «chiedimelo di nuovo prima di spostare gli eventi» o tocca «Chiedimelo di nuovo»."
+      },
+      {
+        "type": "chips",
+        "items": [
+          "Chiedimelo di nuovo: spostamenti"
+        ]
+      },
+      {
+        "type": "section",
+        "title": "Le tre che contano"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Palestra spostata alle 19"
+        ]
+      },
+      {
+        "type": "section",
+        "title": "Una proposta da Pisa"
+      },
+      {
+        "type": "text",
+        "text": "Spostamenti di calendario (solo eventi tuoi, senza altri invitati)"
+      },
+      {
+        "type": "text",
+        "text": "Da oggi: li faccio e te lo dico subito dopo, invece di chiederti prima."
+      },
+      {
+        "type": "section",
+        "title": "Perché lo propongo"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Ultimi 23 spostamenti: 23 tenuti, 0 annullati (dal 12 ottobre).",
+          "In pratica: errore stimato al massimo 13%: non è zero, per questo resto al passo «faccio e ti dico».",
+          "Ultimo errore: 9 ottobre, Palestra sopra la cena con Marta."
+        ]
+      },
+      {
+        "type": "section",
+        "title": "Cosa cambia"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Ti scrivo subito cosa ho fatto. Un tocco su Annulla e torna com'era.",
+          "Se c'è un altro invitato, ti chiedo sempre prima.",
+          "Al primo annullamento torno a chiederti.",
+          "«Pisa, ferma tutto» blocca ogni azione automatica, subito."
+        ]
+      },
+      {
+        "type": "chips",
+        "items": [
+          "Sì",
+          "Sì, ma solo per …",
+          "No, continua a chiedere"
+        ]
+      },
+      {
+        "type": "text",
+        "text": "Non serve rispondere: se non scegli nulla, non cambia niente."
+      },
+      {
+        "type": "section",
+        "title": "Abbonamenti"
+      },
+      {
+        "type": "text",
+        "text": "Netflix, 12,99 € al mese: vuoi che ti prepari la disdetta?"
+      },
+      {
+        "type": "section",
+        "title": "Cosa ho imparato a fare per te"
+      },
+      {
+        "type": "list",
+        "items": [
+          "meteo"
+        ]
+      },
+      {
+        "type": "section",
+        "title": "Le tengo?"
+      },
+      {
+        "type": "text",
+        "text": "farmacia: la tengo?"
+      }
+    ]
+  },
+  "skills": {
+    "learned": [
+      {
+        "id": "00000000-0000-4000-8000-000000000702",
+        "name": "meteo"
+      }
+    ],
+    "withered": [
+      {
+        "id": "00000000-0000-4000-8000-000000000704",
+        "name": "farmacia",
+        "text": "farmacia: la tengo?"
+      }
+    ]
+  },
+  "metrics": {
+    "undo": [
+      {
+        "type": "calendar_move",
+        "rung": "ask",
+        "kept": 23,
+        "undone": 0,
+        "rate_pct": 0,
+        "bound_pct": 13
+      },
+      {
+        "type": "calendar_create",
+        "rung": "tell",
+        "kept": 4,
+        "undone": 1,
+        "rate_pct": 20,
+        "bound_pct": 95
+      }
+    ],
+    "rubber_stamp": {
+      "fast": 9,
+      "asked": 23,
+      "rate_pct": 39
+    },
+    "surprise": {
+      "undone": 0,
+      "actions": 0,
+      "per_100": 0.0
+    }
+  },
+  "cost_found": {
+    "month": "2026-11",
+    "cost": {
+      "amount": "4.12",
+      "currency": "EUR",
+      "ai": "3.80",
+      "services": "0.32"
+    },
+    "found": [
+      {
+        "amount": "62.89",
+        "currency": "EUR"
+      }
+    ],
+    "found_items": {
+      "claim": 0,
+      "refund": 1,
+      "subscription": 1
+    },
+    "unvalued": 0,
+    "text": "Questo mese Pisa ti è costato 4,12 € (AI 3,80 €, servizi 0,32 €) e ti ha fatto ritrovare 62,89 € (1 rimborso, 1 abbonamento disdetto)."
+  },
+  "unlocks": [
+    {
+      "id": "00000000-0000-4000-8000-000000000701",
+      "type": "calendar_move",
+      "level": "tell",
+      "at": "2026-11-12T09:30:00+01:00",
+      "text": "Da oggi sposto i tuoi eventi senza chiedere, e te lo dico subito dopo. Per tornare indietro, dimmi «chiedimelo di nuovo prima di spostare gli eventi» o tocca «Chiedimelo di nuovo»."
+    }
+  ]
+}

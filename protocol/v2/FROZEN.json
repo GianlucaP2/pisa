@@ -1,0 +1,70 @@
+{
+  "description": "Frozen files of PISA contract 2. A frozen file never changes: tests/test_frozen.py fails if one does. A change to the contract is a new minor (an additive schema change: bump x-pisa-contract, regenerate, and add a new entry here, keeping the old digest in 'history'), or a new major. A catalog never changes: a new component is a new catalog file (core:2) beside core:1 (CONTRACT-2 \u00a712).",
+  "frozenOn": "2026-11-18",
+  "files": {
+    "schema/pisa-contract-2.schema.json": {
+      "contract": "2.0",
+      "id": "urn:pisa:contract:2:extensions",
+      "sha256": "9eae9434ee0855ced551fcce2337aa8d1ceb9f203f9b49a2a60d9188364c02bf"
+    },
+    "catalog/pisa-core.catalog.v1.json": {
+      "catalogId": "urn:pisa:a2ui:catalog:core:1",
+      "sha256": "c464833c2aa3184107e042071c0ddf477b7ef809d4d53d41488fd79f39e272cc"
+    }
+  },
+  "vendored": {
+    "description": "The official AG-UI 1.0 and A2UI 1.0 schemas, copied verbatim into vendor/ and pinned here by digest. vendor/SHA256SUMS must agree; refreshing them is a contract decision, made here and in SHA256SUMS together.",
+    "files": {
+      "vendor/a2ui-1.0/agent_to_renderer.json": {
+        "sha256": "2f575f783fdda0e4d175fe5d331661655e4a4901613262322792dae7e823761d"
+      },
+      "vendor/a2ui-1.0/catalog_definition.json": {
+        "sha256": "836a48b2deb7ae76c3b68cb4e79c2faa24cba36d4d5396474894796797364d44"
+      },
+      "vendor/a2ui-1.0/common_types.json": {
+        "sha256": "c4e78305be1de73eecb37f8179ba169730250611703683af291b18135a6430dc"
+      },
+      "vendor/a2ui-1.0/renderer_capabilities.json": {
+        "sha256": "3ebd2889764d892df16d034643ecd9e3a3fc02f298fa05577b95d9e287e703de"
+      },
+      "vendor/a2ui-1.0/renderer_to_agent.json": {
+        "sha256": "58ecde02101f0f37566b5e238dc6ef6af628c3ff312fce0e17ab7670b7215465"
+      },
+      "vendor/ag-ui-1.0/schema.json": {
+        "sha256": "4b5c93226838a0e72d88e6c5df20633c686c49fcb75d9be2815c6cbf9e48e71a"
+      }
+    }
+  },
+  "history": [
+    {
+      "file": "schema/pisa-contract-2.schema.json",
+      "sha256": "a38d29e207eb9d623baa204ea41c5ba8726346bdf7c10c4d2456ce0925abe856",
+      "why": "superseded before release: pisa.voice.transcript ignored gains language and fragment (v1 VOICE-ID-1 meaning); architect 1's ruling, 18 Nov"
+    },
+    {
+      "file": "schema/pisa-contract-2.schema.json",
+      "sha256": "71a91e9f7d11ff582a75afaa63ca4132eb7b0eec18f90b46b24fe375b987659e",
+      "why": "superseded before release (D-122): GET /v1/server gains a required serverId (ServerId, also the approval interrupt's server), and the safety features stop and approvals.signed become required, never paywalled or deprecated; architect 1's ruling, 18 Nov"
+    },
+    {
+      "file": "schema/pisa-contract-2.schema.json",
+      "sha256": "62376e7fefb6194a0e1051922d1978c183c09e218dd824a507974ce4c563b283",
+      "why": "superseded before release (D-122): approval threads' RUN_ERROR codes become a closed set (ApprovalErrorCode, ApprovalRunError) with action_failed added; ApprovalResume documents the REST body and the cancelled resume; architect 1's ruling from the PISA backend's B3+B4, 18 Nov"
+    },
+    {
+      "file": "schema/pisa-contract-2.schema.json",
+      "sha256": "e40906933ebe2eabf6fc9f2ef134766386313b6a62eb26bb1aff43189cc5cd40",
+      "why": "superseded before release (D-122): pisa.voice.enrol.done reason becomes a closed set (EnrolReason: missing, consent, no_speech, timeout, not_reliable, error), not_reliable carries the report, by_snr.clean documented; architect 1's ruling from the PISA backend's B5, 18 Nov"
+    },
+    {
+      "file": "schema/pisa-contract-2.schema.json",
+      "sha256": "e581a92d6065179afd6860d69f44aad5405deec2ec0f96615e349cab78546f52",
+      "why": "superseded before release (D-122): $defs/PushPlaintext (the relay-sealed push's plaintext, with the optional apns block), and the SAS commitment ($defs/PairBegin; pairingId required in PairRequest; serverNonce revealed in PairResponse), with the pairing/session/relay bytes; architect 1's rulings from the PISA backend's B4b and on \u00a715 S1, 18 Nov"
+    },
+    {
+      "file": "schema/pisa-contract-2.schema.json",
+      "sha256": "098949469bc777779ed15adfeee46e6dde1139faff67111a1927032286428ceb",
+      "why": "superseded before release (D-122): PushPlaintext.sentAt (RFC 3339 UTC) required, so the Notification Service Extension can drop replayed old sealed blobs; security review E1 R11, architect 1's ruling, 18 Nov"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "via inventata 40 milano": [
+    {
+      "name": "Via Inventata 40",
+      "coordinate": {"latitude": 45.462, "longitude": 9.089},
+      "formattedAddressLines": ["Via Inventata 40", "20123 Milano MI", "Italia"],
+      "structuredAddress": {
+        "administrativeArea": "Lombardia", "locality": "Milano", "postCode": "20123",
+        "thoroughfare": "Via Inventata", "subThoroughfare": "40", "fullThoroughfare": "Via Inventata 40"
+      },
+      "country": "Italia",
+      "countryCode": "IT"
+    }
+  ],
+  "milano": [
+    {
+      "name": "Milano",
+      "coordinate": {"latitude": 45.501, "longitude": 9.051},
+      "formattedAddressLines": ["Milano", "Italia"],
+      "structuredAddress": {"administrativeArea": "Lombardia", "locality": "Milano"},
+      "country": "Italia",
+      "countryCode": "IT"
+    }
+  ]
+}

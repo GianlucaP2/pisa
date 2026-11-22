@@ -1,0 +1,14 @@
+{
+  "query": "Trattoria da Mario Milano",
+  "answer": null,
+  "images": [],
+  "results": [
+    {"title": "Trattoria da Mario - recensione", "url": "https://food.example.com/trattoria-da-mario", "content": "Una trattoria storica vicino alla piazza.", "score": 0.91, "raw_content": null},
+    {"title": "Menu - Trattoria da Mario", "url": "https://trattoriadamario.example.it/menu", "content": "Menu del giorno a 15 euro.", "score": 0.88, "raw_content": null},
+    {"title": "Le 10 trattorie di Milano", "url": "https://guide.example.com/milano-trattorie", "content": "Da Mario è al terzo posto.", "score": 0.80, "raw_content": null},
+    {"title": "Forum: da Mario?", "url": "https://forum.example.com/t/123", "content": "Prenotate il venerdì.", "score": 0.71, "raw_content": null},
+    {"title": "Altro", "url": "https://other.example.com/x", "content": "Non pertinente.", "score": 0.40, "raw_content": null}
+  ],
+  "response_time": 1.12,
+  "usage": {"credits": 1}
+}

@@ -1,0 +1,16 @@
+{
+  "ghost_run": {"on": true, "at": "22:00"},
+  "one_thing": {"on": true},
+  "closing": {"on": true, "at": "21:30"},
+  "week_poster": {"on": true},
+  "something_different": {"on": true, "per_week": 2},
+  "errands": {"on": true},
+  "walk_recap": {"on": true},
+  "life_map": {"on": true},
+  "stanotte": {"on": false},
+  "knock": {"on": true},
+  "tragitto": {"on": true},
+  "quarto": {"on": false},
+  "consiglio": {"on": false},
+  "prova": {"on": false}
+}

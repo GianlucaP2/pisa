@@ -1,0 +1,12 @@
+{
+  "about": "An invented shape of a busy week's lexicon: how many names of each kind and why they are there, never the names themselves. tests/test_understand.py fills it with invented names. Synthetic: no count here was measured on anyone's data.",
+  "entries": 140,
+  "kinds": {"place": 58, "person": 46, "event": 9, "task": 27},
+  "why": {
+    "place": {"today": 3, "home": 0, "week": 35, "visited": 12, "known": 8},
+    "person": {"contact": 46},
+    "event": {"today": 2, "week": 7},
+    "task": {"week": 27}
+  },
+  "must_not_change_changed": 0
+}

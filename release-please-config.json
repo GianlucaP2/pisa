@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "simple",
+  "include-component-in-tag": false,
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "changelog-path": "CHANGELOG.md",
+  "packages": {
+    ".": {
+      "package-name": "pisa",
+      "extra-files": [
+        {"type": "toml", "path": "core/pyproject.toml", "jsonpath": "$.project.version"},
+        {"type": "toml", "path": "relay/pyproject.toml", "jsonpath": "$.project.version"},
+        {"type": "generic", "path": "core/pisa/__init__.py"}
+      ]
+    }
+  }
+}

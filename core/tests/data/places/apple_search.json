@@ -1,0 +1,25 @@
+{
+  "displayMapRegion": {"southLatitude": 45.449, "westLongitude": 9.073, "northLatitude": 45.479, "eastLongitude": 9.112},
+  "results": [
+    {
+      "id": "I7C6F6E2B1A0F9D3E",
+      "name": "Trattoria da Mario",
+      "coordinate": {"latitude": 45.465, "longitude": 9.094},
+      "displayMapRegion": {"southLatitude": 45.464, "westLongitude": 9.093, "northLatitude": 45.466, "eastLongitude": 9.095},
+      "formattedAddressLines": ["Via Immaginaria 1", "20121 Milano MI", "Italia"],
+      "structuredAddress": {"administrativeArea": "Lombardia", "locality": "Milano", "postCode": "20121", "thoroughfare": "Via Immaginaria", "subThoroughfare": "1", "fullThoroughfare": "Via Immaginaria 1"},
+      "country": "Italia",
+      "countryCode": "IT",
+      "poiCategory": "Restaurant"
+    },
+    {
+      "id": "I2B9A8C7D6E5F4A3B",
+      "name": "Farmacia Centrale",
+      "coordinate": {"latitude": 45.468, "longitude": 9.094},
+      "formattedAddressLines": ["Piazza della Finzione 21", "20122 Milano MI", "Italia"],
+      "country": "Italia",
+      "countryCode": "IT",
+      "poiCategory": "Pharmacy"
+    }
+  ]
+}

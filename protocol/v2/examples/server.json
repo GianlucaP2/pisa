@@ -1,0 +1,114 @@
+{
+  "product": "pisa",
+  "serverId": "srv_synthetic0001_Qm7Zr2Xc",
+  "serverVersion": "1.4.0",
+  "contract": {
+    "versions": [
+      "2.0"
+    ],
+    "minApp": "2.0.0"
+  },
+  "agui": [
+    "1.0"
+  ],
+  "a2ui": {
+    "versions": [
+      "1.0"
+    ],
+    "catalogIds": [
+      "urn:pisa:a2ui:catalog:core:1"
+    ]
+  },
+  "mcpApps": [
+    "2026-01-26"
+  ],
+  "features": [
+    {
+      "id": "stop",
+      "version": 1
+    },
+    {
+      "id": "conversation",
+      "version": 1
+    },
+    {
+      "id": "voice.natural",
+      "version": 1
+    },
+    {
+      "id": "today",
+      "version": 1
+    },
+    {
+      "id": "places",
+      "version": 2
+    },
+    {
+      "id": "approvals.signed",
+      "version": 2
+    },
+    {
+      "id": "drawings",
+      "version": 1
+    },
+    {
+      "id": "push.relay",
+      "version": 1,
+      "entitlement": "pisa.pro"
+    },
+    {
+      "id": "coder",
+      "version": 1,
+      "deprecated": {
+        "sunset": "2027-06-30",
+        "replacement": "coder"
+      }
+    }
+  ],
+  "readiness": {
+    "ready": true,
+    "checks": [
+      {
+        "name": "database",
+        "ok": true
+      },
+      {
+        "name": "migrations",
+        "ok": true
+      },
+      {
+        "name": "models",
+        "ok": true
+      },
+      {
+        "name": "push",
+        "ok": true
+      },
+      {
+        "name": "clock",
+        "ok": true
+      }
+    ]
+  },
+  "reach": {
+    "scheme": "https",
+    "network": "tailnet"
+  },
+  "push": {
+    "modes": [
+      "relay",
+      "none"
+    ],
+    "relayConfigured": true
+  },
+  "pairing": {
+    "methods": [
+      "qr_v1",
+      "typed_v1"
+    ]
+  },
+  "deprecations": [],
+  "ai": {
+    "disclosureRevision": "6b1f0c2d9e8a7b3c"
+  }
+}

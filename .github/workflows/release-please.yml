@@ -1,0 +1,29 @@
+# release-please: keeps a release pull request open from the Conventional Commit titles on main (version bump and
+# CHANGELOG.md). Merging it tags the release, which starts release.yml.
+#
+# The secret RELEASE_PLEASE_TOKEN (a GitHub App or fine-grained token with contents and pull-requests write, set up
+# by a maintainer in the repository's secrets) lets the tag start release.yml, which a tag made with the default
+# GITHUB_TOKEN would not. Without it, run release.yml by hand on the new tag.
+name: release-please
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7  # v5.0.0
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json

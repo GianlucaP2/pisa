@@ -1,0 +1,17 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009040",
+  "ts": "2026-10-24T11:20:00+02:00",
+  "type": "card",
+  "card_id": "00000000-0000-4000-8000-000000000440",
+  "title": "Fonti",
+  "lines": [
+    "Waterbus naar Haverbrug: tickets · waterbus.example.com",
+    "Ferry to Haverbrug · rotterdam.example.com"
+  ],
+  "kind": "sources",
+  "sources": [
+    {"title": "Waterbus naar Haverbrug: tickets", "url": "https://waterbus.example.com/en/haverbrug", "host": "waterbus.example.com"},
+    {"title": "Ferry to Haverbrug", "url": "https://rotterdam.example.com/ferry-haverbrug", "host": "rotterdam.example.com"}
+  ]
+}

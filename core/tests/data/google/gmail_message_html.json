@@ -1,0 +1,35 @@
+{
+  "id": "m-html",
+  "threadId": "t-3",
+  "labelIds": [
+    "INBOX"
+  ],
+  "snippet": "Your dentist appointment is confirmed for Tuesday 21 October at 10:00.",
+  "historyId": "900092",
+  "internalDate": "1760958000000",
+  "payload": {
+    "mimeType": "text/html",
+    "headers": [
+      {
+        "name": "From",
+        "value": "\"Studio Dentistico\" <info@dentista.example>"
+      },
+      {
+        "name": "To",
+        "value": "owner@example.org"
+      },
+      {
+        "name": "Subject",
+        "value": "Appointment confirmed"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/html; charset=UTF-8"
+      }
+    ],
+    "body": {
+      "size": 300,
+      "data": "PGh0bWw-PGhlYWQ-PHN0eWxlPnB7Y29sb3I6cmVkfTwvc3R5bGU-PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0PjwvaGVhZD48Ym9keT48cD5Zb3VyIGRlbnRpc3QgYXBwb2ludG1lbnQgaXMgY29uZmlybWVkIGZvciA8Yj5UdWVzZGF5IDIxIE9jdG9iZXIgYXQgMTA6MDA8L2I-LjwvcD48cD5BZGRyZXNzOiBWaWEgVmVyZGkmbmJzcDs1LCBNaWxhbm88L3A-PC9ib2R5PjwvaHRtbD4"
+    }
+  }
+}

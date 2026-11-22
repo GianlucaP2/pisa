@@ -1,0 +1,34 @@
+name: Feature request
+description: Suggest an improvement to something PISA already does, or a new capability.
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For a large change (a new subsystem, a protocol change), please start a discussion first (GOVERNANCE.md).
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you are trying to do, and what stops you today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: The proposal
+      description: What PISA should do. Mention any change to the protocol or to stored data.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: dropdown
+    id: contribute
+    attributes:
+      label: Would you work on it?
+      options:
+        - "Yes, with guidance"
+        - "Yes"
+        - "No"

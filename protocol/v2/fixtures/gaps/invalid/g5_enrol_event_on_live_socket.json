@@ -1,0 +1,23 @@
+{
+  "gap": "G5",
+  "check": "server_frame",
+  "why": "pisa.voice.enrol.* is not a /v2/live server event.",
+  "frame": {
+    "seq": 12,
+    "threadId": "thread-conversation",
+    "runId": "run-talk-1",
+    "event": {
+      "type": "CUSTOM",
+      "timestamp": 1763460000001,
+      "name": "pisa.voice.enrol.quality",
+      "value": {
+        "voicedS": 11.5,
+        "snrDb": 24.0,
+        "clipped": false,
+        "ok": true,
+        "hint": null,
+        "block": "A"
+      }
+    }
+  }
+}

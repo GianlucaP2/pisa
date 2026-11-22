@@ -1,0 +1,10 @@
+{
+  "results": [
+    {"url": "https://food.example.com/trattoria-da-mario", "raw_content": "Trattoria da Mario è aperta dal 1962. La cotoletta è il piatto più famoso. Prezzi medi 30 euro."},
+    {"url": "https://trattoriadamario.example.it/menu", "raw_content": "Menu del giorno: primo, secondo, acqua e caffè a 15 euro, dal lunedì al venerdì a pranzo."},
+    {"url": "https://guide.example.com/milano-trattorie", "raw_content": "Terzo posto: Da Mario, vicino alla piazza, ottimo rapporto qualità prezzo."}
+  ],
+  "failed_results": [{"url": "https://forum.example.com/t/123", "error": "Failed to fetch url"}],
+  "response_time": 2.3,
+  "usage": {"credits": 1}
+}

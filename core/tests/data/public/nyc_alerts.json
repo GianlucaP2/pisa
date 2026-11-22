@@ -1,0 +1,311 @@
+{
+ "header": {
+  "gtfs_realtime_version": "2.0",
+  "incrementality": "FULL_DATASET",
+  "timestamp": 1793705285,
+  "transit_realtime.mercury_feed_header": {
+   "mercury_version": "1.0"
+  }
+ },
+ "entity": [
+  {
+   "id": "example:alert:1001",
+   "alert": {
+    "active_period": [
+     {
+      "start": 1793704425,
+      "end": 1793705400
+     }
+    ],
+    "informed_entity": [
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "7",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:7:20"
+      }
+     },
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "7X",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:7X:20"
+      }
+     }
+    ],
+    "header_text": {
+     "translation": [
+      {
+       "text": "[7][7X] trains are running with delays while crews attend to a signal problem.",
+       "language": "en"
+      },
+      {
+       "text": "<p>[7][7X] trains are running with delays while crews attend to a signal problem.</p>",
+       "language": "en-html"
+      }
+     ]
+    },
+    "transit_realtime.mercury_alert": {
+     "created_at": 1793704425,
+     "updated_at": 1793704545,
+     "alert_type": "Delays",
+     "display_before_active": 0
+    }
+   }
+  },
+  {
+   "id": "example:alert:1002",
+   "alert": {
+    "active_period": [
+     {
+      "start": 1793705284,
+      "end": 1793706300
+     }
+    ],
+    "informed_entity": [
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "J",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:J:20"
+      }
+     }
+    ],
+    "header_text": {
+     "translation": [
+      {
+       "text": "[J] trains are running with delays after a train needed a door repair.",
+       "language": "en"
+      },
+      {
+       "text": "<p>[J] trains are running with delays after a train needed a door repair.</p>",
+       "language": "en-html"
+      }
+     ]
+    },
+    "transit_realtime.mercury_alert": {
+     "created_at": 1793705284,
+     "updated_at": 1793705404,
+     "alert_type": "Delays",
+     "display_before_active": 0
+    }
+   }
+  },
+  {
+   "id": "example:planned:2001",
+   "alert": {
+    "active_period": [
+     {
+      "start": 1795866300,
+      "end": 1795986000
+     },
+     {
+      "start": 1796471100,
+      "end": 1796590800
+     }
+    ],
+    "informed_entity": [
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "7",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:7:20"
+      }
+     },
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "7",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:7:20"
+      }
+     },
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "7",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:7:20"
+      }
+     },
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "7",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:7:20"
+      }
+     }
+    ],
+    "header_text": {
+     "translation": [
+      {
+       "text": "Some [7] trains skip two stations for track work, nights.",
+       "language": "en"
+      },
+      {
+       "text": "<p>Some [7] trains skip two stations for track work, nights.</p>",
+       "language": "en-html"
+      }
+     ]
+    },
+    "transit_realtime.mercury_alert": {
+     "created_at": 1795866300,
+     "updated_at": 1795866420,
+     "alert_type": "Planned - Stops Skipped",
+     "display_before_active": 0
+    }
+   }
+  },
+  {
+   "id": "example:planned:2002",
+   "alert": {
+    "active_period": [
+     {
+      "start": 1795862700,
+      "end": 1795924800
+     },
+     {
+      "start": 1795954500,
+      "end": 1796011200
+     }
+    ],
+    "informed_entity": [
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "C",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:C:20"
+      }
+     },
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "C",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:C:20"
+      }
+     },
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "C",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:C:20"
+      }
+     }
+    ],
+    "header_text": {
+     "translation": [
+      {
+       "text": "[C] trains run via the [F] line between two stations, weekend.",
+       "language": "en"
+      },
+      {
+       "text": "<p>[C] trains run via the [F] line between two stations, weekend.</p>",
+       "language": "en-html"
+      }
+     ]
+    },
+    "transit_realtime.mercury_alert": {
+     "created_at": 1795862700,
+     "updated_at": 1795862820,
+     "alert_type": "Planned - Reroute",
+     "display_before_active": 0
+    }
+   }
+  },
+  {
+   "id": "example:planned:2003",
+   "alert": {
+    "active_period": [
+     {
+      "start": 1795841100,
+      "end": 1796032800
+     }
+    ],
+    "informed_entity": [
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "A",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:A:20"
+      }
+     },
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "A",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:A:20"
+      }
+     },
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "A",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:A:20"
+      }
+     }
+    ],
+    "header_text": {
+     "translation": [
+      {
+       "text": "[A] trains run local in both directions for signal work.",
+       "language": "en"
+      },
+      {
+       "text": "<p>[A] trains run local in both directions for signal work.</p>",
+       "language": "en-html"
+      }
+     ]
+    },
+    "transit_realtime.mercury_alert": {
+     "created_at": 1795841100,
+     "updated_at": 1795841220,
+     "alert_type": "Planned - Reroute",
+     "display_before_active": 0
+    }
+   }
+  },
+  {
+   "id": "example:planned:2004",
+   "alert": {
+    "active_period": [
+     {
+      "start": 1794019500,
+      "end": 1794193200
+     }
+    ],
+    "informed_entity": [
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "4",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:4:20"
+      }
+     },
+     {
+      "agency_id": "MTASBWY",
+      "route_id": "4",
+      "transit_realtime.mercury_entity_selector": {
+       "sort_order": "MTASBWY:4:20"
+      }
+     }
+    ],
+    "header_text": {
+     "translation": [
+      {
+       "text": "Some [4] trains skip a station for platform work.",
+       "language": "en"
+      },
+      {
+       "text": "<p>Some [4] trains skip a station for platform work.</p>",
+       "language": "en-html"
+      }
+     ]
+    },
+    "transit_realtime.mercury_alert": {
+     "created_at": 1794019500,
+     "updated_at": 1794019620,
+     "alert_type": "Planned - Stops Skipped",
+     "display_before_active": 0
+    }
+   }
+  }
+ ]
+}

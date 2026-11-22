@@ -1,0 +1,53 @@
+# The repository's labels. Created once, by a maintainer, in the repository's settings,
+# for example with: gh label create "<name>" --color "<color>" --description "<description>"
+- name: bug
+  color: d73a4a
+  description: Something does not work as documented
+- name: enhancement
+  color: a2eeef
+  description: An improvement or a new capability
+- name: triage
+  color: fbca04
+  description: Not looked at by a maintainer yet
+- name: experimental
+  color: c5def5
+  description: About an experimental feature (PISA_EXPERIMENTAL), off by default
+- name: proposal
+  color: 5319e7
+  description: A larger change, decided by the maintainers (GOVERNANCE.md)
+- name: documentation
+  color: 0075ca
+  description: Docs only
+- name: protocol
+  color: 1d76db
+  description: Touches protocol/, a contract clients implement
+- name: relay
+  color: 0e8a16
+  description: The push relay (relay/)
+- name: security
+  color: b60205
+  description: Hardening (vulnerabilities go through private reporting, never an issue)
+- name: dependencies
+  color: 0366d6
+  description: A dependency update (Dependabot)
+- name: github-actions
+  color: 000000
+  description: A workflow or action update
+- name: good first issue
+  color: 7057ff
+  description: A good place to start
+- name: help wanted
+  color: 008672
+  description: A maintainer would welcome a pull request
+- name: duplicate
+  color: cfd3d7
+  description: Already reported
+- name: wontfix
+  color: ffffff
+  description: Will not be changed
+- name: "autorelease: pending"
+  color: ededed
+  description: release-please's open release pull request
+- name: "autorelease: tagged"
+  color: ededed
+  description: release-please's merged and tagged release

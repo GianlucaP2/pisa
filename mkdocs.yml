@@ -1,0 +1,123 @@
+# The documentation site: MkDocs Material over docs-site/, English by default, Italian where a page has an
+# `.it.md` twin (every other page falls back to English). Built and deployed to GitHub Pages by
+# .github/workflows/docs.yml. Locally: pip install -r requirements-docs.txt && mkdocs serve
+site_name: Pisa documentation
+site_description: A personal assistant you host yourself.
+# The workflow sets PISA_DOCS_SITE_URL from the repository's own owner and name; nothing is hard-coded here.
+site_url: !ENV [PISA_DOCS_SITE_URL, "http://127.0.0.1:8000/"]
+# The repository's address (the workflow sets it too): the header's link, and where links to files outside
+# docs-site/ point (mkdocs_hooks.py). Unset in a local build.
+repo_url: !ENV [PISA_DOCS_REPO_URL, null]
+edit_uri: ""
+docs_dir: docs-site
+site_dir: site
+strict: true
+hooks:
+  - mkdocs_hooks.py
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Light mode
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      reconfigure_material: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: it
+          name: Italiano
+          build: true
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+
+validation:
+  links:
+    not_found: warn
+    anchors: warn
+    absolute_links: info
+    unrecognized_links: info
+
+nav:
+  - Home: index.md
+  - Install:
+      - On a Mac: install/mac.md
+      - On Linux: install/linux.md
+      - On a Raspberry Pi: install/raspberry-pi.md
+      - On a VPS: install/vps.md
+      - On Windows (experimental): install/windows.md
+  - Run it:
+      - Self-hosting: self-hosting.md
+      - Configuration: configuration.md
+      - The pisa command: cli.md
+      - Troubleshooting: troubleshooting.md
+      - Limits: limits.md
+  - Set it up:
+      - Pairing: pairing.md
+      - AI providers and models: ai-providers.md
+      - Your own model server:
+          - models/index.md
+          - vLLM: models/vllm.md
+          - SGLang: models/sglang.md
+          - llama.cpp: models/llama-cpp.md
+          - Ollama: models/ollama.md
+          - LM Studio: models/lm-studio.md
+          - LiteLLM: models/litellm.md
+          - TGI: models/tgi.md
+          - Upgrading: models/upgrading.md
+      - Connectors: connectors.md
+      - Places and web search: places-and-web.md
+      - Notifications: notifications.md
+  - Privacy:
+      - Privacy policy: privacy.md
+      - For App Store reviewers: app-review.md
+  - Build on it:
+      - Build your own client:
+          - build-a-client/index.md
+          - Pairing and sessions: build-a-client/pairing.md
+          - Text chat: build-a-client/text-chat.md
+          - Audio: build-a-client/audio.md
+          - Events: build-a-client/events.md
+          - Screens: build-a-client/screens.md
+          - Approvals: build-a-client/approvals.md
+          - Push: build-a-client/push.md
+          - Deleting data: build-a-client/erase.md
+          - More devices: build-a-client/devices.md
+          - Errors: build-a-client/errors.md
+          - Testing: build-a-client/testing.md
+      - The API: api.md
+  - Experimental: experimental.md

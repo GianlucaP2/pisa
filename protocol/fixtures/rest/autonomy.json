@@ -1,0 +1,74 @@
+{
+  "types": [
+    {
+      "type": "calendar_create",
+      "level": "ask",
+      "kept": 4,
+      "undone": 0,
+      "since": "2026-11-03T10:00:00+01:00",
+      "locked": false
+    },
+    {
+      "type": "calendar_move",
+      "level": "ask",
+      "kept": 23,
+      "undone": 0,
+      "since": "2026-11-03T10:00:00+01:00",
+      "locked": false,
+      "proposal": {
+        "level": "tell",
+        "kept": 23,
+        "undone": 0,
+        "days": 27,
+        "since_on": "2026-10-12",
+        "bound_pct": 13,
+        "last_error": {
+          "on": "2026-10-09",
+          "what": "Palestra sopra la cena con Marta"
+        }
+      }
+    },
+    {
+      "type": "calendar_cancel",
+      "level": "ask",
+      "kept": 1,
+      "undone": 1,
+      "since": "2026-11-03T10:00:00+01:00",
+      "locked": false
+    },
+    {
+      "type": "task_done",
+      "level": "tell",
+      "kept": 31,
+      "undone": 0,
+      "since": "2026-11-20T18:02:00+01:00",
+      "locked": false
+    },
+    {
+      "type": "task_close",
+      "level": "ask",
+      "kept": 2,
+      "undone": 0,
+      "since": "2026-11-03T10:00:00+01:00",
+      "locked": false
+    },
+    {
+      "type": "email_draft",
+      "level": "ask",
+      "kept": 3,
+      "undone": 1,
+      "since": "2026-11-03T10:00:00+01:00",
+      "locked": false
+    },
+    {
+      "type": "email_send",
+      "level": "ask",
+      "kept": 3,
+      "undone": 0,
+      "since": "2026-11-03T10:00:00+01:00",
+      "locked": true
+    }
+  ],
+  "stopped": false,
+  "proposals_from": null
+}

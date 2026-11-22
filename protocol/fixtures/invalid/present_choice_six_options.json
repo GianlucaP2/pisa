@@ -1,0 +1,46 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009154",
+  "ts": "2026-10-31T14:02:11+01:00",
+  "type": "present",
+  "present_id": "00000000-0000-4000-8000-000000009210",
+  "reply_to": "00000000-0000-4000-8000-000000009010",
+  "object": {
+    "object_id": "choice:00000000-0000-4000-8000-000000000804",
+    "kind": "choice",
+    "revision": 0,
+    "data": {
+      "question": "Dove ceniamo?",
+      "options": [
+        {
+          "id": "o1",
+          "label": "x"
+        },
+        {
+          "id": "o2",
+          "label": "x"
+        },
+        {
+          "id": "o3",
+          "label": "x"
+        },
+        {
+          "id": "o4",
+          "label": "x"
+        },
+        {
+          "id": "o5",
+          "label": "x"
+        },
+        {
+          "id": "o5",
+          "label": "y"
+        }
+      ]
+    }
+  },
+  "purpose": "Così scegli con un tocco",
+  "focus": "take",
+  "lang": "it-IT",
+  "expires_at": "2026-10-31T14:12:11+01:00"
+}
