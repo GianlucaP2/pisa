@@ -1,0 +1,10 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009053",
+  "ts": "2026-10-24T11:32:00+02:00",
+  "type": "understood",
+  "meant": "portami al Kraanhal",
+  "raw": "portami al kraan hal",
+  "corrections": [{"from": "kraan hal", "to": "Kraanhal", "via": "guess"}],
+  "ask": null
+}

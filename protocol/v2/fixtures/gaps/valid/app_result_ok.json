@@ -1,0 +1,13 @@
+{
+  "gap": "app.actions",
+  "check": "client_frame",
+  "why": "Contract 2.2 (app.actions): the app opened the screen pisa.app.open asked for.",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.app.result",
+    "value": {
+      "actionId": "7c1d2e3f-4a5b-4c6d-8e7f-901a2b3c4d5e",
+      "ok": true
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "gap": "G5",
+  "check": "server_frame",
+  "why": "talk.gate is a server event inside the gated talk's run, like pisa.voice.state.",
+  "v1": {
+    "type": "talk.gate",
+    "heard": "other"
+  },
+  "frame": {
+    "seq": 12,
+    "threadId": "thread-conversation",
+    "runId": "run-talk-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.voice.gate",
+      "value": {
+        "heard": "other"
+      }
+    }
+  }
+}

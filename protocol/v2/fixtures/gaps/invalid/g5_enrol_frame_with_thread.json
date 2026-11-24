@@ -1,0 +1,22 @@
+{
+  "gap": "G5",
+  "check": "enrol_server_frame",
+  "why": "Enrolment opens no AG-UI stream: no threadId.",
+  "frame": {
+    "seq": 1,
+    "event": {
+      "type": "CUSTOM",
+      "timestamp": 1763460000001,
+      "name": "pisa.voice.enrol.quality",
+      "value": {
+        "voicedS": 11.5,
+        "snrDb": 24.0,
+        "clipped": false,
+        "ok": true,
+        "hint": null,
+        "block": "A"
+      }
+    },
+    "threadId": "thread-conversation"
+  }
+}

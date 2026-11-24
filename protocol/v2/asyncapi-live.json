@@ -1,0 +1,1564 @@
+{
+  "asyncapi": "3.0.0",
+  "info": {
+    "title": "PISA contract 2: /v2/live",
+    "version": "2.2",
+    "description": "The live socket between a PISA server and the PISA app (or any headless client). One JSON object per text frame. Server event frames carry plain AG-UI 1.0 events (each must also validate against the official AG-UI 1.0 schema), multiplexed one AG-UI stream per threadId; pisa.* server events are AG-UI CUSTOM events. Generated from schema/pisa-contract-2.schema.json by tools/gen_asyncapi.py: do not edit.",
+    "license": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "defaultContentType": "application/json",
+  "servers": {
+    "pisa": {
+      "host": "{host}",
+      "protocol": "wss",
+      "description": "The user's own PISA server. TLS 1.3, pinned to the SPKI from pairing (CONTRACT-2 §3.1, §4.3).",
+      "variables": {
+        "host": {
+          "description": "host[:port] of the server, from the pairing QR or pisa.endpoints.",
+          "default": "pisa.example"
+        }
+      },
+      "security": [
+        {
+          "$ref": "#/components/securitySchemes/sessionToken"
+        }
+      ]
+    }
+  },
+  "channels": {
+    "live": {
+      "address": "/v2/live",
+      "title": "The live socket",
+      "description": "WebSocket, subprotocol pisa.v2. The app sends hello first; the server answers welcome with what it picked, and never sends what was not negotiated. Close codes 1000, 1002, 1011, 4001, 4003, 4008.",
+      "servers": [
+        {
+          "$ref": "#/servers/pisa"
+        }
+      ],
+      "messages": {
+        "hello": {
+          "$ref": "#/components/messages/hello"
+        },
+        "run": {
+          "$ref": "#/components/messages/run"
+        },
+        "cancel": {
+          "$ref": "#/components/messages/cancel"
+        },
+        "a2ui": {
+          "$ref": "#/components/messages/a2ui"
+        },
+        "custom": {
+          "$ref": "#/components/messages/custom"
+        },
+        "ping": {
+          "$ref": "#/components/messages/ping"
+        },
+        "custom.pisa_presence": {
+          "$ref": "#/components/messages/custom.pisa_presence"
+        },
+        "custom.pisa_location": {
+          "$ref": "#/components/messages/custom.pisa_location"
+        },
+        "custom.pisa_place_enter": {
+          "$ref": "#/components/messages/custom.pisa_place_enter"
+        },
+        "custom.pisa_device_context": {
+          "$ref": "#/components/messages/custom.pisa_device_context"
+        },
+        "custom.pisa_surface_ack": {
+          "$ref": "#/components/messages/custom.pisa_surface_ack"
+        },
+        "custom.pisa_surface_event": {
+          "$ref": "#/components/messages/custom.pisa_surface_event"
+        },
+        "custom.pisa_voice_partial": {
+          "$ref": "#/components/messages/custom.pisa_voice_partial"
+        },
+        "custom.pisa_voice_talk_text": {
+          "$ref": "#/components/messages/custom.pisa_voice_talk_text"
+        },
+        "custom.pisa_app_result": {
+          "$ref": "#/components/messages/custom.pisa_app_result"
+        },
+        "welcome": {
+          "$ref": "#/components/messages/welcome"
+        },
+        "pong": {
+          "$ref": "#/components/messages/pong"
+        },
+        "error": {
+          "$ref": "#/components/messages/error"
+        },
+        "event": {
+          "$ref": "#/components/messages/event"
+        },
+        "event.pisa_voice_audio": {
+          "$ref": "#/components/messages/event.pisa_voice_audio"
+        },
+        "event.pisa_voice_state": {
+          "$ref": "#/components/messages/event.pisa_voice_state"
+        },
+        "event.pisa_voice_gate": {
+          "$ref": "#/components/messages/event.pisa_voice_gate"
+        },
+        "event.pisa_voice_transcript": {
+          "$ref": "#/components/messages/event.pisa_voice_transcript"
+        },
+        "event.pisa_voice_turn_hint": {
+          "$ref": "#/components/messages/event.pisa_voice_turn_hint"
+        },
+        "event.pisa_voice_understood": {
+          "$ref": "#/components/messages/event.pisa_voice_understood"
+        },
+        "event.pisa_notice": {
+          "$ref": "#/components/messages/event.pisa_notice"
+        },
+        "event.pisa_ask_to_open": {
+          "$ref": "#/components/messages/event.pisa_ask_to_open"
+        },
+        "event.pisa_directions": {
+          "$ref": "#/components/messages/event.pisa_directions"
+        },
+        "event.pisa_call": {
+          "$ref": "#/components/messages/event.pisa_call"
+        },
+        "event.pisa_compose": {
+          "$ref": "#/components/messages/event.pisa_compose"
+        },
+        "event.pisa_action_done": {
+          "$ref": "#/components/messages/event.pisa_action_done"
+        },
+        "event.pisa_approval_state": {
+          "$ref": "#/components/messages/event.pisa_approval_state"
+        },
+        "event.pisa_ai_disclosure": {
+          "$ref": "#/components/messages/event.pisa_ai_disclosure"
+        },
+        "event.pisa_endpoints": {
+          "$ref": "#/components/messages/event.pisa_endpoints"
+        },
+        "event.pisa_surface_focus": {
+          "$ref": "#/components/messages/event.pisa_surface_focus"
+        },
+        "event.pisa_entitlement_required": {
+          "$ref": "#/components/messages/event.pisa_entitlement_required"
+        },
+        "event.pisa_app_open": {
+          "$ref": "#/components/messages/event.pisa_app_open"
+        },
+        "event.pisa_app_changed": {
+          "$ref": "#/components/messages/event.pisa_app_changed"
+        }
+      },
+      "bindings": {
+        "ws": {
+          "method": "GET",
+          "headers": {
+            "type": "object",
+            "required": [
+              "Sec-WebSocket-Protocol"
+            ],
+            "properties": {
+              "Sec-WebSocket-Protocol": {
+                "type": "string",
+                "const": "pisa.v2"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "operations": {
+    "send_hello": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/hello"
+        }
+      ]
+    },
+    "send_run": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/run"
+        }
+      ]
+    },
+    "send_cancel": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/cancel"
+        }
+      ]
+    },
+    "send_a2ui": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/a2ui"
+        }
+      ]
+    },
+    "send_custom": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/custom"
+        }
+      ]
+    },
+    "send_ping": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/ping"
+        }
+      ]
+    },
+    "send_custom_pisa_presence": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/custom.pisa_presence"
+        }
+      ]
+    },
+    "send_custom_pisa_location": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/custom.pisa_location"
+        }
+      ]
+    },
+    "send_custom_pisa_place_enter": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/custom.pisa_place_enter"
+        }
+      ]
+    },
+    "send_custom_pisa_device_context": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/custom.pisa_device_context"
+        }
+      ]
+    },
+    "send_custom_pisa_surface_ack": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/custom.pisa_surface_ack"
+        }
+      ]
+    },
+    "send_custom_pisa_surface_event": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/custom.pisa_surface_event"
+        }
+      ]
+    },
+    "send_custom_pisa_voice_partial": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/custom.pisa_voice_partial"
+        }
+      ]
+    },
+    "send_custom_pisa_voice_talk_text": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/custom.pisa_voice_talk_text"
+        }
+      ]
+    },
+    "send_custom_pisa_app_result": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/custom.pisa_app_result"
+        }
+      ]
+    },
+    "receive_welcome": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/welcome"
+        }
+      ]
+    },
+    "receive_pong": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/pong"
+        }
+      ]
+    },
+    "receive_error": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/error"
+        }
+      ]
+    },
+    "receive_event": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event"
+        }
+      ]
+    },
+    "receive_event_pisa_voice_audio": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_voice_audio"
+        }
+      ]
+    },
+    "receive_event_pisa_voice_state": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_voice_state"
+        }
+      ]
+    },
+    "receive_event_pisa_voice_gate": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_voice_gate"
+        }
+      ]
+    },
+    "receive_event_pisa_voice_transcript": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_voice_transcript"
+        }
+      ]
+    },
+    "receive_event_pisa_voice_turn_hint": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_voice_turn_hint"
+        }
+      ]
+    },
+    "receive_event_pisa_voice_understood": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_voice_understood"
+        }
+      ]
+    },
+    "receive_event_pisa_notice": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_notice"
+        }
+      ]
+    },
+    "receive_event_pisa_ask_to_open": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_ask_to_open"
+        }
+      ]
+    },
+    "receive_event_pisa_directions": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_directions"
+        }
+      ]
+    },
+    "receive_event_pisa_call": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_call"
+        }
+      ]
+    },
+    "receive_event_pisa_compose": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_compose"
+        }
+      ]
+    },
+    "receive_event_pisa_action_done": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_action_done"
+        }
+      ]
+    },
+    "receive_event_pisa_approval_state": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_approval_state"
+        }
+      ]
+    },
+    "receive_event_pisa_ai_disclosure": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_ai_disclosure"
+        }
+      ]
+    },
+    "receive_event_pisa_endpoints": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_endpoints"
+        }
+      ]
+    },
+    "receive_event_pisa_surface_focus": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_surface_focus"
+        }
+      ]
+    },
+    "receive_event_pisa_entitlement_required": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_entitlement_required"
+        }
+      ]
+    },
+    "receive_event_pisa_app_open": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_app_open"
+        }
+      ]
+    },
+    "receive_event_pisa_app_changed": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/live"
+      },
+      "messages": [
+        {
+          "$ref": "#/channels/live/messages/event.pisa_app_changed"
+        }
+      ]
+    }
+  },
+  "components": {
+    "messages": {
+      "hello": {
+        "name": "hello",
+        "title": "hello",
+        "summary": "Client -> server, the first frame on /v2/live.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "$ref": "schema/pisa-contract-2.schema.json#/$defs/Hello"
+          }
+        }
+      },
+      "run": {
+        "name": "run",
+        "title": "run",
+        "summary": "Start a run (a turn, or a resume). input is an AG-UI 1.0 RunAgentInput; forwardedProps.pisa carries the turn's device facts (TurnProps).",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientRun"
+          }
+        }
+      },
+      "cancel": {
+        "name": "cancel",
+        "title": "cancel",
+        "summary": "Stop a run: the server ends it with the cancelled outcome and sends nothing more for it (barge-in).",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientCancel"
+          }
+        }
+      },
+      "a2ui": {
+        "name": "a2ui",
+        "title": "a2ui",
+        "summary": "An A2UI renderer->agent message (action or error), exactly as A2UI 1.0 defines it.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientA2UI"
+          }
+        }
+      },
+      "custom": {
+        "name": "custom",
+        "title": "custom",
+        "summary": "A client pisa.* event; see the custom.* messages for each name.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientCustom"
+          }
+        }
+      },
+      "ping": {
+        "name": "ping",
+        "title": "ping",
+        "summary": "Keep-alive, every 25 s.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientPing"
+          }
+        }
+      },
+      "custom.pisa_presence": {
+        "name": "custom.pisa_presence",
+        "title": "pisa.presence",
+        "summary": "Where the user can be reached. Sent on change and right after welcome.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientCustom"
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "pisa.presence"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "custom.pisa_location": {
+        "name": "custom.pisa_location",
+        "title": "pisa.location",
+        "summary": "pisa.location",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientCustom"
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "pisa.location"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "custom.pisa_place_enter": {
+        "name": "custom.pisa_place_enter",
+        "title": "pisa.place_enter",
+        "summary": "pisa.place_enter",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientCustom"
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "pisa.place_enter"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "custom.pisa_device_context": {
+        "name": "custom.pisa_device_context",
+        "title": "pisa.device_context",
+        "summary": "pisa.device_context",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientCustom"
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "pisa.device_context"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "custom.pisa_surface_ack": {
+        "name": "custom.pisa_surface_ack",
+        "title": "pisa.surface.ack",
+        "summary": "Replaces presented. Sent at once for every a2ui-surface or mcp-apps activity.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientCustom"
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "pisa.surface.ack"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "custom.pisa_surface_event": {
+        "name": "custom.pisa_surface_event",
+        "title": "pisa.surface.event",
+        "summary": "Ids only: never gaze, never content.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientCustom"
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "pisa.surface.event"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "custom.pisa_voice_partial": {
+        "name": "custom.pisa_voice_partial",
+        "title": "pisa.voice.partial",
+        "summary": "A partial transcript (at most 2 a second while listening), only after welcome granted pisa.voice.turn_hints. Never stored.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientCustom"
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "pisa.voice.partial"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "custom.pisa_voice_talk_text": {
+        "name": "custom.pisa_voice_talk_text",
+        "title": "pisa.voice.talk.text",
+        "summary": "Contract 2.1, the feature talk.text (pisa.voice): words the user typed into this device's open talk; id is the talk's session_id (POST /v1/talk/sessions). The server gives them to the talker as the user's text turn and Pisa answers by voice; they come back as the user's final pisa.voice.transcript on the talk's channel (their bubble, in the talk's run) and are stored as their message. Refused with a control error: invalid_frame for an id that is not this device's open talk or text out of bounds (1-4000 characters, as a typed turn), ai_consent_required without the user's AI consent. While a talk is open a typed run is answered the same way, never in text only.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientCustom"
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "pisa.voice.talk.text"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "custom.pisa_app_result": {
+        "name": "custom.pisa_app_result",
+        "title": "pisa.app.result",
+        "summary": "Contract 2.2, the feature app.actions (pisa.app): the app's answer to pisa.app.open: ok when the screen is open (or the riepilogo read again); else why not (unsupported: this app has no such screen; not_found: no such tab or task; not_now: the app can't move now, e.g. a sheet is open or the phone is locked; error).",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ClientCustom"
+              },
+              {
+                "properties": {
+                  "name": {
+                    "const": "pisa.app.result"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "welcome": {
+        "name": "welcome",
+        "title": "welcome",
+        "summary": "Server -> client: what the server picked. Everything not picked is never sent.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "$ref": "schema/pisa-contract-2.schema.json#/$defs/Welcome"
+          }
+        }
+      },
+      "pong": {
+        "name": "pong",
+        "title": "pong",
+        "summary": "Answer to ping.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerControl"
+              },
+              {
+                "properties": {
+                  "control": {
+                    "const": "pong"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "error": {
+        "name": "error",
+        "title": "error",
+        "summary": "A control error: auth_failed, device_revoked, contract_unsupported, invalid_frame, rate_limited, internal, replaced or ai_consent_required (CONTRACT-2 §3.1, §4.5).",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerControl"
+              },
+              {
+                "properties": {
+                  "control": {
+                    "const": "error"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event": {
+        "name": "event",
+        "title": "AG-UI event",
+        "summary": "One AG-UI 1.0 event of the AG-UI stream for threadId (the socket multiplexes one AG-UI stream per thread; each obeys the AG-UI lifecycle on its own). runId is the run the event belongs to. Session-level server events (pisa.notice and the rest) travel in short server-started runs on the thread pisa-notices:<deviceId>. seq grows by one per frame in the session; resume replays after lastSeq.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+          }
+        }
+      },
+      "event.pisa_voice_audio": {
+        "name": "event.pisa_voice_audio",
+        "title": "pisa.voice.audio",
+        "summary": "The server's voice for a text message (messageId) or a notice (noticeId), in seq order. Replaces say_audio. A device that negotiated audio.binary gets the same chunk as a binary frame instead.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.voice.audio"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_voice_state": {
+        "name": "event.pisa_voice_state",
+        "title": "pisa.voice.state",
+        "summary": "What the voice is doing (natural mode): drives the presence orb and the Talk Live Activity.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.voice.state"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_voice_gate": {
+        "name": "event.pisa_voice_gate",
+        "title": "pisa.voice.gate",
+        "summary": "G5. During a gated talk (VOICE-ID-1): whose voice the gate hears, at most twice a second (a subtle state on the orb). Replaces talk.gate.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.voice.gate"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_voice_transcript": {
+        "name": "event.pisa_voice_transcript",
+        "title": "pisa.voice.transcript",
+        "summary": "The user's words as the server heard them (natural mode); text is the whole line so far. A final without ignored becomes a user message in MESSAGES_SNAPSHOT.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.voice.transcript"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_voice_turn_hint": {
+        "name": "event.pisa_voice_turn_hint",
+        "title": "pisa.voice.turn_hint",
+        "summary": "End-of-turn score for a partial transcript (economy mode).",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.voice.turn_hint"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_voice_understood": {
+        "name": "event.pisa_voice_understood",
+        "title": "pisa.voice.understood",
+        "summary": "What the server understood the user meant.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.voice.understood"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_notice": {
+        "name": "event.pisa_notice",
+        "title": "pisa.notice",
+        "summary": "A proactive notice. The same object is the plaintext of a relay-sealed push (CONTRACT-2 §9). Replaces notify.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.notice"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_ask_to_open": {
+        "name": "event.pisa_ask_to_open",
+        "title": "pisa.ask_to_open",
+        "summary": "The server asks to open a voice talk (earbuds, glasses, car).",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.ask_to_open"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_directions": {
+        "name": "event.pisa_directions",
+        "title": "pisa.directions",
+        "summary": "Open the maps app (foreground) or a notification that opens it.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.directions"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_call": {
+        "name": "event.pisa_call",
+        "title": "pisa.call",
+        "summary": "Place a phone call after the user's tap (Ring 0 confirms).",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.call"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_compose": {
+        "name": "event.pisa_compose",
+        "title": "pisa.compose",
+        "summary": "Open a prepared message; the user sends it.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.compose"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_action_done": {
+        "name": "event.pisa_action_done",
+        "title": "pisa.action_done",
+        "summary": "An approved act ran.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.action_done"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_approval_state": {
+        "name": "event.pisa_approval_state",
+        "title": "pisa.approval.state",
+        "summary": "An approval's interrupt was closed somewhere else (voice, another device, expiry): the app drops the held interrupt and must not resume it.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.approval.state"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_ai_disclosure": {
+        "name": "event.pisa_ai_disclosure",
+        "title": "pisa.ai.disclosure",
+        "summary": "Which AI providers and models the server sends the user's data to, per slot (guideline 5.1.2(i)). revision = sha256 of the JCS of processors; it changes whenever a provider or model changes, and the app asks again.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.ai.disclosure"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_endpoints": {
+        "name": "event.pisa_endpoints",
+        "title": "pisa.endpoints",
+        "summary": "The server's reachable addresses and its SPKI pins (current and the pre-announced next key), sent after a change. Authenticated by the pinned channel; the app keeps the set per server.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.endpoints"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_surface_focus": {
+        "name": "event.pisa_surface_focus",
+        "title": "pisa.surface.focus",
+        "summary": "Bring a surface already shown back in front (v1 focus).",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.surface.focus"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_entitlement_required": {
+        "name": "event.pisa_entitlement_required",
+        "title": "pisa.entitlement.required",
+        "summary": "The server offers this feature but the app reported no entitlement for it: the app shows its paywall (Ring 0).",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.entitlement.required"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_app_open": {
+        "name": "event.pisa_app_open",
+        "title": "pisa.app.open",
+        "summary": "Contract 2.2, the feature app.actions (pisa.app): Pisa asks the app to open one of its own screens: a tab (id: the tab's id, pisa, oggi or impostazioni), the riepilogo, a task (id: its uuid), Settings → AI e privacy, or to read the riepilogo again (riepilogo_refresh). The app does it and answers with pisa.app.result for the same actionId at once; without an answer in a few seconds Pisa says it isn't confirmed. Never anything outside the app.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.app.open"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "event.pisa_app_changed": {
+        "name": "event.pisa_app_changed",
+        "title": "pisa.app.changed",
+        "summary": "Contract 2.2, the feature briefing.view (pisa.app): the user's tasks or agenda changed (on any device, by Pisa or by them), so the views named are out of date: the app reads them again (GET /v1/briefings/latest, GET /v1/plan...). Ids only, never content; at most about once a second.",
+        "payload": {
+          "schemaFormat": "application/schema+json;version=draft-2020-12",
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerEventFrame"
+              },
+              {
+                "properties": {
+                  "event": {
+                    "allOf": [
+                      {
+                        "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerCustomEvent"
+                      },
+                      {
+                        "properties": {
+                          "name": {
+                            "const": "pisa.app.changed"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "sessionToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Short-lived (1 h) session token from POST /v1/devices/session, signed by the device's Secure Enclave key (CONTRACT-2 §4.3)."
+      }
+    }
+  }
+}

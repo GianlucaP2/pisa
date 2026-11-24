@@ -1,0 +1,16 @@
+{
+  "gap": "approvals",
+  "check": "server_frame",
+  "why": "Approved, the action ran, and it failed: RUN_ERROR action_failed on the approval's thread.",
+  "frame": {
+    "event": {
+      "code": "action_failed",
+      "message": "The calendar refused the change: the event no longer exists.",
+      "timestamp": 1763460000160,
+      "type": "RUN_ERROR"
+    },
+    "runId": "run-approval-f2",
+    "seq": 4,
+    "threadId": "pisa-approval:77777777-7777-4777-8777-777777777777"
+  }
+}

@@ -1,0 +1,120 @@
+[project]
+name = "pisa-assistant"
+version = "0.1.2"
+description = "Pisa Core: the always-on personal assistant hub"
+
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.151",
+    "uvicorn[standard]>=0.37",
+    "pydantic>=2.12",
+    "pydantic-settings>=2.16",
+    "psycopg[binary,pool]>=3.3",
+    "structlog>=26.1",
+    "cryptography>=50",
+    "pydantic-ai-slim[anthropic,openai,google,mistral,groq,cohere]>=2.58",
+    "genai-prices>=0.1.13",
+    "dbos>=3.3",
+    "httpx[http2]>=0.28",
+    "google-auth>=2.40",
+    "pyjwt[crypto]>=2.10",
+    "ortools==9.14.6206",
+    "rapidfuzz==3.14.6",
+    "metaphone==0.6",
+    "wordfreq==3.1.1",
+    "opentelemetry-sdk>=1.45",
+    "aiortc>=1.15",
+    "pypdf==6.21.4",
+    "sherpa-onnx==2.0.1",
+    "onnxruntime==1.31.1",
+    "regex==2026.9.29",
+    "pyhpke==0.6.5",
+    "segno==1.6.6",
+]
+
+[project.scripts]
+pisa = "pisa.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4",
+    "pytest-xdist>=3.8",
+    "jsonschema>=4.25",
+    "ruff>=0.17",
+    "pyright>=1.1.414",
+    "import-linter>=2.15",
+    "pisa-conformance",
+    "schemathesis==4.33.4",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pisa"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"pisa/db/migrations" = "pisa/db/migrations"
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "ASYNC", "RUF"]
+ignore = ["S101"]  # assert is fine in tests
+allowed-confusables = ["ˆ"]  # the datamark between an email's words
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S105", "S106", "S608"]
+
+[tool.pyright]
+include = ["pisa", "pisa_tools", "tests"]
+typeCheckingMode = "basic"
+pythonVersion = "3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["db: needs the throwaway test Postgres (PISA_TEST_ADMIN_URL)"]
+
+# Layer rules. Inner layers never import outer ones.
+[tool.importlinter]
+root_package = "pisa"
+include_external_packages = true
+
+[[tool.importlinter.contracts]]
+name = "Layers: outer layers may import inner ones, never the reverse"
+type = "layers"
+layers = [
+    "pisa.cli",
+    "pisa.api | pisa.workers",
+    "pisa.services",
+    "pisa.connectors | pisa.brain | pisa.planner",
+    "pisa.infra",
+    "pisa.ports",
+    "pisa.domain",
+]
+containers = []
+
+[[tool.importlinter.contracts]]
+name = "Domain is pure: no I/O libraries"
+type = "forbidden"
+source_modules = ["pisa.domain"]
+forbidden_modules = ["fastapi", "psycopg", "httpx", "pydantic_ai", "dbos", "pisa.db"]
+
+[[tool.importlinter.contracts]]
+name = "Infrastructure (keys, spend, caps, exchange rate) never imports the brain or the services"
+type = "forbidden"
+source_modules = ["pisa.infra"]
+forbidden_modules = ["pisa.brain", "pisa.services"]
+
+[[tool.importlinter.contracts]]
+name = "The server never imports the evaluations and fixture tools"
+type = "forbidden"
+source_modules = ["pisa"]
+forbidden_modules = ["pisa_tools"]
+
+[tool.uv.sources]
+pisa-conformance = { path = "../protocol/v2/conformance", editable = true }

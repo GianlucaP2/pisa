@@ -1,0 +1,12 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009060",
+  "ts": "2026-11-15T18:00:00+01:00",
+  "type": "notify",
+  "notification_id": "00000000-0000-4000-8000-000000000560",
+  "text": "La tua settimana con Pisa: 14 cose fatte, 2 da rivedere.",
+  "lang": "it-IT",
+  "kind": "info",
+  "priority": "normal",
+  "ledger_week": "2026-W46"
+}

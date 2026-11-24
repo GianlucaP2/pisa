@@ -1,0 +1,17 @@
+{
+  "gap": "G5",
+  "check": "server_frame",
+  "why": "heard is owner, other or none.",
+  "frame": {
+    "seq": 12,
+    "threadId": "thread-conversation",
+    "runId": "run-talk-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.voice.gate",
+      "value": {
+        "heard": "dog"
+      }
+    }
+  }
+}

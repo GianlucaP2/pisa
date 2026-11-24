@@ -1,0 +1,29 @@
+{
+  "gap": "G5",
+  "check": "enrol_server_frame",
+  "why": "Enrolment frames travel outside runs, on the enrol session's data channel only.",
+  "v1": {
+    "type": "enrol.quality",
+    "block": "C",
+    "voiced_s": 9.0,
+    "snr_db": 7.5,
+    "clipped": false,
+    "ok": false,
+    "hint": "closer"
+  },
+  "frame": {
+    "seq": 1,
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.voice.enrol.quality",
+      "value": {
+        "block": "C",
+        "voicedS": 9.0,
+        "snrDb": 7.5,
+        "clipped": false,
+        "ok": false,
+        "hint": "closer"
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009102",
+  "ts": "2026-10-31T14:02:11+01:00",
+  "type": "present",
+  "present_id": "00000000-0000-4000-8000-000000009202",
+  "reply_to": "00000000-0000-4000-8000-000000009001",
+  "object": {
+    "object_id": "plan:2026-11-01",
+    "kind": "plan",
+    "revision": 42,
+    "ref": {
+      "date": "2026-11-01",
+      "options_id": null,
+      "agenda": true
+    }
+  },
+  "purpose": "Domani non c'è ancora un piano: ecco gli impegni",
+  "focus": "offer",
+  "lang": "it-IT"
+}

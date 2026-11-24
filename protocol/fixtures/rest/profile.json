@@ -1,0 +1,107 @@
+{
+  "claims": [
+    {
+      "id": "00000000-0000-4000-8000-000000000601",
+      "kind": "constraint",
+      "statement": "Niente catene",
+      "scope": {
+        "day": null,
+        "company": null,
+        "where": null,
+        "time": null
+      },
+      "provenance": "said",
+      "confidence": 0.6,
+      "support": 3.0,
+      "evidence_count": 1,
+      "state": "active",
+      "buffer_min": null,
+      "sensitive": false,
+      "hard": true,
+      "evidence": [
+        {
+          "summary": "«niente catene»",
+          "at": "2026-10-20T13:00:00+02:00"
+        }
+      ],
+      "updated_at": "2026-10-20T13:00:00+02:00"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000602",
+      "kind": "like",
+      "statement": "Gli piace «Caffè Lento»",
+      "scope": {
+        "day": "weekday",
+        "company": null,
+        "where": "home",
+        "time": "afternoon"
+      },
+      "provenance": "observed",
+      "confidence": 0.62,
+      "support": 3.27,
+      "evidence_count": 4,
+      "state": "active",
+      "buffer_min": null,
+      "sensitive": false,
+      "hard": false,
+      "evidence": [
+        {
+          "summary": "Tornato a «Caffè Lento», gio 17:57",
+          "at": "2026-10-15T17:57:00+02:00"
+        },
+        {
+          "summary": "Tornato a «Caffè Lento», mar 17:57",
+          "at": "2026-10-13T17:57:00+02:00"
+        },
+        {
+          "summary": "Tornato a «Caffè Lento», gio 17:57",
+          "at": "2026-10-08T17:57:00+02:00"
+        },
+        {
+          "summary": "Scelto «Caffè Lento» da una scheda di Pisa (posto 1), mer 12:02",
+          "at": "2026-10-07T12:02:00+02:00"
+        }
+      ],
+      "updated_at": "2026-10-18T03:30:00+02:00"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000603",
+      "kind": "routine",
+      "statement": "Per gli incontri con altri arriva di solito circa 10 minuti dopo l'inizio",
+      "scope": {
+        "day": null,
+        "company": "others",
+        "where": "home",
+        "time": "evening"
+      },
+      "provenance": "observed",
+      "confidence": 0.71,
+      "support": 4.9,
+      "evidence_count": 5,
+      "state": "active",
+      "buffer_min": 10,
+      "sensitive": false,
+      "hard": false,
+      "evidence": [
+        {
+          "summary": "Arrivato 11 min dopo l'inizio (gli incontri con altri), ven 20:00",
+          "at": "2026-10-23T20:00:00+02:00"
+        }
+      ],
+      "updated_at": "2026-10-25T03:30:00+01:00"
+    }
+  ],
+  "off_limits": [],
+  "paused_until": null,
+  "first_talk": "done",
+  "travelling": null,
+  "home": {
+    "place": {
+      "name": "Vanchiglia, Torino",
+      "lat": 41.886,
+      "lon": 12.557
+    },
+    "source": "owner",
+    "confirmed": true
+  }
+}

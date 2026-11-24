@@ -1,0 +1,19 @@
+{"name": "pisa.voice.audio", "timestamp": 1763460000000, "type": "CUSTOM", "value": {"complete": true, "data": "AAAA", "final": true, "format": "aac_adts", "messageId": "m1", "sampleRate": 24000, "seq": 0}}
+{"name": "pisa.voice.state", "timestamp": 1763460000001, "type": "CUSTOM", "value": {"state": "speaking"}}
+{"name": "pisa.voice.gate", "timestamp": 1763460000002, "type": "CUSTOM", "value": {"heard": "owner"}}
+{"name": "pisa.voice.transcript", "timestamp": 1763460000003, "type": "CUSTOM", "value": {"final": false, "text": "Hello there"}}
+{"name": "pisa.voice.turn_hint", "timestamp": 1763460000004, "type": "CUSTOM", "value": {"pEnd": 0.8, "replyTo": "u1", "waitMs": 300}}
+{"name": "pisa.voice.understood", "timestamp": 1763460000005, "type": "CUSTOM", "value": {"ask": null, "corrections": [{"from": "nation", "to": "station"}], "meant": "the station", "raw": "the nation", "replyTo": "u1"}}
+{"name": "pisa.notice", "timestamp": 1763460000006, "type": "CUSTOM", "value": {"kind": "done", "lang": "en-US", "noticeId": "44444444-4444-4444-8444-444444444444", "priority": "normal", "privacy": "none", "text": "Done: parcel", "undo": {"undoId": "task:demo-2", "until": "2026-11-19T10:00:00Z"}, "wrist": "Done"}}
+{"name": "pisa.ask_to_open", "timestamp": 1763460000007, "type": "CUSTOM", "value": {"lang": "en-US", "line": "Time to go.", "why": "leave_now"}}
+{"name": "pisa.directions", "timestamp": 1763460000008, "type": "CUSTOM", "value": {"directionsId": "66666666-6666-4666-8666-666666666666", "lat": 45.1, "lon": 9.1, "mode": "walk", "name": "Example Station"}}
+{"name": "pisa.call", "timestamp": 1763460000009, "type": "CUSTOM", "value": {"callId": "88888888-8888-4888-8888-888888888888", "name": "Example Clinic", "phone": "+15550100100"}}
+{"name": "pisa.compose", "timestamp": 1763460000010, "type": "CUSTOM", "value": {"app": "messages", "composeId": "99999999-9999-4999-8999-999999999999", "recipient": {"name": "Sam"}, "text": "On my way"}}
+{"name": "pisa.action_done", "timestamp": 1763460000011, "type": "CUSTOM", "value": {"approvalId": "33333333-3333-4333-8333-333333333333", "kind": "email_send", "result": "Sent to 1 person", "summary": "Email sent"}}
+{"name": "pisa.approval.state", "timestamp": 1763460000012, "type": "CUSTOM", "value": {"approvalId": "33333333-3333-4333-8333-333333333333", "by": "voice", "interruptId": "int-1", "state": "approved"}}
+{"name": "pisa.ai.disclosure", "timestamp": 1763460000013, "type": "CUSTOM", "value": {"healthRequiresSeparateConsent": true, "processors": [{"dataCategories": ["conversation", "calendar", "places"], "features": ["conversation"], "model": "example-model-large", "provider": {"id": "example-cloud", "kind": "cloud", "name": "Example Cloud AI", "region": "EU"}, "slot": "conversation"}, {"dataCategories": ["mail"], "model": "example-local-8b", "provider": {"id": "local", "kind": "on_server", "name": "A model on your server"}, "slot": "mail_triage"}], "revision": "6b1f0c2d9e8a7b3c"}}
+{"name": "pisa.endpoints", "timestamp": 1763460000014, "type": "CUSTOM", "value": {"endpoints": [{"address": "pisa-home.local", "kind": "lan", "port": 8443}, {"address": "relay.example.net", "kind": "relay", "relayHandle": "h-123"}], "revision": "r2", "spki": ["AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="]}}
+{"name": "pisa.surface.focus", "timestamp": 1763460000015, "type": "CUSTOM", "value": {"mode": "take", "surfaceId": "places:demo-1"}}
+{"name": "pisa.entitlement.required", "timestamp": 1763460000016, "type": "CUSTOM", "value": {"feature": "push.relay", "level": "pisa.pro"}}
+{"name": "pisa.app.open", "timestamp": 1763460000017, "type": "CUSTOM", "value": {"actionId": "77777777-7777-4777-8777-777777777777", "id": "oggi", "target": "tab"}}
+{"name": "pisa.app.changed", "timestamp": 1763460000018, "type": "CUSTOM", "value": {"at": "2026-11-19T10:00:00Z", "views": ["riepilogo", "plan"]}}

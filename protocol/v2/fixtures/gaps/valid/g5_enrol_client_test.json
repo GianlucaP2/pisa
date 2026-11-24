@@ -1,0 +1,16 @@
+{
+  "gap": "G5",
+  "check": "enrol_client_frame",
+  "why": "App -> server on the enrol channel.",
+  "v1": {
+    "type": "enrol.test",
+    "state": "end"
+  },
+  "frame": {
+    "op": "custom",
+    "name": "pisa.voice.enrol.test",
+    "value": {
+      "state": "end"
+    }
+  }
+}
