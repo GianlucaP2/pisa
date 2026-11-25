@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "about": "What Pisa says at once when its answer isn't ready ~700 ms after the user's turn closed. The server sends `say` with holding: true and holding_id; the app plays the phrase from its cache (synthesised once per voice), then the answer follows in the same stream. Each at most 4 words. `use`: any turn, or a turn that looks something up (a tool is running), or `slow`: a turn still silent past its 8 s budget, said once while the turn goes on.",
+  "phrases": [
+    {"id": "it.vediamo", "lang": "it-IT", "text": "Vediamo…", "use": "any"},
+    {"id": "it.allora", "lang": "it-IT", "text": "Allora…", "use": "any"},
+    {"id": "it.dunque", "lang": "it-IT", "text": "Dunque…", "use": "any"},
+    {"id": "it.un_attimo", "lang": "it-IT", "text": "Un attimo…", "use": "lookup"},
+    {"id": "it.ci_guardo", "lang": "it-IT", "text": "Ci guardo subito.", "use": "lookup"},
+    {"id": "it.controllo", "lang": "it-IT", "text": "Controllo un attimo.", "use": "lookup"},
+    {"id": "en.lets_see", "lang": "en-US", "text": "Let's see…", "use": "any"},
+    {"id": "en.okay_so", "lang": "en-US", "text": "Okay, so…", "use": "any"},
+    {"id": "en.right", "lang": "en-US", "text": "Right…", "use": "any"},
+    {"id": "en.one_moment", "lang": "en-US", "text": "One moment…", "use": "lookup"},
+    {"id": "en.let_me_check", "lang": "en-US", "text": "Let me check.", "use": "lookup"},
+    {"id": "en.checking_now", "lang": "en-US", "text": "Checking now.", "use": "lookup"},
+    {"id": "it.ancora_un_momento", "lang": "it-IT", "text": "Ancora un momento…", "use": "slow"},
+    {"id": "en.bear_with_me", "lang": "en-US", "text": "Bear with me…", "use": "slow"}
+  ]
+}

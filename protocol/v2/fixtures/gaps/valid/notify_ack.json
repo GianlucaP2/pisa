@@ -1,0 +1,21 @@
+{
+  "gap": "notify.local",
+  "check": "client_frame",
+  "why": "Contract 2.3 (notify.local): the phone's report for one revision.",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.notify.ack",
+    "value": {
+      "revision": 12,
+      "scheduled": [
+        "rem-1"
+      ],
+      "failed": [
+        {
+          "id": "leave-1",
+          "reason": "limit"
+        }
+      ]
+    }
+  }
+}

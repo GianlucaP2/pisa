@@ -1,0 +1,14 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009041",
+  "ts": "2026-10-21T18:22:00+02:00",
+  "type": "notify",
+  "notification_id": "00000000-0000-4000-8000-000000000542",
+  "text": "Fatto: Cena ✓",
+  "lang": "it-IT",
+  "kind": "done",
+  "priority": "normal",
+  "event_id": "4k2v9c1q7l0m3n8p5r6s_20261021T170000Z",
+  "title": "Cena",
+  "undo_until": "2026-10-22T18:22:00+02:00"
+}

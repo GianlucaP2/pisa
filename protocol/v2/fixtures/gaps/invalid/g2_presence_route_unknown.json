@@ -1,0 +1,16 @@
+{
+  "gap": "G2",
+  "check": "client_frame",
+  "why": "Not a route.",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.presence",
+    "value": {
+      "event": "app_foreground",
+      "state": {
+        "foreground": true,
+        "route": "hifi"
+      }
+    }
+  }
+}

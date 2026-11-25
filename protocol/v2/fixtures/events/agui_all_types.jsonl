@@ -1,0 +1,33 @@
+{"input": {"messages": [{"content": "Hi", "id": "m0", "role": "user"}], "runId": "r1", "threadId": "t1"}, "parentRunId": "r0", "protocolVersion": "1.0", "runId": "r1", "threadId": "t1", "timestamp": 1763460000000, "type": "RUN_STARTED"}
+{"outcome": {"pendingToolCallIds": ["c9"], "type": "success"}, "result": {"ok": true}, "runId": "r1", "threadId": "t1", "timestamp": 1763460000001, "type": "RUN_FINISHED"}
+{"outcome": {"interrupts": [{"expiresAt": "2026-11-18T10:10:00Z", "id": "i1", "message": "Send an email", "metadata": {"k": 1}, "reason": "pisa.approval", "responseSchema": {"type": "object"}, "toolCallId": "c1"}], "type": "interrupt"}, "runId": "r2", "threadId": "t1", "timestamp": 1763460000002, "type": "RUN_FINISHED"}
+{"outcome": {"type": "cancelled"}, "runId": "r3", "threadId": "t1", "timestamp": 1763460000003, "type": "RUN_FINISHED"}
+{"code": "budget_exceeded", "message": "Budget reached", "timestamp": 1763460000004, "type": "RUN_ERROR"}
+{"stepName": "search", "timestamp": 1763460000005, "type": "STEP_STARTED"}
+{"stepName": "search", "timestamp": 1763460000006, "type": "STEP_FINISHED"}
+{"messageId": "m1", "metadata": {"pisa": {"lang": "en-US", "priority": "normal"}}, "role": "assistant", "timestamp": 1763460000007, "type": "TEXT_MESSAGE_START"}
+{"delta": "Hello", "messageId": "m1", "timestamp": 1763460000008, "type": "TEXT_MESSAGE_CONTENT"}
+{"messageId": "m1", "timestamp": 1763460000009, "type": "TEXT_MESSAGE_END"}
+{"delta": "Hi", "messageId": "m2", "role": "assistant", "timestamp": 1763460000010, "type": "TEXT_MESSAGE_CHUNK"}
+{"parentMessageId": "m1", "timestamp": 1763460000011, "toolCallId": "c1", "toolCallName": "search_places", "type": "TOOL_CALL_START"}
+{"delta": "{\"q\":", "timestamp": 1763460000012, "toolCallId": "c1", "type": "TOOL_CALL_ARGS"}
+{"timestamp": 1763460000013, "toolCallId": "c1", "type": "TOOL_CALL_END"}
+{"delta": "{}", "timestamp": 1763460000014, "toolCallId": "c2", "toolCallName": "weather", "type": "TOOL_CALL_CHUNK"}
+{"content": "{\"found\":2}", "messageId": "m3", "role": "tool", "timestamp": 1763460000015, "toolCallId": "c1", "type": "TOOL_CALL_RESULT"}
+{"snapshot": {"n": 1}, "timestamp": 1763460000016, "type": "STATE_SNAPSHOT"}
+{"delta": [{"op": "replace", "path": "/n", "value": 3}], "timestamp": 1763460000017, "type": "STATE_DELTA"}
+{"messages": [{"content": "Hi", "id": "m0", "role": "user"}, {"content": "Hello", "id": "m1", "role": "assistant"}], "timestamp": 1763460000018, "type": "MESSAGES_SNAPSHOT"}
+{"activityType": "a2ui-surface", "content": {"n": 1}, "messageId": "a1", "replace": true, "timestamp": 1763460000019, "type": "ACTIVITY_SNAPSHOT"}
+{"activityType": "a2ui-surface", "messageId": "a1", "patch": [{"op": "replace", "path": "/n", "value": 3}], "timestamp": 1763460000020, "type": "ACTIVITY_DELTA"}
+{"event": {"anything": [1, 2]}, "source": "provider", "timestamp": 1763460000021, "type": "RAW"}
+{"name": "pisa.voice.state", "timestamp": 1763460000022, "type": "CUSTOM", "value": {"state": "listening"}}
+{"messageId": "rz1", "timestamp": 1763460000023, "type": "REASONING_START"}
+{"messageId": "rz1", "role": "reasoning", "timestamp": 1763460000024, "type": "REASONING_MESSAGE_START"}
+{"delta": "thinking", "messageId": "rz1", "timestamp": 1763460000025, "type": "REASONING_MESSAGE_CONTENT"}
+{"messageId": "rz1", "timestamp": 1763460000026, "type": "REASONING_MESSAGE_END"}
+{"delta": "more", "messageId": "rz1", "timestamp": 1763460000027, "type": "REASONING_MESSAGE_CHUNK"}
+{"messageId": "rz1", "timestamp": 1763460000028, "type": "REASONING_END"}
+{"encryptedValue": "b3BhcXVl", "entityId": "rz1", "subtype": "message", "timestamp": 1763460000029, "type": "REASONING_ENCRYPTED_VALUE"}
+{"description": "Looks things up", "name": "research", "parentToolCallId": "c1", "subagentRunId": "s1", "timestamp": 1763460000030, "type": "SUBAGENT_STARTED"}
+{"outcome": {"type": "success"}, "subagentRunId": "s1", "timestamp": 1763460000031, "type": "SUBAGENT_FINISHED"}
+{"code": "internal", "message": "failed", "subagentRunId": "s2", "timestamp": 1763460000032, "type": "SUBAGENT_ERROR"}

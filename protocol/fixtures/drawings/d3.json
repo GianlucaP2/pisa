@@ -1,0 +1,31 @@
+{
+  "drawing_id": "fixture-d3",
+  "title": "Passi della settimana",
+  "summary": "Un grafico a barre di cinque giorni: il giovedì ha più passi.",
+  "kind": "chart",
+  "html": "<!doctype html><html><head><meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'sha256-Qtuyjv+Ep6ht0F0lLtAGh2M2qzWGBYCsusZCUW9T7j0=' pisa-bundle:; style-src 'unsafe-inline'; img-src data: pisa-bundle:; form-action 'none'; base-uri 'none'\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"></head><body><svg id=\"c\" width=\"300\" height=\"160\" role=\"img\" aria-label=\"Passi\"></svg><script src=\"pisa-bundle://lib/d3.min.js\"></script><script>const bars = window.PISA_DATA.bars; const svg = d3.select('#c');const x = d3.scaleBand().domain(bars.map((b) => b.label)).range([0, 300]).padding(0.2);const y = d3.scaleLinear().domain([0, d3.max(bars, (b) => b.value)]).range([150, 0]);svg.selectAll('rect').data(bars).join('rect').attr('x', (b) => x(b.label)).attr('y', (b) => y(b.value)).attr('width', x.bandwidth()).attr('height', (b) => 150 - y(b.value)).attr('fill', 'var(--pisa-accent)').attr('data-pisa-ask', (b) => b.label);if (document.querySelectorAll('#c rect').length === bars.length) { document.documentElement.dataset.rendered = 'yes'; }</script></body></html>",
+  "data": {
+    "bars": [
+      {
+        "label": "Lun",
+        "value": 6200
+      },
+      {
+        "label": "Mar",
+        "value": 8100
+      },
+      {
+        "label": "Mer",
+        "value": 5400
+      },
+      {
+        "label": "Gio",
+        "value": 11300
+      },
+      {
+        "label": "Ven",
+        "value": 7600
+      }
+    ]
+  }
+}

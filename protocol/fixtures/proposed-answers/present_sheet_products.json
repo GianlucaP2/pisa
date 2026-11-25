@@ -1,0 +1,47 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009703",
+  "ts": "2026-11-14T18:00:00+01:00",
+  "type": "present",
+  "present_id": "6e3c9d2f-8b54-4a1f-9b2c-3d4e5f6a7d03",
+  "reply_to": null,
+  "object": {
+    "object_id": "sheet:4a2d3c0b-7f6e-4d8c-9ba2-1c3d4e5f6c03",
+    "kind": "sheet",
+    "revision": 1763139600003,
+    "data": {
+      "title": "Cuffie ANC sotto 200 €",
+      "blocks": [
+        {
+          "type": "product",
+          "id": "p1",
+          "title": "Sony WH-1000XM5",
+          "price": 185.85,
+          "currency": "EUR",
+          "shop": "Bpm Power",
+          "url": "https://www.trovaprezzi.it/cuffie/prezzi-scheda-prodotto/sony_wh_1000xm5",
+          "source": "https://www.trovaprezzi.it/cuffie/prezzi-scheda-prodotto/sony_wh_1000xm5",
+          "image_url": "https://images.example-cdn.it/xm5.jpg",
+          "shipping": 4.0,
+          "low_6m": 164.97
+        },
+        {
+          "type": "product",
+          "id": "p2",
+          "title": "Sony WH-1000XM5",
+          "price": 199.0,
+          "currency": "EUR",
+          "shop": "Amazon",
+          "url": "https://www.amazon.it/dp/B09XS7JWHH",
+          "source": "https://www.trovaprezzi.it/cuffie/prezzi-scheda-prodotto/sony_wh_1000xm5",
+          "shipping": 0.0,
+          "low_6m": 164.97
+        }
+      ],
+      "lang": "it-IT"
+    }
+  },
+  "purpose": "Dove al prezzo migliore",
+  "focus": "take",
+  "lang": "it-IT"
+}

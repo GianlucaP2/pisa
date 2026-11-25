@@ -1,0 +1,1929 @@
+{
+  "openapi": "3.1.0",
+  "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+  "info": {
+    "title": "PISA contract 2: REST delta",
+    "version": "2.4",
+    "summary": "The endpoints contract 2 adds or changes. Everything else is protocol/openapi.json, unchanged.",
+    "description": "Generated from schema/pisa-contract-2.schema.json by tools/gen_openapi_delta.py: do not edit. x-pisa-status is new, changed or (for a v1 endpoint it removes) replaced. Headers are X-Pisa-Nonce, X-Pisa-Signature, X-Pisa-Key-Id and X-Pisa-Origin.",
+    "license": {
+      "name": "Apache-2.0",
+      "identifier": "Apache-2.0"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{host}",
+      "variables": {
+        "host": {
+          "default": "pisa.example"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "discovery"
+    },
+    {
+      "name": "live"
+    },
+    {
+      "name": "approvals"
+    },
+    {
+      "name": "ai"
+    },
+    {
+      "name": "devices"
+    },
+    {
+      "name": "pairing"
+    },
+    {
+      "name": "surfaces"
+    }
+  ],
+  "paths": {
+    "/v1/server": {
+      "get": {
+        "operationId": "getServer",
+        "summary": "Discovery: what this server is and offers (no auth, nothing personal)",
+        "tags": [
+          "discovery"
+        ],
+        "x-pisa-status": "new",
+        "description": "CONTRACT-2 §4.1. Example: examples/server.json.",
+        "responses": {
+          "200": {
+            "description": "The server's discovery document.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "schema/pisa-contract-2.schema.json#/$defs/ServerDiscovery"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/server/endpoints": {
+      "get": {
+        "operationId": "getServerEndpoints",
+        "summary": "The server's addresses and SPKI pins (current and next)",
+        "tags": [
+          "discovery"
+        ],
+        "x-pisa-status": "new",
+        "description": "CONTRACT-2 §3.4.",
+        "responses": {
+          "200": {
+            "description": "The same value as the pisa.endpoints event.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "schema/pisa-contract-2.schema.json#/$defs/s_pisa_endpoints"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v2/live": {
+      "get": {
+        "operationId": "openLive",
+        "summary": "The live socket (WebSocket upgrade, subprotocol pisa.v2)",
+        "tags": [
+          "live"
+        ],
+        "x-pisa-status": "new",
+        "description": "Replaces /v1/device. CONTRACT-2 §3.1.",
+        "responses": {
+          "101": {
+            "description": "Switching protocols. The frames are described in asyncapi-live.json."
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v2/runs": {
+      "post": {
+        "operationId": "runAgent",
+        "summary": "Run the agent (AG-UI's HTTP binding)",
+        "tags": [
+          "live"
+        ],
+        "x-pisa-status": "new",
+        "description": "Replaces POST /v1/turns. forwardedProps.pisa follows TurnProps; an A2UI action rides forwardedProps.pisa.a2uiAction. CONTRACT-2 §3.2.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "vendor/ag-ui-1.0/schema.json#RunAgentInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "text/event-stream: SSE data: lines of plain AG-UI 1.0 events. application/json: the run collected, within 8 s.",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "events": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "vendor/ag-ui-1.0/schema.json"
+                      }
+                    }
+                  },
+                  "required": [
+                    "events"
+                  ],
+                  "additionalProperties": false,
+                  "description": "A run collected into one document (JSON mode of the AG-UI HTTP binding): plain AG-UI 1.0 events."
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "JSON mode only: the run is still going after 8 s.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "runId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "runId"
+                  ],
+                  "additionalProperties": false,
+                  "description": "The run goes on past 8 s: its events reach the device on /v2/live, and a headless client reads them from GET /v1/changes."
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v1/approvals/{id}/resume": {
+      "post": {
+        "operationId": "resumeApproval",
+        "summary": "Decide an approval outside the socket (notification actions, the watch)",
+        "tags": [
+          "approvals"
+        ],
+        "x-pisa-status": "new",
+        "description": "Replaces POST /v1/approvals/{id} for decisions. The body is ApprovalResume in its camelCase (keyId), as in a socket resume. A cancelled answer is not sent here: cancelling decides nothing, and the approval stays pending until decided elsewhere or expired. Header X-Pisa-Origin: notification when sent from a notification action. CONTRACT-2 §6.1.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/ApprovalResume"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The resuming run, collected: pisa.action_done, or RUN_ERROR with approval_changed, approval_expired, approval_decided, biometric_required or action_failed (approved, ran, failed).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "events": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "vendor/ag-ui-1.0/schema.json"
+                      }
+                    }
+                  },
+                  "required": [
+                    "events"
+                  ],
+                  "additionalProperties": false,
+                  "description": "A run collected into one document (JSON mode of the AG-UI HTTP binding): plain AG-UI 1.0 events."
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Still running after 8 s.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "runId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "runId"
+                  ],
+                  "additionalProperties": false,
+                  "description": "The run goes on past 8 s: its events reach the device on /v2/live, and a headless client reads them from GET /v1/changes."
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ],
+        "x-pisa-shape": "proposed"
+      }
+    },
+    "/v1/approvals/{id}": {
+      "get": {
+        "operationId": "getApproval",
+        "summary": "An approval, with what is hashed",
+        "tags": [
+          "approvals"
+        ],
+        "x-pisa-status": "changed",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The approval.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "payload",
+                    "recipients"
+                  ],
+                  "properties": {
+                    "payload": {
+                      "type": "object",
+                      "description": "The action exactly as the server will run it."
+                    },
+                    "recipients": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Exactly as hashed."
+                    }
+                  },
+                  "description": "v1's approval object plus these two fields, so the phone can recompute the digest (§6.3)."
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v1/phone/challenge": {
+      "post": {
+        "operationId": "phoneChallenge",
+        "summary": "A single-use nonce, and the canonical text the phone signs after Face ID",
+        "tags": [
+          "approvals"
+        ],
+        "x-pisa-status": "changed",
+        "description": "The approval challenge gains interrupt_id and returns the pisa-approval/2 canonical text. The device challenge's canonical becomes pisa-device: 'pisa-device\\nop=<op>\\ntarget=<target>\\nnonce=<nonce>\\nexpires_at=<iso>' (v1's j-device with the prefix renamed), and its op enum gains model_server. The signed request carries X-Pisa-Nonce, X-Pisa-Signature (DER, base64) and X-Pisa-Key-Id.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ApprovalChallengeRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DeviceChallengeRequest"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The challenge (5 minutes).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Challenge"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "unsupported: this server does not offer that device op (allowed for model_server). Nothing was issued.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "../openapi.json#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v1/ai/providers": {
+      "post": {
+        "operationId": "createModelServer",
+        "summary": "Add an OpenAI-compatible model server",
+        "tags": [
+          "ai"
+        ],
+        "x-pisa-status": "new",
+        "description": "Signed (device op model_server, target '<id>:<SHA-256 hex of the body as sent>', id from the body): its address is where the user's words go. The key, when one is needed, is set afterwards with PUT .../key (provider_key).",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XPisaNonce"
+          },
+          {
+            "$ref": "#/components/parameters/XPisaSignature"
+          },
+          {
+            "$ref": "#/components/parameters/XPisaKeyId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServerCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The server as stored.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Provider"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "biometric_required"
+          },
+          "501": {
+            "description": "unsupported: this server does not let the user add model servers."
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ],
+        "x-pisa-signed-op": {
+          "op": "model_server",
+          "target": "<id>:<SHA-256 hex of the request body, as sent>"
+        },
+        "x-pisa-signing-rule": "As provider_key: once the server holds a Face ID key, a request without a valid signature for this op and target (or a nonce used twice) gets 403 biometric_required. Before the first key exists, the session token alone is enough."
+      }
+    },
+    "/v1/ai/providers/{id}": {
+      "patch": {
+        "operationId": "updateModelServer",
+        "summary": "Change a model server the user added",
+        "tags": [
+          "ai"
+        ],
+        "x-pisa-status": "new",
+        "description": "Signed as its creation (device op model_server, target '<id>:<SHA-256 hex of the body as sent>', id from the path). A new address forgets the old probes.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/XPisaNonce"
+          },
+          {
+            "$ref": "#/components/parameters/XPisaSignature"
+          },
+          {
+            "$ref": "#/components/parameters/XPisaKeyId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServerUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The server as stored.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Provider"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "biometric_required, or not editable (a server the operator set)"
+          },
+          "501": {
+            "description": "unsupported"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ],
+        "x-pisa-signed-op": {
+          "op": "model_server",
+          "target": "<id>:<SHA-256 hex of the request body, as sent>"
+        },
+        "x-pisa-signing-rule": "As provider_key: once the server holds a Face ID key, a request without a valid signature for this op and target (or a nonce used twice) gets 403 biometric_required. Before the first key exists, the session token alone is enough."
+      },
+      "delete": {
+        "operationId": "deleteModelServer",
+        "summary": "Remove a model server the user added, with its key, probes and models",
+        "tags": [
+          "ai"
+        ],
+        "x-pisa-status": "new",
+        "description": "Unsigned: removing a destination sends nothing anywhere.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Removed."
+          },
+          "501": {
+            "description": "unsupported"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v1/ai/providers/{id}/probe": {
+      "post": {
+        "operationId": "probeModel",
+        "summary": "Probe a model: one small real request per capability",
+        "tags": [
+          "ai"
+        ],
+        "x-pisa-status": "new",
+        "description": "Unsigned. May take a minute or more on a CPU server.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "description": "The model the answer is about; without it, the provider's default model."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Answers as GET .../capabilities.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderCapabilities"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "unsupported"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v1/ai/providers/{id}/capabilities/overrides": {
+      "put": {
+        "operationId": "setCapabilityOverrides",
+        "summary": "Set capabilities by hand over the probe's",
+        "tags": [
+          "ai"
+        ],
+        "x-pisa-status": "new",
+        "description": "Unsigned. Replaces the model's overrides: each capability sent is set by hand; one left out follows the probe again.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "description": "The model the answer is about; without it, the provider's default model."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CapabilityOverrides"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Answers as GET .../capabilities.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderCapabilities"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "unsupported"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v1/ai/providers/{id}/capabilities": {
+      "get": {
+        "operationId": "getProviderCapabilities",
+        "summary": "What a model can do (the guide's model step)",
+        "tags": [
+          "ai"
+        ],
+        "x-pisa-status": "new",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "description": "The model the answer is about; without it, the provider's default model."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The effective capabilities: the probe's result with the user's overrides applied.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderCapabilities"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v1/ai/disclosure": {
+      "get": {
+        "operationId": "getAiDisclosure",
+        "summary": "Which AI providers and models get which data",
+        "tags": [
+          "ai"
+        ],
+        "x-pisa-status": "new",
+        "description": "CONTRACT-2 §4.4.",
+        "responses": {
+          "200": {
+            "description": "The disclosure.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "schema/pisa-contract-2.schema.json#/$defs/AIDisclosure"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v1/ai/consent": {
+      "post": {
+        "operationId": "postAiConsent",
+        "summary": "Record the user's AI consent for REST-started work",
+        "tags": [
+          "ai"
+        ],
+        "x-pisa-status": "new",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "revision": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{16,64}$"
+                  },
+                  "health": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "revision",
+                  "health"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Recorded."
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v1/devices/me/push": {
+      "put": {
+        "operationId": "putDevicePush",
+        "summary": "How notices reach this device: the relay, direct APNs, or none",
+        "tags": [
+          "devices"
+        ],
+        "x-pisa-status": "changed",
+        "description": "Relay mode added (CONTRACT-2 §9). The server deletes a relay registration when the relay answers 404 or 410 (the handle is gone); a 422 to a liveactivity push drops only that activity's token, and the registration stays.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "mode": {
+                        "const": "relay"
+                      },
+                      "handle": {
+                        "type": "string"
+                      },
+                      "secret": {
+                        "type": "string"
+                      },
+                      "public_key": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "mode",
+                      "handle",
+                      "secret",
+                      "public_key"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "mode": {
+                        "const": "direct"
+                      },
+                      "token": {
+                        "type": "string"
+                      },
+                      "environment": {
+                        "type": "string",
+                        "enum": [
+                          "production",
+                          "sandbox"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "mode",
+                      "token"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "mode": {
+                        "const": "none"
+                      }
+                    },
+                    "required": [
+                      "mode"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Saved."
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ],
+        "x-pisa-shape": "proposed"
+      }
+    },
+    "/v1/devices/me": {
+      "delete": {
+        "operationId": "deleteDeviceMe",
+        "summary": "Unpair: revoke this device's keys, push and Live Activity registrations",
+        "tags": [
+          "devices"
+        ],
+        "x-pisa-status": "changed",
+        "description": "CONTRACT-2 §4.5. Afterwards this device's next connect gets device_revoked.",
+        "responses": {
+          "204": {
+            "description": "Revoked."
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v1/pair/begin": {
+      "post": {
+        "operationId": "beginPairing",
+        "summary": "Begin pairing: the server commits to its nonce before seeing the app's transcript",
+        "tags": [
+          "pairing"
+        ],
+        "x-pisa-status": "new",
+        "description": "No auth and no token: it only commits. Rate-limited per client address. The app keeps the commitment and checks the serverNonce that POST /v1/pair reveals against it. CONTRACT-2 §4.3, §15 S1.",
+        "responses": {
+          "201": {
+            "description": "The pairing id and the commitment.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "schema/pisa-contract-2.schema.json#/$defs/PairBegin"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/pair": {
+      "post": {
+        "operationId": "pair",
+        "summary": "Pair with the QR token (HMAC transcript, then SAS on the server side)",
+        "tags": [
+          "pairing"
+        ],
+        "x-pisa-status": "new",
+        "description": "Replaces POST /v1/devices/pair. 400 pairing_code_invalid when the mac matches no open token. Such a request names no token, so it counts only toward an address backstop (IPv6 /64 or IPv4, much higher than 5) and never retires a token or locks out an address (E1 P2). The token is protected by its 128 bits, single use, a 10-minute expiry and at most 5 open tokens. Carries the pairingId from POST /v1/pair/begin; the answer reveals serverNonce, which the app checks against the commitment before showing the SAS (a mismatch aborts pairing; the token stays spent). CONTRACT-2 §4.3.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/PairRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Awaiting the user's confirmation on the server side.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "schema/pisa-contract-2.schema.json#/$defs/PairResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/pair/{pairingId}": {
+      "get": {
+        "operationId": "getPairing",
+        "summary": "Poll a pairing until confirmed",
+        "tags": [
+          "pairing"
+        ],
+        "x-pisa-status": "new",
+        "parameters": [
+          {
+            "name": "pairingId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The pairing's state.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "schema/pisa-contract-2.schema.json#/$defs/PairResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/devices/session/nonce": {
+      "get": {
+        "operationId": "getSessionNonce",
+        "summary": "A nonce for the device key to sign",
+        "tags": [
+          "pairing"
+        ],
+        "x-pisa-status": "new",
+        "description": "Single use (60 s), consumed whether or not the session request succeeds. Bound (deviceId): at most 5 outstanding per device. Unbound: at most 5 per client address (the IPv6 /64 or the IPv4 address, from X-Forwarded-For only behind a trusted proxy), and a server-wide cap (reference value 10 000). 429 rate_limited past either.",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The device the nonce is for. The app always sends it (E1 P2): a bound nonce opens a session for that device only, at most 5 outstanding per device."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The nonce (60 s).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nonce": {
+                      "type": "string",
+                      "description": "32 random bytes, base64url without padding."
+                    },
+                    "expires_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "nonce",
+                    "expires_at"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/devices/session": {
+      "post": {
+        "operationId": "createSession",
+        "summary": "A short-lived (1 h) session token from the device key's signature",
+        "tags": [
+          "pairing"
+        ],
+        "x-pisa-status": "new",
+        "description": "Replaces v1's never-expiring device token. The device key signs 'pisa-session/1\\n<deviceId>\\n<nonce>' (ECDSA P-256 SHA-256, DER, base64). On expiry REST answers 401 session_expired and /v2/live closes with 4003 and the reason session_expired (no control frame): the app signs a new nonce. /v2/live and /v2/runs take a session token only. CONTRACT-2 §4.3; vectors fixtures/pairing/vectors.json.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "schema/pisa-contract-2.schema.json#/$defs/SessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The bearer for REST and /v2/live.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "Opaque, 32 random bytes; the server stores only its SHA-256."
+                    },
+                    "expires_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "token",
+                    "expires_at"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/pair/offers": {
+      "post": {
+        "operationId": "createPairingOffer",
+        "summary": "A paired phone offers to pair a new device: it shows the QR",
+        "tags": [
+          "pairing"
+        ],
+        "x-pisa-status": "new",
+        "description": "Replaces v1's pairing-code path (POST /v1/devices/pairing-code). Signed: device op pairing_offer, target '<SHA-256 hex of the body as sent>'. The server mints a pairing token as for `pisa pair` and returns the pisa://pair link; the new device scans it and uses POST /v1/pair/begin and POST /v1/pair unchanged. The token counts against the 5 open tokens; {} is a valid body (name defaults to 'device'); offerId is 'offer_' and 16 random bytes, base64url. The confirming side is this phone: the server's CLI neither lists nor confirms an offered pairing. A device paired from an offer (paired_via app) never registers the first approval (Face ID) key. No signer: a signer key is host-only (E1 P1).",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XPisaNonce"
+          },
+          {
+            "$ref": "#/components/parameters/XPisaSignature"
+          },
+          {
+            "$ref": "#/components/parameters/XPisaKeyId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PairingOfferRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The offer, with its QR and typed fallback.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PairingOffer"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "biometric_required"
+          },
+          "400": {
+            "description": "validation_failed: a body that does not match PairingOfferRequest, for example one carrying signer (E1 P1: a signer key is host-only, made with the CLI on the server)"
+          },
+          "404": {
+            "description": "the server has no TLS pin and addresses configured"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ],
+        "x-pisa-signed-op": {
+          "op": "pairing_offer",
+          "target": "<SHA-256 hex of the request body, as sent>"
+        },
+        "x-pisa-signing-rule": "As provider_key: once the server holds a Face ID key, a request without a valid signature for this op and target (or a nonce used twice) gets 403 biometric_required. Before the first key exists, the session token alone is enough."
+      }
+    },
+    "/v1/pair/offers/{offerId}": {
+      "get": {
+        "operationId": "getPairingOffer",
+        "summary": "The offering phone polls its offer",
+        "tags": [
+          "pairing"
+        ],
+        "x-pisa-status": "new",
+        "description": "Only the device that made the offer may read, withdraw or confirm it; for any other device it is 404. open until a device pairs with it (refused if withdrawn first, expired past the token's 10 minutes), then the pairing's state. At awaiting_confirmation it carries pairingId, newDevice and the transcript fields, and expiresAt is the confirmation deadline; the phone checks the reveal and computes the SAS itself (CONTRACT-2 §4.3), never trusting a SAS from the server. At confirmed, deviceId.",
+        "parameters": [
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The offer's state.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PairingOffer"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "deletePairingOffer",
+        "summary": "Withdraw the offer, or refuse the device that scanned it",
+        "tags": [
+          "pairing"
+        ],
+        "x-pisa-status": "new",
+        "description": "Unsigned: refusing grants nothing. Spends the token; a pairing awaiting confirmation becomes refused. 204 also when there is nothing left to withdraw. 404 for any device but the offering one.",
+        "parameters": [
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Withdrawn or refused."
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    },
+    "/v1/pair/offers/{offerId}/confirm": {
+      "post": {
+        "operationId": "confirmPairingOffer",
+        "summary": "Confirm the new device after comparing the SAS",
+        "tags": [
+          "pairing"
+        ],
+        "x-pisa-status": "new",
+        "description": "Signed: device op pairing_confirm, target '<pairingId>:<sas>', so the Face ID approval names the exact device the user compared. The server checks that the SAS it derived for that pairing equals the one sent.",
+        "parameters": [
+          {
+            "name": "offerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/XPisaNonce"
+          },
+          {
+            "$ref": "#/components/parameters/XPisaSignature"
+          },
+          {
+            "$ref": "#/components/parameters/XPisaKeyId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PairingConfirm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "confirmed, with the new device's id.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PairingOffer"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "biometric_required"
+          },
+          "409": {
+            "description": "pairing_code_invalid: the pairing is not this offer's, not awaiting confirmation, or the SAS is not the server's (nothing is confirmed)"
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ],
+        "x-pisa-signed-op": {
+          "op": "pairing_confirm",
+          "target": "<pairingId>:<the 6-digit SAS>"
+        },
+        "x-pisa-signing-rule": "As provider_key: once the server holds a Face ID key, a request without a valid signature for this op and target (or a nonce used twice) gets 403 biometric_required. Before the first key exists, the session token alone is enough."
+      }
+    },
+    "/v1/sheets/{id}": {
+      "get": {
+        "operationId": "getSheet",
+        "summary": "A sheet as a Ring 1 surface",
+        "tags": [
+          "surfaces"
+        ],
+        "x-pisa-status": "changed",
+        "description": "Returns the surface's A2UI operations and its pisa block instead of a v1 present object.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The same content as the activity.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "schema/pisa-contract-2.schema.json#/$defs/A2UISurfaceActivity"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          }
+        },
+        "security": [
+          {
+            "sessionToken": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "sessionToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "The 1 h session token from POST /v1/devices/session."
+      }
+    },
+    "parameters": {
+      "XPisaNonce": {
+        "name": "X-Pisa-Nonce",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "A device challenge's nonce (single use, 5 minutes)."
+      },
+      "XPisaSignature": {
+        "name": "X-Pisa-Signature",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "The Face ID key's signature over the pisa-device canonical text: DER, base64."
+      },
+      "XPisaKeyId": {
+        "name": "X-Pisa-Key-Id",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "The signing key."
+      }
+    },
+    "schemas": {
+      "PairingOfferRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60,
+            "description": "A label for the new device; 'device' when absent"
+          }
+        },
+        "required": [],
+        "additionalProperties": false,
+        "description": "Closed: there is no signer field. A signer key is host-only, made with the CLI on the server (E1 P1); a body carrying signer is 400 validation_failed."
+      },
+      "PairingOffer": {
+        "type": "object",
+        "properties": {
+          "offerId": {
+            "type": "string",
+            "pattern": "^offer_[A-Za-z0-9_-]{22}$"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "open",
+              "awaiting_confirmation",
+              "confirmed",
+              "refused",
+              "expired"
+            ]
+          },
+          "qr": {
+            "type": "string",
+            "pattern": "^pisa://pair\\?v=1&"
+          },
+          "token": {
+            "type": "string",
+            "pattern": "^[A-Z2-7]{26}$",
+            "description": "The typed fallback (the same token)."
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pairingId": {
+            "type": "string"
+          },
+          "deviceId": {
+            "type": "string",
+            "description": "When confirmed."
+          },
+          "newDevice": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "platform": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "platform"
+            ],
+            "additionalProperties": false
+          },
+          "transcript": {
+            "type": "object",
+            "properties": {
+              "spki": {
+                "type": "string"
+              },
+              "deviceKey": {
+                "type": "string"
+              },
+              "clientNonce": {
+                "type": "string"
+              },
+              "commitment": {
+                "type": "string"
+              },
+              "serverNonce": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "spki",
+              "deviceKey",
+              "clientNonce",
+              "commitment",
+              "serverNonce"
+            ],
+            "additionalProperties": false,
+            "description": "awaiting_confirmation only: what the phone needs to compute the SAS. The phone checks serverNonce against the commitment (as the new device does) before showing digits."
+          }
+        },
+        "required": [
+          "offerId",
+          "state",
+          "expiresAt"
+        ],
+        "additionalProperties": false
+      },
+      "PairingConfirm": {
+        "type": "object",
+        "properties": {
+          "pairingId": {
+            "type": "string"
+          },
+          "sas": {
+            "type": "string",
+            "pattern": "^[0-9]{6}$"
+          }
+        },
+        "required": [
+          "pairingId",
+          "sas"
+        ],
+        "additionalProperties": false
+      },
+      "ApprovalChallengeRequest": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "const": "approval"
+          },
+          "approval_id": {
+            "type": "string"
+          },
+          "interrupt_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "action",
+          "approval_id",
+          "interrupt_id"
+        ],
+        "additionalProperties": false
+      },
+      "DeviceChallengeRequest": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "const": "device"
+          },
+          "op": {
+            "type": "string",
+            "enum": [
+              "revoke_device",
+              "provider_key",
+              "google_connect",
+              "google_disconnect",
+              "place_key",
+              "google_credentials",
+              "messages_retention",
+              "erase",
+              "connector",
+              "connector_credential",
+              "connector_consent",
+              "model_server",
+              "pairing_offer",
+              "pairing_confirm",
+              "paid_ack",
+              "conversation"
+            ],
+            "x-pisa-pairing-ops": [
+              "pairing_offer",
+              "pairing_confirm"
+            ]
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "action",
+          "op",
+          "target"
+        ],
+        "additionalProperties": false,
+        "description": "A signed device op (v1 CORE-SEC). The server puts the target on one line: control characters become spaces."
+      },
+      "Challenge": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "approval",
+              "device"
+            ]
+          },
+          "nonce": {
+            "type": "string"
+          },
+          "canonical": {
+            "type": "string",
+            "description": "pisa-approval/2 (§6.2), or pisa-device for a device op."
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "action",
+          "nonce",
+          "canonical",
+          "expires_at"
+        ],
+        "additionalProperties": false
+      },
+      "ServerCreate": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "openai_compatible"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{1,31}$",
+            "description": "The provider part of its models' references (<id>:<model id>)."
+          },
+          "base_url": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000,
+            "description": "The address that ends in /v1."
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "ca_bundle": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 4096,
+            "description": "An absolute path, on the PISA server, to the PEM file of a private CA that signs the model server's certificate."
+          }
+        },
+        "required": [
+          "type",
+          "id",
+          "base_url"
+        ],
+        "additionalProperties": false,
+        "description": "An OpenAI-compatible model server."
+      },
+      "ServerUpdate": {
+        "type": "object",
+        "properties": {
+          "base_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "ca_bundle": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "required": [],
+        "additionalProperties": false,
+        "description": "Only the fields sent change; ca_bundle null removes the bundle."
+      },
+      "LastTest": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ok",
+          "at",
+          "message"
+        ],
+        "additionalProperties": false
+      },
+      "Provider": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "type",
+          "key_set",
+          "key_last4",
+          "last_test",
+          "keys_url",
+          "base_url",
+          "ca_bundle",
+          "editable"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "builtin",
+              "openai_compatible"
+            ]
+          },
+          "key_set": {
+            "type": "boolean"
+          },
+          "key_last4": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "last_test": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LastTest"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "keys_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "base_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ca_bundle": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "editable": {
+            "type": "boolean",
+            "description": "false for built-in providers and for a server the operator set in the environment"
+          }
+        },
+        "description": "v1's provider entry, plus the model-server fields. Further fields may appear (v1's list)."
+      },
+      "CapabilityOverrides": {
+        "type": "object",
+        "propertyNames": {
+          "enum": [
+            "tools",
+            "json_schema",
+            "json_object",
+            "tool_choice",
+            "vision",
+            "audio",
+            "embeddings"
+          ]
+        },
+        "additionalProperties": {
+          "type": "boolean"
+        }
+      },
+      "ProviderCapabilities": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string"
+          },
+          "probed_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "tools": {
+            "type": "boolean"
+          },
+          "json_schema": {
+            "type": "boolean"
+          },
+          "json_object": {
+            "type": "boolean"
+          },
+          "tool_choice": {
+            "type": "boolean"
+          },
+          "vision": {
+            "type": "boolean"
+          },
+          "audio": {
+            "type": "boolean"
+          },
+          "embeddings": {
+            "type": "boolean"
+          },
+          "overrides": {
+            "$ref": "#/components/schemas/CapabilityOverrides"
+          },
+          "features_needing_tools": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Feature ids, as in /v1/server.features."
+          }
+        },
+        "required": [
+          "model",
+          "probed_at",
+          "tools",
+          "json_schema",
+          "json_object",
+          "tool_choice",
+          "vision",
+          "audio",
+          "embeddings",
+          "overrides",
+          "features_needing_tools"
+        ],
+        "additionalProperties": false,
+        "description": "Effective capabilities (the probe with the overrides applied). An unprobed model reports every capability false, with probed_at null."
+      }
+    },
+    "responses": {
+      "Error": {
+        "description": "v1's error envelope (protocol/openapi.json). 401 device_revoked: the app wipes itself (§4.5); 403 ai_consent_required (§4.4).",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../openapi.json#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-pisa-replaced": {
+    "POST /v1/turns": "POST /v2/runs",
+    "GET /v1/device": "GET /v2/live",
+    "POST /v1/devices/pair": "POST /v1/pair",
+    "POST /v1/devices/pairing-code": "POST /v1/pair/offers",
+    "POST /v1/approvals/{id}": "POST /v1/approvals/{id}/resume (decisions)"
+  }
+}

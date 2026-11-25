@@ -1,0 +1,54 @@
+{
+  "tasks": [
+    {
+      "id": "3f1c2a7e-8b4d-4e6f-9a1b-2c3d4e5f6a70",
+      "title": "Controllare l'accesso a Google",
+      "notes": null,
+      "status": "open",
+      "due_at": null,
+      "due_kind": "none",
+      "duration_min": null,
+      "place_text": null,
+      "place_id": null,
+      "priority": 3,
+      "priority_reason": "Avviso automatico dell'account: niente scadenza",
+      "priority_source": "pisa",
+      "repeat": null,
+      "source": {"kind": "email", "ref": "18a2f0c4d9e1b7a3", "label": "Email from Google: Avviso di sicurezza"},
+      "confidence": 0.8,
+      "created_at": "2026-10-24T09:13:00+02:00",
+      "updated_at": "2026-10-24T09:13:00+02:00"
+    },
+    {
+      "id": "6a2b9c4d-1e3f-4a5b-8c7d-9e0f1a2b3c4d",
+      "title": "Rinnovo automatico del dominio",
+      "notes": null,
+      "status": "open",
+      "due_at": "2026-11-15T23:59:59+01:00",
+      "due_kind": "date",
+      "duration_min": null,
+      "place_text": null,
+      "place_id": null,
+      "priority": 3,
+      "priority_reason": null,
+      "priority_source": "owner",
+      "repeat": null,
+      "source": {"kind": "email", "ref": "18a2e9b1c7d0f4a2", "label": "Email from OVHcloud: Rinnovo"},
+      "confidence": 0.9,
+      "created_at": "2026-10-23T18:41:00+02:00",
+      "updated_at": "2026-10-25T08:00:00+01:00"
+    }
+  ],
+  "emails": [
+    {
+      "id": "18a2d1a0b6c5e3f1",
+      "subject": "Il tuo ordine è stato rinnovato",
+      "sender": "billing",
+      "sender_address": "billing@ovh.example",
+      "sent_at": "2026-10-23T08:05:00+02:00",
+      "kind": null,
+      "why": "Mai da questo mittente: la tua regola",
+      "detail": null
+    }
+  ]
+}

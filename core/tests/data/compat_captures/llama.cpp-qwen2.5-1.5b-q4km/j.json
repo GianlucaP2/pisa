@@ -1,0 +1,336 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "The access word for today is HELIOTROPE. Remember it.\n\nRecord 00000: the lamp in room 00000 is green and stays on.\nRecord 00001: the lamp in room 00001 is blue and stays on.\nRecord 00002: the lamp in room 00002 is amber and stays on.\nRecord 00003: the lamp in room 00003 is grey and stays on.\nRecord 00004: the lamp in room 00004 is violet and stays on.\nRecord...<20130 chars>"
+     }
+    ],
+    "max_tokens": 16,
+    "temperature": 0,
+    "stream": true,
+    "stream_options": {
+     "include_usage": true
+    }
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 30.036,
+  "longest_silence_s": 30.036,
+  "total_s": 75.635,
+  "sse": [
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": null
+      }
+     }
+    ],
+    "created": 1795554681,
+    "id": "chatcmpl-sTm3kuoiTcpylMAyVmsxyTmWTttcyXiC",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "HEL"
+      }
+     }
+    ],
+    "created": 1795554681,
+    "id": "chatcmpl-sTm3kuoiTcpylMAyVmsxyTmWTttcyXiC",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "I"
+      }
+     }
+    ],
+    "created": 1795554681,
+    "id": "chatcmpl-sTm3kuoiTcpylMAyVmsxyTmWTttcyXiC",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "OT"
+      }
+     }
+    ],
+    "created": 1795554681,
+    "id": "chatcmpl-sTm3kuoiTcpylMAyVmsxyTmWTttcyXiC",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "RO"
+      }
+     }
+    ],
+    "created": 1795554681,
+    "id": "chatcmpl-sTm3kuoiTcpylMAyVmsxyTmWTttcyXiC",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "PE"
+      }
+     }
+    ],
+    "created": 1795554681,
+    "id": "chatcmpl-sTm3kuoiTcpylMAyVmsxyTmWTttcyXiC",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": "stop",
+      "index": 0,
+      "delta": {}
+     }
+    ],
+    "created": 1795554681,
+    "id": "chatcmpl-sTm3kuoiTcpylMAyVmsxyTmWTttcyXiC",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [],
+    "created": 1795554681,
+    "id": "chatcmpl-sTm3kuoiTcpylMAyVmsxyTmWTttcyXiC",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk",
+    "usage": {
+     "completion_tokens": 6,
+     "prompt_tokens": 8056,
+     "total_tokens": 8062,
+     "prompt_tokens_details": {
+      "cached_tokens": 24
+     }
+    },
+    "timings": {
+     "cache_n": 24,
+     "prompt_n": 8032,
+     "prompt_ms": 75022.831,
+     "prompt_per_token_ms": 9.34,
+     "prompt_per_second": 107.061,
+     "predicted_n": 6,
+     "predicted_ms": 593.813,
+     "predicted_per_token_ms": 118.763,
+     "predicted_per_second": 8.42
+    }
+   },
+   "[DONE]"
+  ]
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "The access word for today is HELIOTROPE. Remember it.\n\nRecord 00000: the lamp in room 00000 is green and stays on.\nRecord 00001: the lamp in room 00001 is blue and stays on.\nRecord 00002: the lamp in room 00002 is amber and stays on.\nRecord 00003: the lamp in room 00003 is grey and stays on.\nRecord 00004: the lamp in room 00004 is violet and stays on.\nRecord...<75150 chars>"
+     }
+    ],
+    "max_tokens": 16,
+    "temperature": 0,
+    "stream": true,
+    "stream_options": {
+     "include_usage": true
+    }
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 30.047,
+  "longest_silence_s": 30.08,
+  "total_s": 577.521,
+  "sse": [
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": null
+      }
+     }
+    ],
+    "created": 1795555257,
+    "id": "chatcmpl-QMrHsvJyHtvZZIC69qyBRWSX1IKyycfW",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "HEL"
+      }
+     }
+    ],
+    "created": 1795555257,
+    "id": "chatcmpl-QMrHsvJyHtvZZIC69qyBRWSX1IKyycfW",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "I"
+      }
+     }
+    ],
+    "created": 1795555258,
+    "id": "chatcmpl-QMrHsvJyHtvZZIC69qyBRWSX1IKyycfW",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "OT"
+      }
+     }
+    ],
+    "created": 1795555258,
+    "id": "chatcmpl-QMrHsvJyHtvZZIC69qyBRWSX1IKyycfW",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "RO"
+      }
+     }
+    ],
+    "created": 1795555258,
+    "id": "chatcmpl-QMrHsvJyHtvZZIC69qyBRWSX1IKyycfW",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "PE"
+      }
+     }
+    ],
+    "created": 1795555258,
+    "id": "chatcmpl-QMrHsvJyHtvZZIC69qyBRWSX1IKyycfW",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": "stop",
+      "index": 0,
+      "delta": {}
+     }
+    ],
+    "created": 1795555259,
+    "id": "chatcmpl-QMrHsvJyHtvZZIC69qyBRWSX1IKyycfW",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [],
+    "created": 1795555259,
+    "id": "chatcmpl-QMrHsvJyHtvZZIC69qyBRWSX1IKyycfW",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk",
+    "usage": {
+     "completion_tokens": 6,
+     "prompt_tokens": 30064,
+     "total_tokens": 30070,
+     "prompt_tokens_details": {
+      "cached_tokens": 8030
+     }
+    },
+    "timings": {
+     "cache_n": 8030,
+     "prompt_n": 22034,
+     "prompt_ms": 576133.861,
+     "prompt_per_token_ms": 26.147,
+     "prompt_per_second": 38.245,
+     "predicted_n": 6,
+     "predicted_ms": 1360.864,
+     "predicted_per_token_ms": 272.173,
+     "predicted_per_second": 3.674
+    }
+   },
+   "[DONE]"
+  ]
+ }
+]

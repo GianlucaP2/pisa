@@ -1,0 +1,2 @@
+{"event": {"name": "pisa.voice.enrol.quality", "timestamp": 1763460000001, "type": "CUSTOM", "value": {"block": "A", "clipped": false, "hint": null, "ok": true, "snrDb": 24.0, "voicedS": 11.5}}, "seq": 1}
+{"event": {"name": "pisa.voice.enrol.done", "timestamp": 1763460000002, "type": "CUSTOM", "value": {"missing": ["B", "C", "D"], "ok": false, "reason": "missing", "route": "speaker"}}, "seq": 2}

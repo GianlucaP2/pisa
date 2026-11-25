@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "kind": "event",
+      "start": "2026-10-20T11:00:00+02:00",
+      "end": "2026-10-20T12:00:00+02:00",
+      "title": "Colloquio riservato",
+      "event_id": "e-private",
+      "private": true,
+      "sensitive": false
+    },
+    {
+      "kind": "event",
+      "start": "2026-10-20T15:00:00+02:00",
+      "end": "2026-10-20T16:00:00+02:00",
+      "title": "Visita",
+      "event_id": "e-visit",
+      "private": false,
+      "sensitive": true
+    },
+    {
+      "kind": "free",
+      "start": "2026-10-20T16:00:00+02:00",
+      "end": "2026-10-20T18:00:00+02:00",
+      "private": false,
+      "sensitive": false
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009102",
+  "ts": "2026-10-28T13:00:00+01:00",
+  "type": "notify",
+  "notification_id": "00000000-0000-4000-8000-000000000501",
+  "text": "Scusa, un attimo: Esci ora: 12 minuti a piedi per Dentista.",
+  "lang": "it-IT",
+  "kind": "reminder",
+  "priority": "normal",
+  "urgency": "now"
+}

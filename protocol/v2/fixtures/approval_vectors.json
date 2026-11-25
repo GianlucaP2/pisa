@@ -1,0 +1,854 @@
+{
+  "description": "PISA contract 2 approval vectors (CONTRACT-2 §6). Synthetic. Each verifier case runs on a fresh verifier holding usedNonces; payload is submitted once per entry of expect, in order.",
+  "signature": {
+    "algorithm": "ECDSA P-256 SHA-256, DER, base64",
+    "keyId": "phone-key-1",
+    "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEtfPlVrbXFPLRPE8IwL2kpW7DMlskwrSVN/gGys1WHyFzFfdYjP6mZ7ogyYzwfFjKgLw6eK/M6DWyw+FRT1wl/A=="
+  },
+  "jcs": [
+    {
+      "input": {
+        "b": 1,
+        "a": [
+          true,
+          null,
+          "é"
+        ],
+        "c": 1.5
+      },
+      "output": "{\"a\":[true,null,\"é\"],\"b\":1,\"c\":1.5}"
+    },
+    {
+      "input": 1e+21,
+      "output": "1e+21"
+    },
+    {
+      "input": 10.0,
+      "output": "10"
+    },
+    {
+      "input": -0.0,
+      "output": "0"
+    },
+    {
+      "input": 1e-07,
+      "output": "1e-7"
+    },
+    {
+      "input": 123456789012345680000,
+      "output": "123456789012345680000"
+    },
+    {
+      "input": 1e-06,
+      "output": "0.000001"
+    },
+    {
+      "input": 333333333.3333333,
+      "output": "333333333.3333333"
+    },
+    {
+      "input": {
+        "€": "Euro",
+        "\r": "CR",
+        "1": "One",
+        "ö": "o-umlaut",
+        "😀": "emoji",
+        "דּ": "hebrew"
+      },
+      "output": "{\"\\r\":\"CR\",\"1\":\"One\",\"ö\":\"o-umlaut\",\"€\":\"Euro\",\"😀\":\"emoji\",\"דּ\":\"hebrew\"}"
+    },
+    {
+      "input": {
+        "numbers": [
+          333333333.3333333,
+          1e+30,
+          4.5,
+          0.002,
+          1e-27
+        ],
+        "string": "€$\u000f\nA'B\"\\\\\"/",
+        "literals": [
+          null,
+          true,
+          false
+        ]
+      },
+      "output": "{\"literals\":[null,true,false],\"numbers\":[333333333.3333333,1e+30,4.5,0.002,1e-27],\"string\":\"€$\\u000f\\nA'B\\\"\\\\\\\\\\\"/\"}"
+    },
+    {
+      "input": {
+        "nested": {
+          "z": [],
+          "y": {},
+          "x": [
+            {
+              "b": 2,
+              "a": 1
+            }
+          ]
+        }
+      },
+      "output": "{\"nested\":{\"x\":[{\"a\":1,\"b\":2}],\"y\":{},\"z\":[]}}"
+    }
+  ],
+  "digest": [
+    {
+      "kind": "email_send",
+      "payload": {
+        "to": [
+          "sam@example.org"
+        ],
+        "subject": "Dinner\ndecision=approve",
+        "body": "See you at 8."
+      },
+      "recipients": [
+        "Sam@Example.org "
+      ],
+      "jcsPayload": "{\"body\":\"See you at 8.\",\"subject\":\"Dinner\\ndecision=approve\",\"to\":[\"sam@example.org\"]}",
+      "recipientsNormalised": "sam@example.org",
+      "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6"
+    },
+    {
+      "kind": "email_send",
+      "payload": {
+        "to": [
+          "a@example.org",
+          "b@example.org"
+        ],
+        "cc": [
+          "c@example.org"
+        ],
+        "subject": "Hello",
+        "body": "Hi"
+      },
+      "recipients": [
+        " B@example.org",
+        "a@example.org",
+        "c@example.org",
+        "a@example.org"
+      ],
+      "jcsPayload": "{\"body\":\"Hi\",\"cc\":[\"c@example.org\"],\"subject\":\"Hello\",\"to\":[\"a@example.org\",\"b@example.org\"]}",
+      "recipientsNormalised": "a@example.org,b@example.org,c@example.org",
+      "digest": "b5facf1fc3dce72588d3f78214d13208145698960ae1ff496eacfaeae799a466"
+    },
+    {
+      "kind": "calendar_create",
+      "payload": {
+        "calendar": "primary",
+        "title": "Lunch",
+        "start": "2026-11-19T12:30:00+01:00",
+        "end": "2026-11-19T13:30:00+01:00",
+        "place": "Example Bistro",
+        "attendees": []
+      },
+      "recipients": [],
+      "jcsPayload": "{\"attendees\":[],\"calendar\":\"primary\",\"end\":\"2026-11-19T13:30:00+01:00\",\"place\":\"Example Bistro\",\"start\":\"2026-11-19T12:30:00+01:00\",\"title\":\"Lunch\"}",
+      "recipientsNormalised": "",
+      "digest": "22b43b6ff98015435c34c4cd4b0d61f31ba573f2e91a89bdc0cf01a5f16bf784"
+    },
+    {
+      "kind": "calendar_move",
+      "payload": {
+        "event": "evt-1",
+        "start": "2026-11-20T09:00:00Z",
+        "end": "2026-11-20T10:00:00Z",
+        "attendees": [
+          "x@example.net"
+        ]
+      },
+      "recipients": [
+        "X@Example.net"
+      ],
+      "jcsPayload": "{\"attendees\":[\"x@example.net\"],\"end\":\"2026-11-20T10:00:00Z\",\"event\":\"evt-1\",\"start\":\"2026-11-20T09:00:00Z\"}",
+      "recipientsNormalised": "x@example.net",
+      "digest": "7e7dbc583ae776224127caaa207022b1b07fe0d815d15f6b142ccb4623c6cee3"
+    },
+    {
+      "kind": "calendar_cancel",
+      "payload": {
+        "event": "evt-2",
+        "notify": true,
+        "attendees": [
+          "y@example.net",
+          "z@example.net"
+        ]
+      },
+      "recipients": [
+        "z@example.net",
+        "y@example.net"
+      ],
+      "jcsPayload": "{\"attendees\":[\"y@example.net\",\"z@example.net\"],\"event\":\"evt-2\",\"notify\":true}",
+      "recipientsNormalised": "y@example.net,z@example.net",
+      "digest": "04f999fa11bfefdf90ff8d907d483d7d2c25c559c1d244966e3e90a36bc9f423"
+    }
+  ],
+  "canonical": [
+    {
+      "fields": {
+        "server": "srv_synthetic0001_Qm7Zr2Xc",
+        "device": "00000000-0000-4000-8000-0000000000d1",
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "interrupt_id": "int-1",
+        "decision": "approve",
+        "kind": "email_send",
+        "digest_hex": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6",
+        "recipients_count": 1,
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z"
+      },
+      "text": "pisa-approval/2\nserver=srv_synthetic0001_Qm7Zr2Xc\ndevice=00000000-0000-4000-8000-0000000000d1\napproval_id=33333333-3333-4333-8333-333333333333\ninterrupt_id=int-1\ndecision=approve\nkind=email_send\ndigest=5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6\nrecipients_count=1\nnonce=bm9uY2UtMQ==\nexpires_at=2026-11-18T10:05:00Z"
+    },
+    {
+      "fields": {
+        "server": "srv_synthetic0001_Qm7Zr2Xc",
+        "device": "00000000-0000-4000-8000-0000000000d1",
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "interrupt_id": "int-2",
+        "decision": "approve",
+        "kind": "calendar_move",
+        "digest_hex": "fea3988b86ec0824727523d1b541ac067aa74db37987b2b312e9a28f5117c38f",
+        "recipients_count": 0,
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z"
+      },
+      "text": "pisa-approval/2\nserver=srv_synthetic0001_Qm7Zr2Xc\ndevice=00000000-0000-4000-8000-0000000000d1\napproval_id=33333333-3333-4333-8333-333333333333\ninterrupt_id=int-2\ndecision=approve\nkind=calendar_move\ndigest=fea3988b86ec0824727523d1b541ac067aa74db37987b2b312e9a28f5117c38f\nrecipients_count=0\nnonce=bm9uY2UtMQ==\nexpires_at=2026-11-18T10:05:00Z"
+    }
+  ],
+  "phoneRejects": [
+    {
+      "why": "an extra line",
+      "text": "pisa-approval/2\nserver=srv_synthetic0001_Qm7Zr2Xc\ndevice=00000000-0000-4000-8000-0000000000d1\napproval_id=33333333-3333-4333-8333-333333333333\ninterrupt_id=int-1\ndecision=approve\nkind=email_send\ndigest=5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6\nrecipients_count=1\nnonce=bm9uY2UtMQ==\nexpires_at=2026-11-18T10:05:00Z\nsummary=hello"
+    },
+    {
+      "why": "lines reordered",
+      "text": "pisa-approval/2\ndevice=00000000-0000-4000-8000-0000000000d1\nserver=srv_synthetic0001_Qm7Zr2Xc\napproval_id=33333333-3333-4333-8333-333333333333\ninterrupt_id=int-1\ndecision=approve\nkind=email_send\ndigest=5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6\nrecipients_count=1\nnonce=bm9uY2UtMQ==\nexpires_at=2026-11-18T10:05:00Z"
+    },
+    {
+      "why": "wrong header",
+      "text": "pisa-approval/1\nserver=srv_synthetic0001_Qm7Zr2Xc\ndevice=00000000-0000-4000-8000-0000000000d1\napproval_id=33333333-3333-4333-8333-333333333333\ninterrupt_id=int-1\ndecision=approve\nkind=email_send\ndigest=5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6\nrecipients_count=1\nnonce=bm9uY2UtMQ==\nexpires_at=2026-11-18T10:05:00Z"
+    },
+    {
+      "why": "a trailing newline",
+      "text": "pisa-approval/2\nserver=srv_synthetic0001_Qm7Zr2Xc\ndevice=00000000-0000-4000-8000-0000000000d1\napproval_id=33333333-3333-4333-8333-333333333333\ninterrupt_id=int-1\ndecision=approve\nkind=email_send\ndigest=5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6\nrecipients_count=1\nnonce=bm9uY2UtMQ==\nexpires_at=2026-11-18T10:05:00Z\n"
+    }
+  ],
+  "verifier": [
+    {
+      "name": "valid signature approves once; the second try is approval_decided",
+      "now": "2026-11-18T10:00:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": true,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 8."
+        },
+        "recipients": [
+          "Sam@Example.org "
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "00000000-0000-4000-8000-0000000000d1"
+      },
+      "interruptId": "int-1",
+      "server": "srv_synthetic0001_Qm7Zr2Xc",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [],
+      "payload": {
+        "decision": "approve",
+        "auth": "biometric",
+        "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6",
+        "nonce": "bm9uY2UtMQ==",
+        "signature": "MEQCIAFNACv5i1NTr0ooaB31S0wXFYl4dvcWgt0zCft8bfbPAiBtKKyBHYHjeusibfromNfHZYG4GFhc+1R/1xqE61IOgQ==",
+        "keyId": "phone-key-1"
+      },
+      "expect": [
+        "ok",
+        "approval_decided"
+      ]
+    },
+    {
+      "name": "a spent nonce is refused",
+      "now": "2026-11-18T10:00:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": true,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 8."
+        },
+        "recipients": [
+          "Sam@Example.org "
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "00000000-0000-4000-8000-0000000000d1"
+      },
+      "interruptId": "int-1",
+      "server": "srv_synthetic0001_Qm7Zr2Xc",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [
+        "bm9uY2UtMQ=="
+      ],
+      "payload": {
+        "decision": "approve",
+        "auth": "biometric",
+        "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6",
+        "nonce": "bm9uY2UtMQ==",
+        "signature": "MEQCIAFNACv5i1NTr0ooaB31S0wXFYl4dvcWgt0zCft8bfbPAiBtKKyBHYHjeusibfromNfHZYG4GFhc+1R/1xqE61IOgQ==",
+        "keyId": "phone-key-1"
+      },
+      "expect": [
+        "biometric_required"
+      ]
+    },
+    {
+      "name": "body changed after signing",
+      "now": "2026-11-18T10:00:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": true,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 9."
+        },
+        "recipients": [
+          "Sam@Example.org "
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "00000000-0000-4000-8000-0000000000d1"
+      },
+      "interruptId": "int-1",
+      "server": "srv_synthetic0001_Qm7Zr2Xc",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [],
+      "payload": {
+        "decision": "approve",
+        "auth": "biometric",
+        "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6",
+        "nonce": "bm9uY2UtMQ==",
+        "signature": "MEQCIAFNACv5i1NTr0ooaB31S0wXFYl4dvcWgt0zCft8bfbPAiBtKKyBHYHjeusibfromNfHZYG4GFhc+1R/1xqE61IOgQ==",
+        "keyId": "phone-key-1"
+      },
+      "expect": [
+        "approval_changed"
+      ]
+    },
+    {
+      "name": "recipient added after signing",
+      "now": "2026-11-18T10:00:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": true,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 8."
+        },
+        "recipients": [
+          "Sam@Example.org ",
+          "eve@example.net"
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "00000000-0000-4000-8000-0000000000d1"
+      },
+      "interruptId": "int-1",
+      "server": "srv_synthetic0001_Qm7Zr2Xc",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [],
+      "payload": {
+        "decision": "approve",
+        "auth": "biometric",
+        "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6",
+        "nonce": "bm9uY2UtMQ==",
+        "signature": "MEQCIAFNACv5i1NTr0ooaB31S0wXFYl4dvcWgt0zCft8bfbPAiBtKKyBHYHjeusibfromNfHZYG4GFhc+1R/1xqE61IOgQ==",
+        "keyId": "phone-key-1"
+      },
+      "expect": [
+        "approval_changed"
+      ]
+    },
+    {
+      "name": "signature made for another interrupt",
+      "now": "2026-11-18T10:00:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": true,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 8."
+        },
+        "recipients": [
+          "Sam@Example.org "
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "00000000-0000-4000-8000-0000000000d1"
+      },
+      "interruptId": "int-1",
+      "server": "srv_synthetic0001_Qm7Zr2Xc",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [],
+      "payload": {
+        "decision": "approve",
+        "auth": "biometric",
+        "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6",
+        "nonce": "bm9uY2UtMQ==",
+        "signature": "MEYCIQDQ9d74dJLc/5Ni1qyijRd54MhTZ3YyT+6+Qft8tZSoxwIhAP0EISCWirKEMLeITuzqvUizUKPizfiRrjUaiu5HsKXT",
+        "keyId": "phone-key-1"
+      },
+      "expect": [
+        "biometric_required"
+      ]
+    },
+    {
+      "name": "signature presented to another server",
+      "now": "2026-11-18T10:00:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": true,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 8."
+        },
+        "recipients": [
+          "Sam@Example.org "
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "00000000-0000-4000-8000-0000000000d1"
+      },
+      "interruptId": "int-1",
+      "server": "srv_other_install_9Tq4LmWx2p",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [],
+      "payload": {
+        "decision": "approve",
+        "auth": "biometric",
+        "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6",
+        "nonce": "bm9uY2UtMQ==",
+        "signature": "MEQCIAFNACv5i1NTr0ooaB31S0wXFYl4dvcWgt0zCft8bfbPAiBtKKyBHYHjeusibfromNfHZYG4GFhc+1R/1xqE61IOgQ==",
+        "keyId": "phone-key-1"
+      },
+      "expect": [
+        "biometric_required"
+      ]
+    },
+    {
+      "name": "challenge issued to another device",
+      "now": "2026-11-18T10:00:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": true,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 8."
+        },
+        "recipients": [
+          "Sam@Example.org "
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "other-device"
+      },
+      "interruptId": "int-1",
+      "server": "srv_synthetic0001_Qm7Zr2Xc",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [],
+      "payload": {
+        "decision": "approve",
+        "auth": "biometric",
+        "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6",
+        "nonce": "bm9uY2UtMQ==",
+        "signature": "MEQCIAFNACv5i1NTr0ooaB31S0wXFYl4dvcWgt0zCft8bfbPAiBtKKyBHYHjeusibfromNfHZYG4GFhc+1R/1xqE61IOgQ==",
+        "keyId": "phone-key-1"
+      },
+      "expect": [
+        "biometric_required"
+      ]
+    },
+    {
+      "name": "tap cannot approve a biometric approval",
+      "now": "2026-11-18T10:00:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": true,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 8."
+        },
+        "recipients": [
+          "Sam@Example.org "
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "00000000-0000-4000-8000-0000000000d1"
+      },
+      "interruptId": "int-1",
+      "server": "srv_synthetic0001_Qm7Zr2Xc",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [],
+      "payload": {
+        "decision": "approve",
+        "auth": "tap",
+        "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6"
+      },
+      "expect": [
+        "biometric_required"
+      ]
+    },
+    {
+      "name": "reject needs no signature",
+      "now": "2026-11-18T10:00:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": true,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 8."
+        },
+        "recipients": [
+          "Sam@Example.org "
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "00000000-0000-4000-8000-0000000000d1"
+      },
+      "interruptId": "int-1",
+      "server": "srv_synthetic0001_Qm7Zr2Xc",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [],
+      "payload": {
+        "decision": "reject",
+        "auth": "tap",
+        "digest": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expect": [
+        "ok"
+      ]
+    },
+    {
+      "name": "approval expired",
+      "now": "2026-11-18T10:11:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": true,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 8."
+        },
+        "recipients": [
+          "Sam@Example.org "
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "00000000-0000-4000-8000-0000000000d1"
+      },
+      "interruptId": "int-1",
+      "server": "srv_synthetic0001_Qm7Zr2Xc",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [],
+      "payload": {
+        "decision": "approve",
+        "auth": "biometric",
+        "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6",
+        "nonce": "bm9uY2UtMQ==",
+        "signature": "MEQCIAFNACv5i1NTr0ooaB31S0wXFYl4dvcWgt0zCft8bfbPAiBtKKyBHYHjeusibfromNfHZYG4GFhc+1R/1xqE61IOgQ==",
+        "keyId": "phone-key-1"
+      },
+      "expect": [
+        "approval_expired"
+      ]
+    },
+    {
+      "name": "challenge expired",
+      "now": "2026-11-18T10:06:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": true,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 8."
+        },
+        "recipients": [
+          "Sam@Example.org "
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "00000000-0000-4000-8000-0000000000d1"
+      },
+      "interruptId": "int-1",
+      "server": "srv_synthetic0001_Qm7Zr2Xc",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [],
+      "payload": {
+        "decision": "approve",
+        "auth": "biometric",
+        "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6",
+        "nonce": "bm9uY2UtMQ==",
+        "signature": "MEQCIAFNACv5i1NTr0ooaB31S0wXFYl4dvcWgt0zCft8bfbPAiBtKKyBHYHjeusibfromNfHZYG4GFhc+1R/1xqE61IOgQ==",
+        "keyId": "phone-key-1"
+      },
+      "expect": [
+        "biometric_required"
+      ]
+    },
+    {
+      "name": "tap approves an approval that does not require biometrics",
+      "now": "2026-11-18T10:00:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": false,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 8."
+        },
+        "recipients": [
+          "Sam@Example.org "
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "00000000-0000-4000-8000-0000000000d1"
+      },
+      "interruptId": "int-1",
+      "server": "srv_synthetic0001_Qm7Zr2Xc",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [],
+      "payload": {
+        "decision": "approve",
+        "auth": "tap",
+        "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6"
+      },
+      "expect": [
+        "ok"
+      ]
+    },
+    {
+      "name": "signature over different bytes",
+      "now": "2026-11-18T10:00:00Z",
+      "row": {
+        "approval_id": "33333333-3333-4333-8333-333333333333",
+        "kind": "email_send",
+        "requires_biometric": true,
+        "payload": {
+          "to": [
+            "sam@example.org"
+          ],
+          "subject": "Dinner\ndecision=approve",
+          "body": "See you at 8."
+        },
+        "recipients": [
+          "Sam@Example.org "
+        ],
+        "expires_at": "2026-11-18T10:10:00Z"
+      },
+      "challenge": {
+        "nonce": "bm9uY2UtMQ==",
+        "expires_at": "2026-11-18T10:05:00Z",
+        "device": "00000000-0000-4000-8000-0000000000d1"
+      },
+      "interruptId": "int-1",
+      "server": "srv_synthetic0001_Qm7Zr2Xc",
+      "device": "00000000-0000-4000-8000-0000000000d1",
+      "usedNonces": [],
+      "payload": {
+        "decision": "approve",
+        "auth": "biometric",
+        "digest": "5ff647901c4d2155fc5572a5e716e6256e620a5cde22dac535727b5ce9b877f6",
+        "nonce": "bm9uY2UtMQ==",
+        "signature": "MEQCIAxkQhuIYtSi1jq8dmbtUlTrr2C/4qnv+kYUafHt4fd/AiAYZf2dLmjxgAc2xsS0EYFfgY1s+ZF8s51H1k0DTKu/ew==",
+        "keyId": "phone-key-1"
+      },
+      "expect": [
+        "biometric_required",
+        "biometric_required"
+      ]
+    }
+  ],
+  "payloadAsSent": {
+    "rule": "The app hashes exactly the `payload` field of GET /v1/approvals/{id} as the server sent it (parsed, then JCS), never a payload rebuilt from what it shows. Email: {draft_id, version, to, cc, subject, body, attachments} with attachments as their stored signs. Calendar: the stored payload minus internal fields. A case whose matchesTheServer is false must give a different digest: the app then refuses to offer Approve.",
+    "cases": [
+      {
+        "name": "email: as sent",
+        "kind": "email_send",
+        "payloadAsSent": "{\"draft_id\":\"drf-demo-1\",\"version\":3,\"to\":[\"sam@example.org\",\"alex@example.org\"],\"cc\":[],\"subject\":\"Dinner\",\"body\":\"See you at 8.\",\"attachments\":[\"9f2b6d1c4e8a7f30b5c2d9e1a6f4b8c07d3e5a91f2c6b4d8e0a7f3c5b9d1e2a4\"]}",
+        "recipients": [
+          "sam@example.org",
+          "alex@example.org"
+        ],
+        "digest": "9c3e7a3a451da84ffd6a832189ae5d9d93ca325ee14df292054bd2676e42b438",
+        "matchesTheServer": true
+      },
+      {
+        "name": "email: the same object, keys in another order (JCS sorts them)",
+        "kind": "email_send",
+        "payloadAsSent": "{\"attachments\": [\"9f2b6d1c4e8a7f30b5c2d9e1a6f4b8c07d3e5a91f2c6b4d8e0a7f3c5b9d1e2a4\"], \"body\": \"See you at 8.\", \"subject\": \"Dinner\", \"cc\": [], \"to\": [\"sam@example.org\", \"alex@example.org\"], \"version\": 3, \"draft_id\": \"drf-demo-1\"}",
+        "recipients": [
+          "sam@example.org",
+          "alex@example.org"
+        ],
+        "digest": "9c3e7a3a451da84ffd6a832189ae5d9d93ca325ee14df292054bd2676e42b438",
+        "matchesTheServer": true
+      },
+      {
+        "name": "email: recipients in another order (an array keeps its order)",
+        "kind": "email_send",
+        "payloadAsSent": "{\"draft_id\": \"drf-demo-1\", \"version\": 3, \"to\": [\"alex@example.org\", \"sam@example.org\"], \"cc\": [], \"subject\": \"Dinner\", \"body\": \"See you at 8.\", \"attachments\": [\"9f2b6d1c4e8a7f30b5c2d9e1a6f4b8c07d3e5a91f2c6b4d8e0a7f3c5b9d1e2a4\"]}",
+        "recipients": [
+          "sam@example.org",
+          "alex@example.org"
+        ],
+        "digest": "980afa255fe5d8bf88a2fa2d6a73373747860c7d8cd3f07821e307018a87dc54",
+        "matchesTheServer": false
+      },
+      {
+        "name": "email: rebuilt by the app from what it shows (no draft_id, no version)",
+        "kind": "email_send",
+        "payloadAsSent": "{\"to\": [\"sam@example.org\", \"alex@example.org\"], \"cc\": [], \"subject\": \"Dinner\", \"body\": \"See you at 8.\", \"attachments\": [\"9f2b6d1c4e8a7f30b5c2d9e1a6f4b8c07d3e5a91f2c6b4d8e0a7f3c5b9d1e2a4\"]}",
+        "recipients": [
+          "sam@example.org",
+          "alex@example.org"
+        ],
+        "digest": "bb0ab448de3369bbd43b739d85b415690d2d94b914cc7efb8fa72fdd381b045c",
+        "matchesTheServer": false
+      },
+      {
+        "name": "email: the attachment named instead of its stored sign",
+        "kind": "email_send",
+        "payloadAsSent": "{\"draft_id\": \"drf-demo-1\", \"version\": 3, \"to\": [\"sam@example.org\", \"alex@example.org\"], \"cc\": [], \"subject\": \"Dinner\", \"body\": \"See you at 8.\", \"attachments\": [\"menu.pdf\"]}",
+        "recipients": [
+          "sam@example.org",
+          "alex@example.org"
+        ],
+        "digest": "602823cd8a5fdb2a6d8be0e9a347049925de705e1c3fdd6e661435e597a41d82",
+        "matchesTheServer": false
+      },
+      {
+        "name": "email: version as a string",
+        "kind": "email_send",
+        "payloadAsSent": "{\"draft_id\": \"drf-demo-1\", \"version\": \"3\", \"to\": [\"sam@example.org\", \"alex@example.org\"], \"cc\": [], \"subject\": \"Dinner\", \"body\": \"See you at 8.\", \"attachments\": [\"9f2b6d1c4e8a7f30b5c2d9e1a6f4b8c07d3e5a91f2c6b4d8e0a7f3c5b9d1e2a4\"]}",
+        "recipients": [
+          "sam@example.org",
+          "alex@example.org"
+        ],
+        "digest": "b349809669c569544d9e36aad6b579477d38db5c385a925c7b33fe8eae25daf0",
+        "matchesTheServer": false
+      },
+      {
+        "name": "calendar: the stored payload minus internal fields, as sent",
+        "kind": "calendar_move",
+        "payloadAsSent": "{\"calendar\": \"primary\", \"event\": \"evt-demo-1\", \"start\": \"2026-11-20T09:00:00+01:00\", \"end\": \"2026-11-20T10:00:00+01:00\", \"title\": \"Planning\", \"place\": \"Room 2\", \"attendees\": [\"kim@example.org\"]}",
+        "recipients": [
+          "kim@example.org"
+        ],
+        "digest": "890457afb99d01ffd0bdaa2dc233effbc6de29b6cc61399d401cb82dd34e8a01",
+        "matchesTheServer": true
+      },
+      {
+        "name": "calendar: internal fields left in",
+        "kind": "calendar_move",
+        "payloadAsSent": "{\"calendar\": \"primary\", \"event\": \"evt-demo-1\", \"start\": \"2026-11-20T09:00:00+01:00\", \"end\": \"2026-11-20T10:00:00+01:00\", \"title\": \"Planning\", \"place\": \"Room 2\", \"attendees\": [\"kim@example.org\"], \"_etag\": \"e-77\", \"_synced_at\": \"2026-11-18T07:00:00Z\"}",
+        "recipients": [
+          "kim@example.org"
+        ],
+        "digest": "9421255cab717e7a0bcaff8f42ae9e5b5586507ef378c641cd5147185d9b7187",
+        "matchesTheServer": false
+      },
+      {
+        "name": "calendar: the time rewritten in UTC (the same instant, other bytes)",
+        "kind": "calendar_move",
+        "payloadAsSent": "{\"calendar\": \"primary\", \"event\": \"evt-demo-1\", \"start\": \"2026-11-20T08:00:00Z\", \"end\": \"2026-11-20T09:00:00Z\", \"title\": \"Planning\", \"place\": \"Room 2\", \"attendees\": [\"kim@example.org\"]}",
+        "recipients": [
+          "kim@example.org"
+        ],
+        "digest": "07442fee081d2fbfaa8939f929684cd2bc8d54f48b9ca97dbe977dcb4dbf03a7",
+        "matchesTheServer": false
+      }
+    ]
+  }
+}

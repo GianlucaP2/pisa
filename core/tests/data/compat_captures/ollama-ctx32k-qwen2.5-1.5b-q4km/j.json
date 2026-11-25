@@ -1,0 +1,302 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "The access word for today is HELIOTROPE. Remember it.\n\nRecord 00000: the lamp in room 00000 is green and stays on.\nRecord 00001: the lamp in room 00001 is blue and stays on.\nRecord 00002: the lamp in room 00002 is amber and stays on.\nRecord 00003: the lamp in room 00003 is grey and stays on.\nRecord 00004: the lamp in room 00004 is violet and stays on.\nRecord...<20130 chars>"
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0,
+    "stream": true,
+    "stream_options": {
+     "include_usage": true
+    }
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 68.786,
+  "longest_silence_s": 68.786,
+  "total_s": 69.379,
+  "sse": [
+   {
+    "id": "chatcmpl-585",
+    "object": "chat.completion.chunk",
+    "created": 1795558243,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": "HEL"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-585",
+    "object": "chat.completion.chunk",
+    "created": 1795558243,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": "I"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-585",
+    "object": "chat.completion.chunk",
+    "created": 1795558243,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": "OT"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-585",
+    "object": "chat.completion.chunk",
+    "created": 1795558243,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": "RO"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-585",
+    "object": "chat.completion.chunk",
+    "created": 1795558243,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": "PE"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-585",
+    "object": "chat.completion.chunk",
+    "created": 1795558243,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {},
+      "finish_reason": "stop"
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-585",
+    "object": "chat.completion.chunk",
+    "created": 1795558243,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [],
+    "usage": {
+     "prompt_tokens": 8056,
+     "prompt_tokens_details": {
+      "cached_tokens": 24
+     },
+     "completion_tokens": 6,
+     "total_tokens": 8062
+    },
+    "timings": {
+     "prompt_n": 8056,
+     "prompt_ms": 68754,
+     "prompt_per_token_ms": 8.535,
+     "prompt_per_second": 117.171,
+     "predicted_n": 6,
+     "predicted_ms": 592,
+     "predicted_per_token_ms": 98.667,
+     "predicted_per_second": 10.135
+    }
+   },
+   "[DONE]"
+  ]
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "The access word for today is HELIOTROPE. Remember it.\n\nRecord 00000: the lamp in room 00000 is green and stays on.\nRecord 00001: the lamp in room 00001 is blue and stays on.\nRecord 00002: the lamp in room 00002 is amber and stays on.\nRecord 00003: the lamp in room 00003 is grey and stays on.\nRecord 00004: the lamp in room 00004 is violet and stays on.\nRecord...<75150 chars>"
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0,
+    "stream": true,
+    "stream_options": {
+     "include_usage": true
+    }
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 658.058,
+  "longest_silence_s": 658.058,
+  "total_s": 671.5,
+  "sse": [
+   {
+    "id": "chatcmpl-326",
+    "object": "chat.completion.chunk",
+    "created": 1795558902,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": "HEL"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-326",
+    "object": "chat.completion.chunk",
+    "created": 1795558902,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": "I"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-326",
+    "object": "chat.completion.chunk",
+    "created": 1795558902,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": "OT"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-326",
+    "object": "chat.completion.chunk",
+    "created": 1795558902,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": "RO"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-326",
+    "object": "chat.completion.chunk",
+    "created": 1795558902,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": "PE"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-326",
+    "object": "chat.completion.chunk",
+    "created": 1795558902,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {},
+      "finish_reason": "stop"
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-326",
+    "object": "chat.completion.chunk",
+    "created": 1795558902,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [],
+    "usage": {
+     "prompt_tokens": 30064,
+     "prompt_tokens_details": {
+      "cached_tokens": 8030
+     },
+     "completion_tokens": 6,
+     "total_tokens": 30070
+    },
+    "timings": {
+     "prompt_n": 30064,
+     "prompt_ms": 657950,
+     "prompt_per_token_ms": 21.885,
+     "prompt_per_second": 45.693,
+     "predicted_n": 6,
+     "predicted_ms": 13440,
+     "predicted_per_token_ms": 2240,
+     "predicted_per_second": 0.446
+    }
+   },
+   "[DONE]"
+  ]
+ }
+]

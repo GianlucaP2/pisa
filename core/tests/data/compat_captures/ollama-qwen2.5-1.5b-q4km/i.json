@@ -1,0 +1,153 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/embeddings",
+   "body": {
+    "model": "all-minilm",
+    "input": "a green lamp"
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.163,
+  "longest_silence_s": 0.163,
+  "total_s": 0.163,
+  "body": {
+   "object": "list",
+   "data": [
+    {
+     "object": "embedding",
+     "embedding": "<384 numbers>",
+     "index": 0
+    }
+   ],
+   "model": "all-minilm",
+   "usage": {
+    "prompt_tokens": 5,
+    "total_tokens": 5
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/embeddings",
+   "body": {
+    "model": "all-minilm",
+    "input": [
+     "a green lamp",
+     "a blue door",
+     "an amber window"
+    ],
+    "encoding_format": "float"
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.017,
+  "longest_silence_s": 0.017,
+  "total_s": 0.017,
+  "body": {
+   "object": "list",
+   "data": [
+    {
+     "object": "embedding",
+     "embedding": "<384 numbers>",
+     "index": 0
+    },
+    {
+     "object": "embedding",
+     "embedding": "<384 numbers>",
+     "index": 1
+    },
+    {
+     "object": "embedding",
+     "embedding": "<384 numbers>",
+     "index": 2
+    }
+   ],
+   "model": "all-minilm",
+   "usage": {
+    "prompt_tokens": 15,
+    "total_tokens": 15
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/embeddings",
+   "body": {
+    "model": "all-minilm",
+    "input": "a green lamp",
+    "encoding_format": "base64"
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.007,
+  "longest_silence_s": 0.007,
+  "total_s": 0.007,
+  "body": {
+   "object": "list",
+   "data": [
+    {
+     "object": "embedding",
+     "embedding": "jLyTvOAZvTz+vg48sP+QvbLaOzwtmrK74k7HPZdFM7wy2VM9zPalPbEjLz0BMi69UwS0vBbYrTyZ5VU8XEJZPYBRr700+o69eNRwvei6FjqAjx48grGfvPhJhby1Yu+8QoGcvVuwgj1mUNe81vCQPXz2HT0ATJC9W/8DvNqxDz1T3L69U2AZPVLmj73E10k8nIQcvUhi1L2zUTA84FxAPUYSib1AsoO8w1ZqPL1DMD1CuGC9qtfsvJL+BT0BWpE8GltuvSqZ1r0pqyO8uA6IvYWIfztGH6U953GKPYZlkD0GpwS9qpCBPKsv0DtHpzS9Kv46PfyIoTxgc/I8focXPW+3i73w4hk9d/2TvZ0t...<2048 chars>",
+     "index": 0
+    }
+   ],
+   "model": "all-minilm",
+   "usage": {
+    "prompt_tokens": 5,
+    "total_tokens": 5
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/embeddings",
+   "body": {
+    "model": "all-minilm",
+    "input": [
+     "a green lamp",
+     "a blue door",
+     "an amber window"
+    ],
+    "encoding_format": "base64"
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.025,
+  "longest_silence_s": 0.025,
+  "total_s": 0.025,
+  "body": {
+   "object": "list",
+   "data": [
+    {
+     "object": "embedding",
+     "embedding": "jLyTvOAZvTz+vg48sP+QvbLaOzwtmrK74k7HPZdFM7wy2VM9zPalPbEjLz0BMi69UwS0vBbYrTyZ5VU8XEJZPYBRr700+o69eNRwvei6FjqAjx48grGfvPhJhby1Yu+8QoGcvVuwgj1mUNe81vCQPXz2HT0ATJC9W/8DvNqxDz1T3L69U2AZPVLmj73E10k8nIQcvUhi1L2zUTA84FxAPUYSib1AsoO8w1ZqPL1DMD1CuGC9qtfsvJL+BT0BWpE8GltuvSqZ1r0pqyO8uA6IvYWIfztGH6U953GKPYZlkD0GpwS9qpCBPKsv0DtHpzS9Kv46PfyIoTxgc/I8focXPW+3i73w4hk9d/2TvZ0t...<2048 chars>",
+     "index": 0
+    },
+    {
+     "object": "embedding",
+     "embedding": "Y4xgvMFarzxTWRk6W+AiPX+FdLxVVL08NZCaPVQ9SL3vO/w8eeQxPejwbbrjVfI8vkuAPZVBYryFpIU7ujCmPQYaJ7zxMoK931uAvYI4/bpIDSC9Hp8bPfi7kTtM0fQ86sADvuV/Bb3qmwK8WsHAPP2p7DmnllA8WuN7vU66hrwJ5mQ8cFR7vfDQGz1Ns3y95QU/PTEwlDwMqbk5TlhFvZLu7rx7LLQ8ujiyu5C1SbZyzLa7Wf8HPePcKr2ltI+8SCQ6PbH8Qr3+QSK92VqVPQGQor1Vtlo95q2uvPv5nj1d9SM9SP+XvVR/Sjy+d2G30ks5PZ8ScT3LuDC97yRfPAX1RD1Divo8p9J1veQN...<2048 chars>",
+     "index": 1
+    },
+    {
+     "object": "embedding",
+     "embedding": "vvj7PIJRiz0yZyg9a+cSPTaQjzwInh29qjT6PcnAW70Agag88BhYuycLGDxbs5Q8CRmavLLSpLt87Sq8JHBjPeCSJb1Ui1a9vE6UvRiBkD3SrLo7o8QivNuSSb3qeDa9jjfRvOeEVD00NjS9RbGvPGjygj2ulz695JQxPcUCx7xs5IW9OmzePM4smrtCmc696PrRvN6pAb27AA49F+CgPDuVAr24ook7HE6qvRBMy7yo3NC9Ob2yu3sr4DsdqpA8QsI6PV8YxL0seC08E8ZlvTaVvL2im1y9LTIjPQnv2TrCc5U68y6YvYvG8jroIiQ9TVaxPTK+fj0uU6S95PiDPSOlvDwwCJc9MOTFvSmC...<2048 chars>",
+     "index": 2
+    }
+   ],
+   "model": "all-minilm",
+   "usage": {
+    "prompt_tokens": 15,
+    "total_tokens": 15
+   }
+  }
+ }
+]

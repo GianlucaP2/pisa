@@ -1,0 +1,96 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Reply with exactly one word: ready."
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.429,
+  "longest_silence_s": 0.429,
+  "total_s": 0.429,
+  "body": {
+   "id": "chatcmpl-874",
+   "object": "chat.completion",
+   "created": 1795557603,
+   "model": "qwen2.5:1.5b",
+   "system_fingerprint": "fp_ollama",
+   "choices": [
+    {
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "Ready."
+     },
+     "finish_reason": "stop"
+    }
+   ],
+   "usage": {
+    "prompt_tokens": 37,
+    "prompt_tokens_details": {
+     "cached_tokens": 24
+    },
+    "completion_tokens": 3,
+    "total_tokens": 40
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Reply with exactly one word: ready."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.171,
+  "longest_silence_s": 0.171,
+  "total_s": 0.171,
+  "body": {
+   "id": "chatcmpl-462",
+   "object": "chat.completion",
+   "created": 1795557604,
+   "model": "qwen2.5:1.5b",
+   "system_fingerprint": "fp_ollama",
+   "choices": [
+    {
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "Ready."
+     },
+     "finish_reason": "stop"
+    }
+   ],
+   "usage": {
+    "prompt_tokens": 37,
+    "prompt_tokens_details": {
+     "cached_tokens": 36
+    },
+    "completion_tokens": 3,
+    "total_tokens": 40
+   }
+  }
+ }
+]

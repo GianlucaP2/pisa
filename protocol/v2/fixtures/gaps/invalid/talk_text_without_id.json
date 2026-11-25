@@ -1,0 +1,12 @@
+{
+  "gap": "talk.text",
+  "check": "client_frame",
+  "why": "talk.text names the open talk it is typed into: no id, no frame.",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.voice.talk.text",
+    "value": {
+      "text": "Mettimi il dentista domani alle 9"
+    }
+  }
+}

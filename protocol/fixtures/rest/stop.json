@@ -1,0 +1,6 @@
+{
+  "stopped": true,
+  "since": "2026-11-14T21:30:00+01:00",
+  "by": "voice",
+  "paused": ["follow_ups", "scheduled_pushes", "planning", "email_tasks", "vault_reminders", "autonomy", "ready_answers"]
+}

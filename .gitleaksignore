@@ -1,0 +1,3 @@
+# Reviewed false positives (gitleaks fingerprints). None in the tree: the tests build every credential-shaped
+# value at run time (core/tests/test_no_literal_secrets.py), so no reviewed exception is needed.
+
