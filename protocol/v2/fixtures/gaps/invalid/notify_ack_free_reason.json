@@ -1,0 +1,19 @@
+{
+  "gap": "notify.local",
+  "check": "client_frame",
+  "why": "An ack's failure reason is a closed set: never free text.",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.notify.ack",
+    "value": {
+      "revision": 12,
+      "scheduled": [],
+      "failed": [
+        {
+          "id": "rem-1",
+          "reason": "the user said no"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,427 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is the weather in Paris? Use the get_weather tool."
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     }
+    ],
+    "tool_choice": "none"
+   }
+  },
+  "status": 500,
+  "content_type": "application/json",
+  "first_byte_s": 0.002,
+  "longest_silence_s": 0.002,
+  "total_s": 0.002,
+  "body": {
+   "error": {
+    "code": 500,
+    "message": "tools param requires --jinja flag",
+    "type": "server_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say hello."
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     }
+    ],
+    "tool_choice": "required"
+   }
+  },
+  "status": 500,
+  "content_type": "application/json",
+  "first_byte_s": 0.002,
+  "longest_silence_s": 0.002,
+  "total_s": 0.002,
+  "body": {
+   "error": {
+    "code": 500,
+    "message": "tools param requires --jinja flag",
+    "type": "server_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say hello."
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     }
+    ],
+    "tool_choice": {
+     "type": "function",
+     "function": {
+      "name": "get_time"
+     }
+    }
+   }
+  },
+  "status": 500,
+  "content_type": "application/json",
+  "first_byte_s": 0.001,
+  "longest_silence_s": 0.001,
+  "total_s": 0.001,
+  "body": {
+   "error": {
+    "code": 500,
+    "message": "tools param requires --jinja flag",
+    "type": "server_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": true,
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is the weather in Paris? Use the get_weather tool."
+     }
+    ],
+    "max_tokens": 1024,
+    "parallel_tool_calls": true,
+    "stream_options": {
+     "include_usage": true
+    },
+    "tool_choice": "none",
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 500,
+  "content_type": "application/json",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.002,
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": true,
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is the weather in Paris? Use the get_weather tool."
+     }
+    ],
+    "max_tokens": 1024,
+    "parallel_tool_calls": true,
+    "stream_options": {
+     "include_usage": true
+    },
+    "tool_choice": "none",
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 500,
+  "content_type": "application/json",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.002,
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": true,
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is the weather in Paris? Use the get_weather tool."
+     }
+    ],
+    "max_tokens": 1024,
+    "parallel_tool_calls": true,
+    "stream_options": {
+     "include_usage": true
+    },
+    "tool_choice": "none",
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 500,
+  "content_type": "application/json",
+  "first_byte_s": 0.002,
+  "longest_silence_s": 0.002,
+  "total_s": 0.002,
+  "body": {
+   "error": {
+    "code": 500,
+    "message": "tools param requires --jinja flag",
+    "type": "server_error"
+   }
+  }
+ }
+]

@@ -1,0 +1,147 @@
+{
+  "gap": "maps.phone",
+  "check": "client_frame",
+  "why": "Untrusted input: at most 10 places.",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.maps.result",
+    "value": {
+      "requestId": "3f2a1b0c-9d8e-4f7a-8b6c-5d4e3f2a1b0c",
+      "ok": true,
+      "places": [
+        {
+          "id": "I0000000000000000",
+          "name": "Farmacia Esempio",
+          "address": "Via Esempio 1, Testville",
+          "lat": 45.0012,
+          "lon": 9.0034,
+          "kind": "pharmacy",
+          "distanceMeters": 420,
+          "openNow": true,
+          "phone": "+15550100100",
+          "url": "https://pharmacy.example.org"
+        },
+        {
+          "id": "I0000000000000001",
+          "name": "Farmacia Esempio",
+          "address": "Via Esempio 1, Testville",
+          "lat": 45.0012,
+          "lon": 9.0034,
+          "kind": "pharmacy",
+          "distanceMeters": 420,
+          "openNow": true,
+          "phone": "+15550100100",
+          "url": "https://pharmacy.example.org"
+        },
+        {
+          "id": "I0000000000000002",
+          "name": "Farmacia Esempio",
+          "address": "Via Esempio 1, Testville",
+          "lat": 45.0012,
+          "lon": 9.0034,
+          "kind": "pharmacy",
+          "distanceMeters": 420,
+          "openNow": true,
+          "phone": "+15550100100",
+          "url": "https://pharmacy.example.org"
+        },
+        {
+          "id": "I0000000000000003",
+          "name": "Farmacia Esempio",
+          "address": "Via Esempio 1, Testville",
+          "lat": 45.0012,
+          "lon": 9.0034,
+          "kind": "pharmacy",
+          "distanceMeters": 420,
+          "openNow": true,
+          "phone": "+15550100100",
+          "url": "https://pharmacy.example.org"
+        },
+        {
+          "id": "I0000000000000004",
+          "name": "Farmacia Esempio",
+          "address": "Via Esempio 1, Testville",
+          "lat": 45.0012,
+          "lon": 9.0034,
+          "kind": "pharmacy",
+          "distanceMeters": 420,
+          "openNow": true,
+          "phone": "+15550100100",
+          "url": "https://pharmacy.example.org"
+        },
+        {
+          "id": "I0000000000000005",
+          "name": "Farmacia Esempio",
+          "address": "Via Esempio 1, Testville",
+          "lat": 45.0012,
+          "lon": 9.0034,
+          "kind": "pharmacy",
+          "distanceMeters": 420,
+          "openNow": true,
+          "phone": "+15550100100",
+          "url": "https://pharmacy.example.org"
+        },
+        {
+          "id": "I0000000000000006",
+          "name": "Farmacia Esempio",
+          "address": "Via Esempio 1, Testville",
+          "lat": 45.0012,
+          "lon": 9.0034,
+          "kind": "pharmacy",
+          "distanceMeters": 420,
+          "openNow": true,
+          "phone": "+15550100100",
+          "url": "https://pharmacy.example.org"
+        },
+        {
+          "id": "I0000000000000007",
+          "name": "Farmacia Esempio",
+          "address": "Via Esempio 1, Testville",
+          "lat": 45.0012,
+          "lon": 9.0034,
+          "kind": "pharmacy",
+          "distanceMeters": 420,
+          "openNow": true,
+          "phone": "+15550100100",
+          "url": "https://pharmacy.example.org"
+        },
+        {
+          "id": "I0000000000000008",
+          "name": "Farmacia Esempio",
+          "address": "Via Esempio 1, Testville",
+          "lat": 45.0012,
+          "lon": 9.0034,
+          "kind": "pharmacy",
+          "distanceMeters": 420,
+          "openNow": true,
+          "phone": "+15550100100",
+          "url": "https://pharmacy.example.org"
+        },
+        {
+          "id": "I0000000000000009",
+          "name": "Farmacia Esempio",
+          "address": "Via Esempio 1, Testville",
+          "lat": 45.0012,
+          "lon": 9.0034,
+          "kind": "pharmacy",
+          "distanceMeters": 420,
+          "openNow": true,
+          "phone": "+15550100100",
+          "url": "https://pharmacy.example.org"
+        },
+        {
+          "id": "I000000000000000A",
+          "name": "Farmacia Esempio",
+          "address": "Via Esempio 1, Testville",
+          "lat": 45.0012,
+          "lon": 9.0034,
+          "kind": "pharmacy",
+          "distanceMeters": 420,
+          "openNow": true,
+          "phone": "+15550100100",
+          "url": "https://pharmacy.example.org"
+        }
+      ]
+    }
+  }
+}

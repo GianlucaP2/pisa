@@ -1,0 +1,103 @@
+{
+  "id": "00000000-0000-4000-8000-000000000501",
+  "name": "Osteria sul Ponte",
+  "hours": {
+    "weekly": [
+      {
+        "day": 1,
+        "open": "12:00",
+        "close": "23:00"
+      },
+      {
+        "day": 2,
+        "open": "12:00",
+        "close": "23:00"
+      },
+      {
+        "day": 3,
+        "open": "12:00",
+        "close": "23:00"
+      },
+      {
+        "day": 4,
+        "open": "12:00",
+        "close": "23:00"
+      },
+      {
+        "day": 5,
+        "open": "12:00",
+        "close": "23:00"
+      },
+      {
+        "day": 6,
+        "open": "12:00",
+        "close": "23:00"
+      },
+      {
+        "day": 7,
+        "open": "12:00",
+        "close": "23:00"
+      }
+    ],
+    "open_now": true,
+    "next_change": "2026-10-23T23:00:00+02:00",
+    "note": null
+  },
+  "phone": "+39 02 1234 5678",
+  "website": "https://www.osteriasulponte.example.it",
+  "review_summary": {
+    "text": "People like the terrace on the canal at sunset and the risotto; service can be slow on weekends.",
+    "source": "google",
+    "sources": [],
+    "disclosure": "Summarized with Gemini",
+    "flag_uri": "https://www.google.com/local/review/rap/report?postId=example",
+    "uri": "https://www.google.com/maps/place/?q=place_id:example"
+  },
+  "description": {
+    "text": "A Milanese osteria with a terrace on the Naviglio Grande.",
+    "disclosure": "Summarized with Gemini",
+    "flag_uri": "https://www.google.com/local/review/rap/report?postId=overview-example"
+  },
+  "reviews": [
+    {
+      "author": "Un cliente",
+      "rating": 5,
+      "relative_time": "2 settimane fa",
+      "text": "Terrazza proprio sul Naviglio, al tramonto la vista sull'acqua è bellissima.",
+      "author_uri": "https://www.google.com/maps/contrib/100000000000000000001"
+    },
+    {
+      "author": "Marta",
+      "rating": 4,
+      "relative_time": "un mese fa",
+      "text": "Cucina italiana di casa, risotto ottimo.",
+      "author_uri": "https://www.google.com/maps/contrib/100000000000000000001"
+    }
+  ],
+  "menu": {
+    "url": "https://www.osteriasulponte.example.it/menu",
+    "highlights": [
+      "Risotto alla milanese",
+      "Cotoletta",
+      "Tiramisù"
+    ],
+    "source": "https://www.osteriasulponte.example.it/menu"
+  },
+  "apple_place_id": "I7C6F6E2B1A0F9D3E",
+  "photos": [
+    {
+      "index": 0,
+      "attribution": {
+        "name": "Sara B.",
+        "uri": "https://maps.google.com/maps/contrib/1"
+      }
+    },
+    {
+      "index": 1,
+      "attribution": {
+        "name": "Osteria sul Ponte",
+        "uri": "https://maps.google.com/maps/contrib/2"
+      }
+    }
+  ]
+}

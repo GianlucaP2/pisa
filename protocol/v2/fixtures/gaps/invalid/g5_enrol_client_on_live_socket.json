@@ -1,0 +1,13 @@
+{
+  "gap": "G5",
+  "check": "client_frame",
+  "why": "pisa.voice.enrol.* is not a /v2/live client event.",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.voice.enrol.block",
+    "value": {
+      "block": "A",
+      "state": "start"
+    }
+  }
+}

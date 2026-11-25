@@ -1,0 +1,21 @@
+{
+  "gap": "briefing.view",
+  "check": "server_frame",
+  "why": "pisa.app.changed names views only, never content.",
+  "frame": {
+    "seq": 7,
+    "threadId": "pisa-notices",
+    "runId": "run-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.app.changed",
+      "value": {
+        "views": [
+          "riepilogo"
+        ],
+        "at": "2026-11-22T09:30:00Z",
+        "text": "Dentista alle 10"
+      }
+    }
+  }
+}

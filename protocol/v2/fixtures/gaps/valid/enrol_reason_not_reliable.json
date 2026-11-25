@@ -1,0 +1,38 @@
+{
+  "gap": "enrol-reason",
+  "check": "enrol_server_frame",
+  "why": "enrol.done ok false, reason not_reliable. v1 sent this with no reason and the report.",
+  "v1": {
+    "type": "enrol.done",
+    "route": "speaker",
+    "ok": false,
+    "owner_false_reject": 0.35,
+    "strangers_per_min": 0.4,
+    "by_snr": {
+      "clean": 0.9,
+      "10": 0.75,
+      "5": 0.6,
+      "0": 0.4
+    }
+  },
+  "frame": {
+    "seq": 1,
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.voice.enrol.done",
+      "value": {
+        "route": "speaker",
+        "ok": false,
+        "ownerFalseReject": 0.35,
+        "strangersPerMin": 0.4,
+        "bySnr": {
+          "clean": 0.9,
+          "10": 0.75,
+          "5": 0.6,
+          "0": 0.4
+        },
+        "reason": "not_reliable"
+      }
+    }
+  }
+}

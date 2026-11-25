@@ -1,0 +1,236 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "pisa-matrix-no-such-model",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 2048
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 2.695,
+  "longest_silence_s": 2.695,
+  "total_s": 2.695,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "stop",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "You said \"Say ok.\" Let me know if there's anything I can help with! 😊",
+      "reasoning_content": "Okay, the user said \"Say ok.\" I need to respond appropriately. Let me think about the possible meanings. \"Say ok\" could be a playful way to say \"okay,\" but maybe the user wants a more formal response. Alternatively, it might be a command or a greeting. Since the user wrote \"Say ok,\" it's a bit unclear. I should respond in a friendly and helpful manner, maybe...<459 chars>"
+     }
+    }
+   ],
+   "created": 1795555983,
+   "model": "qwen3-0.6b",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 128,
+    "prompt_tokens": 11,
+    "total_tokens": 139,
+    "prompt_tokens_details": {
+     "cached_tokens": 3
+    }
+   },
+   "id": "chatcmpl-nI2Wd93N2BtMZUyM6gqY4Iq3gM60fuap",
+   "timings": {
+    "cache_n": 3,
+    "prompt_n": 8,
+    "prompt_ms": 34.51,
+    "prompt_per_token_ms": 4.314,
+    "prompt_per_second": 231.817,
+    "predicted_n": 128,
+    "predicted_ms": 2198.069,
+    "predicted_per_token_ms": 17.308,
+    "predicted_per_second": 57.778
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Record 00000: the lamp in room 00000 is green and stays on.\nRecord 00001: the lamp in room 00001 is blue and stays on.\nRecord 00002: the lamp in room 00002 is amber and stays on.\nRecord 00003: the lamp in room 00003 is grey and stays on.\nRecord 00004: the lamp in room 00004 is violet and stays on.\nRecord 00005: the lamp in room 00005 is white and stays on.\nR...<150007 chars>"
+     }
+    ],
+    "max_tokens": 2048
+   }
+  },
+  "status": 400,
+  "content_type": "application/json",
+  "first_byte_s": 0.045,
+  "longest_silence_s": 0.045,
+  "total_s": 0.045,
+  "body": {
+   "error": {
+    "code": 400,
+    "message": "request (60011 tokens) exceeds the available context size (40960 tokens), try increasing it",
+    "type": "exceed_context_size_error",
+    "n_prompt_tokens": 60011,
+    "n_ctx": 40960
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a 300-word story about a lamp."
+     }
+    ],
+    "max_tokens": 2048
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.504,
+  "error": "ReadTimeout",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a 300-word story about a lamp."
+     }
+    ],
+    "max_tokens": 2048
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.515,
+  "error": "ReadTimeout",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a 300-word story about a lamp."
+     }
+    ],
+    "max_tokens": 2048
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.504,
+  "error": "ReadTimeout",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 2048
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.001,
+  "error": "ConnectError",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 2048
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.001,
+  "error": "ConnectError",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 2048
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.001,
+  "error": "ConnectError",
+  "body": ""
+ }
+]

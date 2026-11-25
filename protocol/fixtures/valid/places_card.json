@@ -1,0 +1,105 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009056",
+  "ts": "2026-10-23T19:10:00+02:00",
+  "type": "card",
+  "card_id": "00000000-0000-4000-8000-000000000402",
+  "title": "Terrazze sul fiume, aperte ora",
+  "lines": [
+    "Osteria sul Ponte: terrazza sul fiume, cucina italiana, aperta fino alle 23:00",
+    "Bistrot dell'Ansa: terrazza con vista, aperta ora; il fiume si vede solo dai tavoli in fondo"
+  ],
+  "kind": "places",
+  "request": "una terrazza sul fiume, aperta ora, cucina italiana",
+  "places": [
+    {
+      "place_id": "00000000-0000-4000-8000-000000000501",
+      "name": "Osteria sul Ponte",
+      "why": "Terrazza sul fiume, cucina italiana, aperta fino alle 23:00",
+      "checks": [
+        {
+          "requirement": "terrazza",
+          "status": "verified",
+          "source": "Google (outdoor seating)"
+        },
+        {
+          "requirement": "vista sul fiume",
+          "status": "verified",
+          "source": "https://www.example-guida.it/terrazze-sul-fiume"
+        },
+        {
+          "requirement": "aperta ora",
+          "status": "verified",
+          "source": "Google (orari)"
+        },
+        {
+          "requirement": "cucina italiana",
+          "status": "likely",
+          "source": "recensioni"
+        }
+      ],
+      "distance_m": 850,
+      "travel_min": 11,
+      "open_now": true,
+      "rating": 4.5,
+      "sources": [
+        {
+          "title": "Le terrazze sul fiume",
+          "url": "https://www.example-guida.it/terrazze-sul-fiume"
+        }
+      ],
+      "lat": null,
+      "lon": null,
+      "photo_count": 0,
+      "rating_count": null,
+      "price_level": null,
+      "closes_at": null,
+      "opens_at": null,
+      "menu_url": null,
+      "fits": [],
+      "different": false
+    },
+    {
+      "place_id": "00000000-0000-4000-8000-000000000502",
+      "name": "Bistrot dell'Ansa",
+      "why": "Terrazza con vista, aperta ora; il fiume si vede solo dai tavoli in fondo",
+      "checks": [
+        {
+          "requirement": "terrazza",
+          "status": "verified",
+          "source": "Google (outdoor seating)"
+        },
+        {
+          "requirement": "vista sul fiume",
+          "status": "likely",
+          "source": "recensioni"
+        },
+        {
+          "requirement": "aperta ora",
+          "status": "verified",
+          "source": "Google (orari)"
+        },
+        {
+          "requirement": "cucina italiana",
+          "status": "unknown",
+          "source": ""
+        }
+      ],
+      "distance_m": 1400,
+      "travel_min": null,
+      "open_now": true,
+      "rating": 4.2,
+      "sources": [],
+      "lat": null,
+      "lon": null,
+      "photo_count": 0,
+      "rating_count": null,
+      "price_level": null,
+      "closes_at": null,
+      "opens_at": null,
+      "menu_url": null,
+      "fits": [],
+      "different": false
+    }
+  ]
+}

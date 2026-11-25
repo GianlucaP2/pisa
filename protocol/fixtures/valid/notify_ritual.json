@@ -1,0 +1,14 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009403",
+  "ts": "2026-11-18T22:00:00+01:00",
+  "type": "notify",
+  "notification_id": "8c3f2e4a-5d6e-4a7b-8c9d-0e1f2a3b4c5d",
+  "text": "Domani, in 20 secondi: Palestra alle 18 si sovrappone a call con Marco. Sposto la palestra alle 19?",
+  "lang": "it-IT",
+  "kind": "info",
+  "priority": "normal",
+  "urgency": "breakpoint",
+  "ritual": "ghost_run",
+  "sheet_id": "sheet:9d4a3f5b-6e7f-4b8c-9d0e-1f2a3b4c5d6e"
+}

@@ -1,0 +1,18 @@
+{
+  "kind": "calendar#events",
+  "items": [
+    {
+      "id": "hol-1",
+      "status": "confirmed",
+      "summary": "Ognissanti",
+      "start": {
+        "date": "2026-11-01"
+      },
+      "end": {
+        "date": "2026-11-02"
+      },
+      "updated": "2026-01-01T00:00:00.000Z"
+    }
+  ],
+  "nextSyncToken": "sync-token-hol"
+}

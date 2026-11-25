@@ -1,0 +1,17 @@
+{
+  "messages": [
+    {
+      "id": "m-parcel",
+      "threadId": "t-1"
+    },
+    {
+      "id": "m-promo",
+      "threadId": "t-2"
+    },
+    {
+      "id": "m-html",
+      "threadId": "t-3"
+    }
+  ],
+  "resultSizeEstimate": 3
+}

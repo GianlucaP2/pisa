@@ -1,0 +1,365 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Use the pisa_probe_add tool to add 2 and 3."
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "pisa_probe_add",
+       "description": "Add two integers and return their sum.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "a": {
+          "type": "integer"
+         },
+         "b": {
+          "type": "integer"
+         }
+        },
+        "required": [
+         "a",
+         "b"
+        ]
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 5.694,
+  "longest_silence_s": 5.694,
+  "total_s": 5.694,
+  "body": {
+   "id": "chatcmpl-906",
+   "object": "chat.completion",
+   "created": 1795557702,
+   "model": "qwen3:0.6b",
+   "system_fingerprint": "fp_ollama",
+   "choices": [
+    {
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "Okay, the user wants to add 2 and 3 using the pisa_probe_add tool. Let me check the function's description. The tool takes two integers and returns their sum. So I need to call Add two integers with a=2 and b=3. The function is designed to handle that, so I should generate the tool call with those values. No other parameters are needed here. Just make sure t...<429 chars>",
+      "tool_calls": [
+       {
+        "id": "call_6nyrkg12",
+        "index": 0,
+        "type": "function",
+        "function": {
+         "name": "pisa_probe_add",
+         "arguments": "{\"a\":2,\"b\":3}"
+        }
+       }
+      ]
+     },
+     "finish_reason": "tool_calls"
+    }
+   ],
+   "usage": {
+    "prompt_tokens": 155,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    },
+    "completion_tokens": 127,
+    "total_tokens": 282
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is 2 plus 3?"
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "response_format": {
+     "type": "json_schema",
+     "json_schema": {
+      "name": "pisa_probe",
+      "strict": true,
+      "schema": {
+       "type": "object",
+       "properties": {
+        "pisa_probe_sum": {
+         "type": "integer"
+        }
+       },
+       "required": [
+        "pisa_probe_sum"
+       ],
+       "additionalProperties": false
+      }
+     }
+    }
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 6.797,
+  "longest_silence_s": 6.797,
+  "total_s": 6.797,
+  "body": {
+   "id": "chatcmpl-400",
+   "object": "chat.completion",
+   "created": 1795557708,
+   "model": "qwen3:0.6b",
+   "system_fingerprint": "fp_ollama",
+   "choices": [
+    {
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "",
+      "reasoning": "Okay, so the user is asking, \"What is 2 plus 3?\" Let me break this down. First, I need to figure out what they're asking. It's a simple arithmetic problem, right? They want to know the sum of 2 and 3. \n\nNow, I remember that addition is the operation that combines two numbers. So, 2 plus 3 should be straightforward. Let me do that math. 2 plus 3... that's 5. ...<995 chars>"
+     },
+     "finish_reason": "length"
+    }
+   ],
+   "usage": {
+    "prompt_tokens": 18,
+    "prompt_tokens_details": {
+     "cached_tokens": 1
+    },
+    "completion_tokens": 256,
+    "total_tokens": 274
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Describe the colour of the sky in JSON."
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "response_format": {
+     "type": "json_object"
+    }
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 7.223,
+  "longest_silence_s": 7.223,
+  "total_s": 7.223,
+  "body": {
+   "id": "chatcmpl-757",
+   "object": "chat.completion",
+   "created": 1795557716,
+   "model": "qwen3:0.6b",
+   "system_fingerprint": "fp_ollama",
+   "choices": [
+    {
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "{\n\n\"sky_color\": \"blue\",\n\"variations\": [\"blue at night\",",
+      "reasoning": "Okay, the user wants me to describe the color of the sky in JSON. Let me start by recalling what I know about the sky's color. The sky is usually described as a deep blue, right? But I should make sure I'm not mixing up different colors. Maybe the user is looking for a specific color, like the sky's color in a particular context, like a painting or a weather...<1005 chars>"
+     },
+     "finish_reason": "length"
+    }
+   ],
+   "usage": {
+    "prompt_tokens": 19,
+    "prompt_tokens_details": {
+     "cached_tokens": 3
+    },
+    "completion_tokens": 256,
+    "total_tokens": 275
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say hello."
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "pisa_probe_add",
+       "description": "Add two integers and return their sum.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "a": {
+          "type": "integer"
+         },
+         "b": {
+          "type": "integer"
+         }
+        },
+        "required": [
+         "a",
+         "b"
+        ]
+       }
+      }
+     }
+    ],
+    "tool_choice": "required"
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 2.809,
+  "longest_silence_s": 2.809,
+  "total_s": 2.809,
+  "body": {
+   "id": "chatcmpl-20",
+   "object": "chat.completion",
+   "created": 1795557718,
+   "model": "qwen3:0.6b",
+   "system_fingerprint": "fp_ollama",
+   "choices": [
+    {
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "Hello! How can I assist you today? 😊",
+      "reasoning": "Okay, the user just said \"Say hello.\" Let me think about how to respond. The tools provided include a function called pisa_probe_add, which adds two integers and returns their sum. But the user's message is a simple greeting, not a numerical input. Since there's no function needed here, I can't use any tool. I should just respond normally. Make sure to keep ...<403 chars>"
+     },
+     "finish_reason": "stop"
+    }
+   ],
+   "usage": {
+    "prompt_tokens": 143,
+    "prompt_tokens_details": {
+     "cached_tokens": 133
+    },
+    "completion_tokens": 102,
+    "total_tokens": 245
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "messages": [
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "text",
+        "text": "What colour is this image? Answer with one word."
+       },
+       {
+        "type": "image_url",
+        "image_url": {
+         "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKklEQVR4nGO4IyJCU8QwasGoBaMWjFowasGoBaMWjFowasGoBaMWDBULAJ3LED3QqzauAAAAAElFTkSuQmCC"
+        }
+       }
+      ]
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false
+   }
+  },
+  "status": 400,
+  "content_type": "application/json",
+  "first_byte_s": 0.005,
+  "longest_silence_s": 0.005,
+  "total_s": 0.005,
+  "body": {
+   "error": {
+    "message": "Multimodal data provided, but model does not support multimodal requests.",
+    "type": "invalid_request_error",
+    "param": null,
+    "code": null
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/audio/transcriptions",
+   "body": "<16415 bytes>"
+  },
+  "status": 400,
+  "content_type": "application/json",
+  "first_byte_s": 0.001,
+  "longest_silence_s": 0.001,
+  "total_s": 0.001,
+  "body": {
+   "error": {
+    "message": "\"qwen3:0.6b\" does not support audio input",
+    "type": "invalid_request_error",
+    "param": null,
+    "code": null
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/embeddings",
+   "body": {
+    "model": "qwen3:0.6b",
+    "input": "pisa probe"
+   }
+  },
+  "status": 501,
+  "content_type": "application/json",
+  "first_byte_s": 0.004,
+  "longest_silence_s": 0.004,
+  "total_s": 0.004,
+  "body": {
+   "error": {
+    "message": "This server does not support embeddings. Start it with `--embeddings`",
+    "type": "api_error",
+    "param": null,
+    "code": null
+   }
+  }
+ }
+]

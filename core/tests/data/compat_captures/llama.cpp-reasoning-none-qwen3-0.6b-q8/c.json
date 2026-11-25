@@ -1,0 +1,1930 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is the weather in Paris right now? Use the tool."
+     }
+    ],
+    "max_tokens": 4096,
+    "temperature": 0,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 3.316,
+  "longest_silence_s": 3.316,
+  "total_s": 3.316,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "tool_calls",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "<think>\nOkay, the user is asking for the weather in Paris right now. Let me check the available tools. There's get_weather and get_time. The get_weather function requires a city parameter. Since the user specified Paris, I should call get_weather with \"Paris\" as the city. I don't need to use get_time here because they're asking about the weather, not the cur...<452 chars>",
+      "tool_calls": [
+       {
+        "type": "function",
+        "function": {
+         "name": "get_weather",
+         "arguments": "{\"city\": \"Paris\"}"
+        },
+        "id": "mrVctS3yITnWWNt9LGPxk9yvVtEKVwp0"
+       }
+      ]
+     }
+    }
+   ],
+   "created": 1795557286,
+   "model": "qwen3-0.6b",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 120,
+    "prompt_tokens": 236,
+    "total_tokens": 356,
+    "prompt_tokens_details": {
+     "cached_tokens": 51
+    }
+   },
+   "id": "chatcmpl-5DuZd8InJbS0Ijn84XTi6GQnd4sY20mo",
+   "timings": {
+    "cache_n": 51,
+    "prompt_n": 185,
+    "prompt_ms": 462.909,
+    "prompt_per_token_ms": 2.502,
+    "prompt_per_second": 399.647,
+    "predicted_n": 120,
+    "predicted_ms": 2811.517,
+    "predicted_per_token_ms": 23.626,
+    "predicted_per_second": 42.326
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "stream": true,
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is the weather in Paris right now? Use the tool."
+     }
+    ],
+    "max_tokens": 4096,
+    "parallel_tool_calls": true,
+    "stream_options": {
+     "include_usage": true
+    },
+    "tool_choice": "auto",
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 0.467,
+  "longest_silence_s": 0.467,
+  "total_s": 2.967,
+  "sse": [
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": null
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "<think>"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "\n"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "Okay"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": ","
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " the"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " user"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " is"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " asking"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " about"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " the"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " weather"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " in"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " Paris"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " right"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " now"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "."
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " I"
+      }
+     }
+    ],
+    "created": 1795557287,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " need"
+      }
+     }
+    ],
+    "created": 1795557288,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " to"
+      }
+     }
+    ],
+    "created": 1795557288,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " use"
+      }
+     }
+    ],
+    "created": 1795557288,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " the"
+      }
+     }
+    ],
+    "created": 1795557288,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " get"
+      }
+     }
+    ],
+    "created": 1795557288,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "_weather"
+      }
+     }
+    ],
+    "created": 1795557288,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   "<69 events cut>",
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "city"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795557289,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "\":"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795557289,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": " \""
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "Paris"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "\"}"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "delta": {}
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [],
+    "created": 1795557290,
+    "id": "chatcmpl-UzUfe4CvZALnwcUHjeaYOtnF61a8NXu0",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk",
+    "usage": {
+     "completion_tokens": 110,
+     "prompt_tokens": 230,
+     "total_tokens": 340,
+     "prompt_tokens_details": {
+      "cached_tokens": 70
+     }
+    },
+    "timings": {
+     "cache_n": 70,
+     "prompt_n": 160,
+     "prompt_ms": 424.47,
+     "prompt_per_token_ms": 2.653,
+     "prompt_per_second": 376.941,
+     "predicted_n": 110,
+     "predicted_ms": 2499.695,
+     "predicted_per_token_ms": 22.933,
+     "predicted_per_second": 43.605
+    }
+   },
+   "[DONE]"
+  ]
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "stream": true,
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is the weather in Paris right now? Use the tool."
+     }
+    ],
+    "max_tokens": 4096,
+    "parallel_tool_calls": true,
+    "stream_options": {
+     "include_usage": true
+    },
+    "tool_choice": "auto",
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 0.039,
+  "longest_silence_s": 0.205,
+  "total_s": 2.655,
+  "sse": [
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": null
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "<think>"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "\n"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "Okay"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": ","
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " the"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " user"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " is"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " asking"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " for"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " the"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " current"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " weather"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " in"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " Paris"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "."
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " Let"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " me"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " check"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " the"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " tools"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " available"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "."
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " There"
+      }
+     }
+    ],
+    "created": 1795557290,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   "<64 events cut>",
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "city"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795557292,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "\":"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795557292,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": " \""
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795557292,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "Paris"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795557292,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "\"}"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795557292,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "delta": {}
+     }
+    ],
+    "created": 1795557292,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [],
+    "created": 1795557292,
+    "id": "chatcmpl-p3JXathbh1t0AC5RSfMjySmNqSDkxxSk",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk",
+    "usage": {
+     "completion_tokens": 105,
+     "prompt_tokens": 230,
+     "total_tokens": 335,
+     "prompt_tokens_details": {
+      "cached_tokens": 229
+     }
+    },
+    "timings": {
+     "cache_n": 229,
+     "prompt_n": 1,
+     "prompt_ms": 32.506,
+     "prompt_per_token_ms": 32.506,
+     "prompt_per_second": 30.764,
+     "predicted_n": 105,
+     "predicted_ms": 2618.219,
+     "predicted_per_token_ms": 25.175,
+     "predicted_per_second": 39.722
+    }
+   },
+   "[DONE]"
+  ]
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "stream": true,
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is the weather in Paris right now? Use the tool."
+     },
+     {
+      "role": "assistant",
+      "content": "<think>\n\nOkay, the user is asking for the current weather in Paris. Let me check the tools available. There's the get_weather function that requires a city parameter. The other tool is get_time, which also needs a city. Since the user specifically mentioned Paris, I should use get_weather with the city set to Paris. I'll make sure to format the tool call cor...<405 chars>",
+      "tool_calls": [
+       {
+        "id": "0DmsUXS8NLtepawsLJmS2IrJTzyKRaQo",
+        "type": "function",
+        "function": {
+         "name": "get_weather",
+         "arguments": "{\"city\":\"Paris\"}"
+        }
+       }
+      ]
+     },
+     {
+      "role": "tool",
+      "tool_call_id": "0DmsUXS8NLtepawsLJmS2IrJTzyKRaQo",
+      "content": "Paris: 18 C, clear sky"
+     }
+    ],
+    "max_tokens": 4096,
+    "parallel_tool_calls": true,
+    "stream_options": {
+     "include_usage": true
+    },
+    "tool_choice": "auto",
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 0.145,
+  "longest_silence_s": 0.145,
+  "total_s": 3.607,
+  "sse": [
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": null
+      }
+     }
+    ],
+    "created": 1795557292,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "<think>"
+      }
+     }
+    ],
+    "created": 1795557292,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "\n"
+      }
+     }
+    ],
+    "created": 1795557292,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "Alright"
+      }
+     }
+    ],
+    "created": 1795557292,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": ","
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " the"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " user"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " asked"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " about"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " the"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " weather"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " in"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " Paris"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "."
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " I"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " used"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " the"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " get"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "_weather"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " tool"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " with"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " the"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " city"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " parameter"
+      }
+     }
+    ],
+    "created": 1795557293,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   "<112 events cut>",
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " day"
+      }
+     }
+    ],
+    "created": 1795557296,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " to"
+      }
+     }
+    ],
+    "created": 1795557296,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " be"
+      }
+     }
+    ],
+    "created": 1795557296,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " outdoors"
+      }
+     }
+    ],
+    "created": 1795557296,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "!"
+      }
+     }
+    ],
+    "created": 1795557296,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": "stop",
+      "index": 0,
+      "delta": {}
+     }
+    ],
+    "created": 1795557296,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [],
+    "created": 1795557296,
+    "id": "chatcmpl-JbvDerKl1g3idBnb09ZH6ItGDMYcGmjP",
+    "model": "qwen3-0.6b",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk",
+    "usage": {
+     "completion_tokens": 141,
+     "prompt_tokens": 357,
+     "total_tokens": 498,
+     "prompt_tokens_details": {
+      "cached_tokens": 334
+     }
+    },
+    "timings": {
+     "cache_n": 334,
+     "prompt_n": 23,
+     "prompt_ms": 140.517,
+     "prompt_per_token_ms": 6.109,
+     "prompt_per_second": 163.681,
+     "predicted_n": 141,
+     "predicted_ms": 3460.79,
+     "predicted_per_token_ms": 24.72,
+     "predicted_per_second": 40.453
+    }
+   },
+   "[DONE]"
+  ]
+ }
+]

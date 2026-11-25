@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009010",
+  "ts": "2026-10-20T13:00:00+02:00",
+  "type": "approval_request",
+  "approval_id": "00000000-0000-4000-8000-000000000600",
+  "summary": "Book a table for 2 at 20:00 at Trattoria X?",
+  "risk": "R2",
+  "requires_biometric": false,
+  "expires_at": "2026-10-20T19:00:00+02:00"
+}

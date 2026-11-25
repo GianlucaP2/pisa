@@ -1,0 +1,7 @@
+{"event": {"name": "pisa.voice.enrol.quality", "timestamp": 1763460000001, "type": "CUSTOM", "value": {"block": "A", "clipped": false, "hint": null, "ok": true, "snrDb": 24.0, "voicedS": 11.5}}, "seq": 1}
+{"event": {"name": "pisa.voice.enrol.quality", "timestamp": 1763460000002, "type": "CUSTOM", "value": {"block": "B", "clipped": false, "hint": null, "ok": true, "snrDb": 24.0, "voicedS": 11.5}}, "seq": 2}
+{"event": {"name": "pisa.voice.enrol.quality", "timestamp": 1763460000003, "type": "CUSTOM", "value": {"block": "C", "clipped": false, "hint": "closer", "ok": false, "snrDb": 7.5, "voicedS": 11.5}}, "seq": 3}
+{"event": {"name": "pisa.voice.enrol.quality", "timestamp": 1763460000004, "type": "CUSTOM", "value": {"block": "D", "clipped": false, "hint": null, "ok": true, "snrDb": 24.0, "voicedS": 11.5}}, "seq": 4}
+{"event": {"name": "pisa.voice.enrol.quality", "timestamp": 1763460000005, "type": "CUSTOM", "value": {"block": "E", "clipped": false, "hint": null, "ok": true, "snrDb": 24.0, "voicedS": 11.5}}, "seq": 5}
+{"event": {"name": "pisa.voice.enrol.test_result", "timestamp": 1763460000006, "type": "CUSTOM", "value": {"acceptedOwner": 23, "acceptedStrangers": 0, "bySnr": {"0": 0.7, "10": 0.95, "5": 0.9, "clean": 1.0}, "ok": true, "ownerTotal": 24, "strangersTotal": 40}}, "seq": 6}
+{"event": {"name": "pisa.voice.enrol.done", "timestamp": 1763460000007, "type": "CUSTOM", "value": {"bySnr": {"0": 0.7, "10": 0.95, "5": 0.9, "clean": 1.0}, "ok": true, "ownerFalseReject": 0.075, "route": "airpods", "strangersPerMin": 0.0}}, "seq": 7}

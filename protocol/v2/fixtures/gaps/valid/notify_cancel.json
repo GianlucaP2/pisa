@@ -1,0 +1,20 @@
+{
+  "gap": "notify.local",
+  "check": "server_frame",
+  "why": "Contract 2.3 (notify.local): remove a scheduled notification by id.",
+  "frame": {
+    "seq": 7,
+    "threadId": "pisa-notices",
+    "runId": "run-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.notify.cancel",
+      "value": {
+        "revision": 13,
+        "ids": [
+          "rem-1"
+        ]
+      }
+    }
+  }
+}

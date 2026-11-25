@@ -1,0 +1,20 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009030",
+  "ts": "2026-10-21T14:20:00+02:00",
+  "type": "notify",
+  "notification_id": "00000000-0000-4000-8000-000000000530",
+  "text": "Non sei andato a pranzo da Visbar Zilverschub. Vuoi spostarlo, trovare un'alternativa o saltarlo?",
+  "lang": "it-IT",
+  "kind": "check_in",
+  "priority": "normal",
+  "check_in_id": "00000000-0000-4000-8000-000000000531",
+  "choices": [
+    {"id": "reschedule", "label": "Sposta"},
+    {"id": "alternative", "label": "Alternativa"},
+    {"id": "skip", "label": "Salta"},
+    {"id": "on_my_way", "label": "Sto arrivando"},
+    {"id": "did_it", "label": "Fatto"}
+  ],
+  "expects_reply": true
+}

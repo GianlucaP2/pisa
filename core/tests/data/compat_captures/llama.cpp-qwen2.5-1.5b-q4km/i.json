@@ -1,0 +1,157 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/embeddings",
+   "body": {
+    "model": "all-minilm-l6-v2",
+    "input": "a green lamp"
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.009,
+  "longest_silence_s": 0.009,
+  "total_s": 0.009,
+  "body": {
+   "model": "all-minilm-l6-v2",
+   "object": "list",
+   "usage": {
+    "prompt_tokens": 5,
+    "total_tokens": 5
+   },
+   "data": [
+    {
+     "embedding": "<384 numbers>",
+     "index": 0,
+     "object": "embedding"
+    }
+   ]
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/embeddings",
+   "body": {
+    "model": "all-minilm-l6-v2",
+    "input": [
+     "a green lamp",
+     "a blue door",
+     "an amber window"
+    ],
+    "encoding_format": "float"
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.007,
+  "longest_silence_s": 0.007,
+  "total_s": 0.007,
+  "body": {
+   "model": "all-minilm-l6-v2",
+   "object": "list",
+   "usage": {
+    "prompt_tokens": 15,
+    "total_tokens": 15
+   },
+   "data": [
+    {
+     "embedding": "<384 numbers>",
+     "index": 0,
+     "object": "embedding"
+    },
+    {
+     "embedding": "<384 numbers>",
+     "index": 1,
+     "object": "embedding"
+    },
+    {
+     "embedding": "<384 numbers>",
+     "index": 2,
+     "object": "embedding"
+    }
+   ]
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/embeddings",
+   "body": {
+    "model": "all-minilm-l6-v2",
+    "input": "a green lamp",
+    "encoding_format": "base64"
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.004,
+  "longest_silence_s": 0.004,
+  "total_s": 0.004,
+  "body": {
+   "model": "all-minilm-l6-v2",
+   "object": "list",
+   "usage": {
+    "prompt_tokens": 5,
+    "total_tokens": 5
+   },
+   "data": [
+    {
+     "embedding": "dFufvNPpvDz1HA08jPyNvVhGIzzJcgK8BvfFPVbOPbwO91A9W1+jPZChLD0bVzG9aaauvLz+rTyTtFY8V/pYPfIAr71Zgo+9CApxvZvxFbl3+Co8WL6cvME3fbz6uvm8/webvab4gD18wNy8gNaQPePVHz1BcY69dooBvCjMDz2bLcC9ybAXPWqckL1wuWI8gawXvbrW0r0meig8QYY4PT3Uib3xJ4q8D7WFPMe5OT1L72m9JJv0vEy5+jxlWos8UUNuvdN21b3r1FC8QwGIvUbpSjswkak9626OPQ9SkT2B8QS93NiFPAIJuju0PDi9lWI9PSHeozylvPQ8Ko8WPREli734rRA98ZORvSzX...<2048 chars>",
+     "index": 0,
+     "object": "embedding",
+     "encoding_format": "base64"
+    }
+   ]
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/embeddings",
+   "body": {
+    "model": "all-minilm-l6-v2",
+    "input": [
+     "a green lamp",
+     "a blue door",
+     "an amber window"
+    ],
+    "encoding_format": "base64"
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.005,
+  "longest_silence_s": 0.005,
+  "total_s": 0.005,
+  "body": {
+   "model": "all-minilm-l6-v2",
+   "object": "list",
+   "usage": {
+    "prompt_tokens": 15,
+    "total_tokens": 15
+   },
+   "data": [
+    {
+     "embedding": "dVufvNPpvDz1HA08jPyNvVpGIzzKcgK8BvfFPVXOPbwM91A9XF+jPZChLD0cVzG9aaauvLz+rTyTtFY8VvpYPfMAr71Zgo+9CQpxvX7xFbl3+Co8V76cvME3fbz6uvm8/webvab4gD18wNy8gNaQPePVHz1BcY69dooBvCjMDz2cLcC9ybAXPWuckL1wuWI8gawXvbrW0r0leig8QYY4PT3Uib3wJ4q8ELWFPMW5OT1M72m9JJv0vEu5+jxmWos8UkNuvdR21b3r1FC8QwGIvUbpSjswkak9626OPQ9SkT2B8QS93NiFPAEJuju0PDi9lWI9PSHeozylvPQ8Ko8WPREli734rRA98ZORvSzX...<2048 chars>",
+     "index": 0,
+     "object": "embedding",
+     "encoding_format": "base64"
+    },
+    {
+     "embedding": "Mx5vvAO7sDxpxq05xdUkPXTVj7wAprQ8dtagPdQuTL0yK/w8w1oyPcGlUrtrV+48AsyCPeobWbwnXrY7FjSnPQe9I7wtY3+9AMiBvaZ3GrvvLyG9VZ0XPbRJmjv9ifQ8EnYDvkXFBr1kDgK8puq+PFvyeTlXH148Kmh+vTp+eLwHtlg8fBF5vQN8KD0+Bny9qt5BPUH8iTwNWss5ACxHvba26bybIr48kmuVu+f1Izm2SAu8F+D/PJ+4Jr3nOHa8+OkxPd6zRr1nOyO9mVqVPS4MpL0S3lc9Nue2vLJYnD3Byx09hmCVvbp5WTzWMK26n1g8Paotez2GXDG92JBLPEqbTD0QJ+A8whZ2vRHB...<2048 chars>",
+     "index": 1,
+     "object": "embedding",
+     "encoding_format": "base64"
+    },
+    {
+     "embedding": "u08BPR0TiT1+QyU9/XMIPbLZdjxHDyC9puf6PXg5Zr0cSJc8s/x9uw5b1TuJQY48Fe+PvKQjm7sbIzS8HsFuPeejI70lola9fp6RvY8ckz3SVLk7vS36u0OCSr3erTi96BvGvC0KSD1aIiu9336sPJ18hD2FESy98dg3Pcu1xbwUWIm9uZDwPHO7N7tmI9C9rJXIvBc/+Lx2Rww9dzSePKuhAr3QBrs7c4GmvXh1urzxVdS9nO6Iu+9y0juZS5A8V8EvPQWIxr1IQQU8psRrvV+Kvr1VSl69ahwqPVVYDzv03KO6uVWVvRfw5jp4SyI9LBWvPUcygD1/rqG9q5Z8PTqqvzxFgpU9JBPHvcTF...<2048 chars>",
+     "index": 2,
+     "object": "embedding",
+     "encoding_format": "base64"
+    }
+   ]
+  }
+ }
+]

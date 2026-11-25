@@ -1,0 +1,34 @@
+{
+  "gap": "notify.local",
+  "check": "server_frame",
+  "why": "Contract 2.3 (notify.local): two local notifications, minimal lock-screen text, allow-listed deep links.",
+  "frame": {
+    "seq": 7,
+    "threadId": "pisa-notices",
+    "runId": "run-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.notify.schedule",
+      "value": {
+        "revision": 12,
+        "items": [
+          {
+            "id": "rem-1",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "leave-1",
+            "fireAt": "2026-11-25T09:10:00Z",
+            "title": "Ora di partire",
+            "kind": "leave",
+            "deepLink": "pisa://riepilogo"
+          }
+        ]
+      }
+    }
+  }
+}

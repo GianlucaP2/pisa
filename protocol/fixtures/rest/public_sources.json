@@ -1,0 +1,34 @@
+{
+  "sources": [
+    {
+      "key": "rome_trips",
+      "name": "RSM, GTFS-RT",
+      "licence": "CC BY-SA 4.0",
+      "attribution": "Dati: Roma Servizi per la Mobilità (CC BY-SA)",
+      "url": "https://romamobilita.it/wp-content/uploads/shared/rome_rtgtfs_trip_updates_feed.pb",
+      "official": true,
+      "status": "ok",
+      "fetched_at": "2026-11-03T12:56:28+01:00"
+    },
+    {
+      "key": "lazio_pharmacies",
+      "name": "Regione Lazio, farmacie",
+      "licence": "IODL 2.0",
+      "attribution": "Dati: Regione Lazio (IODL 2.0)",
+      "url": "https://dati.lazio.it/dataset/551579e1-a65d-4e7e-80d7-9bfe07fb2bdc/resource/7658322d-b629-4d77-a9f1-e4aad7c8f83b/download/farmaciereglaziolatlon.csv",
+      "official": true,
+      "status": "failing",
+      "fetched_at": null
+    },
+    {
+      "key": "rome_ztl",
+      "name": "Roma Servizi per la Mobilità, ZTL in Centro (orari)",
+      "licence": "reviewed table",
+      "attribution": "Orari: Roma Servizi per la Mobilità, pagina «ZTL in Centro» (aggiornata il 28/07/2026)",
+      "url": "https://romamobilita.it/muoversi-a-roma/ztl-in-centro/",
+      "official": true,
+      "status": "reviewed",
+      "fetched_at": null
+    }
+  ]
+}

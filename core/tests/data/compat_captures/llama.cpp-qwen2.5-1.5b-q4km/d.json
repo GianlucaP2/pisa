@@ -1,0 +1,1440 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "I need two things at once: the weather in Paris and the local time in Tokyo. Call get_weather and get_time now, both in this one reply."
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     }
+    ],
+    "parallel_tool_calls": true
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 2.919,
+  "longest_silence_s": 2.919,
+  "total_s": 2.919,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "tool_calls",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+       {
+        "type": "function",
+        "function": {
+         "name": "get_weather",
+         "arguments": "{\"city\": \"Paris\"}"
+        },
+        "id": "zC17fi1FvEWVfmhHteSb4mQMmaHmxGeJ"
+       },
+       {
+        "type": "function",
+        "function": {
+         "name": "get_time",
+         "arguments": "{\"city\": \"Tokyo\"}"
+        },
+        "id": "ZB9epT0p2wixGMbUbf88VsfLgHoKnopg"
+       }
+      ]
+     }
+    }
+   ],
+   "created": 1795554504,
+   "model": "qwen2.5-1.5b-instruct",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 41,
+    "prompt_tokens": 273,
+    "total_tokens": 314,
+    "prompt_tokens_details": {
+     "cached_tokens": 236
+    }
+   },
+   "id": "chatcmpl-tMWbzBIb3Foxf5YHIuHEmo7o9TNVazCX",
+   "timings": {
+    "cache_n": 236,
+    "prompt_n": 37,
+    "prompt_ms": 459.1,
+    "prompt_per_token_ms": 12.408,
+    "prompt_per_second": 80.592,
+    "predicted_n": 41,
+    "predicted_ms": 2448.387,
+    "predicted_per_token_ms": 61.21,
+    "predicted_per_second": 16.337
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "I need two things at once: the weather in Paris and the local time in Tokyo. Call get_weather and get_time now, both in this one reply."
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 2.313,
+  "longest_silence_s": 2.313,
+  "total_s": 2.313,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "tool_calls",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+       {
+        "type": "function",
+        "function": {
+         "name": "get_weather",
+         "arguments": "{\"city\": \"Paris\"}"
+        },
+        "id": "o7T4SG1dwSy2147cOjNnavP46b0wv9XA"
+       },
+       {
+        "type": "function",
+        "function": {
+         "name": "get_time",
+         "arguments": "{\"city\": \"Tokyo\"}"
+        },
+        "id": "of9YPAZ0oeJXRa9I5xKqIIUiG9YZHdXq"
+       }
+      ]
+     }
+    }
+   ],
+   "created": 1795554506,
+   "model": "qwen2.5-1.5b-instruct",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 41,
+    "prompt_tokens": 273,
+    "total_tokens": 314,
+    "prompt_tokens_details": {
+     "cached_tokens": 272
+    }
+   },
+   "id": "chatcmpl-vsXhWMKnfc2FDx4gxA13SiDeDawyxUW8",
+   "timings": {
+    "cache_n": 272,
+    "prompt_n": 1,
+    "prompt_ms": 55.282,
+    "prompt_per_token_ms": 55.282,
+    "prompt_per_second": 18.089,
+    "predicted_n": 41,
+    "predicted_ms": 2252.883,
+    "predicted_per_token_ms": 56.322,
+    "predicted_per_second": 17.755
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "I need two things at once: the weather in Paris and the local time in Tokyo. Call get_weather and get_time now, both in this one reply."
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     }
+    ],
+    "parallel_tool_calls": false
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 2.421,
+  "longest_silence_s": 2.421,
+  "total_s": 2.421,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "tool_calls",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+       {
+        "type": "function",
+        "function": {
+         "name": "get_weather",
+         "arguments": "{\"city\": \"Paris\"}"
+        },
+        "id": "m4JtuHpi5qT0FYMbQuJo56ASRxOHbZN3"
+       },
+       {
+        "type": "function",
+        "function": {
+         "name": "get_time",
+         "arguments": "{\"city\": \"Tokyo\"}"
+        },
+        "id": "lxG2dc3NPr01824jwUft1YjqdGOYshtH"
+       }
+      ]
+     }
+    }
+   ],
+   "created": 1795554509,
+   "model": "qwen2.5-1.5b-instruct",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 41,
+    "prompt_tokens": 273,
+    "total_tokens": 314,
+    "prompt_tokens_details": {
+     "cached_tokens": 272
+    }
+   },
+   "id": "chatcmpl-RW18DdsXYhSvlSYMu5GMjGtBabNa4wHq",
+   "timings": {
+    "cache_n": 272,
+    "prompt_n": 1,
+    "prompt_ms": 56.743,
+    "prompt_per_token_ms": 56.743,
+    "prompt_per_second": 17.623,
+    "predicted_n": 41,
+    "predicted_ms": 2359.156,
+    "predicted_per_token_ms": 58.979,
+    "predicted_per_second": 16.955
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": true,
+    "messages": [
+     {
+      "role": "user",
+      "content": "I need two things at once: the weather in Paris and the local time in Tokyo. Call get_weather and get_time now, both in this one reply."
+     }
+    ],
+    "max_tokens": 1024,
+    "parallel_tool_calls": true,
+    "stream_options": {
+     "include_usage": true
+    },
+    "tool_choice": "auto",
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 0.303,
+  "longest_silence_s": 7.124,
+  "total_s": 9.171,
+  "sse": [
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": null
+      }
+     }
+    ],
+    "created": 1795554509,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "id": "uAHcKsE0HrVLQq8RhuJH1b1W8z6o877n",
+         "type": "function",
+         "function": {
+          "name": "get_weather",
+          "arguments": "{"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554516,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "\""
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554517,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "city"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554517,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "\":"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554517,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": " \""
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554517,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "Paris"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554517,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 0,
+         "function": {
+          "arguments": "\"}"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554517,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 1,
+         "id": "kmKsHPWpqN4rAHlgecj2gbTXBg3wGjdY",
+         "type": "function",
+         "function": {
+          "name": "get_time",
+          "arguments": "{"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554518,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 1,
+         "function": {
+          "arguments": "\""
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554518,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 1,
+         "function": {
+          "arguments": "city"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554518,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 1,
+         "function": {
+          "arguments": "\":"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554518,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 1,
+         "function": {
+          "arguments": " \""
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554518,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 1,
+         "function": {
+          "arguments": "Tok"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554518,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 1,
+         "function": {
+          "arguments": "yo"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554518,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "tool_calls": [
+        {
+         "index": 1,
+         "function": {
+          "arguments": "\"}"
+         }
+        }
+       ]
+      }
+     }
+    ],
+    "created": 1795554518,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "delta": {}
+     }
+    ],
+    "created": 1795554518,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [],
+    "created": 1795554518,
+    "id": "chatcmpl-D5P4tE4z4sFgli9HIffLHwR4twq0NIFJ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk",
+    "usage": {
+     "completion_tokens": 41,
+     "prompt_tokens": 267,
+     "total_tokens": 308,
+     "prompt_tokens_details": {
+      "cached_tokens": 230
+     }
+    },
+    "timings": {
+     "cache_n": 230,
+     "prompt_n": 37,
+     "prompt_ms": 293.818,
+     "prompt_per_token_ms": 7.941,
+     "prompt_per_second": 125.928,
+     "predicted_n": 41,
+     "predicted_ms": 8868.834,
+     "predicted_per_token_ms": 221.721,
+     "predicted_per_second": 4.51
+    }
+   },
+   "[DONE]"
+  ]
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": true,
+    "messages": [
+     {
+      "role": "user",
+      "content": "I need two things at once: the weather in Paris and the local time in Tokyo. Call get_weather and get_time now, both in this one reply."
+     },
+     {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+       {
+        "id": "uAHcKsE0HrVLQq8RhuJH1b1W8z6o877n",
+        "type": "function",
+        "function": {
+         "name": "get_weather",
+         "arguments": "{\"city\":\"Paris\"}"
+        }
+       },
+       {
+        "id": "kmKsHPWpqN4rAHlgecj2gbTXBg3wGjdY",
+        "type": "function",
+        "function": {
+         "name": "get_time",
+         "arguments": "{\"city\":\"Tokyo\"}"
+        }
+       }
+      ]
+     },
+     {
+      "role": "tool",
+      "tool_call_id": "uAHcKsE0HrVLQq8RhuJH1b1W8z6o877n",
+      "content": "Paris: 18 C, clear sky"
+     },
+     {
+      "role": "tool",
+      "tool_call_id": "kmKsHPWpqN4rAHlgecj2gbTXBg3wGjdY",
+      "content": "Tokyo: 14:05"
+     }
+    ],
+    "max_tokens": 1024,
+    "parallel_tool_calls": true,
+    "stream_options": {
+     "include_usage": true
+    },
+    "tool_choice": "auto",
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 0.363,
+  "longest_silence_s": 0.363,
+  "total_s": 2.858,
+  "sse": [
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": null
+      }
+     }
+    ],
+    "created": 1795554518,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "The"
+      }
+     }
+    ],
+    "created": 1795554518,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " weather"
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " in"
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " Paris"
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " is"
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " "
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "1"
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "8"
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " degrees"
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " Celsius"
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " with"
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " clear"
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " sky"
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "."
+      }
+     }
+    ],
+    "created": 1795554519,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " The"
+      }
+     }
+    ],
+    "created": 1795554520,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " current"
+      }
+     }
+    ],
+    "created": 1795554520,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " local"
+      }
+     }
+    ],
+    "created": 1795554520,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " time"
+      }
+     }
+    ],
+    "created": 1795554520,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " in"
+      }
+     }
+    ],
+    "created": 1795554520,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " Tokyo"
+      }
+     }
+    ],
+    "created": 1795554520,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " is"
+      }
+     }
+    ],
+    "created": 1795554520,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " "
+      }
+     }
+    ],
+    "created": 1795554520,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "1"
+      }
+     }
+    ],
+    "created": 1795554520,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   "<8 events cut>",
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": "5"
+      }
+     }
+    ],
+    "created": 1795554521,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " PM"
+      }
+     }
+    ],
+    "created": 1795554521,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " local"
+      }
+     }
+    ],
+    "created": 1795554521,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": " time"
+      }
+     }
+    ],
+    "created": 1795554521,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": null,
+      "index": 0,
+      "delta": {
+       "content": ")."
+      }
+     }
+    ],
+    "created": 1795554521,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [
+     {
+      "finish_reason": "stop",
+      "index": 0,
+      "delta": {}
+     }
+    ],
+    "created": 1795554521,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk"
+   },
+   {
+    "choices": [],
+    "created": 1795554521,
+    "id": "chatcmpl-S7u6RciMBXUimdyj0r5cOYSEZrM7ilGZ",
+    "model": "qwen2.5-1.5b-instruct",
+    "system_fingerprint": "b12679-af5c58347",
+    "object": "chat.completion.chunk",
+    "usage": {
+     "completion_tokens": 37,
+     "prompt_tokens": 353,
+     "total_tokens": 390,
+     "prompt_tokens_details": {
+      "cached_tokens": 307
+     }
+    },
+    "timings": {
+     "cache_n": 307,
+     "prompt_n": 46,
+     "prompt_ms": 355.258,
+     "prompt_per_token_ms": 7.723,
+     "prompt_per_second": 129.483,
+     "predicted_n": 37,
+     "predicted_ms": 2497.66,
+     "predicted_per_token_ms": 69.379,
+     "predicted_per_second": 14.413
+    }
+   },
+   "[DONE]"
+  ]
+ }
+]

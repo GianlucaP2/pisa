@@ -1,0 +1,13 @@
+{
+  "server_to_phone": [
+    {"type": "talk.transcript", "text": "A", "final": true, "ignored": "noise"},
+    {"type": "talk.transcript", "text": "domani alle nove hai il dentista", "final": true, "ignored": "echo"},
+    {"type": "talk.dismiss", "id": "00000000-0000-4000-8000-000000009301"}
+  ],
+  "phone_to_server": [
+    {"type": "talk.route", "route": "speaker"},
+    {"type": "talk.route", "route": "airpods"},
+    {"type": "talk.choose", "id": "00000000-0000-4000-8000-000000009302", "choice": "o2"},
+    {"type": "talk.choose", "id": "00000000-0000-4000-8000-000000009303", "choice": "yes"}
+  ]
+}

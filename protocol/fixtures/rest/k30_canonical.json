@@ -1,0 +1,27 @@
+{
+  "_about": "A Face ID approval (protocol/README.md, 'A Face ID approval, signed by the phone's key'): one approval's digest and canonical text, byte for byte. The server (core/tests/test_core_sec.py) and the phone (CanonicalCheck) both assert against it.",
+  "approval": {
+    "id": "0b6f3a52-6c1e-4d7a-9f0e-2a4c1b8d5e70",
+    "kind": "email_send",
+    "summary": "Mando a Claudio, Marco:\r\nRe: Cena di venerdì",
+    "payload": {
+      "draft_id": "5d7e1c2a-9b3f-4a6e-8c1d-2f0e3b4a5c6d",
+      "version": 2,
+      "lang": "it-IT",
+      "names": "Claudio, Marco",
+      "fingerprint": "3c9f1e0b7a2d4c6e",
+      "heard": true
+    },
+    "recipients": [
+      "Claudio@Studio.example ",
+      "marco@z.example",
+      "claudio@studio.example"
+    ]
+  },
+  "payload_sha256": "762153016263d9b0439c62a661d18d390e78129721faca8f2269b5e948360535",
+  "digest_preimage": "pisa-approval-digest/1\nemail_send\n762153016263d9b0439c62a661d18d390e78129721faca8f2269b5e948360535\nclaudio@studio.example,marco@z.example",
+  "digest": "10a33b49933a0dc1f6c6cbe3a6c0972dbe47d7c0294527999c6be64b9fc31fa7",
+  "nonce": "a2FwcHJvdmFsLW5vbmNlLW9uY2UtMTIzNDU2",
+  "expires_at": "2026-11-19T18:12:00+01:00",
+  "canonical": "pisa-approval\napproval_id=0b6f3a52-6c1e-4d7a-9f0e-2a4c1b8d5e70\ndecision=approve\nkind=email_send\nsummary=Mando a Claudio, Marco:  Re: Cena di venerdì\ndigest=10a33b49933a0dc1f6c6cbe3a6c0972dbe47d7c0294527999c6be64b9fc31fa7\nnonce=a2FwcHJvdmFsLW5vbmNlLW9uY2UtMTIzNDU2\nexpires_at=2026-11-19T18:12:00+01:00"
+}

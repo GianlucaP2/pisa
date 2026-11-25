@@ -1,0 +1,20 @@
+{
+  "gap": "maps.phone",
+  "check": "server_frame",
+  "why": "An ETA's point is \"here\", a coordinate or a placeId, never free text.",
+  "frame": {
+    "seq": 7,
+    "threadId": "t-1",
+    "runId": "run-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.maps.eta",
+      "value": {
+        "requestId": "3f2a1b0c-9d8e-4f7a-8b6c-5d4e3f2a1b0c",
+        "from": "here",
+        "to": "Testville station",
+        "mode": "walk"
+      }
+    }
+  }
+}

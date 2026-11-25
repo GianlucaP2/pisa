@@ -1,0 +1,42 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000031001",
+  "ts": "2026-11-10T10:00:00+01:00",
+  "type": "present",
+  "present_id": "00000000-0000-4000-8000-000000031002",
+  "reply_to": "00000000-0000-4000-8000-000000031000",
+  "object": {
+    "object_id": "drawing:5d1f6b2a-3c4e-4f50-8a71-92b3c4d5e6f7",
+    "kind": "drawing",
+    "revision": 0,
+    "data": {
+      "drawing_id": "5d1f6b2a-3c4e-4f50-8a71-92b3c4d5e6f7",
+      "title": "Come il modello parla al database",
+      "summary": "Tre passi: la domanda diventa una query, il database risponde, il modello riassume.",
+      "kind": "flow",
+      "html": "<!doctype html><html><head><meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'sha256-RoOIoaTXwQqWtkV6FhmmLiGwCrP7GaHXGaK8nsPz4PQ=' pisa-bundle:; style-src 'unsafe-inline'; img-src data: pisa-bundle:; form-action 'none'; base-uri 'none'\"><style>svg{width:100%}</style></head><body><svg viewBox=\"0 0 300 120\" id=\"flow\"></svg><script src=\"pisa-bundle://lib/d3.min.js\"></script><script>/* the steps, from PISA_DATA */ const D = window.PISA_DATA; const svg = d3.select(\"#flow\"); svg.selectAll(\"text\").data(D.steps).join(\"text\").attr(\"x\", function(d, i) { return 10 + i * 100; }).attr(\"y\", 60).attr(\"data-pisa-ask\", \"\").text(function(d) { return d.label; });</script></body></html>",
+      "data": {
+        "steps": [
+          {
+            "label": "Domanda"
+          },
+          {
+            "label": "Query"
+          },
+          {
+            "label": "Risposta"
+          }
+        ]
+      },
+      "libraries": [
+        {
+          "name": "d3",
+          "version": "7.9.0"
+        }
+      ]
+    }
+  },
+  "purpose": "Lo schema del flusso",
+  "focus": "take",
+  "lang": "it-IT"
+}

@@ -1,0 +1,22 @@
+{
+  "task": {
+    "id": "8df701b7-0b8d-4221-b4da-c46e3ac0a2c7",
+    "title": "Rinnova il VPS",
+    "notes": null,
+    "status": "dismissed",
+    "due_at": null,
+    "due_kind": "none",
+    "duration_min": null,
+    "place_text": null,
+    "place_id": null,
+    "priority": 2,
+    "repeat": null,
+    "source": {"kind": "email", "ref": "18a2d1a0b6c5e3f1", "label": "Email from billing: Rinnovo VPS"},
+    "confidence": 0.9,
+    "created_at": "2026-10-22T10:00:00+02:00",
+    "updated_at": "2026-10-24T12:00:00+02:00"
+  },
+  "rule": "Nessun task dalle email di «billing@ovh.example»",
+  "rule_id": "7a1c3e5f-2b4d-4f6a-8c9e-0d1f2a3b4c5d",
+  "also_dismissed": ["2b7d1e94-6a3f-4c58-9e21-0f4d8a6c3b75", "5c0e2f81-3d9a-4b67-a1e4-7f9b2d6c8e03"]
+}

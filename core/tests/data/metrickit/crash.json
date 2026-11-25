@@ -1,0 +1,55 @@
+{
+  "timeStampBegin": "2026-10-22 08:00:00",
+  "timeStampEnd": "2026-10-22 08:59:00",
+  "crashDiagnostics": [
+    {
+      "version": "1.0.0",
+      "callStackTree": {
+        "callStackPerThread": true,
+        "callStacks": [
+          {
+            "threadAttributed": false,
+            "callStackRootFrames": [
+              {"binaryUUID": "11111111-2222-3333-4444-555555555555", "offsetIntoBinaryTextSegment": 4096,
+               "sampleCount": 1, "binaryName": "libsystem_kernel.dylib", "address": 7000000000}
+            ]
+          },
+          {
+            "threadAttributed": true,
+            "callStackRootFrames": [
+              {
+                "binaryUUID": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE", "offsetIntoBinaryTextSegment": 1715004,
+                "sampleCount": 1, "binaryName": "Pisa", "address": 4300000000,
+                "subFrames": [
+                  {
+                    "binaryUUID": "AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE", "offsetIntoBinaryTextSegment": 1714000,
+                    "sampleCount": 1, "binaryName": "Pisa", "address": 4299990000,
+                    "subFrames": [
+                      {"binaryUUID": "99999999-8888-7777-6666-555555555555", "offsetIntoBinaryTextSegment": 320,
+                       "sampleCount": 1, "binaryName": "AVFAudio", "address": 7100000000,
+                       "userNote": "Pranzo con Dario alle 13"}
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "diagnosticMetaData": {
+        "appBuildVersion": "4", "appVersion": "0.1.0", "osVersion": "iPhone OS 26.3 (23D5)",
+        "deviceType": "iPhone17,1", "platformArchitecture": "arm64e", "bundleIdentifier": "com.example.pisa",
+        "exceptionType": 6, "exceptionCode": 1, "signal": 5,
+        "terminationReason": "Namespace SIGNAL, Code 5 Trace/BPT trap: 5",
+        "exceptionReason": {
+          "exceptionName": "NSInternalInconsistencyException", "className": "AVAudioEngine",
+          "composedMessage": "required condition is false: the owner said 'chiama Marta al 020 7946 0123'",
+          "formatString": "%@", "arguments": ["chiama Marta"]
+        },
+        "regionFormat": "IT",
+        "pid": 4242
+      }
+    }
+  ],
+  "signpostData": [{"subsystem": "pisa", "name": "Pranzo con Dario"}]
+}

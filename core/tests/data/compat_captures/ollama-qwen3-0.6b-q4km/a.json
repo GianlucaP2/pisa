@@ -1,0 +1,98 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Reply with exactly one word: ready."
+     }
+    ],
+    "max_tokens": 4096,
+    "temperature": 0
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 3.613,
+  "longest_silence_s": 3.613,
+  "total_s": 3.613,
+  "body": {
+   "id": "chatcmpl-427",
+   "object": "chat.completion",
+   "created": 1795557722,
+   "model": "qwen3:0.6b",
+   "system_fingerprint": "fp_ollama",
+   "choices": [
+    {
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "ready",
+      "reasoning": "Okay, the user wants me to reply with exactly one word: \"ready.\" Let me think about how to approach this.\n\nFirst, I need to make sure I understand the context. The user might be testing if I can respond with just that word. It's possible they want a simple confirmation or a direct answer. Since the instruction is clear, I should respond with \"ready\" as instr...<615 chars>"
+     },
+     "finish_reason": "stop"
+    }
+   ],
+   "usage": {
+    "prompt_tokens": 18,
+    "prompt_tokens_details": {
+     "cached_tokens": 1
+    },
+    "completion_tokens": 141,
+    "total_tokens": 159
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Reply with exactly one word: ready."
+     }
+    ],
+    "max_tokens": 4096
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 3.141,
+  "longest_silence_s": 3.141,
+  "total_s": 3.141,
+  "body": {
+   "id": "chatcmpl-966",
+   "object": "chat.completion",
+   "created": 1795557725,
+   "model": "qwen3:0.6b",
+   "system_fingerprint": "fp_ollama",
+   "choices": [
+    {
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "ready",
+      "reasoning": "Okay, the user wants me to reply with exactly one word: \"ready.\" Let me think about how to approach this.\n\nFirst, I need to understand the context. The user might be testing if I can respond with that single word. But since I'm an AI, I should make sure my response is clear and appropriate. Maybe they want a quick answer, so I should provide a straightforwar...<566 chars>"
+     },
+     "finish_reason": "stop"
+    }
+   ],
+   "usage": {
+    "prompt_tokens": 18,
+    "prompt_tokens_details": {
+     "cached_tokens": 17
+    },
+    "completion_tokens": 131,
+    "total_tokens": 149
+   }
+  }
+ }
+]

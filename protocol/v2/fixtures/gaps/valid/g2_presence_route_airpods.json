@@ -1,0 +1,20 @@
+{
+  "gap": "G2",
+  "check": "client_frame",
+  "why": "v1 talk.route values now in presence.state.route; a route change re-sends the current foreground event with the new state.",
+  "v1": {
+    "type": "talk.route",
+    "route": "airpods"
+  },
+  "frame": {
+    "op": "custom",
+    "name": "pisa.presence",
+    "value": {
+      "event": "app_foreground",
+      "state": {
+        "foreground": true,
+        "route": "airpods"
+      }
+    }
+  }
+}

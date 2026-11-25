@@ -1,0 +1,13 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009034",
+  "ts": "2026-10-21T14:20:00+02:00",
+  "type": "notify",
+  "notification_id": "00000000-0000-4000-8000-000000000532",
+  "text": "Hai ritirato il pacco?",
+  "lang": "it-IT",
+  "kind": "check_in",
+  "priority": "normal",
+  "check_in_id": "00000000-0000-4000-8000-000000000533",
+  "choices": [{"id": "Did It!", "label": "Fatto"}]
+}

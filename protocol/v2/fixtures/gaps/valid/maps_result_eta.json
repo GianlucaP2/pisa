@@ -1,0 +1,19 @@
+{
+  "gap": "maps.phone",
+  "check": "client_frame",
+  "why": "Contract 2.3 (maps.phone): the phone's travel time.",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.maps.result",
+    "value": {
+      "requestId": "3f2a1b0c-9d8e-4f7a-8b6c-5d4e3f2a1b0c",
+      "ok": true,
+      "eta": {
+        "seconds": 540,
+        "distanceMeters": 650,
+        "mode": "walk",
+        "departAt": "2026-11-25T08:30:00+01:00"
+      }
+    }
+  }
+}

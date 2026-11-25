@@ -1,0 +1,33 @@
+# Weekly dependency updates, grouped so each ecosystem opens at most one pull request a week (security updates
+# come on their own). Actions stay pinned by commit SHA: Dependabot updates the SHA and its version comment.
+version: 2
+updates:
+  - package-ecosystem: uv
+    directory: /core
+    schedule:
+      interval: weekly
+    labels: ["dependencies"]
+    groups:
+      core-minor:
+        update-types: ["minor", "patch"]
+  - package-ecosystem: uv
+    directory: /relay
+    schedule:
+      interval: weekly
+    labels: ["dependencies", "relay"]
+    groups:
+      relay-minor:
+        update-types: ["minor", "patch"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    labels: ["github-actions"]
+    groups:
+      actions:
+        patterns: ["*"]
+  - package-ecosystem: docker
+    directories: ["/core", "/relay"]
+    schedule:
+      interval: weekly
+    labels: ["dependencies"]

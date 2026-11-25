@@ -1,0 +1,18 @@
+{
+  "gap": "notify.local",
+  "check": "server_frame",
+  "why": "Contract 2.3 (notify.local): an empty set stops every watched place.",
+  "frame": {
+    "seq": 7,
+    "threadId": "pisa-notices",
+    "runId": "run-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.notify.regions",
+      "value": {
+        "revision": 15,
+        "regions": []
+      }
+    }
+  }
+}

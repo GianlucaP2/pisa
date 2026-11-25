@@ -1,0 +1,14 @@
+{
+  "gap": "app.actions",
+  "check": "client_frame",
+  "why": "Contract 2.2 (app.actions): the app has no such task; a closed set of reasons.",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.app.result",
+    "value": {
+      "actionId": "7c1d2e3f-4a5b-4c6d-8e7f-901a2b3c4d5e",
+      "ok": false,
+      "reason": "not_found"
+    }
+  }
+}

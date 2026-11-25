@@ -1,0 +1,37 @@
+{
+  "gap": "G5",
+  "check": "enrol_server_frame",
+  "why": "Enrolment frames travel outside runs, on the enrol session's data channel only.",
+  "v1": {
+    "type": "enrol.done",
+    "route": "airpods",
+    "ok": true,
+    "owner_false_reject": 0.075,
+    "strangers_per_min": 0.0,
+    "by_snr": {
+      "clean": 1.0,
+      "10": 0.95,
+      "5": 0.9,
+      "0": 0.7
+    }
+  },
+  "frame": {
+    "seq": 3,
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.voice.enrol.done",
+      "value": {
+        "route": "airpods",
+        "ok": true,
+        "ownerFalseReject": 0.075,
+        "strangersPerMin": 0.0,
+        "bySnr": {
+          "clean": 1.0,
+          "10": 0.95,
+          "5": 0.9,
+          "0": 0.7
+        }
+      }
+    }
+  }
+}

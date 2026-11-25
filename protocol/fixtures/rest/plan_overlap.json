@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-31",
+  "generated_at": "2026-10-31T11:00:00+01:00",
+  "from": null,
+  "items": [
+    {
+      "kind": "free",
+      "start": "2026-10-31T11:00:00+01:00",
+      "end": "2026-10-31T12:00:00+01:00"
+    },
+    {
+      "kind": "event",
+      "start": "2026-10-31T12:00:00+01:00",
+      "end": "2026-10-31T16:00:00+01:00",
+      "title": "Consegna spesa (resta a casa)",
+      "event_id": "evt-1",
+      "event_ids": [
+        "evt-1"
+      ],
+      "place_id": null,
+      "status": "planned",
+      "overlaps": [
+        {
+          "event_id": "evt-2",
+          "title": "Corsa"
+        },
+        {
+          "event_id": "evt-3",
+          "title": "Palestra"
+        }
+      ],
+      "event_kind": "window",
+      "kind_source": "inferred",
+      "min_stay_min": 120
+    },
+    {
+      "kind": "event",
+      "start": "2026-10-31T14:00:00+01:00",
+      "end": "2026-10-31T15:00:00+01:00",
+      "title": "Corsa",
+      "event_id": "evt-2",
+      "event_ids": [
+        "evt-2"
+      ],
+      "place_id": null,
+      "status": "planned",
+      "overlaps": [
+        {
+          "event_id": "evt-1",
+          "title": "Consegna spesa (resta a casa)"
+        }
+      ],
+      "event_kind": "fixed",
+      "kind_source": "inferred"
+    },
+    {
+      "kind": "event",
+      "start": "2026-10-31T15:00:00+01:00",
+      "end": "2026-10-31T16:00:00+01:00",
+      "title": "Palestra",
+      "event_id": "evt-3",
+      "event_ids": [
+        "evt-3"
+      ],
+      "place_id": null,
+      "status": "planned",
+      "overlaps": [
+        {
+          "event_id": "evt-1",
+          "title": "Consegna spesa (resta a casa)"
+        }
+      ],
+      "event_kind": "fixed",
+      "kind_source": "inferred"
+    },
+    {
+      "kind": "free",
+      "start": "2026-10-31T16:00:00+01:00",
+      "end": "2026-10-31T21:00:00+01:00"
+    }
+  ],
+  "unplanned": [],
+  "sources": {
+    "routes": null,
+    "skipped": [
+      "routes: no location from the last 15 minutes: the first leg is left out"
+    ]
+  }
+}

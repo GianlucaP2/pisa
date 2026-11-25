@@ -1,0 +1,24 @@
+{
+  "kind": "calendar#calendarList",
+  "items": [
+    {
+      "id": "owner@example.org",
+      "summary": "owner@example.org",
+      "summaryOverride": "Personale",
+      "selected": true,
+      "primary": true,
+      "accessRole": "owner"
+    },
+    {
+      "id": "it.italian#holiday@group.v.calendar.google.com",
+      "summary": "Festività in Italia",
+      "selected": true,
+      "accessRole": "reader"
+    },
+    {
+      "id": "hidden@group.calendar.google.com",
+      "summary": "Hidden",
+      "accessRole": "reader"
+    }
+  ]
+}
