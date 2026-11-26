@@ -6,11 +6,11 @@ license = "AGPL-3.0-only"
 license-files = ["LICENSE"]
 requires-python = ">=3.13"
 dependencies = [
-    "fastapi==0.151.0",
-    "starlette==1.9.0",
+    "fastapi==0.165.0",
+    "starlette==1.10.0",
     "uvicorn==0.54.0",
-    "pydantic==2.14.1",
-    "pydantic-settings==2.16.0",
+    "pydantic==2.14.4",
+    "pydantic-settings==2.16.3",
     "httpx[http2]==0.28.1",
     "h2==4.4.1",
     "pyjwt[crypto]==2.15.1",
@@ -22,8 +22,8 @@ pisa-relay = "pisa_relay.app:main"
 
 [dependency-groups]
 dev = [
-    "pytest==9.1.1",
-    "ruff==0.17.1",
+    "pytest==9.2.0",
+    "ruff==0.17.6",
     "pyright==1.1.414",
     # the interop test runs the Pisa server's own sender (core/pisa) against this relay
     "pyhpke==0.6.5",
