@@ -24,7 +24,7 @@ dependencies = [
     "wordfreq==3.1.1",
     "opentelemetry-sdk>=1.45",
     "aiortc>=1.15",
-    "pypdf==6.21.4",
+    "pypdf==7.1.1",
     "sherpa-onnx==2.0.1",
     "onnxruntime==1.31.1",
     "regex==2026.9.29",
