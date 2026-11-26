@@ -1,0 +1,118 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Reply with exactly one word: ready."
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.294,
+  "longest_silence_s": 0.294,
+  "total_s": 0.294,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "stop",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "Ready."
+     }
+    }
+   ],
+   "created": 1795555271,
+   "model": "qwen2.5-1.5b-instruct",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 3,
+    "prompt_tokens": 16,
+    "total_tokens": 19,
+    "prompt_tokens_details": {
+     "cached_tokens": 3
+    }
+   },
+   "id": "chatcmpl-PWBAsKnlLO49dRlMLkUotK3I7EzxST83",
+   "timings": {
+    "cache_n": 3,
+    "prompt_n": 13,
+    "prompt_ms": 119.391,
+    "prompt_per_token_ms": 9.184,
+    "prompt_per_second": 108.886,
+    "predicted_n": 3,
+    "predicted_ms": 167.919,
+    "predicted_per_token_ms": 83.96,
+    "predicted_per_second": 11.911
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Reply with exactly one word: ready."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.268,
+  "longest_silence_s": 0.268,
+  "total_s": 0.268,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "stop",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "Ready."
+     }
+    }
+   ],
+   "created": 1795555271,
+   "model": "qwen2.5-1.5b-instruct",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 3,
+    "prompt_tokens": 16,
+    "total_tokens": 19,
+    "prompt_tokens_details": {
+     "cached_tokens": 15
+    }
+   },
+   "id": "chatcmpl-4152z2kmQLWjoKkCV76WEFUY2VHkihYb",
+   "timings": {
+    "cache_n": 15,
+    "prompt_n": 1,
+    "prompt_ms": 143.143,
+    "prompt_per_token_ms": 143.143,
+    "prompt_per_second": 6.986,
+    "predicted_n": 3,
+    "predicted_ms": 119.287,
+    "predicted_per_token_ms": 59.644,
+    "predicted_per_second": 16.766
+   }
+  }
+ }
+]

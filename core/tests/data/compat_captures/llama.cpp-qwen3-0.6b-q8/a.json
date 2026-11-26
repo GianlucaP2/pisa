@@ -1,0 +1,120 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Reply with exactly one word: ready."
+     }
+    ],
+    "max_tokens": 2048,
+    "temperature": 0
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 4.988,
+  "longest_silence_s": 4.988,
+  "total_s": 4.988,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "stop",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "ready",
+      "reasoning_content": "Okay, the user wants me to reply with exactly one word: \"ready.\" Let me think about how to approach this.\n\nFirst, I need to make sure I understand the context. The user might be testing if I can respond with a single word, possibly for a specific scenario or a prompt. Since the instruction is to reply with exactly one word, I should focus on that.\n\nI should ...<1088 chars>"
+     }
+    }
+   ],
+   "created": 1795555338,
+   "model": "qwen3-0.6b",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 246,
+    "prompt_tokens": 16,
+    "total_tokens": 262,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "id": "chatcmpl-A8oAH8SCN4iCUePvAhDFAMrNvsOYt14l",
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16,
+    "prompt_ms": 49.618,
+    "prompt_per_token_ms": 3.101,
+    "prompt_per_second": 322.464,
+    "predicted_n": 246,
+    "predicted_ms": 4887.611,
+    "predicted_per_token_ms": 19.949,
+    "predicted_per_second": 50.127
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3-0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Reply with exactly one word: ready."
+     }
+    ],
+    "max_tokens": 2048
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 2.808,
+  "longest_silence_s": 2.808,
+  "total_s": 2.808,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "stop",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "ready",
+      "reasoning_content": "Okay, the user wants me to reply with exactly one word: \"ready.\" Let me think. They might be testing if I can respond with just that word. First, I need to ensure that the response is clear and meets the requirement. Since it's exactly one word, I should avoid any other words. Maybe they're trying to see if I can generate a single-word answer, which is commo...<600 chars>"
+     }
+    }
+   ],
+   "created": 1795555341,
+   "model": "qwen3-0.6b",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 140,
+    "prompt_tokens": 16,
+    "total_tokens": 156,
+    "prompt_tokens_details": {
+     "cached_tokens": 15
+    }
+   },
+   "id": "chatcmpl-mYkLSiK86ZiHlbOPqtZxtAAvyQFVIlnb",
+   "timings": {
+    "cache_n": 15,
+    "prompt_n": 1,
+    "prompt_ms": 25.593,
+    "prompt_per_token_ms": 25.593,
+    "prompt_per_second": 39.073,
+    "predicted_n": 140,
+    "predicted_ms": 2759.555,
+    "predicted_per_token_ms": 19.853,
+    "predicted_per_second": 50.37
+   }
+  }
+ }
+]

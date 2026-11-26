@@ -1,0 +1,223 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "pisa-matrix-no-such-model",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": 404,
+  "content_type": "application/json",
+  "first_byte_s": 0.003,
+  "longest_silence_s": 0.003,
+  "total_s": 0.003,
+  "body": {
+   "error": {
+    "message": "model 'pisa-matrix-no-such-model' not found",
+    "type": "not_found_error",
+    "param": null,
+    "code": null
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Record 00000: the lamp in room 00000 is green and stays on.\nRecord 00001: the lamp in room 00001 is blue and stays on.\nRecord 00002: the lamp in room 00002 is amber and stays on.\nRecord 00003: the lamp in room 00003 is grey and stays on.\nRecord 00004: the lamp in room 00004 is violet and stays on.\nRecord 00005: the lamp in room 00005 is white and stays on.\nR...<349986 chars>"
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 11.325,
+  "longest_silence_s": 11.325,
+  "total_s": 11.325,
+  "body": {
+   "id": "chatcmpl-115",
+   "object": "chat.completion",
+   "created": 1795557691,
+   "model": "qwen2.5:1.5b",
+   "system_fingerprint": "fp_ollama",
+   "choices": [
+    {
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "Ok"
+     },
+     "finish_reason": "stop"
+    }
+   ],
+   "usage": {
+    "prompt_tokens": 2050,
+    "prompt_tokens_details": {
+     "cached_tokens": 4
+    },
+    "completion_tokens": 2,
+    "total_tokens": 2052
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a 300-word story about a lamp."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.505,
+  "error": "ReadTimeout",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a 300-word story about a lamp."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.503,
+  "error": "ReadTimeout",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a 300-word story about a lamp."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.506,
+  "error": "ReadTimeout",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.001,
+  "error": "ConnectError",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.001,
+  "error": "ConnectError",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.001,
+  "error": "ConnectError",
+  "body": ""
+ }
+]

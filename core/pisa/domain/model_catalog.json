@@ -1,0 +1,12 @@
+{
+  "effort": {
+    "anthropic": {"claude-sonnet-5-5": "low", "claude-haiku-5-5": "medium"},
+    "openai": {"gpt-6-luna": "low"},
+    "xai": {"grok-4.7": "low", "grok-4.3": "low"}
+  },
+  "defaults": {
+    "talker": {"xai": "grok-voice-latest", "gemini": "gemini-3.8-live"},
+    "transcribe": {"xai": "grok-transcribe"},
+    "speech": {"openai": "gpt-4o-mini-tts", "elevenlabs": "eleven_flash_v2_5"}
+  }
+}

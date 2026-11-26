@@ -1,0 +1,174 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "The access word for today is HELIOTROPE. Remember it.\n\nRecord 00000: the lamp in room 00000 is green and stays on.\nRecord 00001: the lamp in room 00001 is blue and stays on.\nRecord 00002: the lamp in room 00002 is amber and stays on.\nRecord 00003: the lamp in room 00003 is grey and stays on.\nRecord 00004: the lamp in room 00004 is violet and stays on.\nRecord...<20130 chars>"
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0,
+    "stream": true,
+    "stream_options": {
+     "include_usage": true
+    }
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 14.34,
+  "longest_silence_s": 14.34,
+  "total_s": 14.4,
+  "sse": [
+   {
+    "id": "chatcmpl-925",
+    "object": "chat.completion.chunk",
+    "created": 1795557668,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": "Record"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-925",
+    "object": "chat.completion.chunk",
+    "created": 1795557668,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {},
+      "finish_reason": "stop"
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-925",
+    "object": "chat.completion.chunk",
+    "created": 1795557668,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [],
+    "usage": {
+     "prompt_tokens": 2050,
+     "prompt_tokens_details": {
+      "cached_tokens": 4
+     },
+     "completion_tokens": 2,
+     "total_tokens": 2052
+    },
+    "timings": {
+     "prompt_n": 2050,
+     "prompt_ms": 14298,
+     "prompt_per_token_ms": 6.975,
+     "prompt_per_second": 143.377,
+     "predicted_n": 2,
+     "predicted_ms": 62,
+     "predicted_per_token_ms": 31,
+     "predicted_per_second": 32.258
+    }
+   },
+   "[DONE]"
+  ]
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "The access word for today is HELIOTROPE. Remember it.\n\nRecord 00000: the lamp in room 00000 is green and stays on.\nRecord 00001: the lamp in room 00001 is blue and stays on.\nRecord 00002: the lamp in room 00002 is amber and stays on.\nRecord 00003: the lamp in room 00003 is grey and stays on.\nRecord 00004: the lamp in room 00004 is violet and stays on.\nRecord...<75150 chars>"
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0,
+    "stream": true,
+    "stream_options": {
+     "include_usage": true
+    }
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 10.652,
+  "longest_silence_s": 10.652,
+  "total_s": 10.812,
+  "sse": [
+   {
+    "id": "chatcmpl-918",
+    "object": "chat.completion.chunk",
+    "created": 1795557679,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": "Record"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-918",
+    "object": "chat.completion.chunk",
+    "created": 1795557679,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {},
+      "finish_reason": "stop"
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-918",
+    "object": "chat.completion.chunk",
+    "created": 1795557679,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [],
+    "usage": {
+     "prompt_tokens": 2050,
+     "prompt_tokens_details": {
+      "cached_tokens": 12
+     },
+     "completion_tokens": 2,
+     "total_tokens": 2052
+    },
+    "timings": {
+     "prompt_n": 2050,
+     "prompt_ms": 10513,
+     "prompt_per_token_ms": 5.128,
+     "prompt_per_second": 194.997,
+     "predicted_n": 2,
+     "predicted_ms": 158,
+     "predicted_per_token_ms": 79,
+     "predicted_per_second": 12.658
+    }
+   },
+   "[DONE]"
+  ]
+ }
+]

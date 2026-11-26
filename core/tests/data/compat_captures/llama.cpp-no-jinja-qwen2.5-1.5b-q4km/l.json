@@ -1,0 +1,278 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Use the pisa_probe_add tool to add 2 and 3."
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "pisa_probe_add",
+       "description": "Add two integers and return their sum.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "a": {
+          "type": "integer"
+         },
+         "b": {
+          "type": "integer"
+         }
+        },
+        "required": [
+         "a",
+         "b"
+        ]
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 500,
+  "content_type": "application/json",
+  "first_byte_s": 0.002,
+  "longest_silence_s": 0.002,
+  "total_s": 0.002,
+  "body": {
+   "error": {
+    "code": 500,
+    "message": "tools param requires --jinja flag",
+    "type": "server_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is 2 plus 3?"
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "response_format": {
+     "type": "json_schema",
+     "json_schema": {
+      "name": "pisa_probe",
+      "strict": true,
+      "schema": {
+       "type": "object",
+       "properties": {
+        "pisa_probe_sum": {
+         "type": "integer"
+        }
+       },
+       "required": [
+        "pisa_probe_sum"
+       ],
+       "additionalProperties": false
+      }
+     }
+    }
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 1.333,
+  "longest_silence_s": 1.333,
+  "total_s": 1.333,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "stop",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "{ \"pisa_probe_sum\": 5 }"
+     }
+    }
+   ],
+   "created": 1795555270,
+   "model": "qwen2.5-1.5b-instruct",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 16,
+    "total_tokens": 33,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "id": "chatcmpl-lH1QZjeHWJASa09eoQh31AVyPJT4SrZA",
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 16,
+    "prompt_ms": 136.596,
+    "prompt_per_token_ms": 8.537,
+    "prompt_per_second": 117.134,
+    "predicted_n": 17,
+    "predicted_ms": 1188.448,
+    "predicted_per_token_ms": 74.278,
+    "predicted_per_second": 13.463
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Describe the colour of the sky in JSON."
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "response_format": {
+     "type": "json_object"
+    }
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.691,
+  "longest_silence_s": 0.691,
+  "total_s": 0.691,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "stop",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "{\n  \"sky_color\": \"blue\"\n}"
+     }
+    }
+   ],
+   "created": 1795555270,
+   "model": "qwen2.5-1.5b-instruct",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 11,
+    "prompt_tokens": 17,
+    "total_tokens": 28,
+    "prompt_tokens_details": {
+     "cached_tokens": 3
+    }
+   },
+   "id": "chatcmpl-Ah1RyUaZfLXvJw0CqkfZzI5DEaRasSZt",
+   "timings": {
+    "cache_n": 3,
+    "prompt_n": 14,
+    "prompt_ms": 113.397,
+    "prompt_per_token_ms": 8.1,
+    "prompt_per_second": 123.46,
+    "predicted_n": 11,
+    "predicted_ms": 571.979,
+    "predicted_per_token_ms": 57.198,
+    "predicted_per_second": 17.483
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "text",
+        "text": "What colour is this image? Answer with one word."
+       },
+       {
+        "type": "image_url",
+        "image_url": {
+         "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKklEQVR4nGO4IyJCU8QwasGoBaMWjFowasGoBaMWjFowasGoBaMWDBULAJ3LED3QqzauAAAAAElFTkSuQmCC"
+        }
+       }
+      ]
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false
+   }
+  },
+  "status": 500,
+  "content_type": "application/json",
+  "first_byte_s": 0.002,
+  "longest_silence_s": 0.002,
+  "total_s": 0.002,
+  "body": {
+   "error": {
+    "code": 500,
+    "message": "image input is not supported - hint: if this is unexpected, you may need to provide the mmproj",
+    "type": "server_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/audio/transcriptions",
+   "body": "<16426 bytes>"
+  },
+  "status": 501,
+  "content_type": "application/json",
+  "first_byte_s": 0.004,
+  "longest_silence_s": 0.004,
+  "total_s": 0.004,
+  "body": {
+   "error": {
+    "code": 501,
+    "message": "The current model does not support audio input.",
+    "type": "not_supported_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/embeddings",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "input": "pisa probe"
+   }
+  },
+  "status": 501,
+  "content_type": "application/json",
+  "first_byte_s": 0.002,
+  "longest_silence_s": 0.002,
+  "total_s": 0.002,
+  "body": {
+   "error": {
+    "code": 501,
+    "message": "This server does not support embeddings. Start it with `--embeddings`",
+    "type": "not_supported_error"
+   }
+  }
+ }
+]

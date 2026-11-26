@@ -1,0 +1,14 @@
+{
+  "gap": "presence.state_only",
+  "check": "client_frame",
+  "why": "Contract 2.4: a route change with no presence event of its own sends state alone (event is optional).",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.presence",
+    "value": {
+      "state": {
+        "route": "car"
+      }
+    }
+  }
+}

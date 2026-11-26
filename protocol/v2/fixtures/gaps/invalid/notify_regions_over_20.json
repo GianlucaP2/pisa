@@ -1,0 +1,208 @@
+{
+  "gap": "notify.local",
+  "check": "server_frame",
+  "why": "At most 20 watched places (the system's limit).",
+  "frame": {
+    "seq": 7,
+    "threadId": "pisa-notices",
+    "runId": "run-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.notify.regions",
+      "value": {
+        "revision": 14,
+        "regions": [
+          {
+            "id": "reg-0",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-1",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-2",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-3",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-4",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-5",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-6",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-7",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-8",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-9",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-10",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-11",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-12",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-13",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-14",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-15",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-16",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-17",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-18",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-19",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "reg-20",
+            "lat": 45.0,
+            "lon": 9.0,
+            "radiusMeters": 150,
+            "title": "Comprare il pane",
+            "on": "enter",
+            "deepLink": "pisa://task/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,649 @@
+{
+  "description": "PISA contract 2 pairing, session, relay and sealed-push vectors (CONTRACT-2 §3.4, §4.3, §9). TEST KEYS ONLY. Strings are UTF-8; b64url is base64url without padding; the SPKI pin is standard base64 with padding.",
+  "pairing": {
+    "inputs": {
+      "tlsSpkiDerBase64": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAECKnYKxqanwT3IzIZEHiEavhsCJA0S/Jxsvg+EDGO/9/CpMQcGXKQ4djDsUZulytO9EExn/fIvNxKPP0aoXvIcQ==",
+      "tokenHex": "8f1e2d3c4b5a69788796a5b4c3d2e1f0",
+      "addrs": [
+        "192.0.2.10:8443",
+        "[2001:db8::10]:8443",
+        "pisa.example:443",
+        "relay.example.net:443/r?h=a,b"
+      ],
+      "exp": 1763460600,
+      "deviceKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEzNxNTlUQrua6L96DvuFUh3s+XGa4nw4ALCkSrUt9UrfedrBAwtiSjbpTF9q/2OvTND80b4A9wTAXxj4LQhvZow==",
+      "clientNonce": "ABEiM0RVZneImaq7zN3u_w",
+      "serverNonce": "_-7dzLuqmYh3ZlVEMyIRAA"
+    },
+    "spkiPin": "BocmaZ3/XqdCV7salrMovP5C2hqUb1+5RV1NVJWRQhY=",
+    "nextSpkiPin": "qmlYkzoIo+LxWLwxlHBFyTxbLoWetYwFYuJhLPf2O5I=",
+    "token": "R4PC2PCLLJUXRB4WUW2MHUXB6A",
+    "qr": "pisa://pair?v=1&addrs=192.0.2.10:8443,[2001:db8::10]:8443,pisa.example:443,relay.example.net:443/r%3Fh%3Da%2Cb&spki=BocmaZ3%2FXqdCV7salrMovP5C2hqUb1%2B5RV1NVJWRQhY%3D&token=R4PC2PCLLJUXRB4WUW2MHUXB6A&exp=1763460600",
+    "typedVariants": [
+      "r4pc2pclljuxrb4wuw2mhuxb6a",
+      "R4PC2-PCLLJ-UXRB4-WUW2M-HUXB6-A",
+      "R4PC 2PCL LJUX RB4W UW2M HUXB 6A"
+    ],
+    "transcript": "pisa-pair/1\nBocmaZ3/XqdCV7salrMovP5C2hqUb1+5RV1NVJWRQhY=\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEzNxNTlUQrua6L96DvuFUh3s+XGa4nw4ALCkSrUt9UrfedrBAwtiSjbpTF9q/2OvTND80b4A9wTAXxj4LQhvZow==\nABEiM0RVZneImaq7zN3u_w",
+    "appMac": "woKRFu1lUkxJycj_8YcYm5Z2_y7lT0ft8BTUkh8HZ7w",
+    "serverMac": "HqubucQJs0j0z6M42GQNHSTpuWpc61xZZdoA0ywxIPM",
+    "commitment": "NnqulZler2PsdRXK5-0KTOc39t7QX3L8cNVix4PV9JE",
+    "revealMismatch": {
+      "commitment": "NnqulZler2PsdRXK5-0KTOc39t7QX3L8cNVix4PV9JE",
+      "revealedServerNonce": "AAAAAAAAAAAAAAAAAAAAAA",
+      "mustAbort": true,
+      "why": "the revealed serverNonce does not hash to the commitment the server sent first: the app shows no digits, aborts with a plain error, and the token stays spent"
+    },
+    "sas": "533711",
+    "sasDisplay": "533 711",
+    "rejects": {
+      "typed": [
+        "ABCDEFGHIJKLMNOPQRSTUVWXY1",
+        "TOO-SHORT"
+      ],
+      "macWithTheNextPin": "fvwqWKymAiPhPyqZUdOQAvL2tsm3TvsJTwyw5DvhVwQ"
+    }
+  },
+  "offers": {
+    "valid": [
+      {},
+      {
+        "name": "Tablet"
+      }
+    ],
+    "refused": [
+      {
+        "why": "E1 P1: a signer key is host-only (the CLI on the server); the app never asks for one",
+        "body": {
+          "name": "Tablet",
+          "signer": true
+        },
+        "status": 400,
+        "error": "validation_failed"
+      },
+      {
+        "why": "an unknown field",
+        "body": {
+          "name": "Tablet",
+          "admin": true
+        },
+        "status": 400,
+        "error": "validation_failed"
+      }
+    ],
+    "offerId": "offer_AAECAwQFBgcICQoLDA0ODw",
+    "onlyTheOfferingDevice": {
+      "otherDeviceStatus": 404,
+      "routes": [
+        "GET",
+        "DELETE",
+        "POST confirm"
+      ]
+    },
+    "pairedViaOffer": {
+      "paired_via": "app",
+      "mayRegisterFirstApprovalKey": false
+    },
+    "confirmRefused": {
+      "status": 409,
+      "error": "pairing_code_invalid"
+    }
+  },
+  "session": {
+    "deviceId": "00000000-0000-4000-8000-0000000000d1",
+    "nonce": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8",
+    "text": "pisa-session/1\n00000000-0000-4000-8000-0000000000d1\nAAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8",
+    "devicePublicKeySpkiBase64": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEzNxNTlUQrua6L96DvuFUh3s+XGa4nw4ALCkSrUt9UrfedrBAwtiSjbpTF9q/2OvTND80b4A9wTAXxj4LQhvZow==",
+    "signatureDerBase64": "MEYCIQDxOZ42C3GO4StmnFdsY2GmsVZP54EDohHAhmkuBDAhhgIhANj6Arm0NbDXTMFdlDcQ4oYEEx9zWfy/zd8I04ISnf0l",
+    "signature": "ECDSA P-256 SHA-256, DER, base64 (RFC 6979 deterministic here; a random k is equally valid)",
+    "expiry": {
+      "live": {
+        "closeCode": 4003,
+        "closeReason": "session_expired",
+        "controlFrame": null
+      },
+      "rest": {
+        "status": 401,
+        "code": "session_expired"
+      }
+    }
+  },
+  "relay": {
+    "secretHex": "5ec2e70000000000000000000000000000000000000000000000000000000000",
+    "keyHex": "29e754e7182136842bef82858805a2998f8f69df8a8e4fbad416adec78649c26",
+    "timestamp": 1763460000,
+    "body": "{\"handle\":\"h-7Qm2Xc9LkP4tVb\",\"type\":\"alert\",\"collapse_id\":\"n-1\",\"sealed\":\"...\"}",
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Pisa-Relay-Timestamp": "1763460000",
+      "X-Pisa-Relay-Signature": "dXZnIIEtYaq1SN6G5XAGBK2mrnu4zAOLOPHAovfBv_s"
+    },
+    "windowSeconds": 300,
+    "answers": [
+      {
+        "status": 202,
+        "type": "alert",
+        "action": "sent"
+      },
+      {
+        "status": 400,
+        "type": "alert",
+        "action": "log"
+      },
+      {
+        "status": 401,
+        "type": "alert",
+        "action": "log"
+      },
+      {
+        "status": 401,
+        "type": "liveactivity",
+        "action": "log"
+      },
+      {
+        "status": 404,
+        "type": "alert",
+        "action": "delete_registration"
+      },
+      {
+        "status": 410,
+        "type": "background",
+        "action": "delete_registration"
+      },
+      {
+        "status": 413,
+        "type": "alert",
+        "action": "log"
+      },
+      {
+        "status": 422,
+        "type": "liveactivity",
+        "action": "drop_activity_token"
+      },
+      {
+        "status": 422,
+        "type": "alert",
+        "action": "log"
+      },
+      {
+        "status": 429,
+        "type": "alert",
+        "action": "log"
+      },
+      {
+        "status": 500,
+        "type": "alert",
+        "action": "log"
+      },
+      {
+        "status": 502,
+        "type": "liveactivity",
+        "action": "log"
+      },
+      {
+        "status": 503,
+        "type": "liveactivity",
+        "action": "log"
+      }
+    ],
+    "registerAnswers": [
+      {
+        "status": 201,
+        "action": "store_handle_and_secret"
+      },
+      {
+        "status": 200,
+        "action": "show_devices"
+      },
+      {
+        "status": 204,
+        "action": "done"
+      },
+      {
+        "status": 400,
+        "action": "log",
+        "error": "malformed"
+      },
+      {
+        "status": 401,
+        "action": "log"
+      },
+      {
+        "status": 403,
+        "action": "show_subscription_problem",
+        "error": "subscription_not_verified"
+      },
+      {
+        "status": 403,
+        "action": "show_subscription_problem",
+        "error": "account_not_verified"
+      },
+      {
+        "status": 409,
+        "action": "open_devices_screen",
+        "error": "too_many_devices"
+      },
+      {
+        "status": 413,
+        "action": "log",
+        "error": "too_large"
+      },
+      {
+        "status": 429,
+        "action": "retry_later",
+        "error": "too_many_registrations"
+      },
+      {
+        "status": 404,
+        "action": "refresh_devices",
+        "error": "unknown_device"
+      },
+      {
+        "status": 403,
+        "action": "explain_not_allowed",
+        "error": "not_allowed"
+      },
+      {
+        "status": 500,
+        "action": "retry_later"
+      }
+    ],
+    "appApi": {
+      "appSecretHex": "a990000000000000000000000000000000000000000000000000000000000000",
+      "label": "pisa-relay-app/1",
+      "registerAnswer": {
+        "handle": "AAECAwQFBgcICQoLDA0ODw",
+        "secret": "XsLnAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "app_secret": "qZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      },
+      "givenToTheUsersServer": [
+        "handle",
+        "secret",
+        "public_key"
+      ],
+      "requests": [
+        {
+          "method": "POST",
+          "path": "/v1/register/activity",
+          "timestamp": 1763460005,
+          "body": "{\"handle\":\"h-7Qm2Xc9LkP4tVb\",\"token\":\"a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1\",\"kind\":\"start\"}",
+          "headers": {
+            "Content-Type": "application/json",
+            "X-Pisa-Relay-Timestamp": "1763460005",
+            "X-Pisa-Relay-Signature": "XgXu-UsyAIA1FrX_w6TDKd_5ZUzCZxZj4jeXpG2U28U"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/register/devices",
+          "timestamp": 1763460006,
+          "body": "{\"handle\":\"h-7Qm2Xc9LkP4tVb\"}",
+          "headers": {
+            "Content-Type": "application/json",
+            "X-Pisa-Relay-Timestamp": "1763460006",
+            "X-Pisa-Relay-Signature": "JCnlWTKO_2Ookmu6qjffbISa1rS1fC3_616J4CHhICA"
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/v1/register/devices/remove",
+          "timestamp": 1763460007,
+          "body": "{\"handle\":\"h-7Qm2Xc9LkP4tVb\",\"device\":\"dGhpc0lzQW5JZDEy\"}",
+          "headers": {
+            "Content-Type": "application/json",
+            "X-Pisa-Relay-Timestamp": "1763460007",
+            "X-Pisa-Relay-Signature": "O0A4Lz4x63NjtJEETjX1glxjGArDq5NjjQtxlIJKvio"
+          }
+        },
+        {
+          "method": "DELETE",
+          "path": "/v1/register",
+          "timestamp": 1763460008,
+          "body": "{\"handle\":\"h-7Qm2Xc9LkP4tVb\"}",
+          "headers": {
+            "Content-Type": "application/json",
+            "X-Pisa-Relay-Timestamp": "1763460008",
+            "X-Pisa-Relay-Signature": "kHTkHu9y3ju0iZ8wOzjUJMBe-fG29Xx-Q8gdk1zEwO0"
+          }
+        }
+      ],
+      "deleteByTheServer": {
+        "body": "{\"handle\":\"h-7Qm2Xc9LkP4tVb\"}",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Pisa-Relay-Timestamp": "1763460009",
+          "X-Pisa-Relay-Signature": "yr5pCEjJNS-9uaIZTGcX2Cv0qcomW6Ckx6OAWepTSgk"
+        },
+        "why": "DELETE /v1/register also takes the server's secret with §9's construction (unpair, revoke, leaving relay mode: E1 R13)"
+      },
+      "notAcceptedOnOtherRoutes": {
+        "why": "the same body signed for another route, or with the server's construction, fails",
+        "activityMacForAnotherPath": "s65ZvApiXi1VuussYoDlC0wP1aq2hHJFVWh9WlhM1Yo",
+        "activityWithServerConstruction": "0y4ehPYlKZBeeM9K0pF51tHsNr7grvfHGATERh4aJF4"
+      },
+      "devicesAnswer": {
+        "devices": [
+          {
+            "id": "dGhpc0lzQW5JZDEy",
+            "created": "2026-11-18",
+            "last_used": "2026-11-20",
+            "environment": "production",
+            "this_device": true
+          },
+          {
+            "id": "b3RoZXJEZXZpY2Ux",
+            "created": "2026-10-02",
+            "last_used": null,
+            "environment": "production",
+            "this_device": false
+          }
+        ]
+      },
+      "removalRule": [
+        {
+          "name": "the signer proved the account key",
+          "signer_proved_account_key": true,
+          "target_is_signer": false,
+          "target_idle_days": 0,
+          "signer_registered_first": false,
+          "allowed": true
+        },
+        {
+          "name": "the signer removes itself",
+          "signer_proved_account_key": false,
+          "target_is_signer": true,
+          "target_idle_days": 0,
+          "signer_registered_first": false,
+          "allowed": true
+        },
+        {
+          "name": "the target has been idle 30 days",
+          "signer_proved_account_key": false,
+          "target_is_signer": false,
+          "target_idle_days": 30,
+          "signer_registered_first": false,
+          "allowed": true
+        },
+        {
+          "name": "registered first, no key, target in use: refused (E1 N3b)",
+          "signer_proved_account_key": false,
+          "target_is_signer": false,
+          "target_idle_days": 3,
+          "signer_registered_first": true,
+          "allowed": false
+        },
+        {
+          "name": "a later copy, no key, target in use: refused",
+          "signer_proved_account_key": false,
+          "target_is_signer": false,
+          "target_idle_days": 29,
+          "signer_registered_first": false,
+          "allowed": false
+        }
+      ],
+      "appAccountToken": {
+        "accountKeyHex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "label": "pisa-relay/app-account-token",
+        "token": "55ba834e-40eb-8f96-88a3-4ac1fd42cf59",
+        "published": "55ba834e-40eb-8f96-88a3-4ac1fd42cf59"
+      }
+    },
+    "liveActivityRelayMode": {
+      "handle": "h-7Qm2Xc9LkP4tVb",
+      "type": "liveactivity",
+      "activity": {
+        "token": "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+        "event": "update",
+        "priority": 5,
+        "timestamp": 1763460010
+      }
+    },
+    "liveActivityApsRelayMode": {
+      "timestamp": 1763460010,
+      "event": "update",
+      "content-state": {}
+    },
+    "liveActivityStartRelayMode": {
+      "body": {
+        "handle": "h-7Qm2Xc9LkP4tVb",
+        "type": "liveactivity",
+        "activity": {
+          "token": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+          "event": "start",
+          "priority": 5,
+          "timestamp": 1763460011,
+          "attributesType": "NextStopAttributes"
+        }
+      },
+      "aps": {
+        "timestamp": 1763460011,
+        "event": "start",
+        "content-state": {},
+        "attributes-type": "NextStopAttributes",
+        "attributes": {},
+        "input-push-token": 1
+      }
+    },
+    "liveActivityStartRefused": [
+      {
+        "why": "a push-to-start needs attributesType",
+        "activity": {
+          "token": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+          "event": "start",
+          "priority": 5,
+          "timestamp": 1763460011
+        }
+      },
+      {
+        "why": "relay-mode attributes are {}: nothing about the user's day",
+        "activity": {
+          "token": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+          "event": "start",
+          "priority": 5,
+          "timestamp": 1763460011,
+          "attributesType": "NextStopAttributes",
+          "attributes": {
+            "stop": "Dentist"
+          }
+        }
+      }
+    ],
+    "liveActivityRelayModeRefused": [
+      {
+        "why": "staleDate would tell the relay about the user's day (E1 R5, gap 2)",
+        "activity": {
+          "token": "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+          "event": "update",
+          "priority": 5,
+          "timestamp": 1763460010,
+          "staleDate": 1763463600
+        }
+      },
+      {
+        "why": "progress would tell the relay about the user's day (E1 R5, gap 2)",
+        "activity": {
+          "token": "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+          "event": "update",
+          "priority": 5,
+          "timestamp": 1763460010,
+          "progress": 0.5
+        }
+      },
+      {
+        "why": "time would tell the relay about the user's day (E1 R5, gap 2)",
+        "activity": {
+          "token": "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+          "event": "update",
+          "priority": 5,
+          "timestamp": 1763460010,
+          "time": 1763462000
+        }
+      }
+    ],
+    "limits": {
+      "handlesPerSubscription": 10,
+      "evictIdleDays": 30,
+      "registerPerSubscriptionHour": 5,
+      "activityTokensKeptPerKind": 4,
+      "transactionMaxAgeS": 604800,
+      "pushBodyMaxBytes": 8192,
+      "replayKeepS": 600
+    },
+    "exactRepeat": {
+      "first": 202,
+      "repeat": 202,
+      "sentToApple": 1,
+      "why": "the same signature (same second, same body) is the same request: answered 202, sent once"
+    }
+  },
+  "push": {
+    "suite": {
+      "kem_id": 32,
+      "kdf_id": 1,
+      "aead_id": 3
+    },
+    "info": "pisa-push/2",
+    "aad": "h-7Qm2Xc9LkP4tVb",
+    "recipientPrivateKeyHex": "7e577e577e577e577e577e577e577e577e577e577e577e577e577e577e577e57",
+    "recipientPublicKeyHex": "45cc86106079030a6397385ee3719e6bf837b26da2f756b51404000d7efc966f",
+    "cases": [
+      {
+        "name": "fits 512",
+        "plaintext": "{\"v\":2,\"notice\":{\"noticeId\":\"44444444-4444-4444-8444-444444444444\",\"kind\":\"reminder\",\"priority\":\"normal\",\"lang\":\"en-US\",\"text\":\"Take the evening medicine\",\"privacy\":\"health\",\"genericText\":\"A reminder from Pisa\",\"wrist\":\"Reminder\"},\"sentAt\":\"2026-11-18T10:00:00Z\",\"apns\":{\"category\":\"notice\",\"threadId\":\"pisa-notices\",\"interruption\":\"active\"}}                                                                                                                          ",
+        "plaintextLength": 464,
+        "ephemeralPrivateKeyHex": "e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1e1",
+        "sealed": "TCgXqdZo7YRNL5W5O2nsuEhQlXg6AVpCQWSw0JcCiU_kd-YoXdBacMwaUemkkvu7vscOcdmbK5228kZAHkTlwtFwCXG78l45HBxyNhnSmyv3cCfEYFoHaeN9SqK6Aq26Vvtk9FMTy0ARM81987nfkz57b8b7LzrTjVT4jh2lrONIhRqLa0gmk0s_aZC8Cg6dDE46rzRNCOLhINlK2dRpowWUjNvuT3Vi2l88htZSMkcoFcdQrzIubndrbUhx1PeIEdSU0fDt-s21imLJ9D_H3oXDYXfZChAtMpRXqS0ooP0mOknmBi5_HgrTEr41dG7gHYZJ_lp0o8wEWJvI8Zk3K4-R0ktcUx0nCKhPxpabYut-eRMUpJY2FPXSDvPiutKtY-XSUxbcn3Scyb_NY-rTuQyYjvIO9Ry75VRmsSj-me7PdmN5XSqCA2Gn8OVfV6HbooeltjTrv7lSL6MPzPZziQMGOwitFWEXkQsA-e58WJkS_N2U6NUCbo4jaridDLzZCn2SiiDpDwKHxXnXIMqHPiQh-qYOniFECcy3aGEHtHLi1GO8CrnZ1h0dluabTWr-pl3lAdj5a61OeikxWzHVeHBJ6RXIp3wZq8zZx8CjEI2XwMM1vol_DjOoZaGPk497uf0o0O7d1AwpD6yZwiYvFr7xSgoQB3GNBm7UsZYZ9PQ",
+        "sealedLength": 512
+      },
+      {
+        "name": "needs 2048",
+        "plaintext": "{\"v\":2,\"notice\":{\"noticeId\":\"44444444-4444-4444-8444-444444444444\",\"kind\":\"reminder\",\"priority\":\"normal\",\"lang\":\"en-US\",\"text\":\"A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. A longer note. \",\"privacy\":\"health\",\"genericText\":\"A reminder from Pisa\",\"wrist\":\"Reminder\"},\"sentAt\":\"2026-11-18T10:00:00Z\",\"apns\":{\"category\":\"notice\",\"threadId\":\"pisa-notices\",\"interruption\":\"active\"}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ",
+        "plaintextLength": 2000,
+        "ephemeralPrivateKeyHex": "e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2",
+        "sealed": "GdgCBL-F8-ERjhsjQQyI8NDuztUVb0xb3zR7FO1-xj9DMBxRqsbuHI1DkVucjgY1Ib28ixUFhWUHlkGtGqRAm_T3LeOj0XYAlXCMPhYE3kzbII5SdKP49kFKFJqUZ_oudkPYIKERzhRlgE_zZRp5MkjwgtaPsInQ_4njhyRfZxXl1_SQ-G_v6WL39sNW04GVKHaDlVbaT2DOUs2HS2vZJUCLlXNhtLhhbelbRUzI26zTjVsOEwD28VHODJ83cfhlwaq2uKE2RGWKxKcsShaXGA7x5Q-JH6CGUEc0FzKEjlzZjnFURS_Y_rWx_42r2WWR8M3S_t2umUo_Niu97m8rF0yo45-fG1g11hN7iQQXNqXAM06fOiRk-A9SdS2pxvE0PeT0xahmbnxtZ7qKikQUDcmhe-hYCe7FGSRiZnxgNNNEGqCNIQsaHIcehZ9n6eRUwCUpVqhtOGuQM4K2wCiF_Rxj1etdP-TmVI21k-EwcF7W1fO6al4KmC7fSAM7OMxXZDCiXd2VL6ZxrIWRMgCrEWMQbZX6UamzQhTiBljENcvqh3oYbJ-qjF6JzNgFQabQYZL1_ZQqSZbjl7S4hX6MdJPKyqXX6sXt9rAggC2NHhgDlPhai5IQhRGXbvFD3G5mE5nH58DIr7sdxP4V6GL4TTy4CPzJQAw1ZIL9Q2QgdnWtZHaxDdBIlpuOzQ7LENBy1sXyWXQBZdWU1KVZWRQsMLPQVLagPcpSmrFey-CZz7xCc1ifmh4FnjdUA-D-wtXd_D2XpFo_8D4cPNAxAH0giW4wSsRsNiU5f38pseV4Jst9uVsBMhwiwtXdO0FOATI5pWQ53vZSIgEExmFyPTRxE1Sky2LyMj6qWMhc9gW3_54yP1Y1MNEbrgOQt1EH6Uumjeb6S52PUhOxAcou9ETHbEPkHZbLLnbTjQbGlx4CMXe2CPTRsM037xv8T2SSGT-omdLBvHGtCF-JcNQjlgF6FouLV0gmWAnXpiZkJOU-OZZtZ6qH14Kk4Btf5D7s27iHhp85T8Y3oEgWyYRzu6BQBwihYvlVz5eA5UB7IW0zTy1z2qe6zQS3bN1IWxNjq_tpVoit-ep28JLKpTsdVe3NljnR2cFWcqURGCSCKWDUg2UI-XXtPvLN8er-sb9Lv8KInuv69h2JSzqsFfoFz6Uyfj8osepkME1rOJOYoXHxlLcIhhPzrnmSfiBThh4VE0V2o-uvuciLOyB6SL8qsDFRoJAU7kRiEEBTTkrvu7mgOG3nnjhXpB7Wd2JtJMmk_q6BXjofhl6dnAt-0A4JVMWCzxK_HjtCtPd8yHq5IGba6HJ-n_Y_VLYwsiB5Cm8Ll5YHhyQGNgEXY4XZskps-GtAww9hN_3lri2zOuArcDBHWmJeFHD7SuNfH3sRd41k-NfYp5FW6auYB5Z71fFIUkd_kTElWcfAOlvOHGPXRMIMQXeyoYToYOMkaV6aOz2QKYLe8uZsCA70eWjbrQdAg2eBpb5OgyQ0Vul2ABp4Nm72G12MzJtlwT1ncWB7v2BtZSWyugkJr-y_2C1wmmNyFYu58bkfObXlgNKqLWxpXxbfdbXv1MMrFX0xfIiRe1QIvPJGk-X-wI_5ncItAEuDx5376KVB3v147gLKiOMrjfRYuz8TKwzO6EV6AKCEUTcmlueDBKA-LHIxDcdvd-AF6nE1eYuTUd_RvWgpyTnqjIT0SrHeLsN9tBx8XyIL9xsjuL_L7bN5eiAD0Cac6qaa86z1_Pc26xNhUPlVF9T5SKxvvQ0DfsNu2qxr73UA1j6P0WDayuZsmENuykcwHF-Nb8OeHnH2Xdit5PDNnCwuh8hhUSkjrX2ouUrAUY4-qgSjj5JMgCWl5KV_M8vTIkcstXPjbcIvC_vPssbImWT8zRVx1F6lDYv8q9kLZ5ydFt5pw3ESj23PKN6lCqr4u2sTrgglORuAMIImS98xOet9WjzI--WmjIuE3o1DtB-UvTtuTT0fK5AcMdSPJFvnQ_4JUHkOK1vZnoCAKCr7BXk8K-J9HMP2IocRd4ew0xNsXlfXMHuf-Z6AHDo3ZaWlbTKySlG7SCJRaFN3cmsY0UV36eL7jR4wlW61p4GFl2dPe63STk4VW3Vp4-Ir-twS0u0hBjVp30s617A4Eq_SM_8PwCz4HssSW12TvJ7ujJCyJlQ8Q1CyGBCPazW0R9QJcruQNFVDoXkaAeUUr7BX5W_tFd2E2U6U5CmIOvkDwtQ7tkBlVo6mcMeJRejrtjYOHl_pxqtzsYCa3XNaFYzaBaO4RBJmlZYti_NX--h7HmEel9rzPnWc620jxTrD3PUT6nN0U8PKJuHvoiosSQBlVeFAatNVhv72Vuvy0SATWUTY-zG3C2UG8Sh__D6Qqac974-BEc10SNLz3-ejgxbUjzejbE3vH4Q9gmCMLBBBNISs9M4VKY4KmTyI8fjiTNYi0C8Z7F4icMlnN4h-7ZUn_BeYJXSClb4IZNv7yTAZJrz5HvMIdczvFHn9VmgMm8uz5CGQOjj9I_KNLylBligOO7w_SAT67iZEFrMM0UirfOwfw0CN09hfcH5fT1Uqn8grrQLmzImXqkn6lidTurKaUeBUgpml5HW8_W6f5Q83j2nphqUB9q7LBi0mqRuSqVOHXhcddG-USpoIy5stURbIsQZVJL79hO4VPGH9ciM4H4VUMKK1QEXzFVCzYDk7jpAG329mPX-thxgDhnhsLFZmF_4dxjfVZys",
+        "sealedLength": 2048
+      }
+    ],
+    "nse": {
+      "windowSeconds": 604800,
+      "futureSeconds": 300,
+      "seenMax": 1000,
+      "cases": [
+        {
+          "name": "first delivery",
+          "plaintext": {
+            "v": 2,
+            "notice": {
+              "noticeId": "44444444-4444-4444-8444-444444444444",
+              "kind": "reminder",
+              "priority": "normal",
+              "lang": "en-US",
+              "text": "x",
+              "privacy": "health",
+              "genericText": "A reminder from Pisa",
+              "wrist": "Reminder"
+            },
+            "sentAt": "2026-11-18T10:00:00Z"
+          },
+          "now": 1794996060,
+          "result": "show"
+        },
+        {
+          "name": "the same sealed blob replayed",
+          "plaintext": {
+            "v": 2,
+            "notice": {
+              "noticeId": "44444444-4444-4444-8444-444444444444",
+              "kind": "reminder",
+              "priority": "normal",
+              "lang": "en-US",
+              "text": "x",
+              "privacy": "health",
+              "genericText": "A reminder from Pisa",
+              "wrist": "Reminder"
+            },
+            "sentAt": "2026-11-18T10:00:00Z"
+          },
+          "now": 1794996090,
+          "result": "repeat"
+        },
+        {
+          "name": "another notice",
+          "plaintext": {
+            "v": 2,
+            "notice": {
+              "noticeId": "55555555-5555-4555-8555-555555555555",
+              "kind": "reminder",
+              "priority": "normal",
+              "lang": "en-US",
+              "text": "x",
+              "privacy": "health",
+              "genericText": "A reminder from Pisa",
+              "wrist": "Reminder"
+            },
+            "sentAt": "2026-11-18T10:00:00Z"
+          },
+          "now": 1794996120,
+          "result": "show"
+        },
+        {
+          "name": "an old blob replayed 8 days later (a noticeId long forgotten)",
+          "plaintext": {
+            "v": 2,
+            "notice": {
+              "noticeId": "66666666-6666-4666-8666-666666666666",
+              "kind": "reminder",
+              "priority": "normal",
+              "lang": "en-US",
+              "text": "x",
+              "privacy": "health",
+              "genericText": "A reminder from Pisa",
+              "wrist": "Reminder"
+            },
+            "sentAt": "2026-11-10T09:00:00Z"
+          },
+          "now": 1794996060,
+          "result": "stale"
+        },
+        {
+          "name": "just inside the window",
+          "plaintext": {
+            "v": 2,
+            "notice": {
+              "noticeId": "77777777-7777-4777-8777-777777777777",
+              "kind": "reminder",
+              "priority": "normal",
+              "lang": "en-US",
+              "text": "x",
+              "privacy": "health",
+              "genericText": "A reminder from Pisa",
+              "wrist": "Reminder"
+            },
+            "sentAt": "2026-11-11T10:02:00Z"
+          },
+          "now": 1794996060,
+          "result": "show"
+        },
+        {
+          "name": "dated more than 5 minutes ahead of the phone's clock",
+          "plaintext": {
+            "v": 2,
+            "notice": {
+              "noticeId": "88888888-8888-4888-8888-888888888888",
+              "kind": "reminder",
+              "priority": "normal",
+              "lang": "en-US",
+              "text": "x",
+              "privacy": "health",
+              "genericText": "A reminder from Pisa",
+              "wrist": "Reminder"
+            },
+            "sentAt": "2026-11-18T11:00:00Z"
+          },
+          "now": 1794996060,
+          "result": "future"
+        }
+      ]
+    }
+  }
+}

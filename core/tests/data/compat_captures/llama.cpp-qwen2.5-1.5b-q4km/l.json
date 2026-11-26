@@ -1,0 +1,627 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Use the pisa_probe_add tool to add 2 and 3."
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "pisa_probe_add",
+       "description": "Add two integers and return their sum.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "a": {
+          "type": "integer"
+         },
+         "b": {
+          "type": "integer"
+         }
+        },
+        "required": [
+         "a",
+         "b"
+        ]
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 2.491,
+  "longest_silence_s": 2.491,
+  "total_s": 2.491,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "tool_calls",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+       {
+        "type": "function",
+        "function": {
+         "name": "pisa_probe_add",
+         "arguments": "{\"a\": 2, \"b\": 3}"
+        },
+        "id": "Y8jMF9gcv4SlGOaCp76eZMsGUdtwD8fB"
+       }
+      ]
+     }
+    }
+   ],
+   "created": 1795554474,
+   "model": "qwen2.5-1.5b-instruct",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 27,
+    "prompt_tokens": 194,
+    "total_tokens": 221,
+    "prompt_tokens_details": {
+     "cached_tokens": 0
+    }
+   },
+   "id": "chatcmpl-gSClaJoKJrkm9VCgOB7Y4SXCKAg34ydw",
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 194,
+    "prompt_ms": 1020.327,
+    "prompt_per_token_ms": 5.259,
+    "prompt_per_second": 190.135,
+    "predicted_n": 27,
+    "predicted_ms": 1464.641,
+    "predicted_per_token_ms": 56.332,
+    "predicted_per_second": 17.752
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is 2 plus 3?"
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "response_format": {
+     "type": "json_schema",
+     "json_schema": {
+      "name": "pisa_probe",
+      "strict": true,
+      "schema": {
+       "type": "object",
+       "properties": {
+        "pisa_probe_sum": {
+         "type": "integer"
+        }
+       },
+       "required": [
+        "pisa_probe_sum"
+       ],
+       "additionalProperties": false
+      }
+     }
+    }
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 1.655,
+  "longest_silence_s": 1.655,
+  "total_s": 1.655,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "stop",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "{\n  \"pisa_probe_sum\": 5\n}"
+     }
+    }
+   ],
+   "created": 1795554476,
+   "model": "qwen2.5-1.5b-instruct",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 23,
+    "prompt_tokens": 37,
+    "total_tokens": 60,
+    "prompt_tokens_details": {
+     "cached_tokens": 18
+    }
+   },
+   "id": "chatcmpl-uz0peBnm8FF0uhCgUweDFYNMvizeiRgt",
+   "timings": {
+    "cache_n": 18,
+    "prompt_n": 19,
+    "prompt_ms": 139.159,
+    "prompt_per_token_ms": 7.324,
+    "prompt_per_second": 136.534,
+    "predicted_n": 23,
+    "predicted_ms": 1510.954,
+    "predicted_per_token_ms": 68.68,
+    "predicted_per_second": 14.56
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Describe the colour of the sky in JSON."
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "response_format": {
+     "type": "json_object"
+    }
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 1.136,
+  "longest_silence_s": 1.136,
+  "total_s": 1.136,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "stop",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "{\n  \"sky_color\": \"blue\"\n}"
+     }
+    }
+   ],
+   "created": 1795554477,
+   "model": "qwen2.5-1.5b-instruct",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 15,
+    "prompt_tokens": 38,
+    "total_tokens": 53,
+    "prompt_tokens_details": {
+     "cached_tokens": 24
+    }
+   },
+   "id": "chatcmpl-eIGnNpFfhua0Eiv6tlNtYKgVFUI6K7VR",
+   "timings": {
+    "cache_n": 24,
+    "prompt_n": 14,
+    "prompt_ms": 95.58,
+    "prompt_per_token_ms": 6.827,
+    "prompt_per_second": 146.474,
+    "predicted_n": 15,
+    "predicted_ms": 1035.78,
+    "predicted_per_token_ms": 73.984,
+    "predicted_per_second": 13.516
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say hello."
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "pisa_probe_add",
+       "description": "Add two integers and return their sum.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "a": {
+          "type": "integer"
+         },
+         "b": {
+          "type": "integer"
+         }
+        },
+        "required": [
+         "a",
+         "b"
+        ]
+       }
+      }
+     }
+    ],
+    "tool_choice": "required"
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 15.12,
+  "longest_silence_s": 15.12,
+  "total_s": 15.12,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "length",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "Hello! How can I assist you further? I am not able to call any functions as I am not a tool. I am here to assist you with your queries. Please let me know what you need help with. I am not able to call any functions as I am not a tool. I am here to assist you with your queries. Please let me know what you need help with. I am not able to call any functions a...<1042 chars>"
+     }
+    }
+   ],
+   "created": 1795554492,
+   "model": "qwen2.5-1.5b-instruct",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 256,
+    "prompt_tokens": 182,
+    "total_tokens": 438,
+    "prompt_tokens_details": {
+     "cached_tokens": 174
+    }
+   },
+   "id": "chatcmpl-ja4e39Sj1Qascs2iPapIFf2PlLbDHCWE",
+   "timings": {
+    "cache_n": 174,
+    "prompt_n": 8,
+    "prompt_ms": 87.9,
+    "prompt_per_token_ms": 10.988,
+    "prompt_per_second": 91.013,
+    "predicted_n": 256,
+    "predicted_ms": 15023.641,
+    "predicted_per_token_ms": 58.916,
+    "predicted_per_second": 16.973
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "messages": [
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "text",
+        "text": "What colour is this image? Answer with one word."
+       },
+       {
+        "type": "image_url",
+        "image_url": {
+         "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKklEQVR4nGO4IyJCU8QwasGoBaMWjFowasGoBaMWjFowasGoBaMWDBULAJ3LED3QqzauAAAAAElFTkSuQmCC"
+        }
+       }
+      ]
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false
+   }
+  },
+  "status": 500,
+  "content_type": "application/json",
+  "first_byte_s": 0.001,
+  "longest_silence_s": 0.001,
+  "total_s": 0.001,
+  "body": {
+   "error": {
+    "code": 500,
+    "message": "image input is not supported - hint: if this is unexpected, you may need to provide the mmproj",
+    "type": "server_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/audio/transcriptions",
+   "body": "<16426 bytes>"
+  },
+  "status": 501,
+  "content_type": "application/json",
+  "first_byte_s": 0.003,
+  "longest_silence_s": 0.003,
+  "total_s": 0.003,
+  "body": {
+   "error": {
+    "code": 501,
+    "message": "The current model does not support audio input.",
+    "type": "not_supported_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/embeddings",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "input": "pisa probe"
+   }
+  },
+  "status": 501,
+  "content_type": "application/json",
+  "first_byte_s": 0.001,
+  "longest_silence_s": 0.001,
+  "total_s": 0.001,
+  "body": {
+   "error": {
+    "code": 501,
+    "message": "This server does not support embeddings. Start it with `--embeddings`",
+    "type": "not_supported_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "all-minilm-l6-v2",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Use the pisa_probe_add tool to add 2 and 3."
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "pisa_probe_add",
+       "description": "Add two integers and return their sum.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "a": {
+          "type": "integer"
+         },
+         "b": {
+          "type": "integer"
+         }
+        },
+        "required": [
+         "a",
+         "b"
+        ]
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 500,
+  "content_type": "application/json",
+  "first_byte_s": 0.002,
+  "longest_silence_s": 0.002,
+  "total_s": 0.002,
+  "body": {
+   "error": {
+    "code": 500,
+    "message": "the current context does not support logits computation. skipping",
+    "type": "server_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "all-minilm-l6-v2",
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is 2 plus 3?"
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "response_format": {
+     "type": "json_schema",
+     "json_schema": {
+      "name": "pisa_probe",
+      "strict": true,
+      "schema": {
+       "type": "object",
+       "properties": {
+        "pisa_probe_sum": {
+         "type": "integer"
+        }
+       },
+       "required": [
+        "pisa_probe_sum"
+       ],
+       "additionalProperties": false
+      }
+     }
+    }
+   }
+  },
+  "status": 400,
+  "content_type": "application/json",
+  "first_byte_s": 0.002,
+  "longest_silence_s": 0.002,
+  "total_s": 0.002,
+  "body": {
+   "error": {
+    "code": 400,
+    "message": "Failed to initialize samplers: std::exception",
+    "type": "invalid_request_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "all-minilm-l6-v2",
+    "messages": [
+     {
+      "role": "user",
+      "content": "Describe the colour of the sky in JSON."
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false,
+    "response_format": {
+     "type": "json_object"
+    }
+   }
+  },
+  "status": 400,
+  "content_type": "application/json",
+  "first_byte_s": 0.002,
+  "longest_silence_s": 0.002,
+  "total_s": 0.002,
+  "body": {
+   "error": {
+    "code": 400,
+    "message": "Failed to initialize samplers: std::exception",
+    "type": "invalid_request_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "all-minilm-l6-v2",
+    "messages": [
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "text",
+        "text": "What colour is this image? Answer with one word."
+       },
+       {
+        "type": "image_url",
+        "image_url": {
+         "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAKklEQVR4nGO4IyJCU8QwasGoBaMWjFowasGoBaMWjFowasGoBaMWDBULAJ3LED3QqzauAAAAAElFTkSuQmCC"
+        }
+       }
+      ]
+     }
+    ],
+    "max_tokens": 256,
+    "temperature": 0,
+    "stream": false
+   }
+  },
+  "status": 500,
+  "content_type": "application/json",
+  "first_byte_s": 0.002,
+  "longest_silence_s": 0.002,
+  "total_s": 0.002,
+  "body": {
+   "error": {
+    "code": 500,
+    "message": "image input is not supported - hint: if this is unexpected, you may need to provide the mmproj",
+    "type": "server_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/audio/transcriptions",
+   "body": "<16421 bytes>"
+  },
+  "status": 501,
+  "content_type": "application/json",
+  "first_byte_s": 0.002,
+  "longest_silence_s": 0.002,
+  "total_s": 0.002,
+  "body": {
+   "error": {
+    "code": 501,
+    "message": "The current model does not support audio input.",
+    "type": "not_supported_error"
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/embeddings",
+   "body": {
+    "model": "all-minilm-l6-v2",
+    "input": "pisa probe"
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.005,
+  "longest_silence_s": 0.005,
+  "total_s": 0.005,
+  "body": {
+   "model": "all-minilm-l6-v2",
+   "object": "list",
+   "usage": {
+    "prompt_tokens": 4,
+    "total_tokens": 4
+   },
+   "data": [
+    {
+     "embedding": "<384 numbers>",
+     "index": 0,
+     "object": "embedding"
+    }
+   ]
+  }
+ }
+]

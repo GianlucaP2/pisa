@@ -1,0 +1,13 @@
+{
+  "gap": "talk.text",
+  "check": "client_frame",
+  "why": "Contract 2.1 (talk.text): words typed into the device's open talk, by its session_id; the talker answers them by voice.",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.voice.talk.text",
+    "value": {
+      "id": "5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10",
+      "text": "Mettimi il dentista domani alle 9"
+    }
+  }
+}

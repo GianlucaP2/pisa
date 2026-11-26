@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pisa-conformance"
+version = "2.0.0"
+description = "Conformance kit for PISA contract 2: AG-UI 1.0 + A2UI 1.0 + pisa.* frames, lifecycle, fixtures and approval vectors"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.11"
+dependencies = [
+    "jsonschema>=4.18",
+    "referencing>=0.30",
+    "rfc3339-validator>=0.1.4",  # without it jsonschema silently accepts any "date-time"
+]
+
+[project.optional-dependencies]
+live = ["websockets>=13"]
+test = ["pytest>=9.0.3", "cryptography>=50", "openapi-spec-validator>=0.7", "websockets>=13"]
+openapi = ["schemathesis>=4"]   # Schemathesis on the OpenAPI delta, bundled (pisa_conformance.openapi)
+
+[project.scripts]
+pisa-conformance = "pisa_conformance.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pisa_conformance"]
+
+# The contract files live once, in protocol/v2; the wheel carries a copy so an installed kit needs no checkout.
+[tool.hatch.build.targets.wheel.force-include]
+"../schema" = "pisa_conformance/_data/schema"
+"../catalog" = "pisa_conformance/_data/catalog"
+"../examples" = "pisa_conformance/_data/examples"
+"../vendor" = "pisa_conformance/_data/vendor"
+"../fixtures" = "pisa_conformance/_data/fixtures"
+"../asyncapi-live.json" = "pisa_conformance/_data/asyncapi-live.json"
+"../openapi-v2-delta.json" = "pisa_conformance/_data/openapi-v2-delta.json"
+"../FROZEN.json" = "pisa_conformance/_data/FROZEN.json"
+"../../LICENSE" = "pisa_conformance/_data/LICENSE"
+"../../NOTICE" = "pisa_conformance/_data/NOTICE"
+"../../openapi.json" = "pisa_conformance/_data/v1/openapi.json"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

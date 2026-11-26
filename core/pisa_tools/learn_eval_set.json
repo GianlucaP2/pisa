@@ -1,0 +1,1070 @@
+{
+  "version": 1,
+  "about": "Pisa Learn's evaluation set (LEARN-1): 50 questions over open arXiv papers on white-box monitoring of LLMs (probes, truth directions, representation engineering, circuit breakers). Only ids, questions and gold locations; the papers are fetched from arXiv at run time and never committed (arXiv licence: personal and research use; no re-hosting).",
+  "papers": [
+    {
+      "arxiv": "2304.13734",
+      "title": "The Internal State of an LLM Knows When It's Lying",
+      "licence": "CC BY-NC-ND 4.0",
+      "why": "Probing: SAPLMA, an MLP probe on hidden-layer activations of OPT-6.7b / LLAMA2-7b for statement truthfulness, with per-layer accuracy tables and held-out-topic evaluation."
+    },
+    {
+      "arxiv": "2310.06824",
+      "title": "The Geometry of Truth: Emergent Linear Structure in Large Language Model Representations of True/False Datasets",
+      "licence": "CC BY 4.0",
+      "why": "Probing: truth directions in LLaMA-2 (patching, PCA, LR/mass-mean/CCS probes, causal interventions), with appendices on per-layer structure and dataset construction."
+    },
+    {
+      "arxiv": "2306.03341",
+      "title": "Inference-Time Intervention: Eliciting Truthful Answers from a Language Model",
+      "licence": "CC BY 4.0",
+      "why": "Probing and representation engineering: per-attention-head linear probes on TruthfulQA and steering along truthful directions (ITI), with ablations on directions, K/alpha and head selection."
+    },
+    {
+      "arxiv": "2406.11717",
+      "title": "Refusal in Language Models Is Mediated by a Single Direction",
+      "licence": "arXiv non-exclusive distribution",
+      "why": "Guardrails and probing: a difference-in-means refusal direction, directional ablation / weight orthogonalization as a jailbreak, with appendix on direction selection per layer."
+    },
+    {
+      "arxiv": "2502.03407",
+      "title": "Detecting Strategic Deception Using Linear Probes",
+      "licence": "arXiv non-exclusive distribution",
+      "why": "Deception monitoring: logistic-regression probes on the residual stream of Llama-3.3-70B (layer 22 of 80) trained on Instructed-Pairs/Roleplaying and tested on insider trading and sandbagging, with a 1%-FPR control calibration and appendix sweeps over layer, fitting method and aggregation."
+    },
+    {
+      "arxiv": "2406.04313",
+      "title": "Improving Alignment and Robustness with Circuit Breakers",
+      "licence": "CC BY 4.0",
+      "why": "Representation engineering: Representation Rerouting (LoRRA on layers 10 and 20) that breaks harmful internal processes before output, plus harmfulness probes on chosen layers as a white-box monitor, with representation analyses and a RepE attack on set layers."
+    }
+  ],
+  "questions": [
+    {
+      "id": "q01",
+      "lang": "en",
+      "kind": "fact",
+      "question": "Which two base LLMs does SAPLMA probe in the latest version of the paper, how many layers do they have, and which layers are used as probe inputs?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2304.13734",
+          "section": "4 SAPLMA",
+          "label": null,
+          "page": 5,
+          "anchor": "Therefore, we use several hidden layers as candidates."
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "lang": "it",
+      "kind": "rationale",
+      "question": "Perché SAPLMA non si limita all'ultimo hidden layer del modello ma confronta più layer intermedi?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2304.13734",
+          "section": "4 SAPLMA",
+          "label": null,
+          "page": 5,
+          "anchor": "Our general hypothesis is that the values in the hidden layers"
+        },
+        {
+          "arxiv": "2304.13734",
+          "section": "5 Results",
+          "label": "Table 1",
+          "page": 6,
+          "anchor": "Table 1: Accuracy classifying truthfulness of externally generated sentences during reading"
+        },
+        {
+          "arxiv": "2304.13734",
+          "section": "5 Results",
+          "label": "Table 2",
+          "page": 6,
+          "anchor": "Table 2: Accuracy classifying truthfulness of externally generated sentences using SAPLMA"
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "Why is the SAPLMA classifier evaluated on a held-out topic instead of a random train/test split of all statements?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2304.13734",
+          "section": "1 Introduction",
+          "label": null,
+          "page": 2,
+          "anchor": "In order to train SAPLMA we created a dataset of true and false statements"
+        },
+        {
+          "arxiv": "2304.13734",
+          "section": "4 SAPLMA",
+          "label": null,
+          "page": 5,
+          "anchor": "For each topic in the true-false dataset, we train the classifier"
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "lang": "it",
+      "kind": "fact",
+      "question": "Com'è fatto il classificatore di SAPLMA (strati, unità, attivazioni, ottimizzatore, epoche)?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2304.13734",
+          "section": "4 SAPLMA",
+          "label": null,
+          "page": 5,
+          "anchor": "SAPLMA's classifier employs a feedforward neural network, featuring three hidden layers"
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "For the sentences generated by OPT-6.7b, why do the authors move the decision threshold above 0.5, and how is the threshold chosen?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2304.13734",
+          "section": "5 Results",
+          "label": null,
+          "page": 7,
+          "anchor": "Indeed, SAPLMA classified approximately 70% of the sentences as true"
+        },
+        {
+          "arxiv": "2304.13734",
+          "section": "5 Results",
+          "label": "Table 4",
+          "page": 7,
+          "anchor": "Table 4: Accuracy classifying truthfulness of sentences generated by the LLM itself"
+        },
+        {
+          "arxiv": "2304.13734",
+          "section": "5 Results",
+          "label": null,
+          "page": 7,
+          "anchor": "The use of a higher threshold can also be justified by the notion"
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "lang": "it",
+      "kind": "fact",
+      "question": "Con LLAMA2-7b quale layer dà la migliore accuratezza media di SAPLMA e quanto vale?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2304.13734",
+          "section": "5 Results",
+          "label": "Table 2",
+          "page": 6,
+          "anchor": "Table 2: Accuracy classifying truthfulness of externally generated sentences using SAPLMA"
+        },
+        {
+          "arxiv": "2304.13734",
+          "section": "5 Results",
+          "label": null,
+          "page": 6,
+          "anchor": "Additionally, Table 2 presents the performance of SAPLMA using LLAMA2-7b"
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "Why does the 28th layer, rather than the 20th, work best on the statements generated by the LLM itself?",
+      "rationale": "not_stated",
+      "gold": [
+        {
+          "arxiv": "2304.13734",
+          "section": "5 Results",
+          "label": null,
+          "page": 7,
+          "anchor": "Another interesting observation is that the 20th-layer no longer performs best"
+        },
+        {
+          "arxiv": "2304.13734",
+          "section": "5 Results",
+          "label": "Table 3",
+          "page": 7,
+          "anchor": "Table 3: Accuracy classifying truthfulness of sentences generated by the LLM"
+        }
+      ]
+    },
+    {
+      "id": "q08",
+      "lang": "it",
+      "kind": "fact",
+      "question": "Quante frasi generate da OPT-6.7b sono state etichettate a mano, e con quale accordo tra i giudici?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2304.13734",
+          "section": "5 Results",
+          "label": null,
+          "page": 6,
+          "anchor": "This resulted in 245 labeled statements."
+        }
+      ]
+    },
+    {
+      "id": "q09",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "Why do the authors read truth representations over the end-of-sentence punctuation token rather than over the last token of the statement?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2310.06824",
+          "section": "3 Localizing truth representations via patching",
+          "label": null,
+          "page": 4,
+          "anchor": "What does group (b) encode? The position of this group"
+        },
+        {
+          "arxiv": "2310.06824",
+          "section": "4 Visualizing LLM representations of true/false datasets",
+          "label": null,
+          "page": 5,
+          "anchor": "Our qualitative results are insensitive to choice of layer among"
+        },
+        {
+          "arxiv": "2310.06824",
+          "section": "3 Localizing truth representations via patching",
+          "label": "Figure 2",
+          "page": 4,
+          "anchor": "Results for LLaMA-2-13B and the cities dataset are shown in Fig. 2"
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "lang": "it",
+      "kind": "rationale",
+      "question": "Perché per LLaMA-2-13B le visualizzazioni PCA usano il layer 15 e non un altro layer?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2310.06824",
+          "section": "4 Visualizing LLM representations of true/false datasets",
+          "label": null,
+          "page": 5,
+          "anchor": "We begin our investigation with a simple technique: visualizing LLMs representations"
+        },
+        {
+          "arxiv": "2310.06824",
+          "section": "Appendix C Emergence of linear structure across layers",
+          "label": "Figure 7",
+          "page": 15,
+          "anchor": "The linear structure observed in §4 follows the following pattern"
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "Why do the authors propose mass-mean probing instead of relying on logistic regression probes?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2310.06824",
+          "section": "5.1 Challenges with logistic regression, and mass-mean probing",
+          "label": "Figure 4",
+          "page": 6,
+          "anchor": "A common technique in interpretability research for identifying feature directions"
+        },
+        {
+          "arxiv": "2310.06824",
+          "section": "6.2 Results",
+          "label": "Table 2",
+          "page": 9,
+          "anchor": "Mass-mean probe directions are highly causal, with MM outperforming"
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "lang": "it",
+      "kind": "rationale",
+      "question": "A cosa serve il dataset 'likely' e perché è stato introdotto?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2310.06824",
+          "section": "2 Datasets",
+          "label": null,
+          "page": 3,
+          "anchor": "To ensure that our truth representations do not merely reflect"
+        },
+        {
+          "arxiv": "2310.06824",
+          "section": "5.3 Results",
+          "label": null,
+          "page": 8,
+          "anchor": "Probes trained on likely perform poorly"
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "lang": "en",
+      "kind": "fact",
+      "question": "How many statements does the counterfact_true_false dataset contain, and where does it come from?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2310.06824",
+          "section": "2 Datasets",
+          "label": "Table 1",
+          "page": 3,
+          "anchor": "Table 1: Our datasets"
+        },
+        {
+          "arxiv": "2310.06824",
+          "section": "Appendix H Details on dataset creation",
+          "label": null,
+          "page": 22,
+          "anchor": "counterfact_true_false. Counterfact was introduced in Meng et al."
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "lang": "it",
+      "kind": "rationale",
+      "question": "Perché in cities_cities_conj ciascuna affermazione viene campionata vera con probabilità 1/sqrt(2)?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2310.06824",
+          "section": "Appendix H Details on dataset creation",
+          "label": null,
+          "page": 21,
+          "anchor": "We sample the two statements independently to be true with probability"
+        }
+      ]
+    },
+    {
+      "id": "q15",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "Why are the numbers in larger_than / smaller_than restricted to a narrow range, excluding multiples of ten?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2310.06824",
+          "section": "Appendix H Details on dataset creation",
+          "label": null,
+          "page": 21,
+          "anchor": "We chose to limit the range of possible values in this way"
+        }
+      ]
+    },
+    {
+      "id": "q16",
+      "lang": "it",
+      "kind": "fact",
+      "question": "Nell'esperimento di intervento causale, che NIE ottiene la sonda mass-mean addestrata su cities+neg_cities con LLaMA-2-13B nella direzione falso→vero?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2310.06824",
+          "section": "6 Causal intervention experiments",
+          "label": "Table 2",
+          "page": 9,
+          "anchor": "Table 2: NIEs for intervention experiments, averaged over statements from sp_en_trans"
+        }
+      ]
+    },
+    {
+      "id": "q17",
+      "lang": "en",
+      "kind": "fact",
+      "question": "In LLaMA-7B, which attention head has the highest truthfulness probe accuracy, and what is that accuracy?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2306.03341",
+          "section": "3.2 Probing for “Truthfulness”",
+          "label": null,
+          "page": 4,
+          "anchor": "The results of this experiment show an interesting pattern of specialization"
+        },
+        {
+          "arxiv": "2306.03341",
+          "section": "3.2 Probing for “Truthfulness”",
+          "label": "Figure 2",
+          "page": 4,
+          "anchor": "Figure 2: (A) Linear probe accuracies on the validation set"
+        }
+      ]
+    },
+    {
+      "id": "q18",
+      "lang": "it",
+      "kind": "rationale",
+      "question": "Perché ITI interviene solo sulle top-K teste di attenzione invece che su tutte?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2306.03341",
+          "section": "3.3 Inference-Time Intervention",
+          "label": null,
+          "page": 5,
+          "anchor": "The precise intervention we perform during inference is slightly more complex"
+        },
+        {
+          "arxiv": "2306.03341",
+          "section": "5.5 Why Not Intervene on All Attention Heads?",
+          "label": "Table 5",
+          "page": 10,
+          "anchor": "Here we test two alternative methods for selecting intervention positions"
+        }
+      ]
+    },
+    {
+      "id": "q19",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "Why does ITI shift activations along the mass mean shift direction rather than the probe weight direction?",
+      "rationale": "empirical_only",
+      "gold": [
+        {
+          "arxiv": "2306.03341",
+          "section": "4.3 Experimental Results",
+          "label": "Table 3",
+          "page": 8,
+          "anchor": "In Table 3, we compare different directions to use for intervention"
+        },
+        {
+          "arxiv": "2306.03341",
+          "section": "Appendix B Discussion on Different Directions for Intervention",
+          "label": "Figure 7",
+          "page": 78,
+          "anchor": "We observe that for anisotropic distributions, the best-separating hyperplane"
+        }
+      ]
+    },
+    {
+      "id": "q20",
+      "lang": "it",
+      "kind": "rationale",
+      "question": "Come sono stati scelti K=48 e alpha=15 in ITI? C'è una giustificazione teorica?",
+      "rationale": "empirical_only",
+      "gold": [
+        {
+          "arxiv": "2306.03341",
+          "section": "3.3 Inference-Time Intervention",
+          "label": null,
+          "page": 5,
+          "anchor": "Intervention parameters K and"
+        },
+        {
+          "arxiv": "2306.03341",
+          "section": "4.3 Experimental Results",
+          "label": "Figure 4",
+          "page": 7,
+          "anchor": "In Figure 4, we sweep two hyperparameters controlling the strength"
+        },
+        {
+          "arxiv": "2306.03341",
+          "section": "Appendix C Discussion of Model Selection Procedure",
+          "label": null,
+          "page": 78,
+          "anchor": "There are several stages where supervisions are used"
+        }
+      ]
+    },
+    {
+      "id": "q21",
+      "lang": "en",
+      "kind": "fact",
+      "question": "What true*informative score does Alpaca reach with and without ITI?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2306.03341",
+          "section": "4.3 Experimental Results",
+          "label": "Table 2",
+          "page": 8,
+          "anchor": "Table 2: Comparison with instruction finetuned baselines using 2-fold cross-validation"
+        }
+      ]
+    },
+    {
+      "id": "q22",
+      "lang": "it",
+      "kind": "fact",
+      "question": "Su quali dataset fuori distribuzione è stato testato ITI e con quali risultati per LLaMA-7B?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2306.03341",
+          "section": "5.3 Generalization of ITI beyond TruthfulQA",
+          "label": null,
+          "page": 9,
+          "anchor": "An important concern is how ITI might generalize beyond"
+        },
+        {
+          "arxiv": "2306.03341",
+          "section": "5.3 Generalization of ITI beyond TruthfulQA",
+          "label": "Table 4",
+          "page": 9,
+          "anchor": "Table 4: Generalization results on out-of-distribution datasets"
+        }
+      ]
+    },
+    {
+      "id": "q23",
+      "lang": "en",
+      "kind": "fact",
+      "question": "How is the probing dataset for each attention head constructed and split in ITI?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2306.03341",
+          "section": "3.2 Probing for “Truthfulness”",
+          "label": null,
+          "page": 4,
+          "anchor": "For each QA pair in TruthfulQA, we concatenate the question and answer"
+        }
+      ]
+    },
+    {
+      "id": "q24",
+      "lang": "it",
+      "kind": "fact",
+      "question": "Qual è il costo computazionale di ITI durante l'inferenza e come si può integrare nei pesi?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2306.03341",
+          "section": "5.2 Computational Efficiency",
+          "label": null,
+          "page": 8,
+          "anchor": "According to Equation 2, no matter how many attention heads"
+        }
+      ]
+    },
+    {
+      "id": "q25",
+      "lang": "it",
+      "kind": "rationale",
+      "question": "Perché la sonda di inganno di Apollo legge il residual stream dopo il layer 22 (su 80) di Llama-3.3-70B e non un altro layer?",
+      "rationale": "empirical_only",
+      "gold": [
+        {
+          "arxiv": "2502.03407",
+          "section": "3.1 Building Deception Probes",
+          "label": null,
+          "page": 3,
+          "anchor": "We apply our probes after layer 22 (of 80) in the"
+        },
+        {
+          "arxiv": "2502.03407",
+          "section": "D.2 Varying layer",
+          "label": null,
+          "page": 21,
+          "anchor": "Layer 22 was chosen for best performance on the Roleplaying"
+        },
+        {
+          "arxiv": "2502.03407",
+          "section": "D.2 Varying layer",
+          "label": "Figure 12",
+          "page": 21,
+          "anchor": "Figure 12: Sweep over probe-training layer."
+        }
+      ]
+    },
+    {
+      "id": "q26",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "Why is the deception probe's threshold calibrated to a 1% false positive rate on Llama's responses to Alpaca queries?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2502.03407",
+          "section": "3.3 Evaluation Metrics",
+          "label": null,
+          "page": 5,
+          "anchor": "For a monitor to be useful when deployed on all model outputs"
+        },
+        {
+          "arxiv": "2502.03407",
+          "section": "3.2.3 Control dataset",
+          "label": null,
+          "page": 5,
+          "anchor": "We use Llama responses to queries from the Alpaca dataset"
+        }
+      ]
+    },
+    {
+      "id": "q27",
+      "lang": "it",
+      "kind": "rationale",
+      "question": "Perché nel dataset Instructed-Pairs le attivazioni vengono raccolte sul fatto escludendo gli ultimi 5 token?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2502.03407",
+          "section": "3.2.1 Instructed-Pairs Training Dataset",
+          "label": null,
+          "page": 4,
+          "anchor": "We gather activations on this fact excluding the last 5 tokens"
+        },
+        {
+          "arxiv": "2502.03407",
+          "section": "3.2.1 Instructed-Pairs Training Dataset",
+          "label": null,
+          "page": 4,
+          "anchor": "Ideally, the difference between the activations within each pair should"
+        }
+      ]
+    },
+    {
+      "id": "q28",
+      "lang": "en",
+      "kind": "fact",
+      "question": "What AUROC does the probe trained on Instructed-Pairs reach on Roleplaying, Insider Trading Report, Insider Trading Confirmation and Sandbagging?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2502.03407",
+          "section": "4.1.1 Summary of Performance",
+          "label": null,
+          "page": 6,
+          "anchor": "This probe can usually distinguish deceptive and honest responses"
+        },
+        {
+          "arxiv": "2502.03407",
+          "section": "4.1.1 Summary of Performance",
+          "label": "Figure 4",
+          "page": 7,
+          "anchor": "Figure 4: ROC curves for our probe trained on the Instructed-Pairs dataset"
+        }
+      ]
+    },
+    {
+      "id": "q29",
+      "lang": "it",
+      "kind": "fact",
+      "question": "Che cosa succede al recall con l'1% di FPR se la sonda di inganno viene applicata due layer più avanti?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2502.03407",
+          "section": "4.1.1 Summary of Performance",
+          "label": null,
+          "page": 6,
+          "anchor": "The recall metric is sensitive to small changes of methodology"
+        },
+        {
+          "arxiv": "2502.03407",
+          "section": "D.2 Varying layer",
+          "label": null,
+          "page": 21,
+          "anchor": "There is especially large variation in the recall at 1% metric"
+        }
+      ]
+    },
+    {
+      "id": "q30",
+      "lang": "en",
+      "kind": "fact",
+      "question": "Which alternatives to logistic regression were tried for fitting the deception probe, and which method best separates deceptive from control responses?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2502.03407",
+          "section": "D.1 Varying probe fitting procedure",
+          "label": null,
+          "page": 20,
+          "anchor": "We test several different alternatives for fitting linear probes"
+        },
+        {
+          "arxiv": "2502.03407",
+          "section": "D.1 Varying probe fitting procedure",
+          "label": "Figure 11",
+          "page": 20,
+          "anchor": "Figure 11: Bar chart comparing the performance"
+        },
+        {
+          "arxiv": "2502.03407",
+          "section": "3.1 Building Deception Probes",
+          "label": null,
+          "page": 3,
+          "anchor": "We compare Logistic Regression to alternative probing methods including"
+        }
+      ]
+    },
+    {
+      "id": "q31",
+      "lang": "it",
+      "kind": "rationale",
+      "question": "Perché il circuit breaking su Mistral-7B e Llama-3-8B agisce sui layer 10 e 20, con adattatori LoRA sui layer 0–20? Gli autori lo giustificano?",
+      "rationale": "not_stated",
+      "gold": [
+        {
+          "arxiv": "2406.04313",
+          "section": "C.2.1 Detailed Circuit Breaker Setup",
+          "label": null,
+          "page": 17,
+          "anchor": "We specifically target layers 10 and 20 for the circuit-breaking loss"
+        },
+        {
+          "arxiv": "2406.04313",
+          "section": "4.4 Ablation and Analysis",
+          "label": null,
+          "page": 10,
+          "anchor": "We note that we use layers 10 and 20 for circuit-breaking"
+        }
+      ]
+    },
+    {
+      "id": "q32",
+      "lang": "en",
+      "kind": "fact",
+      "question": "How long is circuit-breaking training run for Mistral-7B and Llama-3-8B (steps, batch size, alpha) and on what hardware?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2406.04313",
+          "section": "C.2.1 Detailed Circuit Breaker Setup",
+          "label": null,
+          "page": 17,
+          "anchor": "For both models, we perform circuit-breaking training for 150 steps"
+        }
+      ]
+    },
+    {
+      "id": "q33",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "In the refusal-direction selection, why are candidate directions restricted to layers below 0.8L?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2406.11717",
+          "section": "C.1 Direction selection algorithm",
+          "label": null,
+          "page": 21,
+          "anchor": "This condition ensures that the direction is not too close to the unembedding directions"
+        }
+      ]
+    },
+    {
+      "id": "q34",
+      "lang": "it",
+      "kind": "fact",
+      "question": "Da quale posizione di token e da quale layer è stata estratta la direzione di rifiuto per Llama-3 8B?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2406.11717",
+          "section": "C.2 Direction selection for each model",
+          "label": "Table 5",
+          "page": 22,
+          "anchor": "Table 5: Direction selection details for each model."
+        }
+      ]
+    },
+    {
+      "id": "q35",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "Why do the authors evaluate jailbreaks with both a refusal score and a safety score instead of string matching alone?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2406.11717",
+          "section": "2.5 Evaluation of refusal and harmfulness",
+          "label": null,
+          "page": 4,
+          "anchor": "As has been previously noted"
+        },
+        {
+          "arxiv": "2406.11717",
+          "section": "D.3 Challenges of evaluating refusal",
+          "label": null,
+          "page": 23,
+          "anchor": "Assessing whether a completion constitutes a successful jailbreak is complex."
+        }
+      ]
+    },
+    {
+      "id": "q36",
+      "lang": "it",
+      "kind": "rationale",
+      "question": "Perché per il jailbreak sui pesi usano l'ablazione direzionale invece di sottrarre il vettore (activation addition negativa)?",
+      "rationale": "empirical_only",
+      "gold": [
+        {
+          "arxiv": "2406.11717",
+          "section": "4.3 Measuring model coherence",
+          "label": null,
+          "page": 7,
+          "anchor": "In addition to standard language model evaluations, we also evaluate differences in CE loss"
+        },
+        {
+          "arxiv": "2406.11717",
+          "section": "I.1 Comparison to activation addition",
+          "label": "Figure 23",
+          "page": 32,
+          "anchor": "As shown in Figure 23, this activation addition intervention is effective"
+        },
+        {
+          "arxiv": "2406.11717",
+          "section": "G.3 CE loss evaluation",
+          "label": "Table 9",
+          "page": 30,
+          "anchor": "Table 9: Model performance as measured by CE loss across different datasets."
+        }
+      ]
+    },
+    {
+      "id": "q37",
+      "lang": "en",
+      "kind": "fact",
+      "question": "How many harmful and harmless instructions are in the train and validation splits used to extract the refusal direction?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2406.11717",
+          "section": "2.2 Datasets and models",
+          "label": null,
+          "page": 3,
+          "anchor": "We construct two datasets:"
+        },
+        {
+          "arxiv": "2406.11717",
+          "section": "A.1 Harmful instructions",
+          "label": null,
+          "page": 18,
+          "anchor": "we randomly sample a total of 128 harmful instructions"
+        }
+      ]
+    },
+    {
+      "id": "q38",
+      "lang": "it",
+      "kind": "fact",
+      "question": "Qual è l'ASR su HarmBench del metodo Ortho per Llama-2 7B con e senza system prompt?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2406.11717",
+          "section": "4.2 Comparison to other jailbreaks",
+          "label": "Table 2",
+          "page": 6,
+          "anchor": "HarmBench attack success rate (ASR) across various jailbreaking methods."
+        },
+        {
+          "arxiv": "2406.11717",
+          "section": "4.2 Comparison to other jailbreaks",
+          "label": null,
+          "page": 7,
+          "anchor": "We observe a notable difference in system prompt sensitivity across model families."
+        }
+      ]
+    },
+    {
+      "id": "q39",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "Why is the refusal metric defined as the log-odds of the refusal-token probability rather than the probability itself?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2406.11717",
+          "section": "Appendix B Refusal metric: an efficient proxy for measuring refusal",
+          "label": null,
+          "page": 19,
+          "anchor": "To create a more informative “refusal metric”, we take the log-odds"
+        }
+      ]
+    },
+    {
+      "id": "q40",
+      "lang": "it",
+      "kind": "rationale",
+      "question": "Perché le Harmfulness Probes leggono le attivazioni dal 16° layer di Mistral ma dall'ultimo layer di Llama-3?",
+      "rationale": "not_stated",
+      "gold": [
+        {
+          "arxiv": "2406.04313",
+          "section": "4.4 Ablation and Analysis",
+          "label": null,
+          "page": 10,
+          "anchor": "Specifically, activations are collected from the 16th layer of the Mistral"
+        }
+      ]
+    },
+    {
+      "id": "q41",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "Why does Representation Rerouting use a ReLU-clipped cosine-similarity loss instead of routing harmful representations to a random vector as in RMU?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2406.04313",
+          "section": "3 Circuit Breaking with Representation Engineering",
+          "label": null,
+          "page": 6,
+          "anchor": "The rerouting loss can take various forms."
+        },
+        {
+          "arxiv": "2406.04313",
+          "section": "4.4 Ablation and Analysis",
+          "label": null,
+          "page": 9,
+          "anchor": "Overall, the cosine loss proposed in RR offers more stability"
+        },
+        {
+          "arxiv": "2406.04313",
+          "section": "Appendix G Additional Ablation Results",
+          "label": "Table 8",
+          "page": 21,
+          "anchor": "Table 8: Training set ablation: adding data that bypass refusal mechanism"
+        }
+      ]
+    },
+    {
+      "id": "q42",
+      "lang": "it",
+      "kind": "fact",
+      "question": "Su quali layer viene applicato il RepE Attack nella valutazione dei circuit breakers, e con quali coefficienti per Mistral-7B e Llama-3?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2406.04313",
+          "section": "C.2.2 Detailed Evaluation Setup",
+          "label": null,
+          "page": 18,
+          "anchor": "In all our experiments, we use RepE on layers -11 through -20"
+        },
+        {
+          "arxiv": "2406.04313",
+          "section": "C.2.2 Detailed Evaluation Setup",
+          "label": null,
+          "page": 17,
+          "anchor": "We follow a standard RepE setup to find and apply directions"
+        }
+      ]
+    },
+    {
+      "id": "q43",
+      "lang": "en",
+      "kind": "rationale",
+      "question": "Why does the Llama-3 circuit breaker set drop the harmful user requests but keep the harmful assistant responses?",
+      "rationale": "stated",
+      "gold": [
+        {
+          "arxiv": "2406.04313",
+          "section": "3 Circuit Breaking with Representation Engineering",
+          "label": null,
+          "page": 6,
+          "anchor": "For models with pre-existing refusal mechanisms, like Llama-3-Instruct, careful dataset curation"
+        },
+        {
+          "arxiv": "2406.04313",
+          "section": "3 Circuit Breaking with Representation Engineering",
+          "label": null,
+          "page": 6,
+          "anchor": "We find that a practical approach is to remove harmful user requests"
+        }
+      ]
+    },
+    {
+      "id": "q44",
+      "lang": "it",
+      "kind": "fact",
+      "question": "Nella Figura 6, da quale layer coseni e norme di Llama-3-8B con circuit breakers cambiano bruscamente, e succede prima o dopo l'inizio della generazione?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2406.04313",
+          "section": "4.4 Ablation and Analysis",
+          "label": null,
+          "page": 10,
+          "anchor": "We observe that in this case, the cosines and norms start"
+        },
+        {
+          "arxiv": "2406.04313",
+          "section": "4.4 Ablation and Analysis",
+          "label": "Figure 6",
+          "page": 9,
+          "anchor": "Figure 6: Cosine analysis of internal representations of the Llama-3-8B-Instruct model"
+        }
+      ]
+    },
+    {
+      "id": "q45",
+      "lang": "en",
+      "kind": "fact",
+      "question": "In the multimodal LLaVA-NeXT-Mistral-7B setup, which layer does the circuit-breaking loss target and in which layers are the LoRA adapters placed?",
+      "rationale": null,
+      "gold": [
+        {
+          "arxiv": "2406.04313",
+          "section": "C.3.1 Detailed Circuit Breaker Setup",
+          "label": null,
+          "page": 18,
+          "anchor": "We perform the circuit-breaking procedure on the language model backbone"
+        }
+      ]
+    },
+    {
+      "id": "q46",
+      "lang": "en",
+      "kind": "absent",
+      "question": "How many A100 GPU-hours did it take to train the SAPLMA probes?",
+      "rationale": null,
+      "gold": []
+    },
+    {
+      "id": "q47",
+      "lang": "it",
+      "kind": "absent",
+      "question": "Quale learning rate e quale regolarizzazione L2 sono stati usati per le sonde di regressione logistica in 'The Geometry of Truth'?",
+      "rationale": null,
+      "gold": []
+    },
+    {
+      "id": "q48",
+      "lang": "en",
+      "kind": "absent",
+      "question": "What AUROC does the deception probe reach on Anthropic's sleeper-agent model organisms?",
+      "rationale": null,
+      "gold": []
+    },
+    {
+      "id": "q49",
+      "lang": "it",
+      "kind": "absent",
+      "question": "Che tasso di successo ottiene l'ablazione della direzione di rifiuto su GPT-4 via API?",
+      "rationale": null,
+      "gold": []
+    },
+    {
+      "id": "q50",
+      "lang": "en",
+      "kind": "absent",
+      "question": "What learning rate and LoRA rank were used to train the circuit breakers (Representation Rerouting) on Llama-3-8B?",
+      "rationale": null,
+      "gold": []
+    }
+  ]
+}

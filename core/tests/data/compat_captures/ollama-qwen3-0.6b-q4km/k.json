@@ -1,0 +1,224 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "pisa-matrix-no-such-model",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 4096
+   }
+  },
+  "status": 404,
+  "content_type": "application/json",
+  "first_byte_s": 0.002,
+  "longest_silence_s": 0.002,
+  "total_s": 0.002,
+  "body": {
+   "error": {
+    "message": "model 'pisa-matrix-no-such-model' not found",
+    "type": "not_found_error",
+    "param": null,
+    "code": null
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Record 00000: the lamp in room 00000 is green and stays on.\nRecord 00001: the lamp in room 00001 is blue and stays on.\nRecord 00002: the lamp in room 00002 is amber and stays on.\nRecord 00003: the lamp in room 00003 is grey and stays on.\nRecord 00004: the lamp in room 00004 is violet and stays on.\nRecord 00005: the lamp in room 00005 is white and stays on.\nR...<150007 chars>"
+     }
+    ],
+    "max_tokens": 4096
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 77.529,
+  "longest_silence_s": 77.529,
+  "total_s": 77.529,
+  "body": {
+   "id": "chatcmpl-467",
+   "object": "chat.completion",
+   "created": 1795558125,
+   "model": "qwen3:0.6b",
+   "system_fingerprint": "fp_ollama",
+   "choices": [
+    {
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "The pattern observed across these records is a repeating cycle of colors every 5 rooms. Each color is associated with a specific room number, where room numbers increase by 5 for each color cycle. For example, green (room 02415, 02422, 02427, 02432, 02437, 02442, 02447, 02452, 02457, 02462, 02467, 02472, 02477, 02482, 02487, 02492, 02497) follows the same co...<627 chars>",
+      "reasoning": "Okay, let me start by understanding the problem. The user provided a series of records from 02400 to 02499, each describing a lamp in a specific room. Each entry has a room number, the color of the lamp, and a note that it stays on. My task is to analyze these records and determine if there's a pattern or a specific rule that applies to these lamps.\n\nFirst, ...<3123 chars>"
+     },
+     "finish_reason": "stop"
+    }
+   ],
+   "usage": {
+    "prompt_tokens": 2050,
+    "prompt_tokens_details": {
+     "cached_tokens": 3
+    },
+    "completion_tokens": 1056,
+    "total_tokens": 3106
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a 300-word story about a lamp."
+     }
+    ],
+    "max_tokens": 4096
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.503,
+  "error": "ReadTimeout",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a 300-word story about a lamp."
+     }
+    ],
+    "max_tokens": 4096
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.505,
+  "error": "ReadTimeout",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a 300-word story about a lamp."
+     }
+    ],
+    "max_tokens": 4096
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.505,
+  "error": "ReadTimeout",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 4096
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.001,
+  "error": "ConnectError",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 4096
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.001,
+  "error": "ConnectError",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen3:0.6b",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 4096
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.001,
+  "error": "ConnectError",
+  "body": ""
+ }
+]

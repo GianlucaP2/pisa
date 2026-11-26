@@ -1,0 +1,27 @@
+{
+  "gap": "notify.local",
+  "check": "server_frame",
+  "why": "A deep link never pairs (pisa://pair is not in the set).",
+  "frame": {
+    "seq": 7,
+    "threadId": "pisa-notices",
+    "runId": "run-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.notify.schedule",
+      "value": {
+        "revision": 12,
+        "items": [
+          {
+            "id": "rem-1",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://pair?v=1"
+          }
+        ]
+      }
+    }
+  }
+}

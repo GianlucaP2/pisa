@@ -1,0 +1,34 @@
+{
+  "kind": "calendar#events",
+  "items": [
+    {
+      "id": "ev-lunch",
+      "status": "cancelled"
+    },
+    {
+      "id": "ev-call",
+      "status": "confirmed",
+      "summary": "Call con Marco",
+      "start": {
+        "dateTime": "2026-10-22T09:00:00+02:00"
+      },
+      "end": {
+        "dateTime": "2026-10-22T09:30:00+02:00"
+      },
+      "updated": "2026-10-20T09:00:00.000Z"
+    },
+    {
+      "id": "ev-far",
+      "status": "confirmed",
+      "summary": "Far future",
+      "start": {
+        "dateTime": "2027-03-01T09:00:00+01:00"
+      },
+      "end": {
+        "dateTime": "2027-03-01T10:00:00+01:00"
+      },
+      "updated": "2026-10-20T09:00:00.000Z"
+    }
+  ],
+  "nextSyncToken": "sync-token-2"
+}

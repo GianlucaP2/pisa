@@ -1,0 +1,4887 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pisa:contract:2:extensions",
+  "title": "PISA contract 2: pisa.* extensions, frames and negotiation",
+  "description": "Everything CONTRACT-2 adds around AG-UI 1.0, A2UI 1.0 and MCP Apps 2026-01-26. Apache-2.0. Field names are camelCase like AG-UI.",
+  "x-pisa-contract": "2.5",
+  "x-pisa-required-features": [
+    "stop",
+    "approvals.signed"
+  ],
+  "x-pisa-approval-error-codes": [
+    "approval_changed",
+    "approval_expired",
+    "approval_decided",
+    "biometric_required",
+    "action_failed"
+  ],
+  "x-pisa-enrol-reasons": [
+    "missing",
+    "consent",
+    "no_speech",
+    "timeout",
+    "not_reliable",
+    "error"
+  ],
+  "x-pisa-server-events": [
+    "pisa.voice.audio",
+    "pisa.voice.state",
+    "pisa.voice.gate",
+    "pisa.voice.transcript",
+    "pisa.voice.turn_hint",
+    "pisa.voice.understood",
+    "pisa.notice",
+    "pisa.ask_to_open",
+    "pisa.directions",
+    "pisa.call",
+    "pisa.compose",
+    "pisa.action_done",
+    "pisa.approval.state",
+    "pisa.ai.disclosure",
+    "pisa.endpoints",
+    "pisa.surface.focus",
+    "pisa.entitlement.required",
+    "pisa.app.open",
+    "pisa.app.changed",
+    "pisa.maps.search",
+    "pisa.maps.eta",
+    "pisa.notify.schedule",
+    "pisa.notify.cancel",
+    "pisa.notify.regions"
+  ],
+  "x-pisa-client-events": [
+    "pisa.presence",
+    "pisa.location",
+    "pisa.place_enter",
+    "pisa.device_context",
+    "pisa.surface.ack",
+    "pisa.surface.event",
+    "pisa.voice.partial",
+    "pisa.voice.talk.text",
+    "pisa.app.result",
+    "pisa.maps.result",
+    "pisa.notify.ack"
+  ],
+  "x-pisa-enrol-server-events": [
+    "pisa.voice.enrol.quality",
+    "pisa.voice.enrol.test_result",
+    "pisa.voice.enrol.done"
+  ],
+  "x-pisa-enrol-client-events": [
+    "pisa.voice.enrol.block",
+    "pisa.voice.enrol.test",
+    "pisa.voice.enrol.finish",
+    "pisa.voice.enrol.cancel"
+  ],
+  "x-pisa-extensions": [
+    "pisa.voice",
+    "pisa.voice.turn_hints",
+    "pisa.voice.audio.binary",
+    "pisa.presence",
+    "pisa.location",
+    "pisa.notice",
+    "pisa.directions",
+    "pisa.call",
+    "pisa.compose",
+    "pisa.approval",
+    "pisa.surface",
+    "pisa.app",
+    "pisa.maps",
+    "pisa.notify"
+  ],
+  "$defs": {
+    "uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "lang": {
+      "type": "string",
+      "pattern": "^[a-z]{2}-[A-Z]{2}$"
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "AIDisclosure": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16,64}$"
+        },
+        "processors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40
+              },
+              "provider": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 60
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "cloud",
+                      "self_hosted",
+                      "on_server"
+                    ]
+                  },
+                  "region": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "kind"
+                ],
+                "additionalProperties": false
+              },
+              "model": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              },
+              "dataCategories": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "conversation",
+                    "mail",
+                    "calendar",
+                    "places",
+                    "location",
+                    "people",
+                    "health",
+                    "finance",
+                    "documents",
+                    "voice"
+                  ]
+                }
+              },
+              "features": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 60
+                }
+              }
+            },
+            "required": [
+              "slot",
+              "provider",
+              "model",
+              "dataCategories"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "healthRequiresSeparateConsent": {
+          "const": true
+        }
+      },
+      "required": [
+        "revision",
+        "processors",
+        "healthRequiresSeparateConsent"
+      ],
+      "additionalProperties": false,
+      "description": "Which AI providers and models the server sends the user's data to, per slot (guideline 5.1.2(i)). revision = sha256 of the JCS of processors; it changes whenever a provider or model changes, and the app asks again."
+    },
+    "MapsPlace": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._:~-]{1,200}$",
+          "not": {
+            "pattern": "\\n"
+          },
+          "description": "The phone's maps service's own id for a place (opaque to the server); only ever handed back to the same phone."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120,
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\u202a-\\u202e\\u2066-\\u2069]"
+          }
+        },
+        "address": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\u202a-\\u202e\\u2066-\\u2069]"
+          }
+        },
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "restaurant",
+            "cafe",
+            "pharmacy",
+            "fuel",
+            "supermarket",
+            "atm",
+            "parking",
+            "other"
+          ]
+        },
+        "distanceMeters": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 40000000
+        },
+        "openNow": {
+          "type": "boolean"
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+[1-9][0-9]{5,14}$",
+          "not": {
+            "pattern": "\\n"
+          }
+        },
+        "url": {
+          "type": "string",
+          "maxLength": 500,
+          "pattern": "^https://[^\\s]+$",
+          "not": {
+            "pattern": "\\n"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "lat",
+        "lon"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.3: one place the phone's own maps found (pisa.maps.result). Untrusted input to the server: its name, address and url are outside text (quarantined like a web page, never instructions), its url is shown, never fetched by the server; the coordinates are used for the answer and never logged. Not the catalog's PlaceSummary component, which the server composes from its own data."
+    },
+    "MapsEta": {
+      "type": "object",
+      "properties": {
+        "seconds": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 604800
+        },
+        "distanceMeters": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 40000000
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "walk",
+            "transit",
+            "drive",
+            "bike"
+          ]
+        },
+        "departAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "seconds",
+        "distanceMeters",
+        "mode"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.3: a travel time the phone's own maps worked out (pisa.maps.result): seconds and metres for mode, leaving at departAt (now when absent). Untrusted input to the server."
+    },
+    "NotifyItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,64}$",
+          "not": {
+            "pattern": "\\n"
+          }
+        },
+        "fireAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\u202a-\\u202e\\u2066-\\u2069]"
+          }
+        },
+        "body": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\u202a-\\u202e\\u2066-\\u2069]"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "reminder",
+            "task",
+            "calendar",
+            "leave"
+          ]
+        },
+        "deepLink": {
+          "type": "string",
+          "pattern": "^pisa://(chat|riepilogo|task/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|reminder/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$",
+          "not": {
+            "pattern": "\\n"
+          },
+          "description": "Where a tap on the notification leads, one of an allow-listed set of the app's own screens: pisa://chat, pisa://riepilogo, pisa://task/<uuid>, pisa://reminder/<uuid>. Nothing else (never a web address, never pisa://pair)."
+        }
+      },
+      "required": [
+        "id",
+        "fireAt",
+        "title",
+        "kind"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.3: one local notification the phone schedules for fireAt (RFC 3339 with an offset). title and body are what the lock screen shows: the server keeps them minimal (no health or money detail, no address, no coordinate); the phone shows them as the user's preview setting allows."
+    },
+    "NotifyRegion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,64}$",
+          "not": {
+            "pattern": "\\n"
+          }
+        },
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "radiusMeters": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 5000
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\u202a-\\u202e\\u2066-\\u2069]"
+          }
+        },
+        "on": {
+          "type": "string",
+          "enum": [
+            "enter",
+            "exit"
+          ]
+        },
+        "deepLink": {
+          "type": "string",
+          "pattern": "^pisa://(chat|riepilogo|task/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|reminder/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$",
+          "not": {
+            "pattern": "\\n"
+          },
+          "description": "Where a tap on the notification leads, one of an allow-listed set of the app's own screens: pisa://chat, pisa://riepilogo, pisa://task/<uuid>, pisa://reminder/<uuid>. Nothing else (never a web address, never pisa://pair)."
+        }
+      },
+      "required": [
+        "id",
+        "lat",
+        "lon",
+        "radiusMeters",
+        "title",
+        "on"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.3: a place the phone watches itself (geofence): it shows title when the user enters it or leaves it (on). The coordinates stay on the phone and in the server's store; neither side logs them."
+    },
+    "s_pisa_voice_audio": {
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "noticeId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "opus",
+            "aac_adts",
+            "mp3",
+            "pcm16"
+          ]
+        },
+        "sampleRate": {
+          "type": "integer",
+          "enum": [
+            16000,
+            22050,
+            24000,
+            44100,
+            48000
+          ]
+        },
+        "data": {
+          "type": "string",
+          "maxLength": 400000,
+          "contentEncoding": "base64"
+        },
+        "final": {
+          "type": "boolean"
+        },
+        "sentenceEnd": {
+          "type": "boolean"
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "spokenChars": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "seq",
+        "format",
+        "sampleRate",
+        "data",
+        "final"
+      ],
+      "additionalProperties": false,
+      "description": "The server's voice for a text message (messageId) or a notice (noticeId), in seq order. Replaces say_audio. A device that negotiated audio.binary gets the same chunk as a binary frame instead.",
+      "anyOf": [
+        {
+          "required": [
+            "messageId"
+          ]
+        },
+        {
+          "required": [
+            "noticeId"
+          ]
+        }
+      ]
+    },
+    "s_pisa_voice_state": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "listening",
+            "thinking",
+            "speaking",
+            "idle"
+          ]
+        }
+      },
+      "required": [
+        "state"
+      ],
+      "additionalProperties": false,
+      "description": "What the voice is doing (natural mode): drives the presence orb and the Talk Live Activity."
+    },
+    "s_pisa_voice_gate": {
+      "type": "object",
+      "properties": {
+        "heard": {
+          "type": "string",
+          "enum": [
+            "owner",
+            "other",
+            "none"
+          ]
+        }
+      },
+      "required": [
+        "heard"
+      ],
+      "additionalProperties": false,
+      "description": "G5. During a gated talk (VOICE-ID-1): whose voice the gate hears, at most twice a second (a subtle state on the orb). Replaces talk.gate."
+    },
+    "s_pisa_voice_transcript": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4000
+        },
+        "final": {
+          "type": "boolean"
+        },
+        "ignored": {
+          "type": "string",
+          "enum": [
+            "noise",
+            "echo",
+            "language",
+            "fragment"
+          ],
+          "description": "A final the server sets aside: no reply, no end of turn; the app clears the live words and waits. noise: nothing to answer (a cough, a lone letter); echo: the server's own voice heard back; language: a language other than the user's with a weak score (VOICE-ID-1, sent with text \"\"); fragment: a plainly unfinished fragment (sent with text \"\")."
+        }
+      },
+      "required": [
+        "text",
+        "final"
+      ],
+      "additionalProperties": false,
+      "description": "The user's words as the server heard them (natural mode); text is the whole line so far. A final without ignored becomes a user message in MESSAGES_SNAPSHOT."
+    },
+    "s_pisa_voice_turn_hint": {
+      "type": "object",
+      "properties": {
+        "replyTo": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "pEnd": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "waitMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5000
+        }
+      },
+      "required": [
+        "replyTo",
+        "pEnd",
+        "waitMs"
+      ],
+      "additionalProperties": false,
+      "description": "End-of-turn score for a partial transcript (economy mode)."
+    },
+    "s_pisa_voice_understood": {
+      "type": "object",
+      "properties": {
+        "replyTo": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "meant": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "raw": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "corrections": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              "to": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              }
+            },
+            "required": [
+              "from",
+              "to"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "ask": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "replyTo",
+        "meant",
+        "raw",
+        "corrections",
+        "ask"
+      ],
+      "additionalProperties": false,
+      "description": "What the server understood the user meant."
+    },
+    "s_pisa_notice": {
+      "type": "object",
+      "properties": {
+        "noticeId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "reminder",
+            "briefing",
+            "replan",
+            "alert",
+            "info",
+            "check_in",
+            "done",
+            "turn_answer",
+            "weekly",
+            "ledger_week"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "low",
+            "normal",
+            "urgent"
+          ]
+        },
+        "urgency": {
+          "type": "string",
+          "enum": [
+            "now",
+            "breakpoint"
+          ]
+        },
+        "lang": {
+          "$ref": "#/$defs/lang"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "wrist": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 60
+        },
+        "voice": {
+          "type": "boolean",
+          "default": true
+        },
+        "sensitive": {
+          "type": "boolean",
+          "default": false
+        },
+        "checkIn": {
+          "type": "object",
+          "properties": {
+            "checkInId": {
+              "$ref": "#/$defs/uuid"
+            },
+            "choices": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 5,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z_]{1,32}$"
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 40
+                  }
+                },
+                "required": [
+                  "id",
+                  "label"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "expectsReply": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "checkInId",
+            "choices"
+          ],
+          "additionalProperties": false
+        },
+        "undo": {
+          "type": "object",
+          "properties": {
+            "undoId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "until": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "required": [
+            "undoId",
+            "until"
+          ],
+          "additionalProperties": false
+        },
+        "place": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "refs": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "maxLength": 1200
+          },
+          "description": "Ring 0 refs to open (task:, event:, sheet:, approval:, ledger_week:...)."
+        },
+        "surfaceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "privacy": {
+          "type": "string",
+          "enum": [
+            "none",
+            "health",
+            "finance",
+            "place",
+            "people"
+          ],
+          "default": "none",
+          "description": "What the notice touches. The lock screen, the watch and a relay push show a generic preview for health and finance unless the user allowed full previews for that class (Ring 0 setting)."
+        },
+        "genericText": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      },
+      "required": [
+        "noticeId",
+        "kind",
+        "priority",
+        "lang",
+        "text"
+      ],
+      "additionalProperties": false,
+      "description": "A proactive notice. The same object is the plaintext of a relay-sealed push (CONTRACT-2 §9). Replaces notify."
+    },
+    "s_pisa_ask_to_open": {
+      "type": "object",
+      "properties": {
+        "why": {
+          "type": "string",
+          "enum": [
+            "leave_now",
+            "reply_waiting",
+            "approval_lapsing",
+            "check_in"
+          ]
+        },
+        "line": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "lang": {
+          "$ref": "#/$defs/lang"
+        },
+        "noticeId": {
+          "$ref": "#/$defs/uuid"
+        }
+      },
+      "required": [
+        "why",
+        "line",
+        "lang"
+      ],
+      "additionalProperties": false,
+      "description": "The server asks to open a voice talk (earbuds, glasses, car)."
+    },
+    "s_pisa_directions": {
+      "type": "object",
+      "properties": {
+        "directionsId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "walk",
+            "transit",
+            "drive",
+            "bike"
+          ]
+        },
+        "placeId": {
+          "$ref": "#/$defs/uuid"
+        }
+      },
+      "required": [
+        "directionsId",
+        "name",
+        "lat",
+        "lon",
+        "mode"
+      ],
+      "additionalProperties": false,
+      "description": "Open the maps app (foreground) or a notification that opens it."
+    },
+    "s_pisa_call": {
+      "type": "object",
+      "properties": {
+        "callId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+[1-9][0-9]{5,14}$"
+        }
+      },
+      "required": [
+        "callId",
+        "name",
+        "phone"
+      ],
+      "additionalProperties": false,
+      "description": "Place a phone call after the user's tap (Ring 0 confirms)."
+    },
+    "s_pisa_compose": {
+      "type": "object",
+      "properties": {
+        "composeId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "app": {
+          "type": "string",
+          "enum": [
+            "messages",
+            "whatsapp"
+          ]
+        },
+        "recipient": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "phone": {
+              "type": "string",
+              "pattern": "^\\+[1-9][0-9]{5,14}$"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "additionalProperties": false
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 3000
+        }
+      },
+      "required": [
+        "composeId",
+        "app",
+        "recipient",
+        "text"
+      ],
+      "additionalProperties": false,
+      "description": "Open a prepared message; the user sends it."
+    },
+    "s_pisa_action_done": {
+      "type": "object",
+      "properties": {
+        "approvalId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "result": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "undoUntil": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "approvalId",
+        "kind",
+        "summary",
+        "result"
+      ],
+      "additionalProperties": false,
+      "description": "An approved act ran."
+    },
+    "s_pisa_approval_state": {
+      "type": "object",
+      "properties": {
+        "approvalId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "interruptId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "approved",
+            "rejected",
+            "expired",
+            "replaced",
+            "done",
+            "failed"
+          ]
+        },
+        "by": {
+          "type": "string",
+          "enum": [
+            "voice",
+            "tap",
+            "biometric",
+            "watch",
+            "notification",
+            "server"
+          ]
+        }
+      },
+      "required": [
+        "approvalId",
+        "interruptId",
+        "state"
+      ],
+      "additionalProperties": false,
+      "description": "An approval's interrupt was closed somewhere else (voice, another device, expiry): the app drops the held interrupt and must not resume it."
+    },
+    "s_pisa_ai_disclosure": {
+      "$ref": "#/$defs/AIDisclosure"
+    },
+    "s_pisa_endpoints": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "endpoints": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "lan",
+                  "ipv6",
+                  "ipv4",
+                  "host",
+                  "relay"
+                ]
+              },
+              "address": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 255
+              },
+              "port": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 65535
+              },
+              "relayHandle": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              }
+            },
+            "required": [
+              "kind",
+              "address"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "spki": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9+/=]{44}$"
+          }
+        }
+      },
+      "required": [
+        "revision",
+        "endpoints",
+        "spki"
+      ],
+      "additionalProperties": false,
+      "description": "The server's reachable addresses and its SPKI pins (current and the pre-announced next key), sent after a change. Authenticated by the pinned channel; the app keeps the set per server."
+    },
+    "s_pisa_surface_focus": {
+      "type": "object",
+      "properties": {
+        "surfaceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "take",
+            "offer",
+            "quiet"
+          ]
+        },
+        "highlight": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        }
+      },
+      "required": [
+        "surfaceId",
+        "mode"
+      ],
+      "additionalProperties": false,
+      "description": "Bring a surface already shown back in front (v1 focus)."
+    },
+    "s_pisa_entitlement_required": {
+      "type": "object",
+      "properties": {
+        "feature": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "level": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        }
+      },
+      "required": [
+        "feature",
+        "level"
+      ],
+      "additionalProperties": false,
+      "description": "The server offers this feature but the app reported no entitlement for it: the app shows its paywall (Ring 0)."
+    },
+    "s_pisa_app_open": {
+      "type": "object",
+      "properties": {
+        "actionId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "target": {
+          "type": "string",
+          "enum": [
+            "tab",
+            "riepilogo",
+            "task",
+            "ai_privacy",
+            "riepilogo_refresh"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "actionId",
+        "target"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.2, the feature app.actions (pisa.app): Pisa asks the app to open one of its own screens: a tab (id: the tab's id, pisa, oggi or impostazioni), the riepilogo, a task (id: its uuid), Settings → AI e privacy, or to read the riepilogo again (riepilogo_refresh). The app does it and answers with pisa.app.result for the same actionId at once; without an answer in a few seconds Pisa says it isn't confirmed. Never anything outside the app.",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "target": {
+                "enum": [
+                  "tab",
+                  "task"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "id"
+            ]
+          }
+        }
+      ]
+    },
+    "s_pisa_app_changed": {
+      "type": "object",
+      "properties": {
+        "views": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "riepilogo",
+              "plan",
+              "tasks",
+              "agenda"
+            ]
+          }
+        },
+        "at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "views",
+        "at"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.2, the feature briefing.view (pisa.app): the user's tasks or agenda changed (on any device, by Pisa or by them), so the views named are out of date: the app reads them again (GET /v1/briefings/latest, GET /v1/plan...). Ids only, never content; at most about once a second."
+    },
+    "s_pisa_maps_search": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "query": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f-\\u009f\\u2028\\u2029\\u202a-\\u202e\\u2066-\\u2069]"
+          }
+        },
+        "near": {
+          "oneOf": [
+            {
+              "const": "here"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number",
+                  "minimum": -90,
+                  "maximum": 90
+                },
+                "lon": {
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180
+                }
+              },
+              "required": [
+                "lat",
+                "lon"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "restaurant",
+            "cafe",
+            "pharmacy",
+            "fuel",
+            "supermarket",
+            "atm",
+            "parking",
+            "other"
+          ]
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        }
+      },
+      "required": [
+        "requestId",
+        "query"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.3, the feature maps.phone (pisa.maps): Pisa asks the phone to look places up with its own maps (no server key), near \"here\" or a coordinate (absent: wherever the phone's maps search by default), of one kind, at most limit (default 5, at most 10). Sent in the turn's run; the phone answers pisa.maps.result for the same requestId at once. Without an answer in a few seconds Pisa says it couldn't look. The server never logs near's coordinates."
+    },
+    "s_pisa_maps_eta": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "from": {
+          "oneOf": [
+            {
+              "const": "here"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number",
+                  "minimum": -90,
+                  "maximum": 90
+                },
+                "lon": {
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180
+                }
+              },
+              "required": [
+                "lat",
+                "lon"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "placeId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._:~-]{1,200}$",
+                  "not": {
+                    "pattern": "\\n"
+                  },
+                  "description": "The phone's maps service's own id for a place (opaque to the server); only ever handed back to the same phone."
+                }
+              },
+              "required": [
+                "placeId"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "description": "\"here\" (the phone's own location, which the phone reads and never sends back), a coordinate, or {placeId} from an earlier pisa.maps.result of this phone."
+        },
+        "to": {
+          "oneOf": [
+            {
+              "const": "here"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "lat": {
+                  "type": "number",
+                  "minimum": -90,
+                  "maximum": 90
+                },
+                "lon": {
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180
+                }
+              },
+              "required": [
+                "lat",
+                "lon"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "placeId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9._:~-]{1,200}$",
+                  "not": {
+                    "pattern": "\\n"
+                  },
+                  "description": "The phone's maps service's own id for a place (opaque to the server); only ever handed back to the same phone."
+                }
+              },
+              "required": [
+                "placeId"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "description": "\"here\" (the phone's own location, which the phone reads and never sends back), a coordinate, or {placeId} from an earlier pisa.maps.result of this phone."
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "walk",
+            "transit",
+            "drive",
+            "bike"
+          ]
+        }
+      },
+      "required": [
+        "requestId",
+        "from",
+        "to",
+        "mode"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.3, the feature maps.phone (pisa.maps): Pisa asks the phone how long it takes from one point to another by mode (walk, transit, drive, bike, as pisa.directions) with its own maps; each point is \"here\", a coordinate or a placeId from an earlier result. The phone answers pisa.maps.result for the same requestId with eta. The server never logs the coordinates."
+    },
+    "s_pisa_notify_schedule": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991,
+          "description": "One counter per device, shared by pisa.notify.schedule, .cancel and .regions, growing by at least one per frame. The phone applies a frame only if its revision is above the last it applied (a replay is dropped, and acked again)."
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,64}$",
+          "description": "Contract 2.5, optional: the epoch of this server's notify state, an opaque string, the same on every pisa.notify frame until the state is restored or reset. When it differs from the one the phone last saw, the phone forgets its last applied revision (it resets it to 0) and applies the frame; a frame with no epoch leaves the phone as it was."
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/NotifyItem"
+          }
+        }
+      },
+      "required": [
+        "revision",
+        "items"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.3, the feature notify.local (pisa.notify): schedule these local notifications on the phone (an item whose id is already scheduled replaces it; ids are unique within the frame), so they fire even with no connection. Sent on the notices thread; the phone answers pisa.notify.ack for the same revision."
+    },
+    "s_pisa_notify_cancel": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991,
+          "description": "One counter per device, shared by pisa.notify.schedule, .cancel and .regions, growing by at least one per frame. The phone applies a frame only if its revision is above the last it applied (a replay is dropped, and acked again)."
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,64}$",
+          "description": "Contract 2.5, optional: the epoch of this server's notify state, an opaque string, the same on every pisa.notify frame until the state is restored or reset. When it differs from the one the phone last saw, the phone forgets its last applied revision (it resets it to 0) and applies the frame; a frame with no epoch leaves the phone as it was."
+        },
+        "ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 50,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,64}$",
+            "not": {
+              "pattern": "\\n"
+            }
+          }
+        }
+      },
+      "required": [
+        "revision",
+        "ids"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.3, the feature notify.local (pisa.notify): remove these scheduled notifications or watched places (an unknown id is no error). The phone answers pisa.notify.ack."
+    },
+    "s_pisa_notify_regions": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991,
+          "description": "One counter per device, shared by pisa.notify.schedule, .cancel and .regions, growing by at least one per frame. The phone applies a frame only if its revision is above the last it applied (a replay is dropped, and acked again)."
+        },
+        "epoch": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,64}$",
+          "description": "Contract 2.5, optional: the epoch of this server's notify state, an opaque string, the same on every pisa.notify frame until the state is restored or reset. When it differs from the one the phone last saw, the phone forgets its last applied revision (it resets it to 0) and applies the frame; a frame with no epoch leaves the phone as it was."
+        },
+        "regions": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/NotifyRegion"
+          }
+        }
+      },
+      "required": [
+        "revision",
+        "regions"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.3, the feature notify.local (pisa.notify): the whole set of places the phone watches (at most 20, the system's limit); it replaces the previous set, and an empty one stops them all. The phone answers pisa.notify.ack."
+    },
+    "c_pisa_presence": {
+      "type": "object",
+      "properties": {
+        "event": {
+          "type": "string",
+          "enum": [
+            "glasses_on",
+            "glasses_off",
+            "app_foreground",
+            "app_background",
+            "earbuds_connected",
+            "earbuds_disconnected",
+            "companion_on",
+            "companion_off"
+          ]
+        },
+        "state": {
+          "type": "object",
+          "properties": {
+            "foreground": {
+              "type": "boolean"
+            },
+            "locked": {
+              "type": "boolean"
+            },
+            "route": {
+              "type": "string",
+              "enum": [
+                "speaker",
+                "receiver",
+                "wired",
+                "earbuds",
+                "airpods",
+                "headphones",
+                "bluetooth",
+                "car",
+                "glasses",
+                "airplay",
+                "other"
+              ],
+              "description": "The audio route. airpods and headphones (G2) carry v1 talk.route: on airpods, glasses and car the server speaks shorter (D-055)."
+            },
+            "glassesWorn": {
+              "type": "boolean"
+            },
+            "companion": {
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [],
+      "additionalProperties": false,
+      "description": "Where the user can be reached. Sent on change and right after welcome. Contract 2.4: event is optional; a change with no event of its own (a route change, a lock) sends state alone."
+    },
+    "c_pisa_location": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "accuracyM": {
+          "type": "number",
+          "minimum": 0
+        },
+        "measuredAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "lat",
+        "lon",
+        "accuracyM",
+        "measuredAt"
+      ],
+      "additionalProperties": false
+    },
+    "c_pisa_place_enter": {
+      "type": "object",
+      "properties": {
+        "noteIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "pattern": "^(task:)?[0-9a-f-]{36}$"
+          }
+        }
+      },
+      "required": [
+        "noteIds"
+      ],
+      "additionalProperties": false
+    },
+    "c_pisa_device_context": {
+      "type": "object",
+      "properties": {
+        "tz": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "region": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "hourCycle": {
+          "type": "string",
+          "enum": [
+            "h12",
+            "h23"
+          ]
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "c_pisa_surface_ack": {
+      "type": "object",
+      "properties": {
+        "surfaceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "shown",
+            "queued",
+            "deferred",
+            "unavailable",
+            "unsupported"
+          ]
+        },
+        "surface": {
+          "type": "string",
+          "enum": [
+            "phone",
+            "glasses_display",
+            "watch",
+            "none"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "surfaceId",
+        "status",
+        "surface"
+      ],
+      "additionalProperties": false,
+      "description": "Replaces presented. Sent at once for every a2ui-surface or mcp-apps activity."
+    },
+    "c_pisa_surface_event": {
+      "type": "object",
+      "properties": {
+        "surfaceId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "event": {
+          "type": "string",
+          "enum": [
+            "seen",
+            "expanded",
+            "kept",
+            "closed"
+          ]
+        }
+      },
+      "required": [
+        "surfaceId",
+        "event"
+      ],
+      "additionalProperties": false,
+      "description": "Ids only: never gaze, never content."
+    },
+    "c_pisa_voice_partial": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "lang": {
+          "$ref": "#/$defs/lang"
+        },
+        "turnId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "text",
+        "lang",
+        "turnId"
+      ],
+      "additionalProperties": false,
+      "description": "A partial transcript (at most 2 a second while listening), only after welcome granted pisa.voice.turn_hints. Never stored."
+    },
+    "c_pisa_voice_talk_text": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/uuid"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        }
+      },
+      "required": [
+        "id",
+        "text"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.1, the feature talk.text (pisa.voice): words the user typed into this device's open talk; id is the talk's session_id (POST /v1/talk/sessions). The server gives them to the talker as the user's text turn and Pisa answers by voice; they come back as the user's final pisa.voice.transcript on the talk's channel (their bubble, in the talk's run) and are stored as their message. Refused with a control error: invalid_frame for an id that is not this device's open talk or text out of bounds (1-4000 characters, as a typed turn), ai_consent_required without the user's AI consent. While a talk is open a typed run is answered the same way, never in text only."
+    },
+    "c_pisa_app_result": {
+      "type": "object",
+      "properties": {
+        "actionId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "ok": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "unsupported",
+            "not_found",
+            "not_now",
+            "error"
+          ]
+        }
+      },
+      "required": [
+        "actionId",
+        "ok"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.2, the feature app.actions (pisa.app): the app's answer to pisa.app.open: ok when the screen is open (or the riepilogo read again); else why not (unsupported: this app has no such screen; not_found: no such tab or task; not_now: the app can't move now, e.g. a sheet is open or the phone is locked; error)."
+    },
+    "c_pisa_maps_result": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "ok": {
+          "type": "boolean"
+        },
+        "places": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/$defs/MapsPlace"
+          }
+        },
+        "eta": {
+          "$ref": "#/$defs/MapsEta"
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "denied",
+            "unavailable",
+            "no_results",
+            "timeout",
+            "unsupported"
+          ]
+        }
+      },
+      "required": [
+        "requestId",
+        "ok"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.3, the feature maps.phone (pisa.maps): the phone's answer to pisa.maps.search (places, 1-10) or pisa.maps.eta (eta), with ok true; or ok false and why (denied: the user did not allow location or maps; unavailable: the maps service failed or is offline; no_results; timeout: the maps service did not answer in time; unsupported: this client can't). Untrusted input to the server: bounded, quarantined as outside text, never instructions; coordinates are never logged.",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "ok": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "oneOf": [
+              {
+                "required": [
+                  "places"
+                ]
+              },
+              {
+                "required": [
+                  "eta"
+                ]
+              }
+            ],
+            "not": {
+              "required": [
+                "reason"
+              ]
+            }
+          },
+          "else": {
+            "required": [
+              "reason"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "places"
+                  ]
+                },
+                {
+                  "required": [
+                    "eta"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "c_pisa_notify_ack": {
+      "type": "object",
+      "properties": {
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991,
+          "description": "One counter per device, shared by pisa.notify.schedule, .cancel and .regions, growing by at least one per frame. The phone applies a frame only if its revision is above the last it applied (a replay is dropped, and acked again)."
+        },
+        "scheduled": {
+          "type": "array",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,64}$",
+            "not": {
+              "pattern": "\\n"
+            }
+          }
+        },
+        "failed": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{1,64}$",
+                "not": {
+                  "pattern": "\\n"
+                }
+              },
+              "reason": {
+                "type": "string",
+                "enum": [
+                  "denied",
+                  "limit",
+                  "past",
+                  "invalid",
+                  "unsupported",
+                  "error"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "reason"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "revision",
+        "scheduled",
+        "failed"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.3, the feature notify.local (pisa.notify): the phone's report on the frame with this revision: the ids it applied (scheduled, cancelled or watched) and those it could not, with why (denied: notifications or location not allowed; limit: the system's cap on pending notifications or regions; past: fireAt already gone; invalid; unsupported; error). Untrusted input to the server: ids it did not send are ignored."
+    },
+    "ServerCustomEvent": {
+      "description": "An AG-UI CUSTOM event whose name is pisa.*: it must ALSO validate as an AG-UI 1.0 Event.",
+      "type": "object",
+      "required": [
+        "type",
+        "name",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "const": "CUSTOM"
+        },
+        "timestamp": {
+          "type": "integer"
+        },
+        "name": {
+          "enum": [
+            "pisa.voice.audio",
+            "pisa.voice.state",
+            "pisa.voice.gate",
+            "pisa.voice.transcript",
+            "pisa.voice.turn_hint",
+            "pisa.voice.understood",
+            "pisa.notice",
+            "pisa.ask_to_open",
+            "pisa.directions",
+            "pisa.call",
+            "pisa.compose",
+            "pisa.action_done",
+            "pisa.approval.state",
+            "pisa.ai.disclosure",
+            "pisa.endpoints",
+            "pisa.surface.focus",
+            "pisa.entitlement.required",
+            "pisa.app.open",
+            "pisa.app.changed",
+            "pisa.maps.search",
+            "pisa.maps.eta",
+            "pisa.notify.schedule",
+            "pisa.notify.cancel",
+            "pisa.notify.regions"
+          ]
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.audio"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_voice_audio"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.state"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_voice_state"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.gate"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_voice_gate"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.transcript"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_voice_transcript"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.turn_hint"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_voice_turn_hint"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.understood"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_voice_understood"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.notice"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_notice"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.ask_to_open"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_ask_to_open"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.directions"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_directions"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.call"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_call"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.compose"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_compose"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.action_done"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_action_done"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.approval.state"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_approval_state"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.ai.disclosure"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_ai_disclosure"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.endpoints"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_endpoints"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.surface.focus"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_surface_focus"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.entitlement.required"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_entitlement_required"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.app.open"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_app_open"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.app.changed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_app_changed"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.maps.search"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_maps_search"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.maps.eta"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_maps_eta"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.notify.schedule"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_notify_schedule"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.notify.cancel"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_notify_cancel"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.notify.regions"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_notify_regions"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ClientCustom": {
+      "type": "object",
+      "required": [
+        "op",
+        "name",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "op": {
+          "const": "custom"
+        },
+        "name": {
+          "enum": [
+            "pisa.presence",
+            "pisa.location",
+            "pisa.place_enter",
+            "pisa.device_context",
+            "pisa.surface.ack",
+            "pisa.surface.event",
+            "pisa.voice.partial",
+            "pisa.voice.talk.text",
+            "pisa.app.result",
+            "pisa.maps.result",
+            "pisa.notify.ack"
+          ]
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.presence"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_presence"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.location"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_location"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.place_enter"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_place_enter"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.device_context"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_device_context"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.surface.ack"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_surface_ack"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.surface.event"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_surface_event"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.partial"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_voice_partial"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.talk.text"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_voice_talk_text"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.app.result"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_app_result"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.maps.result"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_maps_result"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.notify.ack"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_notify_ack"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ExtensionSet": {
+      "type": "object",
+      "description": "pisa.* extension -> its major version.",
+      "propertyNames": {
+        "pattern": "^pisa\\.[a-z_.]{1,60}$"
+      },
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "Hello": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "hello"
+        },
+        "contract": {
+          "type": "object",
+          "properties": {
+            "versions": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/semver"
+              }
+            }
+          },
+          "required": [
+            "versions"
+          ],
+          "additionalProperties": false
+        },
+        "agui": {
+          "type": "object",
+          "properties": {
+            "protocolVersions": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/semver"
+              }
+            }
+          },
+          "required": [
+            "protocolVersions"
+          ],
+          "additionalProperties": false
+        },
+        "a2ui": {
+          "$ref": "https://a2ui.org/specification/v1_0/renderer_capabilities.json",
+          "description": "Exactly A2UI's renderer capabilities object ({\"1.0\": {supportedCatalogIds}})."
+        },
+        "mcpApps": {
+          "type": "object",
+          "properties": {
+            "protocolVersions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              }
+            },
+            "mimeTypes": {
+              "type": "array",
+              "items": {
+                "const": "text/html;profile=mcp-app"
+              }
+            },
+            "bundledLibraries": {
+              "type": "array",
+              "maxItems": 20,
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+@[0-9.]+$"
+              }
+            }
+          },
+          "required": [
+            "protocolVersions",
+            "mimeTypes"
+          ],
+          "additionalProperties": false
+        },
+        "rings": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "enum": [
+              0,
+              1,
+              2
+            ]
+          }
+        },
+        "extensions": {
+          "$ref": "#/$defs/ExtensionSet"
+        },
+        "device": {
+          "type": "object",
+          "properties": {
+            "deviceId": {
+              "$ref": "#/$defs/uuid"
+            },
+            "appVersion": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 40
+            },
+            "platform": {
+              "type": "string",
+              "enum": [
+                "ios",
+                "watchos",
+                "android",
+                "web",
+                "cli",
+                "other"
+              ]
+            },
+            "surfaces": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "phone",
+                  "glasses_display",
+                  "watch",
+                  "none"
+                ]
+              }
+            },
+            "audioFormats": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "opus",
+                  "aac_adts",
+                  "mp3",
+                  "pcm16"
+                ]
+              }
+            },
+            "wearable": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "enum": [
+                        "meta_glasses",
+                        "other"
+                      ]
+                    },
+                    "model": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 80
+                    },
+                    "connected": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "connected"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "tz": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "region": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$"
+            },
+            "hourCycle": {
+              "type": "string",
+              "enum": [
+                "h12",
+                "h23"
+              ]
+            }
+          },
+          "required": [
+            "deviceId",
+            "appVersion",
+            "platform"
+          ],
+          "additionalProperties": false
+        },
+        "entitlements": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "description": "Entitlement levels the app holds (from StoreKit), e.g. pisa.pro. Advisory: used only to choose what to offer; never a security boundary."
+        },
+        "resume": {
+          "type": "object",
+          "properties": {
+            "sessionId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            "lastSeq": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "sessionId",
+            "lastSeq"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "op",
+        "contract",
+        "agui",
+        "rings",
+        "device"
+      ],
+      "additionalProperties": false,
+      "description": "Client -> server, the first frame on /v2/live.",
+      "$comment": "G1: v1 hello.capabilities booleans (mic, speaker, display, camera, local_stt, local_tts, location, push) have no contract 2 field on purpose. No backend reads them (old J core reads only audio_formats and present, which became device.audioFormats and the A2UI catalogs; display became device.surfaces and rings). A device fact a server needs is added as a named optional field in a contract minor, never as an open set."
+    },
+    "Welcome": {
+      "type": "object",
+      "properties": {
+        "control": {
+          "const": "welcome"
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sessionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "contract": {
+          "$ref": "#/$defs/semver"
+        },
+        "agui": {
+          "$ref": "#/$defs/semver"
+        },
+        "a2ui": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "version": {
+                  "const": "1.0"
+                },
+                "catalogIds": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  }
+                }
+              },
+              "required": [
+                "version",
+                "catalogIds"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "mcpApps": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "protocolVersion": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "protocolVersion"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "rings": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "enum": [
+              0,
+              1,
+              2
+            ]
+          }
+        },
+        "extensions": {
+          "$ref": "#/$defs/ExtensionSet"
+        },
+        "features": {
+          "$ref": "#/$defs/FeatureList"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/lang"
+          }
+        },
+        "replayed": {
+          "type": "boolean",
+          "description": "true: the frames after resume.lastSeq follow; false: they were lost, the app reloads state over REST."
+        }
+      },
+      "required": [
+        "control",
+        "seq",
+        "sessionId",
+        "contract",
+        "agui",
+        "a2ui",
+        "mcpApps",
+        "rings",
+        "extensions"
+      ],
+      "additionalProperties": false,
+      "description": "Server -> client: what the server picked. Everything not picked is never sent."
+    },
+    "Feature": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.]{1,60}$"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "entitlement": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "If present: the app shows the feature only while StoreKit says this level (or higher) is active."
+        },
+        "deprecated": {
+          "type": "object",
+          "properties": {
+            "sunset": {
+              "type": "string",
+              "format": "date"
+            },
+            "replacement": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 60
+            }
+          },
+          "required": [
+            "sunset"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "FeatureList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Feature"
+      },
+      "description": "What the server offers. It always includes the safety features stop and approvals.signed (stop: cancelling any run and the stop/resume of autonomous work; approvals.signed: approvals as signed interrupts, CONTRACT-2 §6), which are never paywalled or deprecated. Any other feature is optional.",
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "const": "stop"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "const": "approvals.signed"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        },
+        {
+          "items": {
+            "if": {
+              "properties": {
+                "id": {
+                  "enum": [
+                    "stop",
+                    "approvals.signed"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "then": {
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "entitlement"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "deprecated"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ServerId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{22,64}$",
+      "description": "An opaque random id the server picks once, at install (at least 128 bits, base64url), and keeps for its life. Never derived from hardware, the hostname, an address or the owner. It identifies the install, not the person, so it may be served without auth. The app keys pairings by serverId plus host; approvals sign it (server=, CONTRACT-2 §6.2)."
+    },
+    "ServerDiscovery": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "const": "pisa"
+        },
+        "serverId": {
+          "$ref": "#/$defs/ServerId"
+        },
+        "serverVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "contract": {
+          "type": "object",
+          "properties": {
+            "versions": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/semver"
+              }
+            },
+            "minApp": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 40
+            }
+          },
+          "required": [
+            "versions"
+          ],
+          "additionalProperties": false
+        },
+        "agui": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/semver"
+          }
+        },
+        "a2ui": {
+          "type": "object",
+          "properties": {
+            "versions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "catalogIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              }
+            }
+          },
+          "required": [
+            "versions",
+            "catalogIds"
+          ],
+          "additionalProperties": false
+        },
+        "mcpApps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "features": {
+          "$ref": "#/$defs/FeatureList"
+        },
+        "readiness": {
+          "type": "object",
+          "properties": {
+            "ready": {
+              "type": "boolean"
+            },
+            "checks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "enum": [
+                      "database",
+                      "migrations",
+                      "models",
+                      "push",
+                      "clock"
+                    ]
+                  },
+                  "ok": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "name",
+                  "ok"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "ready"
+          ],
+          "additionalProperties": false
+        },
+        "reach": {
+          "type": "object",
+          "properties": {
+            "scheme": {
+              "type": "string",
+              "enum": [
+                "https",
+                "http"
+              ]
+            },
+            "network": {
+              "type": "string",
+              "enum": [
+                "public",
+                "tailnet",
+                "lan",
+                "unknown"
+              ]
+            }
+          },
+          "required": [
+            "scheme",
+            "network"
+          ],
+          "additionalProperties": false
+        },
+        "push": {
+          "type": "object",
+          "properties": {
+            "modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "relay",
+                  "direct",
+                  "none"
+                ]
+              }
+            },
+            "relayConfigured": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "modes"
+          ],
+          "additionalProperties": false
+        },
+        "pairing": {
+          "type": "object",
+          "properties": {
+            "methods": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "qr_v1",
+                  "typed_v1"
+                ]
+              }
+            }
+          },
+          "required": [
+            "methods"
+          ],
+          "additionalProperties": false
+        },
+        "ai": {
+          "type": "object",
+          "properties": {
+            "disclosureRevision": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{16,64}$"
+            }
+          },
+          "required": [
+            "disclosureRevision"
+          ],
+          "additionalProperties": false,
+          "description": "Only the revision: who the providers are is told after pairing (GET /v1/ai/disclosure), so an unauthenticated caller cannot fingerprint the setup."
+        },
+        "deprecations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "what": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 120
+              },
+              "sunset": {
+                "type": "string",
+                "format": "date"
+              }
+            },
+            "required": [
+              "what",
+              "sunset"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "product",
+        "serverId",
+        "serverVersion",
+        "contract",
+        "agui",
+        "a2ui",
+        "mcpApps",
+        "features",
+        "readiness",
+        "reach",
+        "push"
+      ],
+      "additionalProperties": false,
+      "description": "GET /v1/server: no auth, nothing personal (D-128). The connection guide's server step reads it."
+    },
+    "PairingQR": {
+      "type": "object",
+      "properties": {
+        "v": {
+          "const": 1
+        },
+        "addrs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        },
+        "spki": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/=_-]{8,400}$"
+        },
+        "token": {
+          "type": "string",
+          "pattern": "^[A-Z2-7]{26}$"
+        },
+        "exp": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "v",
+        "addrs",
+        "spki",
+        "token",
+        "exp"
+      ],
+      "additionalProperties": false,
+      "description": "pisa://pair?v=1&addrs=..&spki=..&token=..&exp=.. as an object. token: 128-bit one-time secret, base32 (26 characters, also the typed fallback); exp: unix seconds, at most 10 minutes ahead. No long-term secret."
+    },
+    "PairBegin": {
+      "type": "object",
+      "properties": {
+        "pairingId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "commitment": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{43}$"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "pairingId",
+        "commitment",
+        "expiresAt"
+      ],
+      "additionalProperties": false,
+      "description": "POST /v1/pair/begin (no auth, no token; rate-limited per address): the server picks serverNonce now and commits to it, BEFORE it can see the app's transcript. commitment = base64url (no padding) of SHA-256('pisa-sas-commit/1\\n' || serverNonce). This ordering is what stops SAS grinding (CONTRACT-2 §15 S1), and what makes the typed fallback safe."
+    },
+    "PairRequest": {
+      "type": "object",
+      "properties": {
+        "v": {
+          "const": 1
+        },
+        "pairingId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "deviceKey": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/=_-]{8,400}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "platform": {
+          "type": "string",
+          "enum": [
+            "ios",
+            "watchos",
+            "android",
+            "web",
+            "cli",
+            "other"
+          ]
+        },
+        "clientNonce": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/=_-]{8,400}$"
+        },
+        "mac": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/=_-]{8,400}$"
+        }
+      },
+      "required": [
+        "v",
+        "pairingId",
+        "deviceKey",
+        "name",
+        "platform",
+        "clientNonce",
+        "mac"
+      ],
+      "additionalProperties": false,
+      "description": "POST /v1/pair over the pinned channel. deviceKey: the Secure Enclave P-256 device key (SPKI, base64). mac = HMAC-SHA256(token, transcript) where transcript = 'pisa-pair/1' | spki | deviceKey | clientNonce."
+    },
+    "PairResponse": {
+      "type": "object",
+      "properties": {
+        "pairingId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "deviceId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "serverNonce": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/=_-]{8,400}$"
+        },
+        "mac": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/=_-]{8,400}$"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "awaiting_confirmation",
+            "confirmed",
+            "refused",
+            "expired"
+          ]
+        }
+      },
+      "required": [
+        "pairingId",
+        "deviceId",
+        "serverNonce",
+        "mac",
+        "state"
+      ],
+      "additionalProperties": false,
+      "description": "serverNonce is the reveal of PairBegin's commitment: the app checks SHA-256('pisa-sas-commit/1\\n' || serverNonce) against it BEFORE showing any digits, and aborts pairing on a mismatch. mac = HMAC-SHA256(token, transcript \\n serverNonce). SAS = 6 decimal digits from SHA-256('pisa-sas/1' \\n transcript \\n serverNonce), shown on both sides; the server's side confirms."
+    },
+    "SessionRequest": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "$ref": "#/$defs/uuid"
+        },
+        "nonce": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/=_-]{8,400}$"
+        },
+        "signature": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/=_-]{8,400}$"
+        }
+      },
+      "required": [
+        "deviceId",
+        "nonce",
+        "signature"
+      ],
+      "additionalProperties": false,
+      "description": "POST /v1/devices/session: the device key signs 'pisa-session/1\\n<deviceId>\\n<nonce>' (nonce from GET /v1/devices/session/nonce) and gets a short-lived bearer (1 h). Device key: Secure Enclave, .privateKeyUsage, no biometry; separate from the approval key."
+    },
+    "ClientRun": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "run"
+        },
+        "input": {
+          "$ref": "https://ag-ui.com/spec/1.0/schema.json#RunAgentInput"
+        }
+      },
+      "required": [
+        "op",
+        "input"
+      ],
+      "additionalProperties": false,
+      "description": "Start a run (a turn, or a resume). input is an AG-UI 1.0 RunAgentInput; forwardedProps.pisa carries the turn's device facts (TurnProps)."
+    },
+    "ClientCancel": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "cancel"
+        },
+        "runId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        }
+      },
+      "required": [
+        "op",
+        "runId"
+      ],
+      "additionalProperties": false,
+      "description": "Stop a run: the server ends it with the cancelled outcome and sends nothing more for it (barge-in)."
+    },
+    "ClientA2UI": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "a2ui"
+        },
+        "message": {
+          "$ref": "https://a2ui.org/specification/v1_0/renderer_to_agent.json"
+        }
+      },
+      "required": [
+        "op",
+        "message"
+      ],
+      "additionalProperties": false,
+      "description": "An A2UI renderer->agent message (action or error), exactly as A2UI 1.0 defines it."
+    },
+    "ClientPing": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "ping"
+        }
+      },
+      "required": [
+        "op"
+      ],
+      "additionalProperties": false
+    },
+    "ClientFrame": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Hello"
+        },
+        {
+          "$ref": "#/$defs/ClientRun"
+        },
+        {
+          "$ref": "#/$defs/ClientCancel"
+        },
+        {
+          "$ref": "#/$defs/ClientA2UI"
+        },
+        {
+          "$ref": "#/$defs/ClientCustom"
+        },
+        {
+          "$ref": "#/$defs/ClientPing"
+        }
+      ]
+    },
+    "ServerEventFrame": {
+      "type": "object",
+      "properties": {
+        "seq": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "threadId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "runId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "event": {
+          "$ref": "https://ag-ui.com/spec/1.0/schema.json"
+        }
+      },
+      "required": [
+        "seq",
+        "threadId",
+        "event"
+      ],
+      "additionalProperties": false,
+      "description": "One AG-UI 1.0 event of the AG-UI stream for threadId (the socket multiplexes one AG-UI stream per thread; each obeys the AG-UI lifecycle on its own). runId is the run the event belongs to. Session-level server events (pisa.notice and the rest) travel in short server-started runs on the thread pisa-notices:<deviceId>. seq grows by one per frame in the session; resume replays after lastSeq."
+    },
+    "ServerControl": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Welcome"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "const": "pong"
+            },
+            "seq": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "control",
+            "seq"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "control": {
+              "const": "error"
+            },
+            "seq": {
+              "type": "integer"
+            },
+            "code": {
+              "type": "string",
+              "enum": [
+                "auth_failed",
+                "device_revoked",
+                "contract_unsupported",
+                "invalid_frame",
+                "rate_limited",
+                "internal",
+                "replaced",
+                "ai_consent_required"
+              ]
+            },
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "retryable": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "control",
+            "seq",
+            "code",
+            "message",
+            "retryable"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ServerFrame": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ServerEventFrame"
+        },
+        {
+          "$ref": "#/$defs/ServerControl"
+        }
+      ]
+    },
+    "AppMap": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]{1,4}(\\.[0-9]{1,4}){1,2}$"
+        },
+        "build": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "tabs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{0,31}$"
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40,
+                "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+              }
+            },
+            "required": [
+              "id",
+              "title"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "current": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,31}$"
+        },
+        "cards": {
+          "type": "array",
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,31}$"
+          }
+        },
+        "settings": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40,
+            "pattern": "^[^\\u0000-\\u001f\\u007f]+$"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "tabs",
+        "current"
+      ],
+      "additionalProperties": false,
+      "description": "Contract 2.2: the app's screen map with each run (forwardedProps.pisa.app): its version, its tabs (id and title, in order), the tab on screen (current, one of the tabs' ids), the cards visible on it, and the Settings sections by title. app_help answers from it. The server treats its titles as untrusted data (as outside text): they never change Pisa's tools or rules. A map out of these bounds is ignored (the turn goes on with Pisa's own description of the app)."
+    },
+    "TurnProps": {
+      "type": "object",
+      "properties": {
+        "turn": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "enum": [
+                "glasses_mic",
+                "phone_mic",
+                "earbuds_mic",
+                "watch_mic",
+                "typed"
+              ]
+            },
+            "wake": {
+              "type": "string",
+              "enum": [
+                "wake_phrase",
+                "stem_press",
+                "tap",
+                "reply",
+                "glasses_button",
+                "intent"
+              ]
+            },
+            "lang": {
+              "$ref": "#/$defs/lang"
+            },
+            "origin": {
+              "type": "string",
+              "enum": [
+                "phone",
+                "watch",
+                "cli",
+                "web"
+              ]
+            },
+            "continues": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            "voice": {
+              "type": "object",
+              "properties": {
+                "pace": {
+                  "enum": [
+                    "slow",
+                    "usual",
+                    "fast"
+                  ]
+                },
+                "loudness": {
+                  "enum": [
+                    "soft",
+                    "usual",
+                    "loud"
+                  ]
+                },
+                "gaps": {
+                  "enum": [
+                    "few",
+                    "usual",
+                    "many"
+                  ]
+                },
+                "place": {
+                  "enum": [
+                    "whisper",
+                    "normal",
+                    "noisy_place"
+                  ]
+                }
+              },
+              "required": [],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "source",
+            "lang"
+          ],
+          "additionalProperties": false
+        },
+        "consent": {
+          "type": "object",
+          "properties": {
+            "aiRevision": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{16,64}$"
+            },
+            "health": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "aiRevision"
+          ],
+          "additionalProperties": false,
+          "description": "The AI disclosure revision the user allowed on this device, and whether health may go to AI. A run whose revision is not current ends with RUN_ERROR ai_consent_required."
+        },
+        "ask": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "type": "string",
+              "enum": [
+                "mcp-apps",
+                "a2ui"
+              ]
+            },
+            "surfaceId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "elementId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            }
+          },
+          "required": [
+            "source",
+            "surfaceId",
+            "label"
+          ],
+          "additionalProperties": false,
+          "description": "'Ask about this' from a drawing (Ring 2 ui/message after the user's tap, or a native diagram's element). label is the view's text: outside text, quarantined by the server."
+        },
+        "a2uiAction": {
+          "$ref": "https://a2ui.org/specification/v1_0/renderer_to_agent.json",
+          "description": "HTTP binding only: the A2UI action this run answers (the WebSocket sends op a2ui instead)."
+        },
+        "app": {
+          "$ref": "#/$defs/AppMap"
+        }
+      },
+      "required": [],
+      "additionalProperties": false,
+      "description": "RunAgentInput.forwardedProps.pisa"
+    },
+    "ApprovalInterrupt": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "reason": {
+          "const": "pisa.approval"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "toolCallId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "responseSchema": {
+          "type": "object"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "pisa": {
+              "type": "object",
+              "properties": {
+                "approvalId": {
+                  "$ref": "#/$defs/uuid"
+                },
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "calendar_create",
+                    "calendar_move",
+                    "calendar_cancel",
+                    "email_send",
+                    "setting_change"
+                  ]
+                },
+                "risk": {
+                  "const": "R2"
+                },
+                "requiresBiometric": {
+                  "type": "boolean"
+                },
+                "digest": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "recipientsCount": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "undoMinutes": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "detailsRef": {
+                  "type": "string",
+                  "pattern": "^approval:[0-9a-f-]{36}$"
+                },
+                "server": {
+                  "$ref": "#/$defs/ServerId"
+                }
+              },
+              "required": [
+                "approvalId",
+                "kind",
+                "risk",
+                "requiresBiometric",
+                "digest",
+                "server"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "pisa"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "reason",
+        "message",
+        "expiresAt",
+        "responseSchema",
+        "metadata"
+      ],
+      "additionalProperties": false,
+      "description": "The AG-UI Interrupt PISA raises for an approval. message is server-templated (never outside text); the content to approve is fetched by detailsRef over REST and shown as quoted data."
+    },
+    "ApprovalResume": {
+      "type": "object",
+      "properties": {
+        "decision": {
+          "type": "string",
+          "enum": [
+            "approve",
+            "reject"
+          ]
+        },
+        "auth": {
+          "type": "string",
+          "enum": [
+            "tap",
+            "voice",
+            "biometric"
+          ]
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "nonce": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "signature": {
+          "type": "string",
+          "contentEncoding": "base64",
+          "maxLength": 200
+        },
+        "keyId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        }
+      },
+      "required": [
+        "decision",
+        "auth",
+        "digest"
+      ],
+      "additionalProperties": false,
+      "description": "ResumeEntry.payload for a pisa.approval interrupt; also the body of REST POST /v1/approvals/{id}/resume, in the same camelCase (keyId). A ResumeEntry with status cancelled carries no payload and decides nothing: the approval stays pending until it is decided elsewhere or expires.",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "auth": {
+                "const": "biometric"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "nonce",
+              "signature",
+              "keyId"
+            ]
+          }
+        }
+      ]
+    },
+    "ApprovalErrorCode": {
+      "type": "string",
+      "enum": [
+        "approval_changed",
+        "approval_expired",
+        "approval_decided",
+        "biometric_required",
+        "action_failed"
+      ],
+      "description": "RUN_ERROR.code on an approval thread (pisa-approval:<id>). approval_changed: the content changed since the user saw it, nothing ran; approval_expired; approval_decided: already decided elsewhere; biometric_required: this approval needs a valid Face ID signature; action_failed: approved, the action ran, and it failed (the approval is decided)."
+    },
+    "ApprovalRunError": {
+      "type": "object",
+      "required": [
+        "type",
+        "message",
+        "code"
+      ],
+      "properties": {
+        "type": {
+          "const": "RUN_ERROR"
+        },
+        "message": {
+          "type": "string"
+        },
+        "code": {
+          "$ref": "#/$defs/ApprovalErrorCode"
+        }
+      },
+      "description": "A RUN_ERROR on an approval thread: it must ALSO validate as an AG-UI 1.0 RunErrorEvent. Its code is one of ApprovalErrorCode."
+    },
+    "A2UISurfaceActivity": {
+      "type": "object",
+      "properties": {
+        "a2ui_operations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "https://a2ui.org/specification/v1_0/agent_to_renderer.json"
+          }
+        },
+        "pisa": {
+          "type": "object",
+          "properties": {
+            "purpose": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "focus": {
+              "type": "string",
+              "enum": [
+                "take",
+                "offer",
+                "quiet"
+              ]
+            },
+            "replyTo": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80
+            },
+            "fallbackText": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "lang": {
+              "$ref": "#/$defs/lang"
+            },
+            "basis": {
+              "type": "string",
+              "enum": [
+                "data",
+                "knowledge"
+              ]
+            },
+            "expiresAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "G6 (v1 present.expires_at): when the surface leaves the screen. At this time the app removes it from view by itself, keeping it in the conversation's history, even if no deleteSurface arrives (the app may be offline). The server still sends deleteSurface when it can. Absent: it stays until deleted."
+            }
+          },
+          "required": [
+            "focus",
+            "fallbackText"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "a2ui_operations",
+        "pisa"
+      ],
+      "additionalProperties": false,
+      "description": "ACTIVITY_SNAPSHOT/ACTIVITY_DELTA content for activityType a2ui-surface (messageId = the surfaceId)."
+    },
+    "McpAppActivity": {
+      "type": "object",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "pattern": "^ui://"
+        },
+        "mimeType": {
+          "const": "text/html;profile=mcp-app"
+        },
+        "html": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 204800
+        },
+        "toolInput": {
+          "type": "object",
+          "description": "What the view receives in ui/notifications/tool-input (v1's J_DATA)."
+        },
+        "csp": {
+          "type": "object",
+          "properties": {
+            "connectDomains": {
+              "type": "array",
+              "maxItems": 0
+            },
+            "resourceDomains": {
+              "type": "array",
+              "maxItems": 0
+            },
+            "frameDomains": {
+              "type": "array",
+              "maxItems": 0
+            },
+            "baseUriDomains": {
+              "type": "array",
+              "maxItems": 0
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        },
+        "permissions": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false,
+          "description": "Always empty: no camera, microphone, geolocation or clipboard."
+        },
+        "pisa": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "summary": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 400
+            },
+            "fallbackText": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            },
+            "bundle": {
+              "type": "array",
+              "maxItems": 6,
+              "items": {
+                "type": "string",
+                "pattern": "^(d3@7\\.9\\.0|mermaid@12\\.2\\.0|vega@6\\.4\\.0|vega-lite@6\\.5\\.0|vega-embed@7\\.3\\.0|vega-interpreter@2\\.3\\.2)$"
+              }
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "flow",
+                "schema",
+                "chart",
+                "comparison",
+                "timeline",
+                "explorer",
+                "other"
+              ]
+            },
+            "basis": {
+              "type": "string",
+              "enum": [
+                "data",
+                "knowledge"
+              ]
+            },
+            "focus": {
+              "type": "string",
+              "enum": [
+                "take",
+                "offer",
+                "quiet"
+              ]
+            },
+            "expiresAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "G6 (v1 present.expires_at): when the surface leaves the screen. At this time the app removes it from view by itself, keeping it in the conversation's history, even if no deleteSurface arrives (the app may be offline). The server still sends deleteSurface when it can. Absent: it stays until deleted."
+            }
+          },
+          "required": [
+            "title",
+            "summary",
+            "fallbackText"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "resourceUri",
+        "mimeType",
+        "html",
+        "toolInput",
+        "pisa"
+      ],
+      "additionalProperties": false,
+      "description": "ACTIVITY_SNAPSHOT content for activityType mcp-apps (Ring 2)."
+    },
+    "PushPlaintext": {
+      "type": "object",
+      "properties": {
+        "v": {
+          "const": 2
+        },
+        "notice": {
+          "$ref": "#/$defs/s_pisa_notice"
+        },
+        "sentAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "Z$",
+          "description": "When the server sealed it, RFC 3339 in UTC (ends in Z). The Notification Service Extension drops a push whose sentAt is more than 7 days old, and any repeat of a noticeId it has seen (security review E1 R11: a replayed old sealed blob must not show again)."
+        },
+        "apns": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "threadId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "interruption": {
+              "type": "string",
+              "enum": [
+                "passive",
+                "active",
+                "time-sensitive"
+              ]
+            },
+            "askId": {
+              "$ref": "#/$defs/uuid"
+            },
+            "why": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 300
+            }
+          },
+          "required": [
+            "category",
+            "threadId",
+            "interruption"
+          ],
+          "additionalProperties": false,
+          "description": "How to file the banner, as a direct push would: the notification category, the thread, the APNs interruption level, and for a 'may I speak?' ask its id and line."
+        }
+      },
+      "required": [
+        "v",
+        "notice",
+        "sentAt"
+      ],
+      "additionalProperties": false,
+      "description": "The plaintext of a relay-sealed push: compact UTF-8 JSON, padded with trailing spaces so that enc + ciphertext is exactly 512 or 2048 bytes, then sealed with HPKE base mode (X25519, HKDF-SHA256, ChaCha20-Poly1305), info pisa-push/2, aad the relay handle (UTF-8). notice is the same object the live socket sends. Vectors: fixtures/pairing/vectors.json."
+    },
+    "TalkEndedResult": {
+      "type": "object",
+      "properties": {
+        "talkEnded": {
+          "type": "string",
+          "enum": [
+            "idle",
+            "owner",
+            "budget",
+            "error",
+            "fallback",
+            "route"
+          ]
+        }
+      },
+      "required": [
+        "talkEnded"
+      ],
+      "additionalProperties": false,
+      "description": "G4. RUN_FINISHED.result of a talk's last run, just before its data channel closes (replaces talk.ended). idle: nobody spoke; owner: the user (or a newer talk of this device) ended it; budget: the spending cap; error: the server or the peer failed; fallback: the voice model dropped, carry on in economy over /v2/live; route: a gated talk's route changed (or the voice profile was deleted), reopen it at once on the new route with no error shown."
+    },
+    "EnrolReason": {
+      "type": "string",
+      "enum": [
+        "missing",
+        "consent",
+        "no_speech",
+        "timeout",
+        "not_reliable",
+        "error"
+      ],
+      "description": "Why an enrolment ended with ok false. missing: blocks still needed (listed in missing); consent: voice consent withdrawn meanwhile, nothing stored; no_speech: no usable speech in the blocks; timeout: the 15-minute limit; not_reliable: prints were made and stored, but the route's gate cannot rely on them (the report is sent); error: the server failed handling the session (v1 sent this, or an error code, and none other can reach the phone)."
+    },
+    "s_pisa_voice_enrol_quality": {
+      "type": "object",
+      "properties": {
+        "block": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ]
+        },
+        "voicedS": {
+          "type": "number",
+          "minimum": 0
+        },
+        "snrDb": {
+          "type": "number"
+        },
+        "clipped": {
+          "type": "boolean"
+        },
+        "ok": {
+          "type": "boolean"
+        },
+        "hint": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "louder",
+            "quieter",
+            "closer",
+            "again",
+            null
+          ]
+        }
+      },
+      "required": [
+        "block",
+        "voicedS",
+        "snrDb",
+        "clipped",
+        "ok",
+        "hint"
+      ],
+      "additionalProperties": false,
+      "description": "After each block: how usable the recording was, and what to do better. Replaces enrol.quality."
+    },
+    "s_pisa_voice_enrol_test_result": {
+      "type": "object",
+      "properties": {
+        "acceptedOwner": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ownerTotal": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "acceptedStrangers": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "strangersTotal": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ok": {
+          "type": "boolean"
+        },
+        "bySnr": {
+          "type": "object",
+          "properties": {
+            "clean": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "The clean-room rate from the 60-second check; when no check ran, the +10 dB rate as a lower bound."
+            },
+            "10": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "5": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "0": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "clean",
+            "10",
+            "5",
+            "0"
+          ],
+          "additionalProperties": false,
+          "description": "Accept rate of the owner's trials per condition: clean, and babble at +10, +5 and 0 dB SNR."
+        }
+      },
+      "required": [
+        "acceptedOwner",
+        "ownerTotal",
+        "acceptedStrangers",
+        "strangersTotal",
+        "ok",
+        "bySnr"
+      ],
+      "additionalProperties": false,
+      "description": "The 60-second check scored: ok is >= 80% of the owner's trials accepted within 1 s and no stranger accepted. Replaces enrol.test_result."
+    },
+    "s_pisa_voice_enrol_done": {
+      "type": "object",
+      "properties": {
+        "route": {
+          "type": "string",
+          "enum": [
+            "speaker",
+            "receiver",
+            "airpods",
+            "headphones",
+            "car",
+            "glasses"
+          ]
+        },
+        "ok": {
+          "type": "boolean"
+        },
+        "ownerFalseReject": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "strangersPerMin": {
+          "type": "number",
+          "minimum": 0
+        },
+        "bySnr": {
+          "type": "object",
+          "properties": {
+            "clean": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "The clean-room rate from the 60-second check; when no check ran, the +10 dB rate as a lower bound."
+            },
+            "10": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "5": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "0": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "clean",
+            "10",
+            "5",
+            "0"
+          ],
+          "additionalProperties": false,
+          "description": "Accept rate of the owner's trials per condition: clean, and babble at +10, +5 and 0 dB SNR."
+        },
+        "reason": {
+          "$ref": "#/$defs/EnrolReason"
+        },
+        "missing": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          },
+          "description": "With reason missing: the blocks still needed."
+        }
+      },
+      "required": [
+        "route",
+        "ok"
+      ],
+      "additionalProperties": false,
+      "description": "The verdict, the last frame: the server closes the peer after it. Replaces enrol.done.",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "ok": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "ownerFalseReject",
+              "strangersPerMin",
+              "bySnr"
+            ],
+            "not": {
+              "required": [
+                "reason"
+              ]
+            }
+          },
+          "else": {
+            "required": [
+              "reason"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "reason": {
+                "const": "missing"
+              }
+            },
+            "required": [
+              "reason"
+            ]
+          },
+          "then": {
+            "required": [
+              "missing"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "missing"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "reason": {
+                "const": "not_reliable"
+              }
+            },
+            "required": [
+              "reason"
+            ]
+          },
+          "then": {
+            "required": [
+              "ownerFalseReject",
+              "strangersPerMin",
+              "bySnr"
+            ]
+          }
+        }
+      ]
+    },
+    "c_pisa_voice_enrol_block": {
+      "type": "object",
+      "properties": {
+        "block": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "start",
+            "end"
+          ]
+        }
+      },
+      "required": [
+        "block",
+        "state"
+      ],
+      "additionalProperties": false,
+      "description": "Around the reading of a script block. Replaces enrol.block."
+    },
+    "c_pisa_voice_enrol_test": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "start",
+            "end"
+          ]
+        }
+      },
+      "required": [
+        "state"
+      ],
+      "additionalProperties": false,
+      "description": "Around the reading of the script's test (no babble). Replaces enrol.test."
+    },
+    "c_pisa_voice_enrol_finish": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false,
+      "description": "Sent whether the test passed or not: the server stores the prints. Replaces enrol.finish."
+    },
+    "c_pisa_voice_enrol_cancel": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false,
+      "description": "Nothing is kept. Replaces enrol.cancel."
+    },
+    "EnrolServerEvent": {
+      "description": "G5. An AG-UI CUSTOM event on an enrolment data channel; it must ALSO validate as an AG-UI 1.0 Event.",
+      "type": "object",
+      "required": [
+        "type",
+        "name",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "const": "CUSTOM"
+        },
+        "timestamp": {
+          "type": "integer"
+        },
+        "name": {
+          "enum": [
+            "pisa.voice.enrol.quality",
+            "pisa.voice.enrol.test_result",
+            "pisa.voice.enrol.done"
+          ]
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.enrol.quality"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_voice_enrol_quality"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.enrol.test_result"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_voice_enrol_test_result"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.enrol.done"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/s_pisa_voice_enrol_done"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "EnrolServerFrame": {
+      "type": "object",
+      "properties": {
+        "seq": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "event": {
+          "$ref": "#/$defs/EnrolServerEvent"
+        }
+      },
+      "required": [
+        "seq",
+        "event"
+      ],
+      "additionalProperties": false,
+      "description": "G5. Server -> app on the data channel of a talk session opened with purpose enrol, and only there. No threadId and no runId: enrolment is not a conversation, so it opens no AG-UI stream and breaks no AG-UI lifecycle. seq grows by one per frame."
+    },
+    "EnrolClientFrame": {
+      "type": "object",
+      "required": [
+        "op",
+        "name",
+        "value"
+      ],
+      "additionalProperties": false,
+      "description": "G5. App -> server on an enrolment data channel, and only there: the ClientCustom shape with the enrolment names.",
+      "properties": {
+        "op": {
+          "const": "custom"
+        },
+        "name": {
+          "enum": [
+            "pisa.voice.enrol.block",
+            "pisa.voice.enrol.test",
+            "pisa.voice.enrol.finish",
+            "pisa.voice.enrol.cancel"
+          ]
+        },
+        "value": {
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.enrol.block"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_voice_enrol_block"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.enrol.test"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_voice_enrol_test"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.enrol.finish"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_voice_enrol_finish"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "name": {
+                "const": "pisa.voice.enrol.cancel"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/c_pisa_voice_enrol_cancel"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "gap": "notify.local",
+  "check": "client_frame",
+  "why": "An ack lists both what was applied and what failed (each may be empty).",
+  "frame": {
+    "op": "custom",
+    "name": "pisa.notify.ack",
+    "value": {
+      "revision": 12,
+      "scheduled": [
+        "rem-1"
+      ]
+    }
+  }
+}

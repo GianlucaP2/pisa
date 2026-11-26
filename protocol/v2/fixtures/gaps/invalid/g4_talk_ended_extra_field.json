@@ -1,0 +1,22 @@
+{
+  "gap": "G4",
+  "check": "server_frame",
+  "why": "TalkEndedResult is closed.",
+  "frame": {
+    "seq": 12,
+    "threadId": "thread-conversation",
+    "runId": "run-talk-1",
+    "event": {
+      "type": "RUN_FINISHED",
+      "threadId": "thread-conversation",
+      "runId": "run-talk-1",
+      "outcome": {
+        "type": "success"
+      },
+      "result": {
+        "talkEnded": "idle",
+        "detail": "x"
+      }
+    }
+  }
+}

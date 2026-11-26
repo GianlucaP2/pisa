@@ -1,0 +1,22 @@
+{
+  "gap": "maps.phone",
+  "check": "server_frame",
+  "why": "Contract 2.3 (maps.phone): a search near a coordinate, only the query and the point.",
+  "frame": {
+    "seq": 7,
+    "threadId": "t-1",
+    "runId": "run-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.maps.search",
+      "value": {
+        "requestId": "3f2a1b0c-9d8e-4f7a-8b6c-5d4e3f2a1b0c",
+        "query": "caffè",
+        "near": {
+          "lat": 45.0,
+          "lon": 9.0
+        }
+      }
+    }
+  }
+}

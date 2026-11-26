@@ -1,0 +1,5 @@
+{
+  "session_id": "6c2f0e1a-4b7d-4c1e-9a3f-2d8e5b7c9a10",
+  "sdp_answer": "v=0\r\no=- 1 1 IN IP4 100.64.0.1\r\ns=-\r\nt=0 0\r\nm=audio 50124 UDP/TLS/RTP/SAVPF 111\r\na=candidate:1 1 udp 2130706431 100.64.0.1 50124 typ host\r\na=mid:0\r\na=sendrecv\r\n",
+  "ice_servers": []
+}

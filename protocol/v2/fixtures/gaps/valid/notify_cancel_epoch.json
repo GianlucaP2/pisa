@@ -1,0 +1,21 @@
+{
+  "gap": "notify.local",
+  "check": "server_frame",
+  "why": "Contract 2.5 (notify.local): a frame with an epoch; when the epoch changes the phone resets its revision.",
+  "frame": {
+    "seq": 7,
+    "threadId": "pisa-notices",
+    "runId": "run-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.notify.cancel",
+      "value": {
+        "revision": 1,
+        "epoch": "9f3a6c1d0b7e4a52",
+        "ids": [
+          "rem-1"
+        ]
+      }
+    }
+  }
+}

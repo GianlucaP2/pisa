@@ -1,0 +1,427 @@
+{
+  "gap": "notify.local",
+  "check": "server_frame",
+  "why": "At most 50 notifications in one frame.",
+  "frame": {
+    "seq": 7,
+    "threadId": "pisa-notices",
+    "runId": "run-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.notify.schedule",
+      "value": {
+        "revision": 12,
+        "items": [
+          {
+            "id": "rem-0",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-1",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-2",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-3",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-4",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-5",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-6",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-7",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-8",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-9",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-10",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-11",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-12",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-13",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-14",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-15",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-16",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-17",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-18",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-19",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-20",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-21",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-22",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-23",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-24",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-25",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-26",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-27",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-28",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-29",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-30",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-31",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-32",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-33",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-34",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-35",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-36",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-37",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-38",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-39",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-40",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-41",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-42",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-43",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-44",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-45",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-46",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-47",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-48",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-49",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          },
+          {
+            "id": "rem-50",
+            "fireAt": "2026-11-25T08:30:00+01:00",
+            "title": "Promemoria",
+            "body": "Ritirare il pacco",
+            "kind": "reminder",
+            "deepLink": "pisa://reminder/5b0e4c1e-8a7d-4c4b-9a39-2f4f1c9d7e10"
+          }
+        ]
+      }
+    }
+  }
+}

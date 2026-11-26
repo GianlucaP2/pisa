@@ -1,0 +1,632 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is the weather in Paris right now? Use the tool."
+     }
+    ],
+    "max_tokens": 1024,
+    "temperature": 0,
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "city": {
+          "type": "string",
+          "description": "The city name"
+         }
+        },
+        "required": [
+         "city"
+        ]
+       }
+      }
+     }
+    ],
+    "stream": true,
+    "stream_options": {
+     "include_usage": true
+    },
+    "parallel_tool_calls": true
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 1.211,
+  "longest_silence_s": 1.211,
+  "total_s": 1.313,
+  "sse": [
+   {
+    "id": "chatcmpl-974",
+    "object": "chat.completion.chunk",
+    "created": 1795557626,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": "",
+       "tool_calls": [
+        {
+         "id": "call_kpxrd71b",
+         "index": 0,
+         "type": "function",
+         "function": {
+          "name": "get_weather",
+          "arguments": "{\"city\":\"Paris\"}"
+         }
+        }
+       ]
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-974",
+    "object": "chat.completion.chunk",
+    "created": 1795557626,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {},
+      "finish_reason": "tool_calls"
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-974",
+    "object": "chat.completion.chunk",
+    "created": 1795557626,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [],
+    "usage": {
+     "prompt_tokens": 212,
+     "prompt_tokens_details": {
+      "cached_tokens": 194
+     },
+     "completion_tokens": 20,
+     "total_tokens": 232
+    },
+    "timings": {
+     "prompt_n": 212,
+     "prompt_ms": 136,
+     "prompt_per_token_ms": 0.642,
+     "prompt_per_second": 1558.824,
+     "predicted_n": 20,
+     "predicted_ms": 1165,
+     "predicted_per_token_ms": 58.25,
+     "predicted_per_second": 17.167
+    }
+   },
+   "[DONE]"
+  ]
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "stream": true,
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is the weather in Paris right now? Use the tool."
+     }
+    ],
+    "max_tokens": 1024,
+    "parallel_tool_calls": true,
+    "stream_options": {
+     "include_usage": true
+    },
+    "tool_choice": "auto",
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 1.056,
+  "longest_silence_s": 1.056,
+  "total_s": 1.15,
+  "sse": [
+   {
+    "id": "chatcmpl-385",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": "",
+       "tool_calls": [
+        {
+         "id": "call_5fg7ulw6",
+         "index": 0,
+         "type": "function",
+         "function": {
+          "name": "get_weather",
+          "arguments": "{\"city\":\"Paris\"}"
+         }
+        }
+       ]
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-385",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {},
+      "finish_reason": "tool_calls"
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-385",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [],
+    "usage": {
+     "prompt_tokens": 200,
+     "prompt_tokens_details": {
+      "cached_tokens": 182
+     },
+     "completion_tokens": 20,
+     "total_tokens": 220
+    },
+    "timings": {
+     "prompt_n": 200,
+     "prompt_ms": 122,
+     "prompt_per_token_ms": 0.61,
+     "prompt_per_second": 1639.344,
+     "predicted_n": 20,
+     "predicted_ms": 1012,
+     "predicted_per_token_ms": 50.6,
+     "predicted_per_second": 19.763
+    }
+   },
+   "[DONE]"
+  ]
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5:1.5b",
+    "stream": true,
+    "messages": [
+     {
+      "role": "user",
+      "content": "What is the weather in Paris right now? Use the tool."
+     },
+     {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+       {
+        "id": "call_5fg7ulw6",
+        "type": "function",
+        "function": {
+         "name": "get_weather",
+         "arguments": "{\"city\":\"Paris\"}"
+        }
+       }
+      ]
+     },
+     {
+      "role": "tool",
+      "tool_call_id": "call_5fg7ulw6",
+      "content": "Paris: 18 C, clear sky"
+     }
+    ],
+    "max_tokens": 1024,
+    "parallel_tool_calls": true,
+    "stream_options": {
+     "include_usage": true
+    },
+    "tool_choice": "auto",
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_weather",
+       "description": "Get the current weather in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "get_time",
+       "description": "Get the current local time in a city.",
+       "parameters": {
+        "additionalProperties": false,
+        "properties": {
+         "city": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "city"
+        ],
+        "type": "object"
+       }
+      }
+     }
+    ]
+   }
+  },
+  "status": 200,
+  "content_type": "text/event-stream",
+  "first_byte_s": 0.182,
+  "longest_silence_s": 0.182,
+  "total_s": 0.953,
+  "sse": [
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "role": "assistant",
+       "content": "The"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": " current"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": " weather"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": " in"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": " Paris"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": " is"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": " "
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": "1"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": "8"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": "°C"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": " with"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": " clear"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": " skies"
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {
+       "content": "."
+      },
+      "finish_reason": null
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+     {
+      "index": 0,
+      "delta": {},
+      "finish_reason": "stop"
+     }
+    ]
+   },
+   {
+    "id": "chatcmpl-621",
+    "object": "chat.completion.chunk",
+    "created": 1795557627,
+    "model": "qwen2.5:1.5b",
+    "system_fingerprint": "fp_ollama",
+    "choices": [],
+    "usage": {
+     "prompt_tokens": 246,
+     "prompt_tokens_details": {
+      "cached_tokens": 214
+     },
+     "completion_tokens": 15,
+     "total_tokens": 261
+    },
+    "timings": {
+     "prompt_n": 246,
+     "prompt_ms": 172,
+     "prompt_per_token_ms": 0.699,
+     "prompt_per_second": 1430.233,
+     "predicted_n": 15,
+     "predicted_ms": 767,
+     "predicted_per_token_ms": 51.133,
+     "predicted_per_second": 19.557
+    }
+   },
+   "[DONE]"
+  ]
+ }
+]

@@ -1,0 +1,17 @@
+{
+  "gap": "enrol-reason",
+  "check": "enrol_server_frame",
+  "why": "not_reliable carries the report: the prints were made.",
+  "frame": {
+    "seq": 1,
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.voice.enrol.done",
+      "value": {
+        "route": "speaker",
+        "ok": false,
+        "reason": "not_reliable"
+      }
+    }
+  }
+}

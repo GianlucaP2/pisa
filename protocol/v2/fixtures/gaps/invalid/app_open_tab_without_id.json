@@ -1,0 +1,18 @@
+{
+  "gap": "app.actions",
+  "check": "server_frame",
+  "why": "pisa.app.open names the tab (or the task) it opens.",
+  "frame": {
+    "seq": 7,
+    "threadId": "pisa-notices",
+    "runId": "run-1",
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.app.open",
+      "value": {
+        "actionId": "7c1d2e3f-4a5b-4c6d-8e7f-901a2b3c4d5e",
+        "target": "tab"
+      }
+    }
+  }
+}

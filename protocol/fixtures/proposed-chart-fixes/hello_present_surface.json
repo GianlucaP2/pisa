@@ -1,0 +1,39 @@
+{
+  "v": 1,
+  "id": "00000000-0000-4000-8000-000000009791",
+  "ts": "2026-11-11T18:00:00+01:00",
+  "type": "hello",
+  "device_id": "00000000-0000-4000-8000-000000000100",
+  "app_version": "0.1.0",
+  "platform": "ios",
+  "capabilities": {
+    "mic": true,
+    "speaker": true,
+    "display": true,
+    "camera": true,
+    "local_stt": true,
+    "local_tts": true,
+    "location": true,
+    "push": true,
+    "present": {
+      "kinds": [
+        "places",
+        "place",
+        "sheet"
+      ],
+      "focus": true,
+      "blocks": [
+        "diagram",
+        "chart",
+        "timeline",
+        "findings",
+        "map",
+        "product"
+      ],
+      "surface": {
+        "width": 402,
+        "height": 874
+      }
+    }
+  }
+}

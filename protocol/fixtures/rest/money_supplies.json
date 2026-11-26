@@ -1,0 +1,22 @@
+{
+  "supplies": [
+    {
+      "id": "8a9b0c1d2e3f4a5b",
+      "item": "Capsule caffè Lavazza A Modo Mio",
+      "seller": "Amazon.it",
+      "count": 4,
+      "every_days": 30,
+      "last_on": "2026-09-21",
+      "next_on": "2026-10-21",
+      "task_id": "9b0c1d2e-3f4a-4b5c-8d6e-7f8a9b0c1d2e",
+      "handoff": {
+        "type": "handoff",
+        "handoff_id": "0c1d2e3f-4a5b-5c6d-9e7f-8a9b0c1d2e3f",
+        "kind": "open_url",
+        "title": "Amazon",
+        "subtitle": "www.amazon.it",
+        "url": "https://www.amazon.it/gp/buyagain"
+      }
+    }
+  ]
+}

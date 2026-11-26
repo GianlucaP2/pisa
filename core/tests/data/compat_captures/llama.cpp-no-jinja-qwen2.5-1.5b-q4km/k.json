@@ -1,0 +1,235 @@
+[
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "pisa-matrix-no-such-model",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": 200,
+  "content_type": "application/json",
+  "first_byte_s": 0.183,
+  "longest_silence_s": 0.183,
+  "total_s": 0.183,
+  "body": {
+   "choices": [
+    {
+     "finish_reason": "stop",
+     "index": 0,
+     "message": {
+      "role": "assistant",
+      "content": "Okay."
+     }
+    }
+   ],
+   "created": 1795555299,
+   "model": "qwen2.5-1.5b-instruct",
+   "system_fingerprint": "b12679-af5c58347",
+   "object": "chat.completion",
+   "usage": {
+    "completion_tokens": 3,
+    "prompt_tokens": 11,
+    "total_tokens": 14,
+    "prompt_tokens_details": {
+     "cached_tokens": 3
+    }
+   },
+   "id": "chatcmpl-o1cwkvdlcajsyD0XbKwUiRA0hI0qIDYG",
+   "timings": {
+    "cache_n": 3,
+    "prompt_n": 8,
+    "prompt_ms": 81.516,
+    "prompt_per_token_ms": 10.19,
+    "prompt_per_second": 98.14,
+    "predicted_n": 3,
+    "predicted_ms": 96.2,
+    "predicted_per_token_ms": 48.1,
+    "predicted_per_second": 20.79
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Record 00000: the lamp in room 00000 is green and stays on.\nRecord 00001: the lamp in room 00001 is blue and stays on.\nRecord 00002: the lamp in room 00002 is amber and stays on.\nRecord 00003: the lamp in room 00003 is grey and stays on.\nRecord 00004: the lamp in room 00004 is violet and stays on.\nRecord 00005: the lamp in room 00005 is white and stays on.\nR...<99967 chars>"
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": 400,
+  "content_type": "application/json",
+  "first_byte_s": 0.028,
+  "longest_silence_s": 0.028,
+  "total_s": 0.028,
+  "body": {
+   "error": {
+    "code": 400,
+    "message": "request (39995 tokens) exceeds the available context size (32768 tokens), try increasing it",
+    "type": "exceed_context_size_error",
+    "n_prompt_tokens": 39995,
+    "n_ctx": 32768
+   }
+  }
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a 300-word story about a lamp."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.505,
+  "error": "ReadTimeout",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a 300-word story about a lamp."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.502,
+  "error": "ReadTimeout",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Write a 300-word story about a lamp."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.505,
+  "error": "ReadTimeout",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.001,
+  "error": "ConnectError",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.001,
+  "error": "ConnectError",
+  "body": ""
+ },
+ {
+  "request": {
+   "method": "POST",
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "qwen2.5-1.5b-instruct",
+    "stream": false,
+    "messages": [
+     {
+      "role": "user",
+      "content": "Say ok."
+     }
+    ],
+    "max_tokens": 1024
+   }
+  },
+  "status": null,
+  "content_type": "",
+  "first_byte_s": null,
+  "longest_silence_s": null,
+  "total_s": 0.001,
+  "error": "ConnectError",
+  "body": ""
+ }
+]

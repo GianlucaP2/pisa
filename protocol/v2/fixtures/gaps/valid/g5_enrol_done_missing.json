@@ -1,0 +1,31 @@
+{
+  "gap": "G5",
+  "check": "enrol_server_frame",
+  "why": "Enrolment frames travel outside runs, on the enrol session's data channel only.",
+  "v1": {
+    "type": "enrol.done",
+    "route": "speaker",
+    "ok": false,
+    "reason": "missing",
+    "missing": [
+      "B",
+      "C"
+    ]
+  },
+  "frame": {
+    "seq": 4,
+    "event": {
+      "type": "CUSTOM",
+      "name": "pisa.voice.enrol.done",
+      "value": {
+        "route": "speaker",
+        "ok": false,
+        "reason": "missing",
+        "missing": [
+          "B",
+          "C"
+        ]
+      }
+    }
+  }
+}

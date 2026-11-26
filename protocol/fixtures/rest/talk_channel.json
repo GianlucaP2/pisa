@@ -1,0 +1,19 @@
+{
+  "server_to_phone": [
+    {"type": "talk.state", "state": "listening"},
+    {"type": "talk.transcript", "text": "che tempo fa", "final": false},
+    {"type": "talk.transcript", "text": "che tempo fa domani?", "final": true},
+    {"type": "talk.state", "state": "thinking"},
+    {"type": "talk.state", "state": "listening"},
+    {"type": "talk.state", "state": "speaking"},
+    {"type": "talk.said", "text": "Domani", "final": false},
+    {"type": "talk.said", "text": "Domani piove dalle 21.", "final": true},
+    {"type": "talk.state", "state": "listening"},
+    {"type": "talk.state", "state": "idle"},
+    {"type": "talk.ended", "reason": "idle"}
+  ],
+  "phone_to_server": [
+    {"type": "talk.stop"},
+    {"type": "talk.end"}
+  ]
+}
